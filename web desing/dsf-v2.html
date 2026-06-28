@@ -90,11 +90,12 @@ h1, h2, h3, h4 { text-wrap: balance; }
 }
 @keyframes introOut { to { transform: translateY(-100%); pointer-events: none; } }
 .i-mk {
-  font-family: 'Cormorant Garamond', serif; font-size: clamp(3rem, 7vw, 5.5rem);
-  font-weight: 300; letter-spacing: .2em; color: #faf8f3;
+  display: flex; align-items: center; gap: 0;
   animation: iUp .9s .15s var(--ease-out) both;
 }
-.i-mk b { color: var(--glt); font-weight: 400; }
+.i-mk-box { background: #ffffff; color: #0d1f3c; font-family: 'DM Sans', sans-serif; font-size: clamp(1.8rem,4.5vw,3.4rem); font-weight: 700; letter-spacing: .08em; padding: .4rem .6rem; line-height: 1; }
+.i-mk-txt { font-family: 'DM Sans', sans-serif; font-size: clamp(1.8rem,4.5vw,3.4rem); font-weight: 400; letter-spacing: .24em; text-transform: uppercase; color: #ffffff; padding-left: .8rem; }
+.i-mk-cur { color: var(--glt); font-weight: 300; animation: blink 1.1s step-end infinite; }
 .i-rl { height: 1px; background: var(--gold); animation: iRl 1.1s .65s var(--ease-soft) both; }
 .i-sb {
   font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .42em;
@@ -153,9 +154,11 @@ h1, h2, h3, h4 { text-wrap: balance; }
   background: rgba(28,61,104,0.95); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   height: 62px; border-color: rgba(201,146,42,.15);
 }
-.nlogo    { display: flex; align-items: center; gap: 10px; }
-.nlogo-mk { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 500; letter-spacing: .05em; color: var(--glt); }
-.nlogo-tx { font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(250,248,243,.55); }
+.nlogo     { display: flex; align-items: center; gap: 0; text-decoration: none; }
+.nlogo-box { background: #ffffff; color: #0d1f3c; font-family: 'DM Sans', sans-serif; font-size: .92rem; font-weight: 700; letter-spacing: .08em; padding: .32rem .48rem; line-height: 1; flex-shrink: 0; }
+.nlogo-txt { font-family: 'DM Sans', sans-serif; font-size: .92rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: #ffffff; padding-left: .7rem; }
+.nlogo-cur { color: var(--glt); font-weight: 300; animation: blink 1.1s step-end infinite; }
+@keyframes blink { 0%,100%{ opacity:1 } 50%{ opacity:0 } }
 .nlinks   { display: flex; gap: 2rem; list-style: none; }
 .nlinks a { font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,0.75); position: relative; transition: color .3s; padding-bottom: 3px; }
 .nlinks a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px; background: var(--glt); transition: width .35s; }
@@ -442,8 +445,10 @@ a.ctv:hover { color: var(--glt); }
 ============================================================= */
 footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); padding: clamp(3rem,5vw,4.5rem) var(--px) 2rem; }
 .ftg   { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: clamp(1.5rem,3vw,3rem); padding-bottom: clamp(2.5rem,4vw,3.5rem); border-bottom: 1px solid rgba(250,248,243,.07); max-width: 1400px; margin: 0 auto; }
-.ftmk  { font-family: 'Cormorant Garamond', serif; font-size: 1.75rem; font-weight: 300; letter-spacing: .05em; color: #faf8f3; margin-bottom: .65rem; }
-.ftmk b { color: var(--glt); font-weight: 400; }
+.ftmk  { display: flex; align-items: center; gap: 0; margin-bottom: .65rem; }
+.ftmk-box { background: #ffffff; color: #0d1f3c; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: .08em; padding: .34rem .52rem; line-height: 1; }
+.ftmk-txt { font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: #ffffff; padding-left: .75rem; }
+.ftmk-cur { color: var(--glt); font-weight: 300; animation: blink 1.1s step-end infinite; }
 .fttag { font-family: 'DM Mono', monospace; font-size: .57rem; letter-spacing: .12em; color: var(--sl); text-transform: uppercase; line-height: 2; max-width: 30ch; }
 .ftcol h4 { font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
 .ftcol a  { display: block; font-size: .8rem; color: rgba(255,255,255,0.65); margin-bottom: .6rem; transition: color .3s, padding-left .3s; }
@@ -537,7 +542,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
 <div id="pgb"></div>
 
 <div id="intro" aria-hidden="true">
-  <div class="i-mk">DSF<b>.</b></div>
+  <div class="i-mk"><span class="i-mk-box">DSF</span><span class="i-mk-txt">ADVI<span class="i-mk-cur">|</span>SORS</span></div>
   <div class="i-rl"></div>
   <div class="i-sb">Outsourced CFO &amp; COO</div>
 </div>
@@ -557,7 +562,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
 </div>
 
 <nav id="nav">
-  <a href="#" class="nlogo"><span class="nlogo-mk">DSF</span><span class="nlogo-tx">Advisors</span></a>
+  <a href="#" class="nlogo"><span class="nlogo-box">DSF</span><span class="nlogo-txt">ADVI<span class="nlogo-cur">|</span>SORS</span></a>
   <ul class="nlinks">
     <li><a href="#about">About</a></li>
     <li><a href="#founder">Founder</a></li>
@@ -743,7 +748,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
 
 <footer>
   <div class="ftg">
-    <div><div class="ftmk">DSF Advisors<b>.</b></div><div class="fttag">Outsourced CFO &amp; COO services for firms where the numbers matter most. Hackensack, New Jersey.</div></div>
+    <div><div class="ftmk"><span class="ftmk-box">DSF</span><span class="ftmk-txt">ADVI<span class="ftmk-cur">|</span>SORS</span></div><div class="fttag">Outsourced CFO &amp; COO services for firms where the numbers matter most. Hackensack, New Jersey.</div></div>
     <div class="ftcol"><h4>Firm</h4><a href="#about">About</a><a href="#founder">Founder</a><a href="#industries">Industries</a><a href="#process">Process</a></div>
     <div class="ftcol"><h4>Services</h4><a href="#services">CFO Services</a><a href="#services">Fund Operations</a><a href="#advisory">Advisory</a><a href="#services">Compliance</a></div>
     <div class="ftcol"><h4>Contact</h4><a href="mailto:manuelperez@cetis17.edu.mx">Email us</a><a href="tel:+19294120028">(929) 412-0028</a><a href="#contact">Schedule a call</a></div>
