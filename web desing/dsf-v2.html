@@ -463,6 +463,68 @@ a.ctv:hover { color: var(--glt); }
 .fnote { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .08em; color: var(--sl); line-height: 1.8; margin-top: .3rem; }
 
 /* =============================================================
+   ABOUT MODAL
+============================================================= */
+#abt-modal {
+  position: fixed; inset: 0; z-index: 7000;
+  display: flex; align-items: stretch; justify-content: flex-end;
+  opacity: 0; pointer-events: none;
+  transition: opacity .4s var(--ease-out);
+}
+#abt-modal.open { opacity: 1; pointer-events: all; }
+.abt-ov {
+  position: absolute; inset: 0;
+  background: rgba(9,21,41,.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+  cursor: pointer;
+}
+.abt-panel {
+  position: relative; z-index: 1;
+  width: min(700px, 94vw);
+  background: #faf8f3; overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform .55s var(--ease-out);
+  display: flex; flex-direction: column;
+}
+#abt-modal.open .abt-panel { transform: none; }
+.abt-hd {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 2rem;
+  background: var(--dark);
+  border-bottom: 1px solid rgba(201,146,42,.2);
+  flex-shrink: 0;
+}
+.abt-hd-logo { display: flex; align-items: center; gap: 0; }
+.abt-hd-box { background: #fff; color: #0d1f3c; font-family: 'DM Sans', sans-serif; font-size: .82rem; font-weight: 700; letter-spacing: .08em; padding: .28rem .42rem; line-height: 1; }
+.abt-hd-txt { font-family: 'DM Sans', sans-serif; font-size: .82rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: #fff; padding-left: .6rem; }
+.abt-hd-cur { color: var(--glt); animation: blink 1.1s step-end infinite; }
+.abt-cls {
+  background: none; border: 1px solid rgba(250,248,243,.2); color: rgba(250,248,243,.85);
+  font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .14em;
+  text-transform: uppercase; cursor: pointer; padding: .45rem .9rem;
+  display: flex; align-items: center; gap: .5rem;
+  transition: border-color .3s, color .3s;
+}
+.abt-cls:hover { border-color: var(--glt); color: var(--glt); }
+.abt-body { padding: clamp(2rem,5vw,3.5rem) clamp(1.5rem,5vw,3rem); flex: 1; }
+.abt-hero-img { width: 100%; height: clamp(180px,28vw,280px); object-fit: cover; display: block; }
+.abt-sec  { margin-bottom: clamp(2rem,4vw,3rem); padding-bottom: clamp(2rem,4vw,3rem); border-bottom: 1px solid var(--p2); }
+.abt-sec:last-child { border-bottom: none; margin-bottom: 0; }
+.abt-eye  { font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .24em; text-transform: uppercase; color: var(--gdk); display: flex; align-items: center; gap: .6rem; margin-bottom: 1rem; }
+.abt-eye::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.abt-h2   { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem,3.5vw,2.6rem); font-weight: 300; color: var(--navy); line-height: 1.12; margin-bottom: 1rem; }
+.abt-h2 em { font-style: italic; color: var(--gdk); }
+.abt-p    { font-size: clamp(.85rem,1.6vw,.93rem); color: #2a3f56; line-height: 1.92; margin-bottom: .9rem; }
+.abt-p:last-of-type { margin-bottom: 0; }
+.abt-q    { margin: 1.5rem 0; padding: 1.2rem 0 1.2rem 1.4rem; border-left: 2px solid var(--gold); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.05rem,2vw,1.3rem); color: var(--navy); line-height: 1.5; }
+.abt-vals { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
+.abt-val  { padding: 1.2rem; border: 1px solid var(--p2); background: var(--bone); }
+.abt-val-n { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 500; color: var(--navy); margin-bottom: .4rem; }
+.abt-val-d { font-size: .8rem; color: #445566; line-height: 1.7; }
+.abt-cta  { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
+.abt-tag  { font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .1em; text-transform: uppercase; color: var(--glt); border: 1px solid rgba(201,146,42,.3); padding: .3rem .6rem; display: inline-block; margin: .2rem .2rem 0 0; }
+
+/* =============================================================
    FOOTER
 ============================================================= */
 footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); padding: clamp(3rem,5vw,4.5rem) var(--px) 2rem; }
@@ -638,6 +700,9 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
       <p class="abp">We operate as an extension of your leadership team: fractional CFO leadership, accounting and reporting, fund operations, tax, and SEC compliance — engaged exactly to the scope you need, and scaled as you grow.</p>
       <p class="abp">From day-one bookkeeping through to CFO-level strategy, DSF now covers the full financial stack — so you never need to coordinate between vendors, and nothing gets lost in translation.</p>
       <blockquote class="abq">"We carry the financial complexity so your attention stays where it belongs — on capital and clients."</blockquote>
+      <div style="margin-top:1.8rem">
+        <button class="btn btn-g" onclick="openAbout()" style="font-size:.62rem">Read the full story →</button>
+      </div>
     </div>
   </div>
 </div></section>
@@ -1050,6 +1115,91 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
   else boot();
 })();
+</script>
+
+<!-- ===================== ABOUT MODAL ===================== -->
+<div id="abt-modal" role="dialog" aria-modal="true" aria-label="About DSF Advisors">
+  <div class="abt-ov" onclick="closeAbout()"></div>
+  <div class="abt-panel">
+    <div class="abt-hd">
+      <div class="abt-hd-logo">
+        <span class="abt-hd-box">DSF</span>
+        <span class="abt-hd-txt">ADVI<span class="abt-hd-cur">|</span>SORS</span>
+      </div>
+      <button class="abt-cls" onclick="closeAbout()">✕ &nbsp;Close</button>
+    </div>
+
+    <img class="abt-hero-img" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1200&q=85" alt="DSF Advisors team" loading="lazy">
+
+    <div class="abt-body">
+
+      <div class="abt-sec">
+        <div class="abt-eye">Who we are</div>
+        <h2 class="abt-h2">A firm built on the conviction that <em>small firms deserve institutional finance.</em></h2>
+        <p class="abt-p">DSF Advisors was founded in 2020 with a straightforward premise: emerging asset managers, real estate investors, family offices, and professional services firms need institutional-grade financial leadership long before they can justify the headcount to hire it full-time.</p>
+        <p class="abt-p">We are an outsourced CFO and COO partner — not a bookkeeper, not a consultant, and not a software platform. We are the finance function: we show up, we take ownership, and we carry the complexity that would otherwise fall on the founder.</p>
+        <blockquote class="abt-q">"The firms we serve are too serious to cut corners on finance. We make sure they never have to."</blockquote>
+      </div>
+
+      <div class="abt-sec">
+        <div class="abt-eye">Our approach</div>
+        <h2 class="abt-h2">Institutional rigor. <em>Boutique accountability.</em></h2>
+        <p class="abt-p">We work as an extension of your leadership team — not as an outside vendor you have to manage. Every engagement is led directly by a senior principal, every deliverable is reviewed at the top, and every client gets the same standard of care regardless of size.</p>
+        <p class="abt-p">We are deliberately selective about who we take on, so the quality of our work is never diluted by volume. When you engage DSF, you are not handed off to a junior associate — you work with the people who built the firm.</p>
+        <div class="abt-vals">
+          <div class="abt-val"><div class="abt-val-n">Precision</div><p class="abt-val-d">Financial work that holds up under audit, investor scrutiny, and the hardest questions.</p></div>
+          <div class="abt-val"><div class="abt-val-n">Ownership</div><p class="abt-val-d">We take the work off your plate — fully — rather than advising from the sidelines.</p></div>
+          <div class="abt-val"><div class="abt-val-n">Transparency</div><p class="abt-val-d">No surprises in scope, billing, or findings. You always know where things stand.</p></div>
+          <div class="abt-val"><div class="abt-val-n">Scalability</div><p class="abt-val-d">We grow with you — adding disciplines and depth as your obligations widen.</p></div>
+        </div>
+      </div>
+
+      <div class="abt-sec">
+        <div class="abt-eye">The founder</div>
+        <h2 class="abt-h2">Wilfredo Rodriguez, <em>CPA</em></h2>
+        <p class="abt-p">Wilfredo spent eight years at PwC — one of the Big Four — developing the audit and accounting rigor that still defines how DSF works. He then moved to the CFO and COO seat at AshmoreAVENIDA, a real estate asset manager operating across Latin America, where he oversaw fund operations, financial reporting, audits, tax compliance, and investor relations for a portfolio exceeding $300 million in AUM.</p>
+        <p class="abt-p">That combination — Big Four discipline and the operational reality of a fund CFO chair — is rare. Most finance professionals have one or the other. Wilfredo built DSF so that his clients could have both, without the overhead of an in-house hire.</p>
+        <p class="abt-p">He is a Certified Public Accountant (CPA) and holds a BBA from Baruch College. DSF is based in Hackensack, New Jersey, and serves clients locally and remotely across the United States.</p>
+        <div style="margin-top:1.4rem;display:flex;flex-wrap:wrap">
+          <span class="abt-tag">Big Four — PwC</span>
+          <span class="abt-tag">CFO / COO</span>
+          <span class="abt-tag">$300M+ AUM</span>
+          <span class="abt-tag">CPA — Baruch College</span>
+          <span class="abt-tag">Fund Accounting</span>
+          <span class="abt-tag">SEC Compliance</span>
+          <span class="abt-tag">Real Estate</span>
+          <span class="abt-tag">Private Equity</span>
+        </div>
+      </div>
+
+      <div class="abt-sec">
+        <div class="abt-eye">Contact</div>
+        <h2 class="abt-h2">Hackensack, New Jersey.<br><em>Serving clients nationwide.</em></h2>
+        <p class="abt-p">Engagements start with a no-obligation discovery call. We listen first, then propose exactly the scope you need — nothing padded in.</p>
+        <div class="abt-cta">
+          <a href="#contact" class="btn btn-g" onclick="closeAbout()">Schedule a discovery call →</a>
+          <a href="mailto:manuelperez@cetis17.edu.mx" class="btn btn-o" style="background:none;border:1px solid rgba(13,31,60,.25);color:var(--navy)">manuelperez@cetis17.edu.mx</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function openAbout() {
+  var m = document.getElementById('abt-modal');
+  m.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  m.querySelector('.abt-panel').scrollTop = 0;
+}
+function closeAbout() {
+  document.getElementById('abt-modal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeAbout();
+});
 </script>
 </body>
 </html>
