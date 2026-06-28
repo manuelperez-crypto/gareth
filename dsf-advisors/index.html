@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSF Advisors — Outsourced CFO & COO | Hackensack, NJ</title>
+<meta name="description" content="Outsourced CFO, COO, fund operations, tax, and SEC compliance for emerging asset managers, real estate investors and family offices.">
+
+<!-- Preload hero image — first paint priority -->
+<link rel="preload" as="image" href="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1800&q=85" fetchpriority="high">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<!-- Styles — bump ?v= on every deploy -->
+<link rel="stylesheet" href="styles.css?v=20260628">
+
+<!-- GSAP (local — no CDN at runtime) -->
+<script defer src="lib/gsap.min.js"></script>
+<script defer src="lib/ScrollTrigger.min.js"></script>
+
+<!-- Brand data -->
+<script defer src="lib/manifest.js"></script>
+
+<!-- Entry point -->
+<script defer src="main.js?v=20260628"></script>
+</head>
+<body>
+
+<!-- Skip link for keyboard users -->
+<a href="#about" class="skip-link">Skip to content</a>
+
+<div id="pgb"></div>
+
+<!-- INTRO: desktop only via @media in CSS -->
+<div id="intro" aria-hidden="true">
+  <div class="i-mk">DSF<b>.</b></div>
+  <div class="i-rl"></div>
+  <div class="i-sb">Outsourced CFO &amp; COO</div>
+</div>
+
+<!-- Custom cursor (desktop only, opacity:0 until first mousemove) -->
+<div id="cd" aria-hidden="true"></div>
+<div id="cr" aria-hidden="true"></div>
+
+<!-- MOBILE MENU -->
+<div id="mob" role="dialog" aria-label="Navigation menu">
+  <a href="#about"      onclick="cM()"><i>01</i> About</a>
+  <a href="#founder"    onclick="cM()"><i>02</i> Founder</a>
+  <a href="#services"   onclick="cM()"><i>03</i> Services</a>
+  <a href="#advisory"   onclick="cM()"><i>04</i> Advisory</a>
+  <a href="#industries" onclick="cM()"><i>05</i> Industries</a>
+  <a href="#process"    onclick="cM()"><i>06</i> Process</a>
+  <a href="#faq"        onclick="cM()"><i>07</i> FAQ</a>
+  <a href="#contact"    onclick="cM()"><i>08</i> Contact</a>
+</div>
+
+<!-- NAV -->
+<nav id="nav" aria-label="Primary navigation">
+  <a href="#" class="nlogo">
+    <span class="nlogo-mk">DSF</span>
+    <span class="nlogo-tx">Advisors</span>
+  </a>
+  <ul class="nlinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#founder">Founder</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#advisory">Advisory</a></li>
+    <li><a href="#industries">Industries</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <button class="ncta btn" onclick="location.href='#contact'">Schedule a Call</button>
+  <button class="burg" id="burg" onclick="tM()" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="hbg">
+    <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?w=1800&q=85"
+         alt="Financial district skyline" fetchpriority="high" loading="eager">
+  </div>
+  <div class="hov"></div>
+  <div class="hov2"></div>
+  <canvas id="hcv" aria-hidden="true"></canvas>
+  <div class="hinner">
+    <div class="heye">Outsourced CFO &amp; COO Services</div>
+    <h1 id="htitle">Financial leadership,<br><em>without the overhead.</em></h1>
+    <div class="hfoot">
+      <p class="hsub">Emerging managers, real estate investors, and professional firms come to DSF for the judgment of a seasoned CFO and the discipline of a full back office — engaged precisely to scope, never carried as headcount.</p>
+      <div class="hact">
+        <a href="#contact" class="btn btn-g" data-intent="Schedule a consultation">Schedule a consultation →</a>
+        <a href="#services" class="btn btn-o">Our services</a>
+      </div>
+    </div>
+  </div>
+  <div class="hscroll" aria-hidden="true">Scroll</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ MARQUEE -->
+<div class="mq" aria-hidden="true">
+  <div class="mqt">
+    <span class="mqi">CFO Services</span>
+    <span class="mqi">Fund Operations</span>
+    <span class="mqi">Tax Structuring</span>
+    <span class="mqi">SEC Compliance</span>
+    <span class="mqi">Back Office</span>
+    <span class="mqi">Financial Reporting</span>
+    <span class="mqi">Due Diligence</span>
+    <span class="mqi">Investor Relations</span>
+    <span class="mqi">CFO Services</span>
+    <span class="mqi">Fund Operations</span>
+    <span class="mqi">Tax Structuring</span>
+    <span class="mqi">SEC Compliance</span>
+    <span class="mqi">Back Office</span>
+    <span class="mqi">Financial Reporting</span>
+    <span class="mqi">Due Diligence</span>
+    <span class="mqi">Investor Relations</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ ABOUT -->
+<section class="sec bg-p" id="about">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>01</i> About the firm</div>
+    <div class="abg">
+      <div class="abiw" data-reveal>
+        <img class="abimg"
+             src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=85"
+             alt="DSF team meeting" loading="lazy" decoding="async">
+        <div class="abbadge">
+          <div class="n">2020</div>
+          <div class="l">Founded · Hackensack NJ</div>
+        </div>
+      </div>
+      <div>
+        <h2 class="abh">A finance function run with <em>institutional discipline.</em></h2>
+        <p class="abp">DSF Advisors is an outsourced CFO and COO partner for emerging asset managers, real estate investors, family offices, and professional services firms — the firms that need institutional-grade finance long before they can justify an institutional payroll.</p>
+        <p class="abp">We operate as an extension of your leadership team: fractional CFO leadership, accounting and reporting, fund operations, tax, and SEC compliance — engaged exactly to the scope you need, and scaled as you grow.</p>
+        <blockquote class="abq">"We carry the financial complexity so your attention stays where it belongs — on capital and clients."</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ FOUNDER -->
+<section class="sec bg-d" id="founder">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>02</i> Leadership</div>
+    <div class="fdg">
+      <div class="fdcard">
+        <div class="fdname">Wilfredo Rodriguez, CPA</div>
+        <div class="fdrole">Founder &amp; Principal</div>
+        <div class="fddiv"></div>
+        <ul class="fdcv">
+          <li>
+            <span class="fdyr">2020 — NOW</span>
+            <span class="fdrl"><b>Founder &amp; Principal</b> — DSF Advisors</span>
+          </li>
+          <li>
+            <span class="fdyr">2013 — 2021</span>
+            <span class="fdrl"><b>CFO / COO</b> — AshmoreAVENIDA · $300M+ Latin America real estate fund</span>
+          </li>
+          <li>
+            <span class="fdyr">2005 — 2013</span>
+            <span class="fdrl"><b>Manager</b> — PwC (Big Four)</span>
+          </li>
+          <li>
+            <span class="fdyr">EDUCATION</span>
+            <span class="fdrl"><b>BBA</b> — Baruch College · Certified Public Accountant</span>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="fdh2">Two decades in the rooms <em>you're working toward.</em></h2>
+        <p class="fdp">Before founding DSF, Wilfredo spent eight years as CFO/COO of AshmoreAVENIDA, overseeing fund operations, reporting, audits, tax, and regulatory compliance for a real estate manager running over $300 million across Latin America.</p>
+        <p class="fdp">Earlier, he spent eight years at PwC — one of the Big Four — building the audit and accounting discipline that still defines how DSF works. Big Four rigor and a CFO's seat at a real fund: that combination is rare, and it's exactly what your firm gets on every engagement.</p>
+        <div class="fdtags">
+          <span class="fdtag">Fund Accounting</span>
+          <span class="fdtag">SEC Reporting</span>
+          <span class="fdtag">Private Equity</span>
+          <span class="fdtag">Hedge Funds</span>
+          <span class="fdtag">Audit &amp; Tax</span>
+          <span class="fdtag">Due Diligence</span>
+          <span class="fdtag">Investor Relations</span>
+          <span class="fdtag">GAAP / IFRS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ SERVICES -->
+<section class="sec bg-b" id="services">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>03</i> What we do</div>
+    <div class="svhd">
+      <h2>Six disciplines, run with <em>institutional rigor.</em></h2>
+      <p>Engage one or all six. Each runs with the precision of an in-house team and the perspective of an outside partner who has done it before.</p>
+    </div>
+    <div class="scgrid">
+
+      <div class="sc">
+        <div class="scimg">
+          <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=700&q=80" alt="CFO services" loading="lazy" decoding="async">
+        </div>
+        <div class="scbody">
+          <div class="scix">01</div>
+          <h3 class="scnm">Fractional CFO Services</h3>
+          <p class="scld">A seasoned financial lead who reads your firm's posture clearly and hands you the numbers to make decisions with conviction.</p>
+          <button class="sctog" onclick="tog(this)" aria-expanded="false">View scope <span class="ic" aria-hidden="true">+</span></button>
+          <div class="scdet" aria-hidden="true">
+            <ul>
+              <li>Review and approve fund admin financial packages</li>
+              <li>Strategic business planning, financial analysis, budgets &amp; projections</li>
+              <li>Fund-level waterfall, carry, management &amp; incentive fee calculations</li>
+              <li>Manage vendor relationships: fund admin, auditor, tax, legal, insurance</li>
+              <li>Cash management — bill pay, capital calls, distributions &amp; payroll</li>
+              <li>Investor relations, due diligence, ad hoc requests &amp; investor letters</li>
+              <li>Fund performance estimates &amp; track record maintenance (GIPS)</li>
+              <li>Insurance procurement &amp; employee payroll benefits setup</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="scimg">
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=80" alt="Fund operations" loading="lazy" decoding="async">
+        </div>
+        <div class="scbody">
+          <div class="scix">02</div>
+          <h3 class="scnm">Fund Operations</h3>
+          <p class="scld">Manager and fund set-up built to best practice from day one — so operations never become the thing that slows your raise.</p>
+          <button class="sctog" onclick="tog(this)" aria-expanded="false">View scope <span class="ic" aria-hidden="true">+</span></button>
+          <div class="scdet" aria-hidden="true">
+            <ul>
+              <li>Fund formation, tax structure &amp; operating documents (LPA/PPM)</li>
+              <li>Operational setup: auditors, legal counsel, fund admins &amp; compliance firms</li>
+              <li>Prime brokerage account establishment, including new international markets</li>
+              <li>Fund reporting, audit management &amp; tax compliance coordination</li>
+              <li>Trade settlement &amp; investor relations management</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="scimg">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&q=80" alt="Accounting and reporting" loading="lazy" decoding="async">
+        </div>
+        <div class="scbody">
+          <div class="scix">03</div>
+          <h3 class="scnm">Accounting &amp; Reporting</h3>
+          <p class="scld">Clean, defensible books built to the standard your investors, auditors, and lenders expect.</p>
+          <button class="sctog" onclick="tog(this)" aria-expanded="false">View scope <span class="ic" aria-hidden="true">+</span></button>
+          <div class="scdet" aria-hidden="true">
+            <ul>
+              <li>Fund and management company accounting &amp; financial reporting</li>
+              <li>Portfolio and project level accounting</li>
+              <li>Financial statement preparation, including Shadow NAV</li>
+              <li>Institutional client reporting: SMAs and EMOMs</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="scimg">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=700&q=80" alt="Back office support" loading="lazy" decoding="async">
+        </div>
+        <div class="scbody">
+          <div class="scix">04</div>
+          <h3 class="scnm">Back Office Support</h3>
+          <p class="scld">The work that costs you trust when it's wrong, and disappears completely when it's right.</p>
+          <button class="sctog" onclick="tog(this)" aria-expanded="false">View scope <span class="ic" aria-hidden="true">+</span></button>
+          <div class="scdet" aria-hidden="true">
+            <ul>
+              <li>Trade processing and settlement support</li>
+              <li>Corporate actions &amp; proxy management</li>
+              <li>Custody reconciliations &amp; custodian communication</li>
+              <li>Shadow NAV preparation and reporting</li>
+              <li>Portfolio attribution &amp; turnover calculations</li>
+              <li>Broker commission reporting</li>
+              <li>OMS/EMS provider selection &amp; implementation</li>
+              <li>New investor and SMA onboarding</li>
+              <li>Fund presentations &amp; marketing materials assistance</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="scimg">
+          <img src="https://images.unsplash.com/photo-1586282391129-76a6df230234?w=700&q=80" alt="Tax services" loading="lazy" decoding="async">
+        </div>
+        <div class="scbody">
+          <div class="scix">05</div>
+          <h3 class="scnm">Tax Services</h3>
+          <p class="scld">K-1 issuance, entity structuring, and year-round planning that keeps you ahead of every deadline.</p>
+          <button class="sctog" onclick="tog(this)" aria-expanded="false">View scope <span class="ic" aria-hidden="true">+</span></button>
+          <div class="scdet" aria-hidden="true">
+            <ul>
+              <li>Federal, state &amp; local partnership tax returns and K-1 issuance</li>
+              <li>Tax advisory: manager/fund structuring (domestic &amp; international)</li>
+              <li>Entity formation, partnership agreements &amp; compliance requirements</li>
+              <li>Foreign filings &amp; quarterly tax estimates</li>
+              <li>Fund-level tax compliance, including ASC 740 analysis</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="sc">
+        <div class="scimg">
+          <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=700&q=80" alt="Regulatory compliance" loading="lazy" decoding="async">
+        </div>
+        <div class="scbody">
+          <div class="scix">06</div>
+          <h3 class="scnm">Regulatory Compliance</h3>
+          <p class="scld">So an SEC examination is a process you're ready for — not an event that stops your firm.</p>
+          <button class="sctog" onclick="tog(this)" aria-expanded="false">View scope <span class="ic" aria-hidden="true">+</span></button>
+          <div class="scdet" aria-hidden="true">
+            <ul>
+              <li>SEC compliance program monitoring (CCO-directed)</li>
+              <li>Form ADV preparation &amp; completion assistance</li>
+              <li>SEC audit request support for fund managers</li>
+              <li>Regulatory inquiry response &amp; reporting</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ ADVISORY -->
+<section class="sec bg-p" id="advisory">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>04</i> Advisory &amp; consulting</div>
+    <div style="max-width:55ch;margin-bottom:clamp(2rem,4vw,3rem)">
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4.5vw,3.6rem);font-weight:300;color:var(--navy);line-height:1.1;margin-bottom:1rem">
+        For the moments that <em style="font-style:italic;color:var(--gdk)">define a firm.</em>
+      </h2>
+      <p style="font-size:clamp(.86rem,1.6vw,.94rem);color:#3a4f65;line-height:1.85">
+        Beyond ongoing operations, DSF supports the project work that shapes your trajectory — launches, transactions, and the structural decisions you only get one chance to make well.
+      </p>
+    </div>
+    <div class="advg">
+      <div class="advc">
+        <div class="advi" aria-hidden="true">i</div>
+        <div class="advn">Manager &amp; Fund Set-Up</div>
+        <p class="advd">Stand up a new manager or fund with the right structure, service providers, and operational backbone from day one.</p>
+      </div>
+      <div class="advc">
+        <div class="advi" aria-hidden="true">ii</div>
+        <div class="advn">Financial Due Diligence</div>
+        <p class="advd">Rigorous diligence on the numbers behind a transaction — so you commit capital on facts, not on a pitch.</p>
+      </div>
+      <div class="advc">
+        <div class="advi" aria-hidden="true">iii</div>
+        <div class="advn">Financial Modeling</div>
+        <p class="advd">Models that hold up to investor scrutiny — built to test assumptions, not to confirm the answer you hoped for.</p>
+      </div>
+      <div class="advc">
+        <div class="advi" aria-hidden="true">iv</div>
+        <div class="advn">Reorganizations</div>
+        <p class="advd">Restructure entities, operations, or reporting with a steady hand that has done it before and knows what breaks.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ INDUSTRIES -->
+<section class="sec bg-d" id="industries">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>05</i> Who we serve</div>
+    <div class="inhd">
+      <h2>Built for firms where <em>the numbers matter most.</em></h2>
+      <p>Four worlds. One standard of precision.</p>
+    </div>
+    <div class="ing">
+      <div class="inc">
+        <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=700&q=85" alt="Financial services" loading="lazy" decoding="async">
+        <div class="inov"></div>
+        <div class="inbody">
+          <span class="inix">I</span>
+          <div class="inln"></div>
+          <div class="innm">Financial Services</div>
+          <p class="inds">Fractional CFO and fund operations for emerging managers building toward institutional credibility.</p>
+        </div>
+      </div>
+      <div class="inc">
+        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=700&q=85" alt="Real estate" loading="lazy" decoding="async">
+        <div class="inov"></div>
+        <div class="inbody">
+          <span class="inix">II</span>
+          <div class="inln"></div>
+          <div class="innm">Real Estate</div>
+          <p class="inds">CFO and accounting for developers and institutional investors — project and fund-level reporting at every layer.</p>
+        </div>
+      </div>
+      <div class="inc">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=700&q=85" alt="Family offices" loading="lazy" decoding="async">
+        <div class="inov"></div>
+        <div class="inbody">
+          <span class="inix">III</span>
+          <div class="inln"></div>
+          <div class="innm">Family Offices</div>
+          <p class="inds">A discreet, long-term partner for daily operations and the disciplined stewardship of generational wealth.</p>
+        </div>
+      </div>
+      <div class="inc">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=700&q=85" alt="Startups and tech firms" loading="lazy" decoding="async">
+        <div class="inov"></div>
+        <div class="inbody">
+          <span class="inix">IV</span>
+          <div class="inln"></div>
+          <div class="innm">Startups</div>
+          <p class="inds">Technology-augmented finance that gives early-stage firms clean books and the infrastructure to scale without rebuilding.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ PROOF -->
+<section id="proof" aria-label="Key numbers">
+  <div class="pfg">
+    <div class="pf">
+      <div class="pfn"><span class="ct" data-to="20">20</span><s>+</s></div>
+      <div class="pfl">Years inside<br>financial services</div>
+    </div>
+    <div class="pf">
+      <div class="pfn">$<span class="ct" data-to="300">300</span><s>M+</s></div>
+      <div class="pfl">AUM the founder<br>has overseen</div>
+    </div>
+    <div class="pf">
+      <div class="pfn"><span class="ct" data-to="6">6</span></div>
+      <div class="pfl">Core service<br>disciplines</div>
+    </div>
+    <div class="pf">
+      <div class="pfn">1<s>:1</s></div>
+      <div class="pfl">Senior partner<br>on every account</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ PROCESS -->
+<section class="sec bg-p" id="process">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>06</i> How we work</div>
+    <div class="prg">
+      <div class="prsticky">
+        <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=900&q=85" alt="Team meeting in conference room" loading="lazy" decoding="async">
+      </div>
+      <div>
+        <div class="prstep">
+          <span class="prn">01</span>
+          <div>
+            <div class="prt">Discovery</div>
+            <p class="prd">A no-obligation conversation to understand your structure, your goals, and where the real friction lives.</p>
+          </div>
+        </div>
+        <div class="prstep">
+          <span class="prn">02</span>
+          <div>
+            <div class="prt">Proposal</div>
+            <p class="prd">A tailored engagement — only the disciplines you need, scoped to a price that fits your stage, with nothing padded in.</p>
+          </div>
+        </div>
+        <div class="prstep">
+          <span class="prn">03</span>
+          <div>
+            <div class="prt">Onboarding</div>
+            <p class="prd">We integrate quickly and take the work off your plate without disrupting a single day of operations.</p>
+          </div>
+        </div>
+        <div class="prstep">
+          <span class="prn">04</span>
+          <div>
+            <div class="prt">Partnership</div>
+            <p class="prd">We scale with you — adding depth and disciplines as your firm grows and your obligations widen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ FAQ -->
+<section class="sec bg-b" id="faq">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>07</i> Common questions</div>
+    <div class="fqw">
+
+      <div class="fq">
+        <button class="fqq" onclick="faq(this)" aria-expanded="false">
+          Do we have to engage all six services?
+          <span class="fqic" aria-hidden="true">+</span>
+        </button>
+        <div class="fqa" role="region">
+          <div class="fqai">No. Most clients start with one or two disciplines — often fractional CFO support or fund operations — and add others as their needs grow. You only pay for the scope you actually use.</div>
+        </div>
+      </div>
+
+      <div class="fq">
+        <button class="fqq" onclick="faq(this)" aria-expanded="false">
+          What size and stage of firm do you work with?
+          <span class="fqic" aria-hidden="true">+</span>
+        </button>
+        <div class="fqa" role="region">
+          <div class="fqai">We specialize in emerging managers, early-stage funds, real estate sponsors, family offices, and startups — firms that need institutional-grade finance before they can justify hiring a full-time CFO and back office.</div>
+        </div>
+      </div>
+
+      <div class="fq">
+        <button class="fqq" onclick="faq(this)" aria-expanded="false">
+          Can you handle an SEC audit or regulatory inquiry?
+          <span class="fqic" aria-hidden="true">+</span>
+        </button>
+        <div class="fqa" role="region">
+          <div class="fqai">Yes. Regulatory compliance support is a core discipline — we monitor programs and respond to inquiries and SEC audit requests, drawing on two decades of experience inside regulated fund managers.</div>
+        </div>
+      </div>
+
+      <div class="fq">
+        <button class="fqq" onclick="faq(this)" aria-expanded="false">
+          How does pricing work?
+          <span class="fqic" aria-hidden="true">+</span>
+        </button>
+        <div class="fqa" role="region">
+          <div class="fqai">Every engagement is scoped after a discovery call. Because we tailor the work to your stage and disciplines, pricing is specific to your firm rather than a fixed package — and there is nothing padded in.</div>
+        </div>
+      </div>
+
+      <div class="fq">
+        <button class="fqq" onclick="faq(this)" aria-expanded="false">
+          Where are you located, and do you work remotely?
+          <span class="fqic" aria-hidden="true">+</span>
+        </button>
+        <div class="fqa" role="region">
+          <div class="fqai">DSF is based in Hackensack, New Jersey, and works with clients both locally and remotely across the US. Engagements run seamlessly whether you're across the river or across the country.</div>
+        </div>
+      </div>
+
+      <div class="fq">
+        <button class="fqq" onclick="faq(this)" aria-expanded="false">
+          How quickly can you start?
+          <span class="fqic" aria-hidden="true">+</span>
+        </button>
+        <div class="fqa" role="region">
+          <div class="fqai">After a discovery call and an agreed proposal, onboarding is fast — we're built to integrate with your team and take over operations without disrupting your day-to-day.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ CONTACT -->
+<section class="sec bg-d" id="contact" style="position:relative;overflow:hidden">
+  <div style="position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,146,42,.1) 0%,transparent 68%);top:-250px;right:-120px;pointer-events:none" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="eye" data-reveal><i>08</i> Get in touch</div>
+    <div class="ctg">
+      <div>
+        <h2 class="cth">Talk to us before your next <em>raise, audit, or hire.</em></h2>
+        <p class="ctlead">Tell us where your firm is headed. We'll show you what a senior finance function looks like at your stage — no obligation.</p>
+        <div class="ctinfo">
+          <div>
+            <span class="ctk">Email</span>
+            <a class="ctv" href="mailto:manuelperez@cetis17.edu.mx">manuelperez@cetis17.edu.mx</a>
+          </div>
+          <div>
+            <span class="ctk">Phone</span>
+            <a class="ctv" href="tel:+19294120028">(929) 412-0028</a>
+          </div>
+          <div>
+            <span class="ctk">Office</span>
+            <span class="ctv">Hackensack, New Jersey</span>
+          </div>
+          <div>
+            <span class="ctk">Hours</span>
+            <span class="ctv">Mon–Fri · 9:00 AM – 6:00 PM ET</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <form class="form" id="cform" novalidate>
+          <div class="fld">
+            <label for="intent">I'd like to</label>
+            <select name="intent" id="intent">
+              <option>Schedule a consultation</option>
+              <option>Send a general message</option>
+              <option>Ask about a specific service</option>
+              <option>Discuss fund / manager set-up</option>
+            </select>
+          </div>
+          <div class="fldr">
+            <div class="fld">
+              <label for="fname">Full name</label>
+              <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name">
+            </div>
+            <div class="fld">
+              <label for="ffirm">Firm</label>
+              <input type="text" id="ffirm" name="firm" placeholder="Company name" autocomplete="organization">
+            </div>
+          </div>
+          <div class="fldr">
+            <div class="fld">
+              <label for="femail">Email</label>
+              <input type="email" id="femail" name="email" placeholder="you@firm.com" required autocomplete="email">
+            </div>
+            <div class="fld">
+              <label for="fphone">Phone (optional)</label>
+              <input type="tel" id="fphone" name="phone" placeholder="(___) ___-____" autocomplete="tel">
+            </div>
+          </div>
+          <div class="fld">
+            <label for="fmessage">How can we help?</label>
+            <textarea id="fmessage" name="message" placeholder="A sentence or two about your firm and what you need." required></textarea>
+          </div>
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <button type="submit" class="btn btn-g fbtn" id="sbtn">Send message →</button>
+          <div class="fmsg" id="fmsg" role="alert" aria-live="polite"></div>
+          <p class="fnote">Sent securely. We typically reply within one business day.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="ftg">
+    <div>
+      <div class="ftmk">DSF Advisors<b>.</b></div>
+      <div class="fttag">Outsourced CFO &amp; COO services for firms where the numbers matter most. Hackensack, New Jersey.</div>
+    </div>
+    <div class="ftcol">
+      <h4>Firm</h4>
+      <a href="#about">About</a>
+      <a href="#founder">Founder</a>
+      <a href="#industries">Industries</a>
+      <a href="#process">Process</a>
+    </div>
+    <div class="ftcol">
+      <h4>Services</h4>
+      <a href="#services">CFO Services</a>
+      <a href="#services">Fund Operations</a>
+      <a href="#advisory">Advisory</a>
+      <a href="#services">Compliance</a>
+    </div>
+    <div class="ftcol">
+      <h4>Contact</h4>
+      <a href="mailto:manuelperez@cetis17.edu.mx">Email us</a>
+      <a href="tel:+19294120028">(929) 412-0028</a>
+      <a href="#contact">Schedule a call</a>
+    </div>
+  </div>
+  <div class="ftbot">
+    <div class="ftcp">© 2026 DSF Advisors LLC — All rights reserved</div>
+    <div class="ftbd">Outsourced CFO &amp; COO</div>
+  </div>
+</footer>
+
+</body>
+</html>
