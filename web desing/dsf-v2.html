@@ -618,6 +618,8 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
   .prsticky { display: none; }
   .prd  { max-width: 100%; }
   .ctg  { grid-template-columns: 1fr; gap: 3rem; }
+  #location > .wrap > div { grid-template-columns: 1fr !important; }
+  #location > .wrap > div > div:last-child { height: 260px !important; }
   .ctlead { max-width: 100%; }
   .abp, .fdp, .fssub, .prd, .ctlead, .abt-p { text-align: left; hyphens: none; -webkit-hyphens: none; }
   .fldr { grid-template-columns: 1fr; }
@@ -843,9 +845,9 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
         <h2 class="cth">Talk to us before your next <em>raise, audit, or hire.</em></h2>
         <p class="ctlead">Tell us where your firm is headed. We'll show you what a senior finance function looks like at your stage — no obligation.</p>
         <div class="ctinfo">
-          <div><span class="ctk">Email</span><a class="ctv" href="mailto:manuelperez@cetis17.edu.mx">manuelperez@cetis17.edu.mx</a></div>
-          <div><span class="ctk">Phone</span><a class="ctv" href="tel:+19294120028">(929) 412-0028</a></div>
-          <div><span class="ctk">Office</span><span class="ctv">Hackensack, New Jersey</span></div>
+          <div><span class="ctk">Email</span><a class="ctv" href="mailto:wrodriguez@dsfadv.com">wrodriguez@dsfadv.com</a></div>
+          <div><span class="ctk">Phone</span><a class="ctv" href="tel:+12012125584">(201) 212-5584</a></div>
+          <div><span class="ctk">Office</span><a class="ctv" href="#location">411 Hackensack Ave, Suite 200 · Hackensack, NJ 07601</a></div>
           <div><span class="ctk">Hours</span><span class="ctv">Mon–Fri · 9:00 AM – 6:00 PM ET</span></div>
         </div>
       </div>
@@ -865,12 +867,51 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
   </div>
 </section>
 
+<section class="sec bg-p" id="location" style="padding-top:clamp(3rem,6vw,5rem);padding-bottom:clamp(3rem,6vw,5rem)">
+  <div class="wrap">
+    <div class="eye"><i>—</i> Find us</div>
+    <div style="display:grid;grid-template-columns:1fr 1.4fr;gap:clamp(2rem,5vw,4rem);align-items:center">
+      <div>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:300;line-height:1.1;color:var(--navy);margin-bottom:1.2rem">Our office is in <em style="font-style:italic;color:var(--gdk)">Hackensack, New Jersey.</em></h2>
+        <p style="font-size:clamp(.86rem,1.6vw,.94rem);color:#3a4f65;line-height:1.9;margin-bottom:1.8rem;text-align:justify;hyphens:auto">We meet clients in person and work remotely across the US. Whether you're in the tri-state area or across the country, we operate seamlessly wherever you are.</p>
+        <div style="display:flex;flex-direction:column;gap:.9rem">
+          <div style="display:flex;align-items:flex-start;gap:1rem">
+            <span style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gdk);padding-top:.18rem;white-space:nowrap">Address</span>
+            <a href="https://maps.google.com/?q=411+Hackensack+Avenue+Suite+200+Hackensack+NJ+07601" target="_blank" rel="noopener" style="font-size:.88rem;color:var(--navy);line-height:1.6;transition:color .3s" onmouseover="this.style.color='var(--gdk)'" onmouseout="this.style.color='var(--navy)'">411 Hackensack Avenue, Suite 200<br>Hackensack, NJ 07601</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem">
+            <span style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gdk);white-space:nowrap">Phone</span>
+            <a href="tel:+12012125584" style="font-size:.88rem;color:var(--navy);transition:color .3s" onmouseover="this.style.color='var(--gdk)'" onmouseout="this.style.color='var(--navy)'">(201) 212-5584</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem">
+            <span style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gdk);white-space:nowrap">Email</span>
+            <a href="mailto:wrodriguez@dsfadv.com" style="font-size:.88rem;color:var(--navy);transition:color .3s" onmouseover="this.style.color='var(--gdk)'" onmouseout="this.style.color='var(--navy)'">wrodriguez@dsfadv.com</a>
+          </div>
+          <div style="display:flex;align-items:center;gap:1rem">
+            <span style="font-family:'DM Mono',monospace;font-size:.52rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gdk);white-space:nowrap">Hours</span>
+            <span style="font-size:.88rem;color:var(--navy)">Mon–Fri · 9:00 AM – 6:00 PM ET</span>
+          </div>
+        </div>
+        <a href="https://maps.google.com/?q=411+Hackensack+Avenue+Suite+200+Hackensack+NJ+07601" target="_blank" rel="noopener" class="btn btn-g" style="margin-top:2rem;font-size:.74rem">Get directions →</a>
+      </div>
+      <div style="border-radius:2px;overflow:hidden;box-shadow:0 8px 40px rgba(13,31,60,.12);height:clamp(300px,40vw,460px)">
+        <iframe
+          title="DSF Advisors office location"
+          src="https://maps.google.com/maps?q=411+Hackensack+Avenue+Suite+200+Hackensack+NJ+07601&output=embed&z=15"
+          width="100%" height="100%" style="border:0;display:block" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
   <div class="ftg">
     <div><div class="ftmk"><span class="ftmk-box">DSF</span><span class="ftmk-txt">ADVI<span class="ftmk-cur">|</span>SORS</span></div><div class="fttag">Outsourced CFO &amp; COO services for firms where the numbers matter most. Hackensack, New Jersey.</div></div>
     <div class="ftcol"><h4>Firm</h4><a href="#about">About</a><a href="#founder">Founder</a><a href="#industries">Industries</a><a href="#process">Process</a></div>
     <div class="ftcol"><h4>Services</h4><a href="#services">CFO Services</a><a href="#services">Fund Operations</a><a href="#advisory">Advisory</a><a href="#services">Compliance</a></div>
-    <div class="ftcol"><h4>Contact</h4><a href="mailto:manuelperez@cetis17.edu.mx">Email us</a><a href="tel:+19294120028">(929) 412-0028</a><a href="#contact">Schedule a call</a></div>
+    <div class="ftcol"><h4>Contact</h4><a href="mailto:wrodriguez@dsfadv.com">Email us</a><a href="tel:+12012125584">(201) 212-5584</a><a href="#contact">Schedule a call</a><a href="#location">Our location</a></div>
   </div>
   <div class="ftbot"><div class="ftcp">© 2026 DSF Advisors LLC — All rights reserved</div><div class="ftbd">Outsourced CFO &amp; COO</div></div>
 </footer>
@@ -883,7 +924,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
 (function () {
   "use strict";
 
-  var FEMAIL  = "manuelperez@cetis17.edu.mx";
+  var FEMAIL  = "wrodriguez@dsfadv.com";
   var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   var fine    = matchMedia("(hover: hover) and (pointer: fine)").matches;
 
