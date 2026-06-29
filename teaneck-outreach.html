@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prospección Local – Teaneck, NJ | Radio 4 km</title>
+  <style>
+    :root {
+      --green:  #22c55e;
+      --red:    #ef4444;
+      --blue:   #3b82f6;
+      --indigo: #6366f1;
+      --gold:   #f59e0b;
+      --gray:   #6b7280;
+      --bg:     #0f172a;
+      --card:   #1e293b;
+      --border: #334155;
+      --text:   #e2e8f0;
+      --muted:  #94a3b8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+    }
+    header h1 { font-size: 2rem; font-weight: 700; letter-spacing: -.5px; }
+    header h1 span { color: var(--gold); }
+    header p { color: var(--muted); margin-top: .4rem; font-size: .95rem; }
+    .badge {
+      display: inline-block;
+      background: var(--indigo);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .2rem .7rem;
+      border-radius: 999px;
+      margin-top: .6rem;
+      letter-spacing: .5px;
+    }
+
+    /* ── Layout ── */
+    main { max-width: 1100px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+    /* ── Section titles ── */
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+      padding-left: .7rem;
+      border-left: 3px solid var(--gold);
+      letter-spacing: .3px;
+    }
+
+    /* ── KPI cards ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: .5rem;
+    }
+    .kpi {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.2rem 1rem;
+      text-align: center;
+    }
+    .kpi .num { font-size: 2rem; font-weight: 800; }
+    .kpi .label { font-size: .78rem; color: var(--muted); margin-top: .2rem; text-transform: uppercase; letter-spacing: .5px; }
+    .kpi.green  .num { color: var(--green); }
+    .kpi.red    .num { color: var(--red); }
+    .kpi.blue   .num { color: var(--blue); }
+    .kpi.gold   .num { color: var(--gold); }
+    .kpi.indigo .num { color: var(--indigo); }
+
+    /* ── Charts row ── */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 1.5rem;
+      align-items: start;
+      margin-bottom: 2rem;
+    }
+    @media (max-width: 700px) { .charts-row { grid-template-columns: 1fr; } }
+
+    /* ── Bar chart ── */
+    .bar-chart-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .bar-chart-wrap h3 { font-size: .9rem; color: var(--muted); margin-bottom: 1.2rem; text-transform: uppercase; letter-spacing: .5px; }
+    .bar-row { display: flex; align-items: center; gap: .7rem; margin-bottom: .65rem; }
+    .bar-label { font-size: .78rem; color: var(--muted); width: 180px; flex-shrink: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .bar-track { flex: 1; background: #1a2740; border-radius: 4px; height: 22px; position: relative; }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      position: absolute;
+      left: 0; top: 0;
+      display: flex; align-items: center; justify-content: flex-end;
+      padding-right: 6px;
+      font-size: .7rem;
+      font-weight: 700;
+      color: #fff;
+      transition: width .4s;
+    }
+    .bar-fill.has-site  { background: linear-gradient(90deg, #1d4ed8, #3b82f6); }
+    .bar-fill.no-site   { background: linear-gradient(90deg, #b45309, #f59e0b); }
+    .bar-fill.no-rating { background: linear-gradient(90deg, #374151, #6b7280); }
+
+    /* ── Pie chart (SVG) ── */
+    .pie-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem 1.5rem 1rem;
+      min-width: 200px;
+      text-align: center;
+    }
+    .pie-wrap h3 { font-size: .9rem; color: var(--muted); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: .5px; }
+    .pie-legend { display: flex; flex-direction: column; gap: .4rem; margin-top: 1rem; font-size: .78rem; text-align: left; }
+    .pie-legend-item { display: flex; align-items: center; gap: .5rem; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+    /* ── Priority table ── */
+    .alert-box {
+      background: linear-gradient(135deg, #451a03, #1c0a02);
+      border: 1px solid #b45309;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 1.5rem;
+      font-size: .85rem;
+      color: #fde68a;
+    }
+    .alert-box strong { color: #fbbf24; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      font-size: .84rem;
+    }
+    thead th {
+      background: #162032;
+      color: var(--muted);
+      text-transform: uppercase;
+      font-size: .7rem;
+      letter-spacing: .7px;
+      padding: .75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: #253048; }
+    td { padding: .7rem 1rem; vertical-align: middle; }
+
+    .rank { font-weight: 800; color: var(--muted); width: 32px; }
+    .rank.gold-rank   { color: #f59e0b; }
+    .rank.silver-rank { color: #9ca3af; }
+    .rank.bronze-rank { color: #b45309; }
+
+    .stars { color: var(--gold); font-size: .85rem; }
+    .rev-count { color: var(--muted); font-size: .74rem; }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .15rem .55rem;
+      border-radius: 6px;
+      letter-spacing: .3px;
+    }
+    .tag.has-web  { background: #1e3a5f; color: #60a5fa; border: 1px solid #2563eb; }
+    .tag.no-web   { background: #451a03; color: #fcd34d; border: 1px solid #b45309; }
+
+    .phone { font-family: monospace; color: var(--blue); font-size: .82rem; }
+    .biz-name { font-weight: 600; color: var(--text); }
+    .cat { color: var(--muted); font-size: .74rem; margin-top: 1px; }
+
+    /* ── Priority highlight rows ── */
+    tr.priority { background: rgba(245, 158, 11, 0.05); }
+    tr.priority:hover { background: rgba(245, 158, 11, 0.1); }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .76rem;
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Prospección de Negocios Locales — <span>Teaneck, NJ</span></h1>
+  <p>Radio de búsqueda: 4 km · Zona: Cedar Lane, Queen Anne Rd, Degraw Ave, Palisade Ave</p>
+  <span class="badge">Objetivo: Venta de creación / actualización de sitios web</span>
+</header>
+
+<main>
+
+  <!-- ── KPIs ── -->
+  <h2>Resumen Ejecutivo</h2>
+  <div class="kpi-grid">
+    <div class="kpi blue">  <div class="num">13</div><div class="label">Negocios encontrados</div></div>
+    <div class="kpi green"> <div class="num">7</div> <div class="label">Tienen sitio web</div></div>
+    <div class="kpi red">   <div class="num">6</div> <div class="label">Sin sitio web ⚡</div></div>
+    <div class="kpi gold">  <div class="num">4.5</div><div class="label">Calificación promedio</div></div>
+    <div class="kpi indigo"><div class="num">8</div> <div class="label">Restaurantes</div></div>
+  </div>
+
+  <!-- ── Charts ── -->
+  <h2>Análisis Visual</h2>
+  <div class="charts-row">
+
+    <!-- Bar chart -->
+    <div class="bar-chart-wrap">
+      <h3>Calificación por negocio (orden de prioridad)</h3>
+
+      <!-- Helper: max rating = 5, bar width % = (rating/5)*100 -->
+      <!-- has-site = blue, no-site = orange, no-rating = gray -->
+
+      <div class="bar-row">
+        <div class="bar-label" title="Peck Peck Korean Fried Chicken">🍗 Peck Peck Korean Chicken</div>
+        <div class="bar-track"><div class="bar-fill has-site" style="width:94%">4.7 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Coffee & Cornbread Co">☕ Coffee &amp; Cornbread</div>
+        <div class="bar-track"><div class="bar-fill has-site" style="width:94%">4.7 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Golden Grill Restaurant">🍳 Golden Grill</div>
+        <div class="bar-track"><div class="bar-fill has-site" style="width:92%">4.6 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Rudra Indian Bistro">🍛 Rudra Indian Bistro</div>
+        <div class="bar-track"><div class="bar-fill has-site" style="width:92%">4.6 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="BV Tuscany Italian Ristorante">🍝 BV Tuscany Italian</div>
+        <div class="bar-track"><div class="bar-fill has-site" style="width:90%">4.5 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Veggie Heaven">🥗 Veggie Heaven</div>
+        <div class="bar-track"><div class="bar-fill has-site" style="width:88%">4.4 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Taste of India — SIN SITIO WEB">🎯 Taste of India</div>
+        <div class="bar-track"><div class="bar-fill no-site" style="width:82%">4.1 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Chinatown Kitchen">🥡 Chinatown Kitchen</div>
+        <div class="bar-track"><div class="bar-fill has-site" style="width:76%">3.8 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="NoBo Wine & Grill">🍷 NoBo Wine &amp; Grill</div>
+        <div class="bar-track"><div class="bar-fill has-site" style="width:80%">4.0 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Cedar Lane Flower Shoppe — SIN SITIO WEB">🎯 Cedar Lane Flowers</div>
+        <div class="bar-track"><div class="bar-fill no-site" style="width:74%">3.7 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Teaneck Vision Center — SIN SITIO WEB">🎯 Teaneck Vision Center</div>
+        <div class="bar-track"><div class="bar-fill no-site" style="width:50%">2.5 ★</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Style and Chic Hair Salon — SIN SITIO WEB">🎯 Style &amp; Chic Salon</div>
+        <div class="bar-track"><div class="bar-fill no-site" style="width:68%">Sin dato</div></div>
+      </div>
+      <div class="bar-row">
+        <div class="bar-label" title="Cedar Lane Pharmacy — SIN SITIO WEB">🎯 Cedar Lane Pharmacy</div>
+        <div class="bar-track"><div class="bar-fill no-site" style="width:68%">Sin dato</div></div>
+      </div>
+
+      <div style="display:flex;gap:1rem;margin-top:1.2rem;font-size:.75rem;color:var(--muted)">
+        <span style="display:flex;align-items:center;gap:.3rem"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#3b82f6"></span>Tiene sitio web</span>
+        <span style="display:flex;align-items:center;gap:.3rem"><span style="display:inline-block;width:12px;height:12px;border-radius:3px;background:#f59e0b"></span>Sin sitio web (🎯 prioridad)</span>
+      </div>
+    </div>
+
+    <!-- Pie chart SVG -->
+    <div class="pie-wrap">
+      <h3>Estado Web</h3>
+      <!-- SVG Pie: 7 with website (54%), 6 without (46%) -->
+      <!--
+        Circle: cx=80 cy=80 r=70
+        Circumference = 2πr = 439.8
+        Segment "con web"  = 54% → stroke-dasharray = 237.5 439.8  stroke-dashoffset = 0
+        Segment "sin web"  = 46% → stroke-dasharray = 202.3 439.8  stroke-dashoffset = -237.5
+      -->
+      <svg viewBox="0 0 160 160" width="160" height="160">
+        <!-- Background circle -->
+        <circle cx="80" cy="80" r="70" fill="none" stroke="#1a2740" stroke-width="30"/>
+        <!-- Con sitio web: 7/13 = 53.8% -->
+        <circle cx="80" cy="80" r="70" fill="none"
+          stroke="#3b82f6" stroke-width="30"
+          stroke-dasharray="237 440"
+          stroke-dashoffset="110"
+          stroke-linecap="butt"
+          transform="rotate(-90 80 80)"/>
+        <!-- Sin sitio web: 6/13 = 46.2% -->
+        <circle cx="80" cy="80" r="70" fill="none"
+          stroke="#f59e0b" stroke-width="30"
+          stroke-dasharray="203 440"
+          stroke-dashoffset="-127"
+          stroke-linecap="butt"
+          transform="rotate(-90 80 80)"/>
+        <!-- Center text -->
+        <text x="80" y="75" text-anchor="middle" fill="#e2e8f0" font-size="22" font-weight="800" font-family="Segoe UI,sans-serif">13</text>
+        <text x="80" y="93" text-anchor="middle" fill="#94a3b8" font-size="9" font-family="Segoe UI,sans-serif">NEGOCIOS</text>
+      </svg>
+      <div class="pie-legend">
+        <div class="pie-legend-item"><span class="dot" style="background:#3b82f6"></span>Con sitio web (7)</div>
+        <div class="pie-legend-item"><span class="dot" style="background:#f59e0b"></span>Sin sitio web (6)</div>
+      </div>
+    </div>
+
+  </div><!-- /charts-row -->
+
+
+  <!-- ── Priority: No Website ── -->
+  <h2>⚡ Prioridad Alta — Sin Sitio Web (Venta de Creación)</h2>
+
+  <div class="alert-box">
+    <strong>Oportunidad directa:</strong> estos 6 negocios <strong>no tienen sitio web propio</strong>.
+    Ofrecerles un sitio desde cero es la entrada más fácil. Llamar primero a los de mayor calificación.
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Negocio</th>
+        <th>Categoría</th>
+        <th>Calificación</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Estado Web</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="priority">
+        <td class="rank gold-rank">1</td>
+        <td><div class="biz-name">Taste of India</div><div class="cat">Restaurante Indio</div></td>
+        <td>Restaurante</td>
+        <td><span class="stars">★★★★</span><span class="rev-count"> 4.1 (279 res.)</span></td>
+        <td>166 Cedar Ln, Teaneck, NJ</td>
+        <td><span class="phone">(201) 692-3222</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+      </tr>
+      <tr class="priority">
+        <td class="rank silver-rank">2</td>
+        <td><div class="biz-name">Cedar Lane Flower Shoppe</div><div class="cat">Floristería local</div></td>
+        <td>Comercio</td>
+        <td><span class="stars">★★★★</span><span class="rev-count"> 3.7 (Yelp)</span></td>
+        <td>457 Cedar Ln, Teaneck, NJ</td>
+        <td><span class="phone">(201) 836-7106</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+      </tr>
+      <tr class="priority">
+        <td class="rank bronze-rank">3</td>
+        <td><div class="biz-name">Style &amp; Chic Hair Salon</div><div class="cat">Salón de belleza</div></td>
+        <td>Servicios</td>
+        <td><span class="stars">★★★★</span><span class="rev-count"> 4.0+ (local)</span></td>
+        <td>1211 Teaneck Rd, Teaneck, NJ</td>
+        <td><span class="phone">(201) 530-5000</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+      </tr>
+      <tr class="priority">
+        <td class="rank">4</td>
+        <td><div class="biz-name">Cedar Lane Pharmacy</div><div class="cat">Farmacia independiente</div></td>
+        <td>Salud</td>
+        <td><span class="stars">★★★★</span><span class="rev-count"> 3.8 (local)</span></td>
+        <td>527 Cedar Ln, Teaneck, NJ</td>
+        <td><span class="phone">(201) 836-7003</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+      </tr>
+      <tr class="priority">
+        <td class="rank">5</td>
+        <td><div class="biz-name">Teaneck Vision Center</div><div class="cat">Optometrista</div></td>
+        <td>Salud / Óptica</td>
+        <td><span class="stars">★★★</span><span class="rev-count"> 2.5 (Yelp 5 res.)</span></td>
+        <td>502B Cedar Ln, Teaneck, NJ</td>
+        <td><span class="phone">(201) 836-5644</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+      </tr>
+      <tr class="priority">
+        <td class="rank">6</td>
+        <td><div class="biz-name">Teaneck Quick Shop</div><div class="cat">Tienda de conveniencia</div></td>
+        <td>Comercio</td>
+        <td><span class="stars">★★★</span><span class="rev-count"> Local</span></td>
+        <td>725 Cedar Ln, Teaneck, NJ</td>
+        <td><span class="phone">(201) 836-2946</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- ── Full Ranked List ── -->
+  <h2>Ranking Completo — Todos los Negocios (Mayor a Menor Calificación)</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Negocio</th>
+        <th>Calificación</th>
+        <th>Reseñas</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Sitio Web</th>
+        <th>Oportunidad</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rank gold-rank">1</td>
+        <td><div class="biz-name">Peck Peck Korean Chicken</div><div class="cat">🍗 Coreano · Fast food</div></td>
+        <td><span class="stars">★★★★★</span> 4.7</td>
+        <td><span class="rev-count">41+</span></td>
+        <td>250 Degraw Ave</td>
+        <td><span class="phone">(201) 530-5858</span></td>
+        <td><span class="tag has-web">✔ peckpeckchicken.com</span></td>
+        <td>Actualización</td>
+      </tr>
+      <tr>
+        <td class="rank gold-rank">2</td>
+        <td><div class="biz-name">Coffee &amp; Cornbread Co.</div><div class="cat">☕ Café · Desayunos</div></td>
+        <td><span class="stars">★★★★★</span> 4.7</td>
+        <td><span class="rev-count">366+</span></td>
+        <td>1350B Queen Anne Rd</td>
+        <td><span class="phone">(201) 862-0600</span></td>
+        <td><span class="tag has-web">✔ coffeeandcornbread.com</span></td>
+        <td>Actualización</td>
+      </tr>
+      <tr>
+        <td class="rank silver-rank">3</td>
+        <td><div class="biz-name">Golden Grill Restaurant</div><div class="cat">🍳 Americano · Brunch</div></td>
+        <td><span class="stars">★★★★★</span> 4.6</td>
+        <td><span class="rev-count">69+</span></td>
+        <td>1379 Queen Anne Rd</td>
+        <td><span class="phone">(201) 837-1078</span></td>
+        <td><span class="tag has-web">✔ goldengrillteaneck.com</span></td>
+        <td>Actualización</td>
+      </tr>
+      <tr>
+        <td class="rank silver-rank">4</td>
+        <td><div class="biz-name">Rudra Indian Bistro</div><div class="cat">🍛 Indio · Bistró</div></td>
+        <td><span class="stars">★★★★★</span> 4.6</td>
+        <td><span class="rev-count">157+</span></td>
+        <td>561 Cedar Ln</td>
+        <td><span class="phone">(201) 530-7575</span></td>
+        <td><span class="tag has-web">✔ rudraindianbistro.com</span></td>
+        <td>Actualización</td>
+      </tr>
+      <tr>
+        <td class="rank bronze-rank">5</td>
+        <td><div class="biz-name">BV Tuscany Italian Ristorante</div><div class="cat">🍝 Italiano · Fine dining</div></td>
+        <td><span class="stars">★★★★½</span> 4.5</td>
+        <td><span class="rev-count">273+</span></td>
+        <td>368 Cedar Ln</td>
+        <td><span class="phone">(201) 287-0404</span></td>
+        <td><span class="tag has-web">✔ bvtuscany.com</span></td>
+        <td>Actualización</td>
+      </tr>
+      <tr>
+        <td class="rank bronze-rank">6</td>
+        <td><div class="biz-name">Veggie Heaven</div><div class="cat">🥗 Vegano · Kosher · Asiático</div></td>
+        <td><span class="stars">★★★★½</span> 4.4</td>
+        <td><span class="rev-count">119+</span></td>
+        <td>473 Cedar Ln</td>
+        <td><span class="phone">(201) 836-0887</span></td>
+        <td><span class="tag has-web">✔ orderveggieheaven.com</span></td>
+        <td>Actualización</td>
+      </tr>
+      <tr class="priority">
+        <td class="rank">7</td>
+        <td><div class="biz-name">Taste of India</div><div class="cat">🎯 Indio · Familiar</div></td>
+        <td><span class="stars">★★★★</span> 4.1</td>
+        <td><span class="rev-count">279+</span></td>
+        <td>166 Cedar Ln</td>
+        <td><span class="phone">(201) 692-3222</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+        <td><strong style="color:#fbbf24">Crear sitio</strong></td>
+      </tr>
+      <tr>
+        <td class="rank">8</td>
+        <td><div class="biz-name">NoBo Wine &amp; Grill</div><div class="cat">🍷 Vinos · Parrilla</div></td>
+        <td><span class="stars">★★★★</span> 4.0</td>
+        <td><span class="rev-count">Local</span></td>
+        <td>1400 Palisade Ave</td>
+        <td><span class="phone">(201) 837-1000</span></td>
+        <td><span class="tag has-web">✔ noboteaneck.com</span></td>
+        <td>Actualización</td>
+      </tr>
+      <tr class="priority">
+        <td class="rank">9</td>
+        <td><div class="biz-name">Cedar Lane Flower Shoppe</div><div class="cat">🎯 Floristería · Arreglos</div></td>
+        <td><span class="stars">★★★★</span> 3.7</td>
+        <td><span class="rev-count">Yelp</span></td>
+        <td>457 Cedar Ln</td>
+        <td><span class="phone">(201) 836-7106</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+        <td><strong style="color:#fbbf24">Crear sitio</strong></td>
+      </tr>
+      <tr>
+        <td class="rank">10</td>
+        <td><div class="biz-name">Chinatown Kitchen</div><div class="cat">🥡 Chino · Takeout</div></td>
+        <td><span class="stars">★★★★</span> 3.8</td>
+        <td><span class="rev-count">75+</span></td>
+        <td>257 Degraw Ave</td>
+        <td><span class="phone">(201) 530-7388</span></td>
+        <td><span class="tag has-web">✔ chinatownkitchenteaneck.com</span></td>
+        <td>Actualización</td>
+      </tr>
+      <tr class="priority">
+        <td class="rank">11</td>
+        <td><div class="biz-name">Style &amp; Chic Hair Salon</div><div class="cat">🎯 Belleza · Cortes</div></td>
+        <td><span class="stars">★★★★</span> 4.0+</td>
+        <td><span class="rev-count">Local</span></td>
+        <td>1211 Teaneck Rd</td>
+        <td><span class="phone">(201) 530-5000</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+        <td><strong style="color:#fbbf24">Crear sitio</strong></td>
+      </tr>
+      <tr class="priority">
+        <td class="rank">12</td>
+        <td><div class="biz-name">Cedar Lane Pharmacy</div><div class="cat">🎯 Farmacia independiente</div></td>
+        <td><span class="stars">★★★★</span> 3.8</td>
+        <td><span class="rev-count">Local</span></td>
+        <td>527 Cedar Ln</td>
+        <td><span class="phone">(201) 836-7003</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+        <td><strong style="color:#fbbf24">Crear sitio</strong></td>
+      </tr>
+      <tr class="priority">
+        <td class="rank">13</td>
+        <td><div class="biz-name">Teaneck Vision Center</div><div class="cat">🎯 Óptica · Optometrista</div></td>
+        <td><span class="stars">★★★</span> 2.5</td>
+        <td><span class="rev-count">5</span></td>
+        <td>502B Cedar Ln</td>
+        <td><span class="phone">(201) 836-5644</span></td>
+        <td><span class="tag no-web">⚡ Sin sitio web</span></td>
+        <td><strong style="color:#fbbf24">Crear sitio</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <!-- ── Script de llamadas sugerido ── -->
+  <h2>Guión de Contacto Sugerido</h2>
+  <div style="background:var(--card);border:1px solid var(--border);border-radius:12px;padding:1.5rem;font-size:.85rem;line-height:1.9;color:var(--muted)">
+    <p><strong style="color:var(--text)">Para negocios SIN sitio web:</strong><br>
+    "Hola, llamo de <em>[tu empresa]</em>. Encontré su negocio en Google Maps con excelentes reseñas, pero noté que no tienen un sitio web. Hoy en día más del 80 % de los clientes buscan en internet antes de visitar un lugar. ¿Le gustaría que le mostrara opciones de un sitio profesional por un precio accesible?"</p>
+    <br>
+    <p><strong style="color:var(--text)">Para negocios CON sitio web (actualización):</strong><br>
+    "Hola, visité su sitio web y notamos que podría mejorar en velocidad, diseño mobile y posicionamiento en Google. Podemos actualizar su sitio para atraer más clientes sin cambiar lo que ya funciona. ¿Tiene 10 minutos para ver una propuesta gratuita?"</p>
+  </div>
+
+</main>
+
+<footer>
+  Generado el <strong>29 de junio 2026</strong> ·
+  Fuentes: Yelp, TripAdvisor, MenuPix, Google Maps, Birdeye ·
+  Datos para uso comercial de prospección
+</footer>
+
+</body>
+</html>
