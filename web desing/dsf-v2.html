@@ -553,6 +553,15 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
 }
 
 /* =============================================================
+   JUSTIFIED BODY TEXT — desktop only
+============================================================= */
+.abp, .fdp, .fssub, .prd, .ctlead, .abt-p {
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* =============================================================
    TABLET ≤1024px
 ============================================================= */
 @media (max-width: 1024px) {
@@ -610,6 +619,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
   .prd  { max-width: 100%; }
   .ctg  { grid-template-columns: 1fr; gap: 3rem; }
   .ctlead { max-width: 100%; }
+  .abp, .fdp, .fssub, .prd, .ctlead, .abt-p { text-align: left; hyphens: none; -webkit-hyphens: none; }
   .fldr { grid-template-columns: 1fr; }
   .ftg  { grid-template-columns: 1fr 1fr; gap: 2rem; }
   .ftmk { grid-column: 1 / -1; }
