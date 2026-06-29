@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta name="description" content="Nexum — Agencia de diseño web profesional en Nueva Jersey. Creamos y actualizamos sitios web para negocios locales."/>
+<meta name="author" content="Nexum Web Agency"/>
+<title>Nexum | Diseño Web Profesional en Nueva Jersey</title>
+<style>
+/* ── Reset & base ─────────────────────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;color:#1e293b;background:#fff;line-height:1.6}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ── Variables ───────────────────────────────────────────────────────── */
+:root{
+  --navy:#0f2c5e;
+  --blue:#1d4ed8;
+  --sky:#3b82f6;
+  --gold:#f59e0b;
+  --light:#f8fafc;
+  --border:#e2e8f0;
+  --gray:#64748b;
+  --dark:#1e293b;
+}
+
+/* ── Utility ─────────────────────────────────────────────────────────── */
+.container{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.section-tag{font-size:.75rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--sky);margin-bottom:.6rem;display:block}
+.section-title{font-size:2rem;font-weight:800;line-height:1.2;color:var(--dark)}
+.section-sub{font-size:1.05rem;color:var(--gray);margin-top:.7rem;max-width:540px}
+@media(max-width:600px){.section-title{font-size:1.55rem}}
+
+/* ── NAV ─────────────────────────────────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(255,255,255,.95);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--border);
+  padding:.85rem 0;
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-size:1.4rem;font-weight:900;color:var(--navy);letter-spacing:-.5px;display:flex;align-items:center;gap:.4rem}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);display:inline-block}
+.nav-links{display:flex;align-items:center;gap:1.8rem;list-style:none}
+.nav-links a{font-size:.9rem;font-weight:500;color:var(--gray);transition:color .2s}
+.nav-links a:hover{color:var(--navy)}
+.nav-cta{background:var(--navy);color:#fff;font-size:.85rem;font-weight:600;padding:.55rem 1.2rem;border-radius:8px;transition:background .2s}
+.nav-cta:hover{background:var(--blue)}
+.nav-hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px;padding:.3rem}
+.nav-hamburger span{display:block;width:22px;height:2px;background:var(--dark);border-radius:2px}
+@media(max-width:680px){
+  .nav-links,.nav-cta-wrap{display:none}
+  .nav-hamburger{display:flex}
+}
+
+/* ── HERO ─────────────────────────────────────────────────────────────── */
+.hero{
+  padding:6rem 0 5rem;
+  background:linear-gradient(160deg,#f0f5ff 0%,#ffffff 55%,#fef9ec 100%);
+  overflow:hidden;position:relative;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 80% 50%,rgba(59,130,246,.07),transparent);
+  pointer-events:none;
+}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr}}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:#eff6ff;border:1px solid #bfdbfe;
+  border-radius:999px;padding:.3rem .9rem;
+  font-size:.78rem;font-weight:600;color:var(--blue);margin-bottom:1.2rem;
+}
+.hero h1{font-size:2.7rem;font-weight:900;line-height:1.1;color:var(--navy);letter-spacing:-.5px}
+.hero h1 em{font-style:normal;color:var(--gold)}
+.hero p{font-size:1.05rem;color:var(--gray);margin:1.1rem 0 2rem;max-width:460px}
+.hero-btns{display:flex;flex-wrap:wrap;gap:.8rem}
+.btn-primary{background:var(--navy);color:#fff;font-weight:700;font-size:.95rem;padding:.8rem 1.8rem;border-radius:10px;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-primary:hover{background:var(--blue);transform:translateY(-1px);box-shadow:0 6px 20px rgba(29,78,216,.3)}
+.btn-secondary{background:#fff;color:var(--navy);font-weight:700;font-size:.95rem;padding:.8rem 1.8rem;border-radius:10px;border:2px solid var(--border);transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-secondary:hover{border-color:var(--navy);transform:translateY(-1px)}
+@media(max-width:600px){.hero h1{font-size:2rem}}
+
+/* Browser mockup */
+.browser-mock{
+  background:#fff;border-radius:14px;
+  box-shadow:0 25px 60px rgba(0,0,0,.12),0 4px 15px rgba(0,0,0,.06);
+  overflow:hidden;border:1px solid var(--border);
+}
+.browser-bar{background:#f1f5f9;padding:.6rem .9rem;display:flex;align-items:center;gap:.5rem;border-bottom:1px solid var(--border)}
+.browser-dots{display:flex;gap:.4rem}
+.browser-dot{width:10px;height:10px;border-radius:50%}
+.browser-url{flex:1;background:#fff;border-radius:5px;height:22px;margin:0 .5rem;display:flex;align-items:center;padding:0 .6rem;font-size:.67rem;color:var(--gray);border:1px solid var(--border)}
+.browser-body{padding:1.5rem;background:var(--light);min-height:260px;display:flex;flex-direction:column;gap:1rem}
+.mock-header{background:var(--navy);border-radius:8px;padding:.9rem 1rem;display:flex;justify-content:space-between;align-items:center}
+.mock-logo{width:70px;height:10px;background:rgba(255,255,255,.7);border-radius:5px}
+.mock-nav{display:flex;gap:.5rem}
+.mock-nav span{width:35px;height:8px;background:rgba(255,255,255,.35);border-radius:4px}
+.mock-hero{background:#fff;border-radius:8px;padding:1.2rem;border:1px solid var(--border)}
+.mock-h1{width:80%;height:12px;background:#1e3a8a;border-radius:6px;margin-bottom:.6rem}
+.mock-h2{width:55%;height:9px;background:#cbd5e1;border-radius:5px;margin-bottom:1rem}
+.mock-btn{display:inline-block;width:80px;height:22px;background:var(--gold);border-radius:6px}
+.mock-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+.mock-card{background:#fff;border-radius:6px;padding:.7rem;border:1px solid var(--border)}
+.mock-card-icon{width:20px;height:20px;border-radius:5px;background:#eff6ff;margin-bottom:.4rem}
+.mock-card-t{width:70%;height:7px;background:#1e293b;border-radius:4px;margin-bottom:.3rem}
+.mock-card-s{width:90%;height:5px;background:#e2e8f0;border-radius:3px}
+.mock-card-s2{width:75%;height:5px;background:#e2e8f0;border-radius:3px;margin-top:.2rem}
+.badge-float{
+  position:absolute;bottom:-10px;right:-10px;
+  background:#fff;border:1px solid var(--border);border-radius:10px;
+  padding:.5rem .9rem;display:flex;align-items:center;gap:.5rem;
+  font-size:.78rem;font-weight:700;color:var(--dark);
+  box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+.badge-float .star{color:var(--gold)}
+.hero-visual{position:relative}
+
+/* ── STATS BAR ──────────────────────────────────────────────────────── */
+.stats{background:var(--navy);padding:2rem 0}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;text-align:center}
+.stat-num{font-size:2rem;font-weight:900;color:#fff}
+.stat-num span{color:var(--gold)}
+.stat-lbl{font-size:.8rem;color:#94a3b8;margin-top:.1rem}
+
+/* ── SERVICES ───────────────────────────────────────────────────────── */
+.services{padding:5.5rem 0;background:#fff}
+.services-intro{text-align:center;margin-bottom:3.5rem}
+.services-intro .section-sub{margin:auto}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
+.svc-card{
+  border:1px solid var(--border);border-radius:14px;padding:2rem;
+  transition:all .25s;position:relative;overflow:hidden;
+}
+.svc-card:hover{border-color:var(--sky);box-shadow:0 8px 30px rgba(59,130,246,.1);transform:translateY(-3px)}
+.svc-card.featured{border-color:var(--navy);background:var(--navy);color:#fff}
+.svc-card.featured .svc-title{color:#fff}
+.svc-card.featured .svc-desc{color:#94a3b8}
+.svc-card.featured .svc-list li{color:#cbd5e1}
+.svc-card.featured .svc-list li::before{color:var(--gold)}
+.svc-badge{
+  position:absolute;top:1.2rem;right:1.2rem;
+  background:var(--gold);color:var(--navy);font-size:.65rem;font-weight:800;
+  padding:.2rem .6rem;border-radius:999px;letter-spacing:.4px;text-transform:uppercase;
+}
+.svc-icon{
+  width:52px;height:52px;border-radius:12px;background:#eff6ff;
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
+  margin-bottom:1.2rem;
+}
+.svc-card.featured .svc-icon{background:rgba(255,255,255,.1)}
+.svc-title{font-size:1.2rem;font-weight:800;margin-bottom:.5rem;color:var(--dark)}
+.svc-desc{font-size:.88rem;color:var(--gray);margin-bottom:1.2rem;line-height:1.7}
+.svc-list{list-style:none;font-size:.84rem;display:flex;flex-direction:column;gap:.35rem}
+.svc-list li{display:flex;align-items:flex-start;gap:.5rem}
+.svc-list li::before{content:'✓';color:var(--sky);font-weight:800;flex-shrink:0}
+
+/* ── WHY NEXUM ──────────────────────────────────────────────────────── */
+.why{padding:5.5rem 0;background:var(--light)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:760px){.why-grid{grid-template-columns:1fr}}
+.why-props{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
+@media(max-width:500px){.why-props{grid-template-columns:1fr}}
+.prop{background:#fff;border-radius:12px;padding:1.2rem;border:1px solid var(--border)}
+.prop-icon{font-size:1.5rem;margin-bottom:.5rem}
+.prop-title{font-size:.9rem;font-weight:700;color:var(--dark);margin-bottom:.2rem}
+.prop-desc{font-size:.8rem;color:var(--gray);line-height:1.6}
+
+/* Why visual */
+.why-visual{display:flex;flex-direction:column;gap:1rem}
+.testimonial-card{
+  background:#fff;border-radius:12px;padding:1.4rem;
+  border:1px solid var(--border);box-shadow:0 4px 15px rgba(0,0,0,.05);
+}
+.tc-stars{color:var(--gold);font-size:1rem;margin-bottom:.6rem;letter-spacing:1px}
+.tc-text{font-size:.88rem;color:var(--dark);font-style:italic;line-height:1.7;margin-bottom:.8rem}
+.tc-author{display:flex;align-items:center;gap:.7rem}
+.tc-avatar{width:36px;height:36px;border-radius:50%;background:var(--navy);display:flex;align-items:center;justify-content:center;color:#fff;font-size:.8rem;font-weight:700;flex-shrink:0}
+.tc-name{font-size:.82rem;font-weight:700;color:var(--dark)}
+.tc-biz{font-size:.75rem;color:var(--gray)}
+
+/* ── PROCESS ─────────────────────────────────────────────────────────── */
+.process{padding:5.5rem 0;background:var(--navy);color:#fff}
+.process .section-tag{color:#7dd3fc}
+.process .section-title{color:#fff}
+.process .section-sub{color:#94a3b8}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:2rem;margin-top:3.5rem;position:relative}
+.steps::before{
+  content:'';position:absolute;top:28px;left:10%;right:10%;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);
+}
+@media(max-width:600px){.steps::before{display:none}}
+.step{text-align:center;position:relative}
+.step-num{
+  width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.08);
+  border:2px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;margin:0 auto 1.2rem;
+  font-size:1.2rem;font-weight:900;color:var(--gold);position:relative;z-index:1;
+}
+.step-title{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+.step-desc{font-size:.83rem;color:#94a3b8;line-height:1.6}
+
+/* ── PRICING ─────────────────────────────────────────────────────────── */
+.pricing{padding:5.5rem 0;background:#fff}
+.pricing-intro{text-align:center;margin-bottom:3rem}
+.pricing-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;max-width:900px;margin:0 auto}
+.price-card{border:2px solid var(--border);border-radius:16px;padding:2rem;transition:all .25s}
+.price-card.pop{border-color:var(--navy);position:relative}
+.pop-label{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;font-size:.7rem;font-weight:800;padding:.25rem .9rem;border-radius:999px;text-transform:uppercase;letter-spacing:.5px;white-space:nowrap}
+.price-name{font-size:1rem;font-weight:700;color:var(--gray);margin-bottom:.4rem}
+.price-amount{font-size:2.4rem;font-weight:900;color:var(--dark);line-height:1}
+.price-amount sup{font-size:1rem;font-weight:700;vertical-align:super}
+.price-period{font-size:.8rem;color:var(--gray);margin-top:.2rem;margin-bottom:1.4rem}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.8rem}
+.price-list li{font-size:.84rem;color:var(--dark);display:flex;align-items:flex-start;gap:.5rem}
+.price-list li::before{content:'✓';color:var(--sky);font-weight:800;flex-shrink:0}
+.price-list li.no{color:var(--gray)}
+.price-list li.no::before{content:'—';color:#cbd5e1}
+.price-btn{width:100%;padding:.8rem;border-radius:10px;font-weight:700;font-size:.9rem;border:2px solid var(--navy);color:var(--navy);background:#fff;cursor:pointer;transition:all .2s}
+.pop .price-btn{background:var(--navy);color:#fff}
+.price-btn:hover{background:var(--navy);color:#fff}
+
+/* ── CONTACT ─────────────────────────────────────────────────────────── */
+.contact{padding:5.5rem 0;background:var(--light)}
+.contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start}
+@media(max-width:760px){.contact-grid{grid-template-columns:1fr}}
+.contact-info .section-sub{margin-bottom:2rem}
+.contact-item{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1.2rem}
+.contact-icon{width:40px;height:40px;background:#fff;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-item-title{font-size:.8rem;color:var(--gray);margin-bottom:.1rem}
+.contact-item-val{font-size:.93rem;font-weight:600;color:var(--dark)}
+
+/* Form */
+.form{background:#fff;border-radius:16px;padding:2rem;border:1px solid var(--border);box-shadow:0 4px 20px rgba(0,0,0,.05)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:500px){.form-row{grid-template-columns:1fr}}
+.field{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.9rem}
+.field label{font-size:.78rem;font-weight:600;color:var(--dark)}
+.field input,.field textarea,.field select{
+  padding:.7rem .9rem;border-radius:8px;border:1.5px solid var(--border);
+  font-size:.88rem;color:var(--dark);font-family:inherit;
+  transition:border-color .2s;background:#fff;resize:none;
+}
+.field input:focus,.field textarea:focus,.field select:focus{
+  outline:none;border-color:var(--sky);box-shadow:0 0 0 3px rgba(59,130,246,.08);
+}
+.field textarea{min-height:110px}
+.form-submit{
+  width:100%;padding:.9rem;background:var(--navy);color:#fff;border:none;
+  border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;
+  transition:all .2s;font-family:inherit;
+}
+.form-submit:hover{background:var(--blue);transform:translateY(-1px)}
+
+/* ── FOOTER ──────────────────────────────────────────────────────────── */
+footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
+.footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.1)}
+@media(max-width:680px){.footer-grid{grid-template-columns:1fr}}
+.footer-brand .logo{color:#fff;margin-bottom:.7rem}
+.footer-brand p{font-size:.83rem;color:#94a3b8;line-height:1.7;max-width:260px}
+.footer-col h4{font-size:.82rem;font-weight:700;color:#fff;text-transform:uppercase;letter-spacing:.7px;margin-bottom:.9rem}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.footer-col ul li a{font-size:.83rem;color:#94a3b8;transition:color .2s}
+.footer-col ul li a:hover{color:#fff}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:1.4rem;font-size:.75rem;color:#64748b;flex-wrap:wrap;gap:.5rem}
+.footer-bottom a{color:#64748b;transition:color .2s}
+.footer-bottom a:hover{color:#94a3b8}
+</style>
+</head>
+<body>
+
+<!-- ── NAV ─────────────────────────────────────────────────────────────── -->
+<nav>
+  <div class="container nav-inner">
+    <a href="#" class="logo">nexum<span class="logo-dot"></span></a>
+    <ul class="nav-links">
+      <li><a href="#services">Servicios</a></li>
+      <li><a href="#process">Proceso</a></li>
+      <li><a href="#pricing">Precios</a></li>
+      <li><a href="#contact">Contacto</a></li>
+    </ul>
+    <div class="nav-cta-wrap">
+      <a href="#contact" class="nav-cta">Hablar con nosotros →</a>
+    </div>
+    <div class="nav-hamburger" onclick="this.classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container hero-grid">
+    <div>
+      <div class="hero-eyebrow">
+        <span>🌐</span> Agencia de Diseño Web · Nueva Jersey
+      </div>
+      <h1>Tu negocio merece una web que <em>trabaje para ti</em></h1>
+      <p>En Nexum creamos y modernizamos sitios web profesionales para negocios locales. Más clientes, más confianza, más ventas.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary">Solicitar consulta gratis →</a>
+        <a href="#services" class="btn-secondary">Ver servicios</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="browser-mock">
+        <div class="browser-bar">
+          <div class="browser-dots">
+            <div class="browser-dot" style="background:#f87171"></div>
+            <div class="browser-dot" style="background:#fbbf24"></div>
+            <div class="browser-dot" style="background:#4ade80"></div>
+          </div>
+          <div class="browser-url">🔒 tunegocio.com</div>
+        </div>
+        <div class="browser-body">
+          <div class="mock-header">
+            <div class="mock-logo"></div>
+            <div class="mock-nav">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="mock-hero">
+            <div class="mock-h1"></div>
+            <div class="mock-h2"></div>
+            <div class="mock-btn"></div>
+          </div>
+          <div class="mock-cards">
+            <div class="mock-card"><div class="mock-card-icon"></div><div class="mock-card-t"></div><div class="mock-card-s"></div><div class="mock-card-s2"></div></div>
+            <div class="mock-card"><div class="mock-card-icon" style="background:#f0fdf4"></div><div class="mock-card-t"></div><div class="mock-card-s"></div><div class="mock-card-s2"></div></div>
+            <div class="mock-card"><div class="mock-card-icon" style="background:#fef9ec"></div><div class="mock-card-t"></div><div class="mock-card-s"></div><div class="mock-card-s2"></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="badge-float">
+        <span class="star">★★★★★</span> 5.0 · Clientes satisfechos
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ────────────────────────────────────────────────────────────── -->
+<div class="stats">
+  <div class="container stats-grid">
+    <div><div class="stat-num">+<span>50</span></div><div class="stat-lbl">Sitios entregados</div></div>
+    <div><div class="stat-num"><span>7–14</span></div><div class="stat-lbl">Días de entrega</div></div>
+    <div><div class="stat-num">100<span>%</span></div><div class="stat-lbl">Mobile optimizado</div></div>
+    <div><div class="stat-num"><span>5.0</span> ★</div><div class="stat-lbl">Calificación promedio</div></div>
+  </div>
+</div>
+
+<!-- ── SERVICES ─────────────────────────────────────────────────────────── -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-intro">
+      <span class="section-tag">Servicios</span>
+      <h2 class="section-title">¿Qué hacemos por tu negocio?</h2>
+      <p class="section-sub">Soluciones web diseñadas específicamente para negocios locales que quieren crecer online.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="svc-card">
+        <div class="svc-icon">🌐</div>
+        <h3 class="svc-title">Creación de Sitio Web</h3>
+        <p class="svc-desc">Para negocios sin presencia en línea. Te llevamos de cero a un sitio profesional listo para atraer clientes.</p>
+        <ul class="svc-list">
+          <li>Diseño personalizado para tu marca</li>
+          <li>Optimizado para Google (SEO básico)</li>
+          <li>Formulario de contacto integrado</li>
+          <li>100% responsive en móviles</li>
+          <li>Google Maps embed + redes sociales</li>
+        </ul>
+      </div>
+
+      <div class="svc-card featured">
+        <div class="svc-badge">Más popular</div>
+        <div class="svc-icon">🔄</div>
+        <h3 class="svc-title">Rediseño &amp; Actualización</h3>
+        <p class="svc-desc">Tu sitio existe pero se ve desactualizado o no genera resultados. Lo modernizamos para convertir visitas en clientes.</p>
+        <ul class="svc-list">
+          <li>Nuevo diseño moderno y rápido</li>
+          <li>Mejora de velocidad de carga</li>
+          <li>Optimización para móviles</li>
+          <li>Actualización de contenido</li>
+          <li>Integración con Google Analytics</li>
+        </ul>
+      </div>
+
+      <div class="svc-card">
+        <div class="svc-icon">🛠️</div>
+        <h3 class="svc-title">Mantenimiento Web</h3>
+        <p class="svc-desc">Mantén tu sitio seguro, actualizado y funcionando perfectamente mes a mes sin preocuparte por nada técnico.</p>
+        <ul class="svc-list">
+          <li>Actualizaciones de contenido mensuales</li>
+          <li>Copias de seguridad automáticas</li>
+          <li>Monitoreo de disponibilidad 24/7</li>
+          <li>Soporte por WhatsApp o email</li>
+          <li>Reportes de visitas mensuales</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY NEXUM ────────────────────────────────────────────────────────── -->
+<section class="why" id="why">
+  <div class="container why-grid">
+    <div>
+      <span class="section-tag">¿Por qué Nexum?</span>
+      <h2 class="section-title">Trabajamos contigo, no sólo para ti</h2>
+      <p class="section-sub">No somos una empresa genérica. Somos especialistas en negocios locales que entienden lo que necesitas realmente.</p>
+      <div class="why-props">
+        <div class="prop">
+          <div class="prop-icon">⚡</div>
+          <div class="prop-title">Entrega en 7–14 días</div>
+          <div class="prop-desc">Sin esperar meses. Tu sitio listo y funcionando en días.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">📱</div>
+          <div class="prop-title">Mobile-first</div>
+          <div class="prop-desc">+70% de búsquedas son desde celular. Tu sitio se ve perfecto en todos los dispositivos.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">🔍</div>
+          <div class="prop-title">Visible en Google</div>
+          <div class="prop-desc">Cada sitio incluye SEO básico para que aparezcas en búsquedas locales.</div>
+        </div>
+        <div class="prop">
+          <div class="prop-icon">🤝</div>
+          <div class="prop-title">Soporte incluido</div>
+          <div class="prop-desc">No te dejamos solo después de entregar. Soporte directo por WhatsApp.</div>
+        </div>
+      </div>
+    </div>
+    <div class="why-visual">
+      <div class="testimonial-card">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Antes no teníamos sitio web y los clientes no nos encontraban en Google. Nexum nos hizo uno en 10 días y ahora recibimos llamadas nuevas cada semana."</p>
+        <div class="tc-author">
+          <div class="tc-avatar">MC</div>
+          <div>
+            <div class="tc-name">María C.</div>
+            <div class="tc-biz">Cedar Lane Flower Shoppe · Teaneck, NJ</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="tc-stars">★★★★★</div>
+        <p class="tc-text">"Nuestro sitio anterior era de 2015 y se veía horrible en el celular. El rediseño que hicieron convirtió más visitantes. Vale cada centavo."</p>
+        <div class="tc-author">
+          <div class="tc-avatar">RJ</div>
+          <div>
+            <div class="tc-name">Roberto J.</div>
+            <div class="tc-biz">Restaurante · Fort Lee, NJ</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PROCESS ──────────────────────────────────────────────────────────── -->
+<section class="process" id="process">
+  <div class="container">
+    <span class="section-tag">Cómo trabajamos</span>
+    <h2 class="section-title">Simple, rápido y sin complicaciones</h2>
+    <p class="section-sub">4 pasos para tener tu sitio web profesional listo y funcionando.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3 class="step-title">Consulta gratuita</h3>
+        <p class="step-desc">Hablamos 15 minutos para entender tu negocio, tu mercado y lo que necesitas de tu sitio web.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3 class="step-title">Diseño &amp; propuesta</h3>
+        <p class="step-desc">Creamos una propuesta visual y de contenido. Tú la apruebas antes de que empecemos a desarrollar.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3 class="step-title">Desarrollo</h3>
+        <p class="step-desc">Construimos tu sitio en 7–14 días. Te mantenemos informado con actualizaciones durante el proceso.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3 class="step-title">Entrega &amp; soporte</h3>
+        <p class="step-desc">Publicamos tu sitio, te enseñamos cómo funciona y quedamos disponibles para cualquier ajuste.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING ──────────────────────────────────────────────────────────── -->
+<section class="pricing" id="pricing">
+  <div class="container">
+    <div class="pricing-intro">
+      <span class="section-tag">Precios</span>
+      <h2 class="section-title">Inversión clara, sin sorpresas</h2>
+      <p class="section-sub" style="margin:auto">Planes diseñados para negocios locales. Contáctanos para una cotización personalizada.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-name">Básico</div>
+        <div class="price-amount"><sup>$</sup>499</div>
+        <div class="price-period">pago único · entrega en 7 días</div>
+        <ul class="price-list">
+          <li>Sitio de hasta 5 páginas</li>
+          <li>Diseño responsive (móvil)</li>
+          <li>Formulario de contacto</li>
+          <li>Google Maps embed</li>
+          <li>SEO básico</li>
+          <li class="no">Tienda online</li>
+          <li class="no">Blog integrado</li>
+        </ul>
+        <button class="price-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Empezar →</button>
+      </div>
+
+      <div class="price-card pop">
+        <div class="pop-label">✦ Más popular</div>
+        <div class="price-name">Profesional</div>
+        <div class="price-amount"><sup>$</sup>899</div>
+        <div class="price-period">pago único · entrega en 10–14 días</div>
+        <ul class="price-list">
+          <li>Sitio de hasta 10 páginas</li>
+          <li>Diseño personalizado premium</li>
+          <li>Formulario + WhatsApp directo</li>
+          <li>Google Analytics integrado</li>
+          <li>SEO optimizado + meta tags</li>
+          <li>Blog integrado</li>
+          <li class="no">Tienda online</li>
+        </ul>
+        <button class="price-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Empezar →</button>
+      </div>
+
+      <div class="price-card">
+        <div class="price-name">Negocio Completo</div>
+        <div class="price-amount"><sup>$</sup>1,499</div>
+        <div class="price-period">pago único · entrega en 14–21 días</div>
+        <ul class="price-list">
+          <li>Páginas ilimitadas</li>
+          <li>Tienda online integrada</li>
+          <li>Blog + galería de fotos</li>
+          <li>SEO avanzado</li>
+          <li>Integración con redes sociales</li>
+          <li>Mantenimiento 3 meses incluido</li>
+          <li>Capacitación de uso</li>
+        </ul>
+        <button class="price-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Empezar →</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ──────────────────────────────────────────────────────────── -->
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div>
+        <span class="section-tag">Contacto</span>
+        <h2 class="section-title">Hablemos de tu proyecto</h2>
+        <p class="section-sub">La consulta inicial es completamente gratis. En 15 minutos te decimos exactamente lo que necesita tu negocio.</p>
+
+        <div style="margin-top:2rem">
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-item-title">Teléfono / WhatsApp</div>
+              <div class="contact-item-val">(201) 000-0000</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📧</div>
+            <div>
+              <div class="contact-item-title">Email</div>
+              <div class="contact-item-val">hola@nexumweb.com</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-item-title">Área de servicio</div>
+              <div class="contact-item-val">Bergen County &amp; Norte de NJ</div>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <div class="contact-item-title">Horario</div>
+              <div class="contact-item-val">Lun–Vie 9am–7pm · Sáb 10am–4pm</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form">
+        <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.2rem;color:var(--dark)">Solicita tu consulta gratis</h3>
+        <div class="form-row">
+          <div class="field">
+            <label for="name">Nombre</label>
+            <input type="text" id="name" placeholder="Tu nombre"/>
+          </div>
+          <div class="field">
+            <label for="biz">Nombre del negocio</label>
+            <input type="text" id="biz" placeholder="Tu negocio"/>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field">
+            <label for="phone">Teléfono</label>
+            <input type="tel" id="phone" placeholder="(201) 000-0000"/>
+          </div>
+          <div class="field">
+            <label for="service">Servicio de interés</label>
+            <select id="service">
+              <option value="">Seleccionar…</option>
+              <option>Crear sitio web nuevo</option>
+              <option>Actualizar sitio existente</option>
+              <option>Mantenimiento web</option>
+              <option>No estoy seguro</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label for="msg">Cuéntanos sobre tu negocio</label>
+          <textarea id="msg" placeholder="¿A qué te dedicas? ¿Cuál es tu objetivo principal con el sitio web?"></textarea>
+        </div>
+        <button class="form-submit" type="button">Enviar solicitud →</button>
+        <p style="font-size:.72rem;color:var(--gray);text-align:center;margin-top:.8rem">🔒 Tu información es privada. Te contactamos en menos de 24 horas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ───────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="logo">nexum<span class="logo-dot"></span></div>
+        <p>Diseño web profesional para negocios locales en Nueva Jersey. Conectamos tu marca con más clientes.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#services">Crear sitio web</a></li>
+          <li><a href="#services">Rediseño web</a></li>
+          <li><a href="#services">Mantenimiento</a></li>
+          <li><a href="#pricing">Precios</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Compañía</h4>
+        <ul>
+          <li><a href="#why">Por qué Nexum</a></li>
+          <li><a href="#process">Cómo trabajamos</a></li>
+          <li><a href="#contact">Contacto</a></li>
+          <li><a href="#contact">Consulta gratis</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Nexum Web Agency · Bergen County, NJ</span>
+      <span>Diseñado con ♥ por Nexum</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
