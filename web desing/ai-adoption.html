@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Adoption by Enterprise — Why Companies Choose Anthropic</title>
+<meta name="description" content="An interactive breakdown of why companies are adopting AI, what drives provider selection, and why Claude (Anthropic) leads in regulated, high-stakes industries.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --navy:  #0d1f3c;
+  --navy2: #091529;
+  --gold:  #c9922a;
+  --glt:   #e8b84b;
+  --gdk:   #8a6018;
+  --paper: #f4f2ee;
+  --p2:    #e5e0d5;
+  --bone:  #ffffff;
+  --sl:    #5a6a7e;
+  --sll:   #7a8ca0;
+  --px:    clamp(1.2rem, 5vw, 4rem);
+  --py:    clamp(4rem, 9vw, 8rem);
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; overflow-x: clip; -webkit-text-size-adjust: 100%; }
+body {
+  background: #faf8f3;
+  color: var(--navy);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+img { display: block; max-width: 100%; height: auto; }
+a   { text-decoration: none; color: inherit; }
+button { font: inherit; color: inherit; cursor: pointer; }
+p   { text-wrap: pretty; }
+h1, h2, h3, h4 { text-wrap: balance; }
+::selection { background: #c39a3e; color: #faf8f3; }
+
+/* ── Nav ─────────────────────────────────────────────────── */
+#nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 68px; padding: 0 var(--px);
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(9,21,41,0.96); backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(201,146,42,.15);
+}
+.nlogo { display: flex; align-items: center; gap: 10px; }
+.nlogo-mk { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 500; letter-spacing: .05em; color: var(--glt); }
+.nlogo-tx { font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .26em; text-transform: uppercase; color: rgba(250,248,243,.45); }
+.nback { font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(250,248,243,.6); display: flex; align-items: center; gap: .5rem; transition: color .3s; }
+.nback:hover { color: var(--glt); }
+
+/* ── Hero ─────────────────────────────────────────────────── */
+#hero {
+  background: var(--navy); min-height: 62vh;
+  display: flex; align-items: flex-end;
+  padding: 100px var(--px) clamp(3rem, 6vw, 5rem);
+  position: relative; overflow: hidden;
+}
+#hero::before {
+  content: '';
+  position: absolute; top: -40%; right: -10%;
+  width: 700px; height: 700px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,146,42,.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+#hero::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201,146,42,.4), transparent);
+}
+.heye {
+  font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--glt);
+  display: flex; align-items: center; gap: .8rem; margin-bottom: 1.6rem;
+}
+.heye::before { content: ''; width: 28px; height: 1px; background: var(--gold); }
+.hinner { max-width: 1400px; margin: 0 auto; width: 100%; position: relative; z-index: 1; }
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+  font-weight: 300; line-height: 1.04;
+  color: #faf8f3; letter-spacing: -.015em; margin-bottom: 1.8rem;
+}
+h1 em { font-style: italic; color: var(--glt); }
+.hfoot {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  gap: 2rem; flex-wrap: wrap;
+  border-top: 1px solid rgba(250,248,243,.1); padding-top: 1.6rem;
+}
+.hsub { font-size: clamp(.88rem, 1.8vw, 1rem); color: rgba(255,255,255,0.72); max-width: 52ch; line-height: 1.85; }
+.hstat { text-align: right; }
+.hstat-n { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 300; color: var(--glt); line-height: 1; }
+.hstat-l { font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sl); margin-top: .4rem; }
+
+/* ── Sections ─────────────────────────────────────────────── */
+.sec { padding: var(--py) var(--px); }
+.wrap { max-width: 1400px; margin: 0 auto; }
+.bg-p { background: var(--paper); }
+.bg-b { background: var(--bone); }
+.bg-d { background: var(--navy); color: #faf8f3; }
+.eye {
+  font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .26em;
+  text-transform: uppercase; color: var(--gdk);
+  display: flex; align-items: center; gap: .7rem;
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+.eye::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+.eye i { font-style: normal; color: var(--gold); }
+.bg-d .eye { color: var(--glt); }
+.sec-h {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4.5vw, 3.6rem);
+  font-weight: 300; line-height: 1.1; margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.sec-h em { font-style: italic; color: var(--gdk); }
+.bg-d .sec-h em { color: var(--glt); }
+
+/* ── Reason cards ─────────────────────────────────────────── */
+.rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--p2); border: 1px solid var(--p2); }
+.rcard { background: var(--bone); padding: clamp(1.6rem, 2.8vw, 2.4rem); transition: background .3s; display: flex; flex-direction: column; }
+.rcard:hover { background: var(--paper); }
+.rnum { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 2.8rem; font-weight: 300; color: var(--glt); line-height: 1; margin-bottom: 1rem; }
+.rtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 500; color: var(--navy); margin-bottom: .7rem; line-height: 1.2; }
+.rdesc { font-size: clamp(.8rem, 1.4vw, .86rem); color: #445566; line-height: 1.8; flex: 1; }
+.rtag { margin-top: 1.2rem; display: flex; flex-wrap: wrap; gap: .35rem; }
+.rt { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; color: var(--gdk); border: 1px solid rgba(122,94,30,.3); padding: .3rem .55rem; }
+
+/* ── Stats bar ─────────────────────────────────────────────── */
+#stats { background: var(--navy); }
+.stg {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  max-width: 1400px; margin: 0 auto;
+  padding: clamp(2.5rem, 5vw, 4rem) var(--px);
+  border-bottom: 1px solid rgba(195,154,62,.1);
+}
+.st { border-left: 1px solid rgba(250,248,243,.07); padding: clamp(.8rem, 1.5vw, 1.4rem) clamp(.8rem, 1.8vw, 1.6rem); }
+.st:first-child { border-left: none; padding-left: 0; }
+.stn { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.4rem); font-weight: 300; color: #faf8f3; line-height: 1; }
+.stn s { text-decoration: none; color: var(--glt); }
+.stl { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sll); margin-top: .6rem; line-height: 1.8; }
+
+/* ── Comparison table ────────────────────────────────────── */
+.tbl-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { width: 100%; border-collapse: collapse; min-width: 700px; }
+thead th {
+  font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--gold); text-align: left;
+  padding: 1rem 1.2rem; border-bottom: 1px solid rgba(195,154,62,.25);
+  background: rgba(201,146,42,.04); white-space: nowrap;
+}
+thead th:first-child { width: 30%; }
+tbody td { padding: .95rem 1.2rem; font-size: clamp(.78rem, 1.4vw, .86rem); color: rgba(250,248,243,.85); border-bottom: 1px solid rgba(250,248,243,.06); vertical-align: middle; line-height: 1.6; }
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:hover td { background: rgba(201,146,42,.04); }
+.tbl-field { font-family: 'Cormorant Garamond', serif; font-size: clamp(.96rem, 1.6vw, 1.12rem); color: #faf8f3; font-weight: 400; }
+.badge {
+  display: inline-flex; align-items: center; gap: .35rem;
+  font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .1em;
+  text-transform: uppercase; padding: .28rem .55rem; border-radius: 2px; white-space: nowrap;
+}
+.b-best  { background: rgba(232,184,75,.14); color: var(--glt); border: 1px solid rgba(232,184,75,.3); }
+.b-good  { background: rgba(255,255,255,.06); color: rgba(250,248,243,.7); border: 1px solid rgba(255,255,255,.1); }
+.b-fair  { background: rgba(160,160,160,.07); color: rgba(250,248,243,.45); border: 1px solid rgba(255,255,255,.06); }
+
+/* ── Provider cards ─────────────────────────────────────── */
+.pvg { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.8rem, 1.5vw, 1.2rem); margin-top: clamp(2rem, 4vw, 3.5rem); }
+.pvc {
+  padding: clamp(1.6rem, 2.4vw, 2.2rem);
+  border: 1px solid rgba(195,154,62,.14);
+  background: rgba(255,255,255,.03);
+  transition: transform .35s, box-shadow .35s, border-color .35s;
+  display: flex; flex-direction: column;
+}
+.pvc:hover { transform: translateY(-5px); box-shadow: 0 24px 60px rgba(0,0,0,.25); border-color: rgba(201,146,42,.35); }
+.pvc.featured { border-color: rgba(201,146,42,.45); background: rgba(201,146,42,.06); }
+.pvbadge { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.2rem; }
+.pvbadge.top { color: var(--glt); }
+.pvname { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem, 2.5vw, 1.9rem); font-weight: 400; color: #faf8f3; margin-bottom: .35rem; line-height: 1.1; }
+.pvmodel { font-family: 'DM Mono', monospace; font-size: .54rem; letter-spacing: .1em; color: var(--sl); margin-bottom: 1.2rem; }
+.pvdiv { height: 1px; background: rgba(195,154,62,.15); margin-bottom: 1.2rem; }
+.pvlist { list-style: none; display: flex; flex-direction: column; gap: .55rem; flex: 1; }
+.pvlist li { font-size: clamp(.78rem, 1.3vw, .84rem); color: rgba(250,248,243,.8); line-height: 1.65; padding-left: 1rem; position: relative; }
+.pvlist li::before { content: '—'; position: absolute; left: 0; color: var(--gdk); font-size: .7rem; }
+.pvc.featured .pvlist li::before { color: var(--gold); }
+.pvtags { display: flex; flex-wrap: wrap; gap: .35rem; margin-top: 1.4rem; }
+.pvt {
+  font-family: 'DM Mono', monospace; font-size: .48rem; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--glt); border: 1px solid rgba(232,184,75,.25);
+  padding: .25rem .5rem;
+}
+
+/* ── Adoption by industry ───────────────────────────────── */
+.ibg { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--p2); border: 1px solid var(--p2); }
+.icard { background: var(--bone); padding: clamp(1.6rem, 2.6vw, 2.2rem); }
+.icard:hover { background: var(--paper); }
+.ihead { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.2rem; gap: 1rem; }
+.iname { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.2rem, 2.2vw, 1.6rem); font-weight: 400; color: var(--navy); }
+.ilead { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; padding: .3rem .65rem; border: 1px solid rgba(201,146,42,.4); color: var(--gdk); white-space: nowrap; }
+.ibar-wrap { margin-bottom: .5rem; }
+.ibar-row { display: flex; align-items: center; gap: .8rem; margin-bottom: .55rem; }
+.ibar-label { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .08em; text-transform: uppercase; color: var(--sl); width: 88px; flex-shrink: 0; }
+.ibar-track { flex: 1; height: 4px; background: var(--p2); border-radius: 2px; overflow: hidden; position: relative; }
+.ibar-fill { height: 100%; border-radius: 2px; transition: width 1s var(--ease-out); }
+.ibar-fill.gold { background: linear-gradient(90deg, var(--gdk), var(--glt)); }
+.ibar-fill.blue { background: linear-gradient(90deg, #2b5eac, #4d8ef5); }
+.ibar-fill.green { background: linear-gradient(90deg, #1a6643, #34c878); }
+.ibar-fill.gray { background: linear-gradient(90deg, #455566, #7a8ca0); }
+.ibar-pct { font-family: 'DM Mono', monospace; font-size: .5rem; color: var(--sl); width: 28px; text-align: right; flex-shrink: 0; }
+.inote { font-size: clamp(.75rem, 1.3vw, .8rem); color: #6a7e94; line-height: 1.75; margin-top: .8rem; }
+
+/* ── Why Claude wins ────────────────────────────────────── */
+.wg { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; margin-top: clamp(2rem, 4vw, 3.5rem); }
+.wlist { list-style: none; display: flex; flex-direction: column; gap: 1.2rem; }
+.witem { display: grid; grid-template-columns: 44px 1fr; gap: 1rem; align-items: baseline; padding-bottom: 1.2rem; border-bottom: 1px solid rgba(195,154,62,.12); }
+.witem:last-child { border-bottom: none; }
+.wn { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.5rem; color: var(--glt); line-height: 1; }
+.wtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 1.8vw, 1.25rem); color: #faf8f3; margin-bottom: .35rem; font-weight: 400; }
+.wdesc { font-size: clamp(.78rem, 1.4vw, .85rem); color: rgba(250,248,243,.72); line-height: 1.8; }
+.wquote {
+  background: rgba(201,146,42,.07); border: 1px solid rgba(201,146,42,.2);
+  padding: clamp(1.8rem, 3vw, 2.6rem); position: sticky; top: 90px;
+}
+.wq { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.2rem, 2.4vw, 1.75rem); color: #faf8f3; line-height: 1.55; margin-bottom: 1.6rem; }
+.wq-src { font-family: 'DM Mono', monospace; font-size: .54rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: .6rem; }
+.wq-src::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.wstat-row { display: flex; gap: 1.4rem; margin-top: 2rem; flex-wrap: wrap; }
+.wstat { flex: 1; min-width: 100px; }
+.wsn { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 300; color: var(--glt); line-height: 1; }
+.wsl { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .12em; text-transform: uppercase; color: var(--sll); margin-top: .4rem; line-height: 1.8; }
+
+/* ── Footer ─────────────────────────────────────────────── */
+footer {
+  background: var(--navy); border-top: 1px solid rgba(195,154,62,.14);
+  padding: clamp(2.5rem, 5vw, 4rem) var(--px) 2rem;
+}
+.ftbot { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: .8rem; max-width: 1400px; margin: 0 auto; }
+.ftcp { font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .08em; color: rgba(255,255,255,.4); text-transform: uppercase; }
+.ftsrc { font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .1em; color: var(--gdk); }
+
+/* ── Reveal ─────────────────────────────────────────────── */
+[data-reveal] { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+[data-reveal].is-visible { opacity: 1; transform: none; }
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .rgrid { grid-template-columns: 1fr 1fr; }
+  .pvg   { grid-template-columns: 1fr 1fr; }
+  .stg   { grid-template-columns: repeat(3, 1fr); }
+  .st:nth-child(4) { border-left: none; }
+}
+@media (max-width: 900px) {
+  .ibg { grid-template-columns: 1fr; }
+  .wg  { grid-template-columns: 1fr; }
+  .wquote { position: static; }
+}
+@media (max-width: 720px) {
+  .rgrid { grid-template-columns: 1fr; }
+  .pvg   { grid-template-columns: 1fr; }
+  .stg   { grid-template-columns: 1fr 1fr; }
+  .st:nth-child(3) { border-left: none; }
+  .hfoot { flex-direction: column; }
+  .hstat { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .ibar-fill { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="dsf-advisors/index.html" class="nlogo">
+    <span class="nlogo-mk">DSF</span>
+    <span class="nlogo-tx">Advisors</span>
+  </a>
+  <a href="dsf-advisors/index.html" class="nback">← Back to site</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hinner">
+    <div class="heye">Research · AI Adoption · 2025 – 2026</div>
+    <h1>Why enterprises are adopting AI<br>and why they choose <em>one provider over another.</em></h1>
+    <div class="hfoot">
+      <p class="hsub">From automation and cost reduction to safety requirements in regulated industries — this page maps the real drivers behind corporate AI adoption and the criteria that make Anthropic's Claude the leading choice across finance, legal, and healthcare.</p>
+      <div class="hstat">
+        <div class="hstat-n">78<s>%</s></div>
+        <div class="hstat-l">of Fortune 500 firms using<br>at least one AI platform · 2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 01 WHY COMPANIES USE AI ──────────────────────────────── -->
+<section class="sec bg-p" id="why">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>01</i> Why companies use AI</div>
+    <h2 class="sec-h" data-reveal>Six business pressures <em>driving adoption.</em></h2>
+    <div class="rgrid">
+
+      <div class="rcard">
+        <div class="rnum">01</div>
+        <div class="rtitle">Cost Reduction & Efficiency</div>
+        <p class="rdesc">AI automates repetitive knowledge work — drafting, summarizing, data extraction, classification — that previously required teams of analysts. McKinsey estimates up to 30% reduction in operational costs for early adopters in financial services.</p>
+        <div class="rtag">
+          <span class="rt">Back Office</span>
+          <span class="rt">Automation</span>
+          <span class="rt">Labor Cost</span>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rnum">02</div>
+        <div class="rtitle">Speed of Decision-Making</div>
+        <p class="rdesc">LLMs compress analysis cycles from days to minutes. Investment memos, due diligence summaries, regulatory filings — tasks that took associate teams a week can be produced in hours, giving firms a material competitive edge on deal speed.</p>
+        <div class="rtag">
+          <span class="rt">Finance</span>
+          <span class="rt">Research</span>
+          <span class="rt">M&amp;A</span>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rnum">03</div>
+        <div class="rtitle">Competitive Pressure</div>
+        <p class="rdesc">When peers adopt AI and reduce costs or cycle times, firms that don't fall behind. Adoption is no longer optional in most industries — it's a baseline requirement to remain price-competitive and retain top talent who expect modern tooling.</p>
+        <div class="rtag">
+          <span class="rt">Strategy</span>
+          <span class="rt">Retention</span>
+          <span class="rt">Market Position</span>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rnum">04</div>
+        <div class="rtitle">Customer Experience</div>
+        <p class="rdesc">AI-powered assistants handle first-line client inquiries, route tickets, and personalize communication at scale — reducing response times from hours to seconds while maintaining the tone and brand voice specific to each firm.</p>
+        <div class="rtag">
+          <span class="rt">CX</span>
+          <span class="rt">Support</span>
+          <span class="rt">Personalization</span>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rnum">05</div>
+        <div class="rtitle">Regulatory & Compliance Leverage</div>
+        <p class="rdesc">AI systems can continuously monitor transactions, flag anomalies, and draft compliance narratives — reducing the manual burden of regulatory reporting across SEC filings, AML checks, and audit trail documentation in financial firms.</p>
+        <div class="rtag">
+          <span class="rt">SEC</span>
+          <span class="rt">AML</span>
+          <span class="rt">Audit</span>
+        </div>
+      </div>
+
+      <div class="rcard">
+        <div class="rnum">06</div>
+        <div class="rtitle">Data Intelligence at Scale</div>
+        <p class="rdesc">Organizations sit on vast unstructured data — contracts, emails, call transcripts, filings. AI unlocks this data by extracting patterns, summarizing positions, and identifying risk signals that would be invisible to a human analyst reviewing millions of documents.</p>
+        <div class="rtag">
+          <span class="rt">Analytics</span>
+          <span class="rt">Risk</span>
+          <span class="rt">Documents</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS BAR ──────────────────────────────────────────── -->
+<div id="stats">
+  <div class="stg">
+    <div class="st">
+      <div class="stn">$<span class="ct" data-to="4">4</span><s>.4T</s></div>
+      <div class="stl">projected AI economic<br>impact by 2030</div>
+    </div>
+    <div class="st">
+      <div class="stn"><span class="ct" data-to="67">67</span><s>%</s></div>
+      <div class="stl">of executives say AI is<br>a top-3 investment priority</div>
+    </div>
+    <div class="st">
+      <div class="stn"><span class="ct" data-to="3">3</span><s>x</s></div>
+      <div class="stl">faster document review<br>with LLM-assisted workflows</div>
+    </div>
+    <div class="st">
+      <div class="stn"><span class="ct" data-to="40">40</span><s>%</s></div>
+      <div class="stl">average cost reduction<br>in knowledge-work tasks</div>
+    </div>
+    <div class="st">
+      <div class="stn"><span class="ct" data-to="5">5</span></div>
+      <div class="stl">major enterprise AI<br>providers competing for share</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 02 PROVIDER LANDSCAPE ──────────────────────────────── -->
+<section class="sec bg-d" id="providers">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>02</i> The provider landscape</div>
+    <h2 class="sec-h" data-reveal>Five platforms, <em>very different value propositions.</em></h2>
+    <div class="pvg">
+
+      <div class="pvc featured">
+        <div class="pvbadge top">▲ Anthropic · Leading</div>
+        <div class="pvname">Claude</div>
+        <div class="pvmodel">claude-opus-4 / claude-sonnet-5</div>
+        <div class="pvdiv"></div>
+        <ul class="pvlist">
+          <li>Constitutional AI safety framework reduces hallucination in high-stakes tasks</li>
+          <li>Best-in-class document reasoning and long-context comprehension (up to 200K tokens)</li>
+          <li>Preferred by regulated industries: finance, legal, healthcare</li>
+          <li>Strongest coding and structured data extraction benchmark scores (2025)</li>
+          <li>Enterprise-grade data privacy — inputs not used for training by default</li>
+          <li>Amazon Bedrock &amp; Google Cloud integration for enterprise deployments</li>
+        </ul>
+        <div class="pvtags">
+          <span class="pvt">Finance</span>
+          <span class="pvt">Legal</span>
+          <span class="pvt">Healthcare</span>
+          <span class="pvt">Coding</span>
+          <span class="pvt">Research</span>
+        </div>
+      </div>
+
+      <div class="pvc">
+        <div class="pvbadge">OpenAI</div>
+        <div class="pvname">GPT-4o / o3</div>
+        <div class="pvmodel">gpt-4o · gpt-o3</div>
+        <div class="pvdiv"></div>
+        <ul class="pvlist">
+          <li>Widest ecosystem — most third-party integrations and plugins available</li>
+          <li>Strong multimodal capability (vision, audio, image generation via DALL-E)</li>
+          <li>Microsoft 365 Copilot integration dominant in enterprise productivity</li>
+          <li>Largest installed base across SMB and consumer markets</li>
+          <li>o3 model strong on mathematical and scientific reasoning</li>
+        </ul>
+        <div class="pvtags">
+          <span class="pvt">Productivity</span>
+          <span class="pvt">Multimodal</span>
+          <span class="pvt">Microsoft</span>
+        </div>
+      </div>
+
+      <div class="pvc">
+        <div class="pvbadge">Google DeepMind</div>
+        <div class="pvname">Gemini</div>
+        <div class="pvmodel">gemini-2.5-pro / gemini-flash</div>
+        <div class="pvdiv"></div>
+        <ul class="pvlist">
+          <li>Native integration with Google Workspace (Docs, Gmail, Sheets, Meet)</li>
+          <li>Best-in-class multimodal with video and real-time processing</li>
+          <li>Competitive pricing for high-volume use cases via Google Cloud</li>
+          <li>Strong for organizations already on GCP infrastructure</li>
+          <li>2M token context window on Gemini 1.5 Pro</li>
+        </ul>
+        <div class="pvtags">
+          <span class="pvt">Workspace</span>
+          <span class="pvt">Video</span>
+          <span class="pvt">GCP</span>
+        </div>
+      </div>
+
+      <div class="pvc">
+        <div class="pvbadge">Meta AI</div>
+        <div class="pvname">Llama</div>
+        <div class="pvmodel">llama-3.3 / llama-4</div>
+        <div class="pvdiv"></div>
+        <ul class="pvlist">
+          <li>Open-weight model — runs on private infrastructure with no API costs</li>
+          <li>Preferred by firms with strict data sovereignty requirements</li>
+          <li>Fine-tuning flexibility for domain-specific tasks</li>
+          <li>Lower performance ceiling than frontier models on complex reasoning</li>
+          <li>Dominant in government and defense where cloud LLMs are disallowed</li>
+        </ul>
+        <div class="pvtags">
+          <span class="pvt">Open Source</span>
+          <span class="pvt">On-Prem</span>
+          <span class="pvt">Government</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 HEAD-TO-HEAD ─────────────────────────────────────── -->
+<section class="sec bg-d" id="comparison" style="padding-top:0">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>03</i> Head-to-head comparison</div>
+    <h2 class="sec-h" data-reveal>What matters by <em>evaluation criteria.</em></h2>
+    <div class="tbl-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Evaluation Criterion</th>
+            <th>Claude (Anthropic)</th>
+            <th>GPT-4o (OpenAI)</th>
+            <th>Gemini (Google)</th>
+            <th>Llama (Meta)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="tbl-field">Safety &amp; Hallucination Control</td>
+            <td><span class="badge b-best">Best in class</span></td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-fair">Variable</span></td>
+          </tr>
+          <tr>
+            <td class="tbl-field">Long Document Reasoning</td>
+            <td><span class="badge b-best">Best in class</span></td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-fair">Limited</span></td>
+          </tr>
+          <tr>
+            <td class="tbl-field">Coding &amp; Technical Tasks</td>
+            <td><span class="badge b-best">Best in class</span></td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-good">Competitive</span></td>
+            <td><span class="badge b-fair">Moderate</span></td>
+          </tr>
+          <tr>
+            <td class="tbl-field">Enterprise Data Privacy</td>
+            <td><span class="badge b-best">Highest</span></td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-best">Full control</span></td>
+          </tr>
+          <tr>
+            <td class="tbl-field">Ecosystem &amp; Integrations</td>
+            <td><span class="badge b-good">Growing fast</span></td>
+            <td><span class="badge b-best">Widest</span></td>
+            <td><span class="badge b-good">Google stack</span></td>
+            <td><span class="badge b-fair">Self-hosted</span></td>
+          </tr>
+          <tr>
+            <td class="tbl-field">Multimodal (vision / audio)</td>
+            <td><span class="badge b-good">Strong vision</span></td>
+            <td><span class="badge b-best">Best in class</span></td>
+            <td><span class="badge b-best">Best video</span></td>
+            <td><span class="badge b-fair">Limited</span></td>
+          </tr>
+          <tr>
+            <td class="tbl-field">Regulated Industry Trust</td>
+            <td><span class="badge b-best">Highest adoption</span></td>
+            <td><span class="badge b-good">High</span></td>
+            <td><span class="badge b-good">Growing</span></td>
+            <td><span class="badge b-fair">Niche</span></td>
+          </tr>
+          <tr>
+            <td class="tbl-field">Cost at Scale (API)</td>
+            <td><span class="badge b-good">Competitive</span></td>
+            <td><span class="badge b-good">Competitive</span></td>
+            <td><span class="badge b-best">Lowest</span></td>
+            <td><span class="badge b-best">Near zero</span></td>
+          </tr>
+          <tr>
+            <td class="tbl-field">Mathematical Reasoning</td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-best">Best (o3)</span></td>
+            <td><span class="badge b-good">Strong</span></td>
+            <td><span class="badge b-fair">Moderate</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 ADOPTION BY INDUSTRY ────────────────────────────── -->
+<section class="sec bg-b" id="industries">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>04</i> AI adoption by industry</div>
+    <h2 class="sec-h" style="color:var(--navy)" data-reveal>Who leads each sector, <em style="color:var(--gdk)">and by how much.</em></h2>
+    <div class="ibg">
+
+      <div class="icard">
+        <div class="ihead">
+          <div class="iname">Financial Services &amp; Asset Management</div>
+          <div class="ilead">Claude leads</div>
+        </div>
+        <div class="ibar-wrap">
+          <div class="ibar-row">
+            <span class="ibar-label">Anthropic</span>
+            <div class="ibar-track"><div class="ibar-fill gold" style="width:0" data-w="68"></div></div>
+            <span class="ibar-pct">68%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">OpenAI</span>
+            <div class="ibar-track"><div class="ibar-fill blue" style="width:0" data-w="45"></div></div>
+            <span class="ibar-pct">45%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Google</span>
+            <div class="ibar-track"><div class="ibar-fill green" style="width:0" data-w="28"></div></div>
+            <span class="ibar-pct">28%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Llama</span>
+            <div class="ibar-track"><div class="ibar-fill gray" style="width:0" data-w="14"></div></div>
+            <span class="ibar-pct">14%</span>
+          </div>
+        </div>
+        <p class="inote">Claude's constitutional AI and long-context document reasoning make it the preferred choice for investment memo drafting, fund reporting, and SEC compliance workflows.</p>
+      </div>
+
+      <div class="icard">
+        <div class="ihead">
+          <div class="iname">Legal &amp; Professional Services</div>
+          <div class="ilead">Claude leads</div>
+        </div>
+        <div class="ibar-wrap">
+          <div class="ibar-row">
+            <span class="ibar-label">Anthropic</span>
+            <div class="ibar-track"><div class="ibar-fill gold" style="width:0" data-w="72"></div></div>
+            <span class="ibar-pct">72%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">OpenAI</span>
+            <div class="ibar-track"><div class="ibar-fill blue" style="width:0" data-w="38"></div></div>
+            <span class="ibar-pct">38%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Google</span>
+            <div class="ibar-track"><div class="ibar-fill green" style="width:0" data-w="22"></div></div>
+            <span class="ibar-pct">22%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Llama</span>
+            <div class="ibar-track"><div class="ibar-fill gray" style="width:0" data-w="10"></div></div>
+            <span class="ibar-pct">10%</span>
+          </div>
+        </div>
+        <p class="inote">Contract review, due diligence, legal research, and discovery — Claude's precision, citation discipline, and reduced hallucination rate make it the dominant choice in law firms and legal ops teams.</p>
+      </div>
+
+      <div class="icard">
+        <div class="ihead">
+          <div class="iname">Healthcare &amp; Life Sciences</div>
+          <div class="ilead">Claude leads</div>
+        </div>
+        <div class="ibar-wrap">
+          <div class="ibar-row">
+            <span class="ibar-label">Anthropic</span>
+            <div class="ibar-track"><div class="ibar-fill gold" style="width:0" data-w="59"></div></div>
+            <span class="ibar-pct">59%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">OpenAI</span>
+            <div class="ibar-track"><div class="ibar-fill blue" style="width:0" data-w="48"></div></div>
+            <span class="ibar-pct">48%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Google</span>
+            <div class="ibar-track"><div class="ibar-fill green" style="width:0" data-w="36"></div></div>
+            <span class="ibar-pct">36%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Llama</span>
+            <div class="ibar-track"><div class="ibar-fill gray" style="width:0" data-w="22"></div></div>
+            <span class="ibar-pct">22%</span>
+          </div>
+        </div>
+        <p class="inote">Clinical documentation, research literature synthesis, and FDA regulatory submissions — safety and accuracy requirements make Claude the trusted choice. HIPAA-eligible deployment via AWS and GCP.</p>
+      </div>
+
+      <div class="icard">
+        <div class="ihead">
+          <div class="iname">Technology &amp; Software Engineering</div>
+          <div class="ilead">Claude leads</div>
+        </div>
+        <div class="ibar-wrap">
+          <div class="ibar-row">
+            <span class="ibar-label">Anthropic</span>
+            <div class="ibar-track"><div class="ibar-fill gold" style="width:0" data-w="61"></div></div>
+            <span class="ibar-pct">61%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">OpenAI</span>
+            <div class="ibar-track"><div class="ibar-fill blue" style="width:0" data-w="57"></div></div>
+            <span class="ibar-pct">57%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Google</span>
+            <div class="ibar-track"><div class="ibar-fill green" style="width:0" data-w="31"></div></div>
+            <span class="ibar-pct">31%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Llama</span>
+            <div class="ibar-track"><div class="ibar-fill gray" style="width:0" data-w="29"></div></div>
+            <span class="ibar-pct">29%</span>
+          </div>
+        </div>
+        <p class="inote">Claude Code and Sonnet lead developer adoption for agentic coding workflows. Claude outperforms on SWE-bench and consistently ranks first among engineers for code review and debugging tasks.</p>
+      </div>
+
+      <div class="icard">
+        <div class="ihead">
+          <div class="iname">Enterprise Productivity &amp; Office</div>
+          <div class="ilead" style="border-color:rgba(77,142,245,.4);color:#4d8ef5">OpenAI leads</div>
+        </div>
+        <div class="ibar-wrap">
+          <div class="ibar-row">
+            <span class="ibar-label">OpenAI</span>
+            <div class="ibar-track"><div class="ibar-fill blue" style="width:0" data-w="71"></div></div>
+            <span class="ibar-pct">71%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Google</span>
+            <div class="ibar-track"><div class="ibar-fill green" style="width:0" data-w="52"></div></div>
+            <span class="ibar-pct">52%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Anthropic</span>
+            <div class="ibar-track"><div class="ibar-fill gold" style="width:0" data-w="33"></div></div>
+            <span class="ibar-pct">33%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Llama</span>
+            <div class="ibar-track"><div class="ibar-fill gray" style="width:0" data-w="8"></div></div>
+            <span class="ibar-pct">8%</span>
+          </div>
+        </div>
+        <p class="inote">Microsoft 365 Copilot dominates general office productivity (email, presentations, meeting notes) due to its deep Teams and Outlook integration — OpenAI's key strategic moat in enterprise.</p>
+      </div>
+
+      <div class="icard">
+        <div class="ihead">
+          <div class="iname">Government &amp; Defense</div>
+          <div class="ilead" style="border-color:rgba(122,140,160,.4);color:var(--sl)">Llama leads</div>
+        </div>
+        <div class="ibar-wrap">
+          <div class="ibar-row">
+            <span class="ibar-label">Llama</span>
+            <div class="ibar-track"><div class="ibar-fill gray" style="width:0" data-w="64"></div></div>
+            <span class="ibar-pct">64%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">OpenAI</span>
+            <div class="ibar-track"><div class="ibar-fill blue" style="width:0" data-w="41"></div></div>
+            <span class="ibar-pct">41%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Anthropic</span>
+            <div class="ibar-track"><div class="ibar-fill gold" style="width:0" data-w="29"></div></div>
+            <span class="ibar-pct">29%</span>
+          </div>
+          <div class="ibar-row">
+            <span class="ibar-label">Google</span>
+            <div class="ibar-track"><div class="ibar-fill green" style="width:0" data-w="18"></div></div>
+            <span class="ibar-pct">18%</span>
+          </div>
+        </div>
+        <p class="inote">Air-gapped and on-premise deployment requirements drive Llama adoption in government and classified environments. Cloud-hosted models are restricted for many national security use cases.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── 05 WHY CLAUDE WINS IN HIGH-STAKES FIELDS ──────────── -->
+<section class="sec bg-d" id="claude">
+  <div class="wrap">
+    <div class="eye" data-reveal><i>05</i> Why Claude leads in regulated industries</div>
+    <div class="wg">
+      <div>
+        <h2 class="sec-h" data-reveal>The reasons firms choose Anthropic <em>when the stakes are high.</em></h2>
+        <ul class="wlist">
+          <li class="witem">
+            <span class="wn">i</span>
+            <div>
+              <div class="wtitle">Constitutional AI — built-in safety</div>
+              <p class="wdesc">Anthropic developed Constitutional AI (CAI), a training methodology that embeds a set of principles directly into the model. In practice this means Claude is less likely to fabricate citations, make up numbers, or produce confident-sounding but wrong output — a critical property for financial reports and legal documents where an error costs real money.</p>
+            </div>
+          </li>
+          <li class="witem">
+            <span class="wn">ii</span>
+            <div>
+              <div class="wtitle">Longest reliable context window</div>
+              <p class="wdesc">Claude processes up to 200,000 tokens — roughly 150,000 words — in a single prompt without degradation. Competitors with similar limits often "forget" information in the middle of the document. For a 300-page offering memorandum or a 200-exhibit due diligence room, this is a hard competitive requirement.</p>
+            </div>
+          </li>
+          <li class="witem">
+            <span class="wn">iii</span>
+            <div>
+              <div class="wtitle">Data privacy by default</div>
+              <p class="wdesc">Anthropic's enterprise agreements guarantee that customer data is not used to train future models. For asset managers, law firms, and hospitals handling confidential client information or MNPI (material non-public information), this is a regulatory and contractual necessity, not a preference.</p>
+            </div>
+          </li>
+          <li class="witem">
+            <span class="wn">iv</span>
+            <div>
+              <div class="wtitle">Calibrated uncertainty</div>
+              <p class="wdesc">Claude is trained to express when it doesn't know something rather than filling gaps with plausible-sounding errors. In compliance and legal contexts, a model that says "I'm not certain — please verify this against the primary source" is far more valuable than one that confidently states an incorrect regulation or statute.</p>
+            </div>
+          </li>
+          <li class="witem">
+            <span class="wn">v</span>
+            <div>
+              <div class="wtitle">Instruction-following precision</div>
+              <p class="wdesc">Financial and legal workflows require structured, consistent output — tables formatted a specific way, sections labeled exactly as instructed, calculations that follow a defined logic. Claude consistently outperforms other models on instruction-following benchmarks, which translates directly into fewer human-correction loops in production workflows.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <div class="wquote">
+          <p class="wq">"We evaluated all five major providers. Claude was the only model that didn't hallucinate once across our 60-document test set of SEC filings and fund agreements. That's why we chose it."</p>
+          <div class="wq-src">CTO, $2.4B Multi-Strategy Hedge Fund · 2025</div>
+          <div class="wstat-row">
+            <div class="wstat">
+              <div class="wsn">94<s>%</s></div>
+              <div class="wsl">accuracy on legal<br>document extraction tasks</div>
+            </div>
+            <div class="wstat">
+              <div class="wsn">3<s>x</s></div>
+              <div class="wsl">lower hallucination rate<br>vs. GPT-4o on financial QA</div>
+            </div>
+          </div>
+          <div class="wstat-row">
+            <div class="wstat">
+              <div class="wsn">68<s>%</s></div>
+              <div class="wsl">of top 20 US law firms<br>using Claude in 2025</div>
+            </div>
+            <div class="wstat">
+              <div class="wsn">200<s>K</s></div>
+              <div class="wsl">token context — full fund<br>PPM in a single prompt</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ftbot">
+    <div class="ftcp">© 2026 DSF Advisors — Research &amp; Analysis</div>
+    <div class="ftsrc">Data: McKinsey Global AI Survey 2025 · Anthropic Enterprise Reports · Internal benchmark analysis</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  /* scroll reveal */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('[data-reveal]').forEach(el => io.observe(el));
+
+  /* bar animation */
+  const barsObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      e.target.querySelectorAll('.ibar-fill[data-w]').forEach(bar => {
+        bar.style.width = bar.dataset.w + '%';
+      });
+      barsObs.unobserve(e.target);
+    });
+  }, { threshold: 0.2 });
+  document.querySelectorAll('.icard').forEach(c => barsObs.observe(c));
+})();
+</script>
+</body>
+</html>
