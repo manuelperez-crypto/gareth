@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexum · Top 5 AI Platforms — Advantages & Disadvantages</title>
+<meta name="description" content="A schematic: strengths and weaknesses of the top 5 enterprise AI platforms — Claude, GPT, Gemini, Llama, and Copilot. Nexum.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy:   #1b2a52;
+  --navy2:  #152140;
+  --ink:    #3f4863;
+  --muted:  #7c86a0;
+  --orange: #f5921e;
+  --orange-d:#dd7d0b;
+  --blue:   #2c4bc4;
+  --blue-lt:#eaeefb;
+  --paper:  #ffffff;
+  --mist:   #f5f7fc;
+  --line:   #e6eaf3;
+  --good:   #1f9d57;
+  --good-bg:#eaf7f0;
+  --bad:    #e0564a;
+  --bad-bg: #fdeeec;
+  --radius: 16px;
+  --ease:   cubic-bezier(0.16, 1, 0.3, 1);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--mist);
+  background-image: radial-gradient(1200px 500px at 80% -10%, #eef2fb 0%, transparent 60%);
+  color: var(--ink);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding: clamp(1.4rem, 4vw, 3.5rem);
+  min-height: 100vh;
+}
+.sheet { max-width: 1120px; margin: 0 auto; }
+
+/* ── Header ─────────────────────────────────────── */
+header { margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -.02em; color: var(--navy); margin-bottom: 1.2rem; display: inline-flex; align-items: center; gap: .35rem; }
+.logo .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--orange); display: inline-block; }
+.pill {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--blue-lt); color: var(--blue);
+  font-size: .68rem; font-weight: 600; letter-spacing: .04em; text-transform: uppercase;
+  padding: .45rem .9rem; border-radius: 999px; margin-bottom: 1.1rem;
+}
+.pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
+h1 { font-size: clamp(2rem, 5.5vw, 3.5rem); font-weight: 800; letter-spacing: -.025em; line-height: 1.05; color: var(--navy); }
+h1 em { font-style: normal; color: var(--orange); }
+.sub { font-size: clamp(.86rem, 1.7vw, 1rem); color: var(--ink); margin-top: .9rem; max-width: 70ch; font-weight: 300; }
+.sub b { color: var(--navy); font-weight: 600; }
+
+/* ── Tree spine & branches ──────────────────────── */
+.branches { position: relative; padding-left: clamp(1.4rem, 4vw, 2.6rem); }
+.branches::before { content: ''; position: absolute; left: 14px; top: .6rem; bottom: 2.4rem; width: 2px; background: linear-gradient(var(--orange), #f6c58c); border-radius: 2px; }
+
+.branch { position: relative; padding: 0 0 clamp(1.4rem,3.2vw,2rem) clamp(1.4rem,3.5vw,2.4rem); }
+.branch::before { content: ''; position: absolute; left: 15px; top: 1.7rem; width: clamp(1rem,2.6vw,1.9rem); height: 2px; background: var(--orange); border-radius: 2px; }
+.branch::after { content: ''; position: absolute; left: 9px; top: 1.35rem; width: 13px; height: 13px; border-radius: 50%; background: var(--paper); border: 3px solid var(--orange); box-shadow: 0 0 0 4px var(--mist); }
+
+.card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: clamp(1.1rem,2.4vw,1.7rem) clamp(1.1rem,2.6vw,1.8rem);
+  box-shadow: 0 10px 30px rgba(27,42,82,.05);
+}
+
+.node-h { display: flex; align-items: center; gap: .7rem; margin-bottom: .3rem; flex-wrap: wrap; }
+.node-n {
+  font-size: .78rem; font-weight: 700; color: var(--orange);
+  background: #fdf0e0; width: 30px; height: 30px; border-radius: 9px;
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.node-t { font-size: clamp(1.3rem,3vw,1.75rem); font-weight: 700; color: var(--navy); line-height: 1.1; letter-spacing: -.02em; }
+.node-t span { color: var(--muted); font-weight: 500; font-size: .78em; }
+.node-tag { font-size: .6rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); background: var(--mist); border: 1px solid var(--line); padding: .3rem .6rem; border-radius: 999px; }
+.node-tag.star { color: var(--orange-d); background: #fdf0e0; border-color: #f7d7ab; }
+.node-tag.warn { color: var(--bad); background: var(--bad-bg); border-color: #f6cfc9; }
+.node-sub { font-size: .66rem; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: .1rem 0 1.1rem; }
+
+/* pros / cons */
+.pc { display: grid; grid-template-columns: 1fr 1fr; gap: .9rem clamp(1rem,2.4vw,1.6rem); }
+.pc-col { border-radius: 12px; padding: clamp(.9rem,1.9vw,1.2rem) clamp(.95rem,2vw,1.3rem); }
+.pc-col.pros { background: var(--good-bg); border: 1px solid #c9ebd7; }
+.pc-col.cons { background: var(--bad-bg); border: 1px solid #f6cfc9; }
+.pc-h { font-size: .62rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: .75rem; display: flex; align-items: center; gap: .5rem; }
+.pros .pc-h { color: var(--good); }
+.cons .pc-h { color: var(--bad); }
+.pc-h .ic { width: 18px; height: 18px; border-radius: 6px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; color: #fff; font-size: .8rem; }
+.pros .pc-h .ic { background: var(--good); }
+.cons .pc-h .ic { background: var(--bad); }
+.pc ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.pc li { position: relative; padding-left: 1.15rem; font-size: clamp(.77rem,1.4vw,.86rem); color: #37415c; line-height: 1.5; font-weight: 300; }
+.pc li b { font-weight: 600; color: var(--navy); }
+.pros li::before { content: '+'; position: absolute; left: 0; color: var(--good); font-weight: 800; }
+.cons li::before { content: '–'; position: absolute; left: 0; color: var(--bad); font-weight: 800; }
+
+.verdict {
+  grid-column: 1 / -1; padding: .7rem 1rem; border-radius: 10px;
+  background: var(--navy); color: #fff;
+  font-size: clamp(.77rem,1.4vw,.86rem); line-height: 1.5; font-weight: 300;
+  display: flex; align-items: center; gap: .55rem;
+}
+.verdict b { color: var(--orange); font-weight: 600; }
+.verdict::before { content: '▸'; color: var(--orange); font-size: .9em; }
+
+.chip { font-weight: 700; color: #fff; background: var(--orange); padding: .06rem .45rem; border-radius: 6px; font-size: .92em; white-space: nowrap; }
+.chip.warn { background: var(--bad); }
+
+/* ── Takeaway band (Nexum stats style) ──────────── */
+.take { margin-top: .6rem; background: var(--navy); border-radius: var(--radius); padding: clamp(1.4rem,3vw,2.2rem) clamp(1.3rem,3vw,2.2rem); color: #fff; }
+.take .lbl { font-size: .64rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--orange); margin-bottom: .7rem; }
+.take p { font-size: clamp(1.1rem,2.4vw,1.6rem); font-weight: 700; line-height: 1.35; letter-spacing: -.01em; }
+.take p em { font-style: normal; color: var(--orange); }
+.take .map { margin-top: 1.3rem; display: grid; grid-template-columns: repeat(5, 1fr); gap: .7rem; }
+.take .map div { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.12); border-radius: 10px; padding: .8rem .7rem; }
+.take .map .k { font-size: .58rem; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: rgba(255,255,255,.6); line-height: 1.4; }
+.take .map .v { font-size: 1.15rem; font-weight: 800; color: var(--orange); margin-top: .3rem; letter-spacing: -.02em; }
+
+/* ── Footer / sources ───────────────────────────── */
+.foot { margin-top: clamp(1.5rem,3vw,2.2rem); padding-top: 1.3rem; border-top: 1px solid var(--line); }
+.foot .lbl { font-size: .62rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--blue); margin-bottom: .6rem; }
+.foot p { font-size: .72rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+.foot .note { margin-top: .5rem; font-style: italic; }
+
+/* reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 720px) {
+  .pc { grid-template-columns: 1fr; }
+  .take .map { grid-template-columns: 1fr 1fr; }
+}
+
+@media print {
+  body { background: #fff; padding: 0; }
+  .card, .take { box-shadow: none; }
+  .reveal { opacity: 1; transform: none; }
+  .branch { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <header class="reveal">
+    <div class="logo">nexum<span class="dot"></span></div>
+    <div class="pill">Schematic · AI Research</div>
+    <h1>Top 5 AI platforms — <em>advantages &amp; disadvantages</em></h1>
+    <p class="sub">The four frontier <b>models</b> (Claude, GPT, Gemini, Llama) plus <b>Copilot</b> — which is not a model but a Microsoft <b>product</b> that runs them. It's included because in the enterprise conversation it competes for the same budget.</p>
+  </header>
+
+  <div class="branches">
+
+    <!-- 01 CLAUDE -->
+    <div class="branch reveal">
+      <div class="card">
+        <div class="node-h">
+          <span class="node-n">01</span>
+          <span class="node-t">Claude <span>· Anthropic</span></span>
+          <span class="node-tag star">★ Leader in regulated sectors</span>
+        </div>
+        <div class="node-sub">Model · opus-4 / sonnet-5</div>
+        <div class="pc">
+          <div class="pc-col pros">
+            <div class="pc-h"><span class="ic">+</span> Advantages</div>
+            <ul>
+              <li><b>Best accuracy / fewest hallucinations</b> — Constitutional AI trains safety into the model</li>
+              <li><b>Long-document reasoning</b> — 200K tokens without "forgetting the middle"</li>
+              <li><b>Top coding benchmarks</b> — leads SWE-bench for real-world engineering</li>
+              <li><b>Enterprise privacy</b> — no training on business data; SOC 2, ISO 27001, HIPAA</li>
+              <li><b>Trusted where errors cost money</b> — finance, legal, healthcare</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <div class="pc-h"><span class="ic">–</span> Disadvantages</div>
+            <ul>
+              <li><b>Smaller ecosystem</b> — fewer plugins and integrations than OpenAI</li>
+              <li><b>Weaker multimodal</b> — no image generation; limited audio/video</li>
+              <li><b>Premium pricing</b> at the frontier tier; usage caps on heavy work</li>
+              <li><b>Consumer tiers may train on chats</b> unless you opt out — guarantee is enterprise/API</li>
+              <li><b>No self-hosting</b> — cloud only (AWS, GCP, Foundry)</li>
+            </ul>
+          </div>
+          <div class="verdict">Pick when <b>accuracy, confidentiality and compliance</b> are non-negotiable.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 02 GPT -->
+    <div class="branch reveal">
+      <div class="card">
+        <div class="node-h">
+          <span class="node-n">02</span>
+          <span class="node-t">GPT <span>· OpenAI</span></span>
+          <span class="node-tag">Largest user base</span>
+        </div>
+        <div class="node-sub">Model · gpt-4o / o3</div>
+        <div class="pc">
+          <div class="pc-col pros">
+            <div class="pc-h"><span class="ic">+</span> Advantages</div>
+            <ul>
+              <li><b>Widest ecosystem</b> — most integrations, plugins, custom GPTs, community</li>
+              <li><b>Best all-round multimodal</b> — vision, audio, image generation in one place</li>
+              <li><b>Strong math &amp; science reasoning</b> (o3)</li>
+              <li><b>Brand familiarity</b> — staff already know ChatGPT, so training cost is low</li>
+              <li><b>Fast shipping</b> — new features tend to arrive first</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <div class="pc-h"><span class="ic">–</span> Disadvantages</div>
+            <ul>
+              <li><b>More hallucinations in high-stakes documents</b> than Claude</li>
+              <li><b>Long context degrades</b> — "lost in the middle" on big files</li>
+              <li><b>Consumer privacy defaults</b> — data can train models unless configured</li>
+              <li><b>Product churn</b> — frequent model deprecations force rework</li>
+              <li><b>Governance turbulence</b> has raised enterprise trust questions</li>
+            </ul>
+          </div>
+          <div class="verdict">Pick for <b>breadth</b>: general productivity, multimodal creativity, fastest ecosystem.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 03 GEMINI -->
+    <div class="branch reveal">
+      <div class="card">
+        <div class="node-h">
+          <span class="node-n">03</span>
+          <span class="node-t">Gemini <span>· Google</span></span>
+          <span class="node-tag">Best price at scale</span>
+        </div>
+        <div class="node-sub">Model · gemini-2.5-pro / flash</div>
+        <div class="pc">
+          <div class="pc-col pros">
+            <div class="pc-h"><span class="ic">+</span> Advantages</div>
+            <ul>
+              <li><b>Native Google Workspace integration</b> — Docs, Gmail, Sheets, Meet</li>
+              <li><b>Best video &amp; real-time multimodal</b> of any provider</li>
+              <li><b>Huge context</b> — up to 2M tokens on Pro tiers</li>
+              <li><b>Lowest cost at high volume</b> — Flash models are extremely cheap</li>
+              <li><b>Google Cloud infrastructure</b> — easy if you're already on GCP</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <div class="pc-h"><span class="ic">–</span> Disadvantages</div>
+            <ul>
+              <li><b>Behind Claude/GPT</b> on reasoning-critical enterprise tasks</li>
+              <li><b>Ecosystem lock-in</b> — value drops sharply outside Google's stack</li>
+              <li><b>Trust in regulated sectors still growing</b> — less finance/legal adoption</li>
+              <li><b>Version churn</b> — frequent renames confuse teams</li>
+              <li><b>Privacy perception</b> — Google's ad business makes some clients wary</li>
+            </ul>
+          </div>
+          <div class="verdict">Pick for <b>cost, video and Google-first companies</b>.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 04 LLAMA -->
+    <div class="branch reveal">
+      <div class="card">
+        <div class="node-h">
+          <span class="node-n">04</span>
+          <span class="node-t">Llama <span>· Meta</span></span>
+          <span class="node-tag">Open weights</span>
+        </div>
+        <div class="node-sub">Model · llama-4 (open)</div>
+        <div class="pc">
+          <div class="pc-col pros">
+            <div class="pc-h"><span class="ic">+</span> Advantages</div>
+            <ul>
+              <li><b>Open-weight</b> — run it on your own servers; total data sovereignty</li>
+              <li><b>Near-zero marginal cost</b> — no per-token API fees</li>
+              <li><b>Fully fine-tunable</b> for domain-specific tasks</li>
+              <li><b>No vendor lock-in</b> — you own the deployment</li>
+              <li><b>Dominant in government / defense</b> — air-gapped environments</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <div class="pc-h"><span class="ic">–</span> Disadvantages</div>
+            <ul>
+              <li><b>Lower performance ceiling</b> than frontier models on complex reasoning</li>
+              <li><b>You own the security</b> — patching, infra, monitoring = costly expertise</li>
+              <li><b>No vendor support / SLA</b> on the open version</li>
+              <li><b>Safety not built in</b> — behavior varies with your fine-tune</li>
+              <li><b>Limited multimodal</b> capabilities</li>
+            </ul>
+          </div>
+          <div class="verdict">Pick when <b>data cannot leave your building</b> — sovereignty over raw capability.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 05 COPILOT -->
+    <div class="branch reveal">
+      <div class="card">
+        <div class="node-h">
+          <span class="node-n">05</span>
+          <span class="node-t">Copilot <span>· Microsoft</span></span>
+          <span class="node-tag warn">Product, not a model</span>
+        </div>
+        <div class="node-sub">Wrapper · runs GPT / Claude / Gemini under the hood</div>
+        <div class="pc">
+          <div class="pc-col pros">
+            <div class="pc-h"><span class="ic">+</span> Advantages</div>
+            <ul>
+              <li><b>Lives inside Office, Teams &amp; GitHub</b> — zero context-switching</li>
+              <li><b>Multi-model</b> — pick Claude or GPT as the engine per task</li>
+              <li><b>Best enterprise admin tooling</b> — audit logs, seat &amp; policy management</li>
+              <li><b>Backed by the M365 security stack</b> — SSO, sensitivity labels, DLP</li>
+              <li><b>Easiest procurement</b> — one line on an existing Microsoft agreement</li>
+            </ul>
+          </div>
+          <div class="pc-col cons">
+            <div class="pc-h"><span class="ic">–</span> Disadvantages</div>
+            <ul>
+              <li><b>No intelligence of its own</b> — quality depends entirely on the engine</li>
+              <li><b>Weak proven ROI</b> — only <span class="chip">~3%</span> of M365 users pay; <span class="chip">~36%</span> of licensed users active</li>
+              <li><b>Oversharing risk</b> — surfaces years of messy SharePoint permissions</li>
+              <li><b>EchoLeak precedent</b> — zero-click prompt injection <span class="chip warn">CVSS 9.3</span> (patched)</li>
+              <li><b>Value collapses without data governance</b> — cleanup is a prerequisite</li>
+            </ul>
+          </div>
+          <div class="verdict">Pick for <b>Office-native convenience</b> — and choose <b>Claude as its engine</b> for high-stakes work.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- TAKEAWAY -->
+  <div class="take reveal">
+    <div class="lbl">Takeaway</div>
+    <p>There is no "best AI" — there is a <em>best AI for each job</em>. Enterprises increasingly run more than one.</p>
+    <div class="map">
+      <div><div class="k">Accuracy &amp; regulated work</div><div class="v">Claude</div></div>
+      <div><div class="k">Ecosystem &amp; multimodal</div><div class="v">GPT</div></div>
+      <div><div class="k">Cost &amp; video</div><div class="v">Gemini</div></div>
+      <div><div class="k">Data sovereignty</div><div class="v">Llama</div></div>
+      <div><div class="k">Office-native</div><div class="v">Copilot</div></div>
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="foot reveal">
+    <div class="lbl">Sources</div>
+    <p>GitHub Docs — Supported AI models · Anthropic — Claude in Microsoft Foundry &amp; M365 Copilot · Petri / WebProNews — Copilot adoption &amp; ROI · Varonis / SOC Prime — EchoLeak (CVE-2025-32711) · EPC Group &amp; Microsoft — Copilot oversharing · ClaudeReadiness — Anthropic enterprise security · DataCamp / IntuitionLabs — enterprise AI comparisons.</p>
+    <p class="note">Figures are drawn from 2025–2026 industry reporting and are indicative, not audited benchmarks.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = Math.min(i * 0.06, 0.4) + 's';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
