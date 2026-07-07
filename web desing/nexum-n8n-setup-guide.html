@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexum · Connect your contact form to n8n + Claude</title>
+<meta name="description" content="Step-by-step guide: route the Nexum contact form through an n8n workflow that drafts a reply with Claude and emails you the lead.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1b2a52; --navy2:#152140; --ink:#3f4863; --muted:#7c86a0;
+  --orange:#f5921e; --orange-d:#dd7d0b; --blue:#2c4bc4; --blue-lt:#eaeefb;
+  --paper:#ffffff; --mist:#f5f7fc; --line:#e6eaf3;
+  --good:#1f9d57; --good-bg:#eaf7f0; --code:#0f1a33; --radius:16px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--mist);background-image:radial-gradient(1200px 500px at 82% -12%,#eef2fb 0,transparent 60%);
+  color:var(--ink);font-family:'Poppins',sans-serif;font-weight:400;line-height:1.65;-webkit-font-smoothing:antialiased;
+  padding:clamp(1.4rem,4vw,3.5rem);min-height:100vh}
+.sheet{max-width:900px;margin:0 auto}
+
+header{margin-bottom:clamp(1.8rem,4vw,2.8rem)}
+.logo{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;color:var(--navy);margin-bottom:1.1rem;display:inline-flex;align-items:center;gap:.35rem}
+.logo .dot{width:9px;height:9px;border-radius:50%;background:var(--orange)}
+.pill{display:inline-flex;align-items:center;gap:.5rem;background:var(--blue-lt);color:var(--blue);
+  font-size:.68rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:.45rem .9rem;border-radius:999px;margin-bottom:1rem}
+.pill::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue)}
+h1{font-size:clamp(1.9rem,5vw,3rem);font-weight:800;letter-spacing:-.025em;line-height:1.06;color:var(--navy)}
+h1 em{font-style:normal;color:var(--orange)}
+.sub{font-size:clamp(.86rem,1.7vw,1rem);color:var(--ink);margin-top:.8rem;max-width:70ch;font-weight:300}
+.sub b{color:var(--navy);font-weight:600}
+
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:.5rem;margin:1.6rem 0 0}
+.fstep{flex:1;min-width:120px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:.9rem .8rem;text-align:center;box-shadow:0 8px 22px rgba(27,42,82,.05)}
+.fstep .n{font-size:.58rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.fstep .t{font-size:.82rem;font-weight:700;color:var(--navy);margin-top:.3rem;line-height:1.25}
+.fstep .t span{color:var(--orange)}
+.farr{display:flex;align-items:center;color:var(--orange);font-weight:800;font-size:1.1rem}
+@media(max-width:640px){.farr{transform:rotate(90deg)}}
+
+section.step{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+  padding:clamp(1.2rem,2.6vw,1.8rem);box-shadow:0 10px 30px rgba(27,42,82,.05);margin-top:1rem}
+.step-h{display:flex;align-items:center;gap:.8rem;margin-bottom:.7rem}
+.step-n{flex-shrink:0;width:34px;height:34px;border-radius:10px;background:#fdf0e0;color:var(--orange);
+  font-weight:800;font-size:.9rem;display:inline-flex;align-items:center;justify-content:center}
+.step-t{font-size:clamp(1.05rem,2.2vw,1.35rem);font-weight:700;color:var(--navy);letter-spacing:-.01em;line-height:1.2}
+.step p{font-size:clamp(.82rem,1.5vw,.9rem);color:#37415c;font-weight:300;margin:.4rem 0}
+.step p b{font-weight:600;color:var(--navy)}
+.step ul{margin:.5rem 0 .2rem;padding-left:0;list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.step li{position:relative;padding-left:1.2rem;font-size:clamp(.82rem,1.5vw,.9rem);color:#37415c;font-weight:300;line-height:1.55}
+.step li::before{content:'→';position:absolute;left:0;color:var(--orange);font-weight:700}
+.step li b{font-weight:600;color:var(--navy)}
+
+.kbd{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.82em;background:#eef1f8;border:1px solid var(--line);
+  border-radius:6px;padding:.08rem .4rem;color:var(--navy);white-space:nowrap}
+pre{background:var(--code);color:#e7ecf7;border-radius:12px;padding:1rem 1.1rem;overflow-x:auto;margin:.7rem 0;
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.78rem;line-height:1.6}
+pre .c{color:#7c86a0}
+pre .del{color:#e0857a}
+pre .add{color:#6fd39a}
+pre .k{color:#f5b96a}
+.tag{display:inline-block;font-size:.6rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .5rem;border-radius:6px;margin-left:.5rem}
+.tag.you{background:#fdecec;color:#d15140}
+.note{background:var(--good-bg);border:1px solid #c9ebd7;border-radius:12px;padding:.9rem 1rem;margin-top:.8rem;font-size:.82rem;color:#1c5c3a;font-weight:300}
+.note b{font-weight:600;color:#134a2e}
+.warn{background:#fff6ec;border:1px solid #f7d7ab;border-radius:12px;padding:.9rem 1rem;margin-top:.8rem;font-size:.82rem;color:#7a5312;font-weight:300}
+.warn b{font-weight:600;color:var(--orange-d)}
+
+.you-only{background:var(--navy);border-radius:var(--radius);padding:clamp(1.3rem,3vw,2rem);color:#fff;margin-top:1.2rem}
+.you-only .lbl{font-size:.62rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--orange);margin-bottom:.8rem}
+.you-only ol{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:.5rem}
+.you-only li{font-size:.86rem;font-weight:300;color:rgba(255,255,255,.9);line-height:1.5}
+.you-only li b{font-weight:600;color:#fff}
+
+.foot{margin-top:1.6rem;padding-top:1.2rem;border-top:1px solid var(--line);font-size:.74rem;color:var(--muted);font-weight:300}
+</style>
+</head>
+<body>
+<div class="sheet">
+  <header>
+    <div class="logo">nexum<span class="dot"></span></div>
+    <div class="pill">Setup Guide · Automation</div>
+    <h1>Connect your contact form to <em>n8n + Claude</em></h1>
+    <p class="sub">Right now your form emails through <b>formsubmit.co</b>. This routes it through an <b>n8n</b> workflow instead, so every submission automatically gets a reply <b>drafted by Claude</b> and lands in your inbox. About 15 minutes.</p>
+    <div class="flow">
+      <div class="fstep"><div class="n">Website</div><div class="t">Contact <span>form</span></div></div>
+      <div class="farr">→</div>
+      <div class="fstep"><div class="n">n8n</div><div class="t">Webhook</div></div>
+      <div class="farr">→</div>
+      <div class="fstep"><div class="n">Anthropic</div><div class="t"><span>Claude</span> drafts reply</div></div>
+      <div class="farr">→</div>
+      <div class="fstep"><div class="n">Inbox</div><div class="t">Email <span>you</span></div></div>
+    </div>
+  </header>
+
+  <section class="step">
+    <div class="step-h"><span class="step-n">1</span><span class="step-t">Get n8n running</span><span class="tag you">you</span></div>
+    <p>n8n is where the workflow lives. Pick one:</p>
+    <ul>
+      <li><b>Easiest — n8n Cloud:</b> sign up at n8n.io and start the free trial. Nothing to install.</li>
+      <li><b>Self-host (free):</b> run <span class="kbd">docker run -it --rm -p 5678:5678 n8nio/n8n</span>, then open <span class="kbd">http://localhost:5678</span>. (For the webhook to be reachable by your live site it needs a public URL — Cloud is simpler for that.)</li>
+    </ul>
+  </section>
+
+  <section class="step">
+    <div class="step-h"><span class="step-n">2</span><span class="step-t">Import the workflow</span></div>
+    <p>In n8n: top-right <b>⋯ menu → Import from File</b>, and choose <span class="kbd">nexum-contact-workflow.json</span> (the file included alongside this guide). You'll see four connected nodes: <b>Webhook → Claude → Email → Respond</b>.</p>
+  </section>
+
+  <section class="step">
+    <div class="step-h"><span class="step-n">3</span><span class="step-t">Add your Anthropic API key</span><span class="tag you">you</span></div>
+    <p>Open the <b>"Claude — draft reply"</b> node. Under <b>Header Parameters</b>, find <span class="kbd">x-api-key</span> and replace <span class="kbd">YOUR_ANTHROPIC_API_KEY</span> with your real key from <b>console.anthropic.com</b>.</p>
+    <div class="warn"><b>Keep the key private.</b> It's in the workflow, not in your website — so it never reaches the browser. Don't paste your key into the HTML or commit it to the repo.</div>
+  </section>
+
+  <section class="step">
+    <div class="step-h"><span class="step-n">4</span><span class="step-t">Connect your email</span><span class="tag you">you</span></div>
+    <p>Open the <b>"Email the lead to you"</b> node, connect your <b>Gmail</b> account (or swap it for the SMTP <em>Send Email</em> node), and change <span class="kbd">you@nexum.com</span> to the inbox where you want leads. The email includes the lead's details <b>and</b> Claude's suggested reply.</p>
+  </section>
+
+  <section class="step">
+    <div class="step-h"><span class="step-n">5</span><span class="step-t">Copy the webhook URL &amp; update the form</span></div>
+    <p>Open the <b>Webhook</b> node and copy its <b>Production URL</b> (looks like <span class="kbd">https://your-n8n-host/webhook/nexum-contact</span>). Then, in <span class="kbd">dsf-advisors/main.js</span>, change one line in the form handler:</p>
+<pre><span class="c">// in initForm(), the fetch call:</span>
+<span class="del">- var res = await fetch("https://formsubmit.co/ajax/" + FEMAIL, {</span>
+<span class="add">+ var res = await fetch("https://your-n8n-host/webhook/nexum-contact", {</span>
+    method: "POST",
+    headers: { <span class="k">"Content-Type"</span>: "application/json", <span class="k">"Accept"</span>: "application/json" },
+    body: JSON.stringify({ intent, name, firm, email, phone, message })
+  });</pre>
+    <p>Nothing else changes — the form already sends JSON, and the workflow returns <span class="kbd">{ "success": true }</span>, which is exactly what your existing success check looks for.</p>
+    <div class="note"><b>Tip:</b> paste the webhook URL into a small constant at the top of <span class="kbd">main.js</span> (e.g. <span class="kbd">var FORM_ENDPOINT = "…"</span>) so it's easy to change later.</div>
+  </section>
+
+  <section class="step">
+    <div class="step-h"><span class="step-n">6</span><span class="step-t">Activate &amp; test</span></div>
+    <ul>
+      <li>Toggle the workflow <b>Active</b> (top-right in n8n).</li>
+      <li>Submit your own contact form once.</li>
+      <li>You should get an email with the lead + a Claude-drafted reply, and the form should show its normal <b>"Message sent"</b> confirmation.</li>
+      <li>If something fails, open the workflow's <b>Executions</b> tab in n8n — it shows exactly which node errored.</li>
+    </ul>
+  </section>
+
+  <div class="you-only">
+    <div class="lbl">The 3 things only you can do</div>
+    <ol>
+      <li><b>Run n8n</b> (Cloud account or self-host) — I can't host it for you.</li>
+      <li><b>Paste your Anthropic API key</b> into the Claude node — I never see or store your key.</li>
+      <li><b>Connect your email</b> and set the destination address.</li>
+    </ol>
+  </div>
+
+  <section class="step" style="margin-top:1.2rem">
+    <div class="step-h"><span class="step-n">✓</span><span class="step-t">Good to know</span></div>
+    <ul>
+      <li><b>Model &amp; cost:</b> the workflow uses <span class="kbd">claude-opus-4-8</span> (highest quality). For a short auto-reply you can switch the <span class="kbd">model</span> field to <span class="kbd">claude-haiku-4-5</span> to cut cost — that's your call.</li>
+      <li><b>Do more:</b> n8n can also add the lead to <b>Google Sheets</b>, ping you on <b>WhatsApp/Slack</b>, or auto-send the drafted reply to the client — just add nodes after the Claude step.</li>
+      <li><b>Auto-reply to the client:</b> add a second Gmail node that sends <span class="kbd">{{ $json.content[0].text }}</span> to <span class="kbd">{{ $('Webhook (form submission)').item.json.body.email }}</span>. (Review-first is safer to start.)</li>
+    </ul>
+  </section>
+
+  <div class="foot">Files: <b>nexum-contact-workflow.json</b> (import into n8n) · this guide. Endpoints and keys shown are placeholders — replace them with your own.</div>
+</div>
+</body>
+</html>
