@@ -157,9 +157,9 @@ pre .k{color:#f5b96a}
   <section class="step" style="margin-top:1.2rem">
     <div class="step-h"><span class="step-n">✓</span><span class="step-t">Good to know</span></div>
     <ul>
-      <li><b>Model &amp; cost:</b> the workflow uses <span class="kbd">claude-opus-4-8</span> (highest quality). For a short auto-reply you can switch the <span class="kbd">model</span> field to <span class="kbd">claude-haiku-4-5</span> to cut cost — that's your call.</li>
+      <li><b>Model &amp; cost:</b> the workflow uses <span class="kbd">claude-fable-5</span> (the most capable model). It's overkill and pricey for a short reply — switch the <span class="kbd">model</span> field to <span class="kbd">claude-haiku-4-5</span> (cheap) or <span class="kbd">claude-opus-4-8</span> to lower cost. Note: Fable 5 needs your API org on <b>30-day data retention</b> (not zero-retention), or the request returns a 400.</li>
       <li><b>Do more:</b> n8n can also add the lead to <b>Google Sheets</b>, ping you on <b>WhatsApp/Slack</b>, or auto-send the drafted reply to the client — just add nodes after the Claude step.</li>
-      <li><b>Auto-reply to the client:</b> add a second Gmail node that sends <span class="kbd">{{ $json.content[0].text }}</span> to <span class="kbd">{{ $('Webhook (form submission)').item.json.body.email }}</span>. (Review-first is safer to start.)</li>
+      <li><b>Auto-reply to the client:</b> add a second Gmail node that sends <span class="kbd">{{ ($json.content.find(b =&gt; b.type === 'text') || {}).text }}</span> to <span class="kbd">{{ $('Webhook (form submission)').item.json.body.email }}</span>. (Review-first is safer to start.)</li>
     </ul>
   </section>
 

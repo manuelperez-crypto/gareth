@@ -29,7 +29,7 @@
         },
         "sendBody": true,
         "specifyBody": "json",
-        "jsonBody": "={{ JSON.stringify({ model: \"claude-opus-4-8\", max_tokens: 500, system: \"You are the assistant for Nexum, a web design agency in New Jersey. A potential client just submitted the contact form. Write a warm, concise, professional reply in English (3-4 sentences) that acknowledges their message, references what they asked about, and proposes a short intro call as the next step. Sign off as 'The Nexum Team'. Return only the email body text.\", messages: [{ role: \"user\", content: \"New Nexum contact form submission. Name: \" + ($json.body.name || \"-\") + \". Firm: \" + ($json.body.firm || \"-\") + \". Email: \" + ($json.body.email || \"-\") + \". Intent: \" + ($json.body.intent || \"-\") + \". Their message: \" + ($json.body.message || \"-\") }] }) }}",
+        "jsonBody": "={{ JSON.stringify({ model: \"claude-fable-5\", max_tokens: 1500, system: \"You are the assistant for Nexum, a web design agency in New Jersey. A potential client just submitted the contact form. Write a warm, concise, professional reply in English (3-4 sentences) that acknowledges their message, references what they asked about, and proposes a short intro call as the next step. Sign off as 'The Nexum Team'. Return only the email body text.\", messages: [{ role: \"user\", content: \"New Nexum contact form submission. Name: \" + ($json.body.name || \"-\") + \". Firm: \" + ($json.body.firm || \"-\") + \". Email: \" + ($json.body.email || \"-\") + \". Intent: \" + ($json.body.intent || \"-\") + \". Their message: \" + ($json.body.message || \"-\") }] }) }}",
         "options": {}
       },
       "id": "b1f7c0a2-0002-4a10-9c11-000000000002",
@@ -43,7 +43,7 @@
         "sendTo": "you@nexum.com",
         "subject": "=New Nexum lead — {{ $('Webhook (form submission)').item.json.body.name || 'unknown' }}",
         "emailType": "text",
-        "message": "=New contact form submission\n\nName:   {{ $('Webhook (form submission)').item.json.body.name }}\nFirm:   {{ $('Webhook (form submission)').item.json.body.firm }}\nEmail:  {{ $('Webhook (form submission)').item.json.body.email }}\nPhone:  {{ $('Webhook (form submission)').item.json.body.phone }}\nIntent: {{ $('Webhook (form submission)').item.json.body.intent }}\n\nMessage:\n{{ $('Webhook (form submission)').item.json.body.message }}\n\n----- Suggested reply (drafted by Claude) -----\n\n{{ $json.content[0].text }}",
+        "message": "=New contact form submission\n\nName:   {{ $('Webhook (form submission)').item.json.body.name }}\nFirm:   {{ $('Webhook (form submission)').item.json.body.firm }}\nEmail:  {{ $('Webhook (form submission)').item.json.body.email }}\nPhone:  {{ $('Webhook (form submission)').item.json.body.phone }}\nIntent: {{ $('Webhook (form submission)').item.json.body.intent }}\n\nMessage:\n{{ $('Webhook (form submission)').item.json.body.message }}\n\n----- Suggested reply (drafted by Claude) -----\n\n{{ ($json.content.find(b => b.type === 'text') || {}).text }}",
         "options": {}
       },
       "id": "b1f7c0a2-0003-4a10-9c11-000000000003",
