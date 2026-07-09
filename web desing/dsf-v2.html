@@ -443,7 +443,7 @@ h1, h2, h3, h4 { text-wrap: balance; }
    PROOF
 ============================================================= */
 #proof  { background: var(--dark); border-top: 1px solid rgba(195,154,62,.1); border-bottom: 1px solid rgba(195,154,62,.1); }
-.pfg    { display: grid; grid-template-columns: repeat(4,1fr); max-width: 1400px; margin: 0 auto; padding: clamp(2.5rem,5vw,4.5rem) var(--px); }
+.pfg    { display: grid; grid-template-columns: repeat(3,1fr); max-width: 1400px; margin: 0 auto; padding: clamp(2.5rem,5vw,4.5rem) var(--px); }
 .pf     { border-left: 1px solid rgba(250,248,243,.07); padding: clamp(1rem,2vw,1.8rem); }
 .pf:first-child { border-left: none; padding-left: 0; }
 .pfn    { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem,5.5vw,4.8rem); font-weight: 300; color: #faf8f3; line-height: 1; transition: text-shadow .8s; }
@@ -678,6 +678,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
   .pfg  { grid-template-columns: 1fr 1fr; padding: 2.5rem 1.2rem; }
   .pf   { border-left: none !important; padding-left: 0 !important; border-bottom: 1px solid rgba(250,248,243,.07); padding: 1.4rem .8rem; }
   .pf:nth-child(odd) { border-right: 1px solid rgba(250,248,243,.07); }
+  .pf:last-child { grid-column: 1 / -1; border-right: none; }
   .prg  { grid-template-columns: 1fr; }
   .prsticky { display: none; }
   .prd  { max-width: 100%; }
@@ -944,7 +945,6 @@ footer { background: var(--dark); border-top: 1px solid rgba(195,154,62,.14); pa
   <div class="pf"><div class="pfn"><span class="ct" data-to="20">20</span><s>+</s></div><div class="pfl">Years inside<br>financial services</div></div>
   <div class="pf"><div class="pfn">$<span class="ct" data-to="15" data-dec="1">1.5</span><s>B+</s></div><div class="pfl">Assets under<br>administration</div></div>
   <div class="pf"><div class="pfn">$<span class="ct" data-to="300">300</span><s>M+</s></div><div class="pfl">In private equity<br>assets overseen</div></div>
-  <div class="pf"><div class="pfn">1<s>:1</s></div><div class="pfl">Senior partner<br>on every account</div></div>
 </div></section>
 
 <section class="sec bg-p" id="process"><div class="wrap">
