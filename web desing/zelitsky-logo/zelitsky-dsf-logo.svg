@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 780" width="1440" height="780">
+  <!-- Zelitsky & Company — A DSF Advisors Company -->
+  <!-- Sin borde exterior; "A", "ADVISORS" y "COMPANY" al mismo tamaño en la franja inferior -->
+
+  <!-- Fondo blanco -->
+  <rect x="0" y="0" width="1440" height="780" fill="#ffffff"/>
+
+  <!-- Isotipo Z -->
+  <g>
+    <circle cx="310" cy="300" r="140" fill="#b9bdc4"/>
+    <polygon points="460,55 460,305 170,305" fill="#1656b8"/>
+    <polygon points="160,545 160,295 450,295" fill="#1656b8"/>
+  </g>
+
+  <!-- Wordmark -->
+  <text x="575" y="295" font-family="Georgia, 'Times New Roman', 'Liberation Serif', serif" font-size="128" fill="#1656b8">Zelitsky<tspan font-size="66" dx="18">&amp; Company</tspan></text>
+  <text x="580" y="408" font-family="Arial, Helvetica, 'Liberation Sans', sans-serif" font-size="54" letter-spacing="2" fill="#1e5b40">Accountants &amp; Advisors</text>
+
+  <!-- Franja inferior navy -->
+  <rect x="0" y="560" width="1440" height="220" fill="#101f42"/>
+
+  <g font-family="Arial, Helvetica, 'Liberation Sans', sans-serif" font-weight="bold" fill="#ffffff">
+    <!-- línea decorativa -->
+    <line x1="80" y1="670" x2="265" y2="670" stroke="#c6ccd6" stroke-width="4"/>
+
+    <!-- A -->
+    <text x="312" y="692" font-size="60" letter-spacing="6">A</text>
+
+    <!-- caja DSF -->
+    <rect x="382" y="613" width="180" height="112" fill="#ffffff"/>
+    <text x="472" y="694" font-size="66" letter-spacing="4" fill="#101f42" text-anchor="middle">DSF</text>
+
+    <!-- swoosh -->
+    <path d="M 600 716 C 715 748, 830 702, 882 640" fill="none" stroke="#99a1ad" stroke-width="4"/>
+    <circle cx="886" cy="633" r="9" fill="#99a1ad" stroke="none"/>
+
+    <!-- ADVISORS -->
+    <text x="596" y="692" font-size="60" letter-spacing="6">ADVISORS</text>
+
+    <!-- COMPANY (mismo tamaño que ADVISORS) -->
+    <text x="1038" y="692" font-size="60" letter-spacing="6">COMPANY</text>
+  </g>
+</svg>
