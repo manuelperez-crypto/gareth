@@ -62,16 +62,32 @@ def convertir(ruta_json: str, carpeta_salida: str) -> None:
 
     os.makedirs(carpeta_salida, exist_ok=True)
     creadas = 0
+    vacias = 0
     usados = set()
 
     for conv in conversaciones:
-        titulo = conv.get("name") or "Conversación sin título"
+        titulo = (conv.get("name") or "").strip()
+        if not titulo:
+            # Sin título: usar el inicio del primer mensaje del usuario
+            for msg in conv.get("chat_messages") or conv.get("messages") or []:
+                if msg.get("sender") == "human":
+                    primera_linea = texto_del_mensaje(msg).split("\n")[0].strip()
+                    if primera_linea:
+                        titulo = primera_linea[:60]
+                        break
+        titulo = titulo or "Conversación sin título"
         creada = fecha_corta(conv.get("created_at", ""))
         actualizada = fecha_corta(conv.get("updated_at", ""))
         uuid = conv.get("uuid", "")
         mensajes = conv.get("chat_messages") or conv.get("messages") or []
 
         if not mensajes:
+            continue
+
+        # Algunas conversaciones (p. ej. sesiones de Claude Code) vienen sin
+        # texto en la exportación: no tiene sentido crear una nota vacía.
+        if not any(texto_del_mensaje(m) for m in mensajes):
+            vacias += 1
             continue
 
         # Nombre de archivo único: "2026-07-13 Título.md"
@@ -112,6 +128,9 @@ def convertir(ruta_json: str, carpeta_salida: str) -> None:
             f.write("\n".join(lineas))
         creadas += 1
 
+    if vacias:
+        print(f"ℹ️  Se omitieron {vacias} conversaciones sin contenido de texto"
+              " (la exportación de claude.ai no incluye el contenido de las sesiones de Claude Code).")
     print(f"✅ Listo: {creadas} conversaciones convertidas en notas dentro de:")
     print(f"   {os.path.abspath(carpeta_salida)}")
     print("Abre Obsidian y ahí estarán (si la carpeta está dentro de tu bóveda).")
