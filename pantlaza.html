@@ -323,36 +323,62 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes drawLine{to{stroke-dashoffset:0}}
 
-/* ── SCROLL ANIMATIONS ───────────────────────────────────────────────── */
-.anim{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
-.anim.visible{opacity:1;transform:none}
-.anim-stagger>*{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
-.anim-stagger.visible>*:nth-child(1){opacity:1;transform:none;transition-delay:.04s}
-.anim-stagger.visible>*:nth-child(2){opacity:1;transform:none;transition-delay:.13s}
-.anim-stagger.visible>*:nth-child(3){opacity:1;transform:none;transition-delay:.22s}
-.anim-stagger.visible>*:nth-child(4){opacity:1;transform:none;transition-delay:.31s}
-.anim-stagger.visible>*:nth-child(5){opacity:1;transform:none;transition-delay:.4s}
-.anim-stagger.visible>*:nth-child(6){opacity:1;transform:none;transition-delay:.49s}
-.anim-stagger.visible>*:nth-child(7){opacity:1;transform:none;transition-delay:.58s}
-.anim-stagger.visible>*:nth-child(8){opacity:1;transform:none;transition-delay:.67s}
-
-/* ── HERO ENTRANCE (fires after intro) ───────────────────────────────── */
-.hero-eyebrow,.hero h1,.hero p,.hero-btns,.hero-visual{
-  opacity:0;transform:translateY(18px);
-  transition:opacity .65s ease,transform .65s ease;
+/* ── SCROLL ANIMATIONS (keyframe-based — fires reliably after paint) ─── */
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(34px)}
+  to{opacity:1;transform:none}
 }
-.hero.go .hero-eyebrow{opacity:1;transform:none;transition-delay:.04s}
-.hero.go h1{opacity:1;transform:none;transition-delay:.18s}
-.hero.go p{opacity:1;transform:none;transition-delay:.33s}
-.hero.go .hero-btns{opacity:1;transform:none;transition-delay:.48s}
-.hero.go .hero-visual{opacity:1;transform:none;transition-delay:.24s}
+.anim{opacity:0}
+.anim.visible{animation:slideUp .75s cubic-bezier(.22,1,.36,1) both}
+.anim-stagger>*{opacity:0}
+.anim-stagger.visible>*:nth-child(1){animation:slideUp .65s cubic-bezier(.22,1,.36,1) .05s both}
+.anim-stagger.visible>*:nth-child(2){animation:slideUp .65s cubic-bezier(.22,1,.36,1) .14s both}
+.anim-stagger.visible>*:nth-child(3){animation:slideUp .65s cubic-bezier(.22,1,.36,1) .23s both}
+.anim-stagger.visible>*:nth-child(4){animation:slideUp .65s cubic-bezier(.22,1,.36,1) .32s both}
+.anim-stagger.visible>*:nth-child(5){animation:slideUp .65s cubic-bezier(.22,1,.36,1) .41s both}
+.anim-stagger.visible>*:nth-child(6){animation:slideUp .65s cubic-bezier(.22,1,.36,1) .50s both}
+.anim-stagger.visible>*:nth-child(7){animation:slideUp .65s cubic-bezier(.22,1,.36,1) .59s both}
+.anim-stagger.visible>*:nth-child(8){animation:slideUp .65s cubic-bezier(.22,1,.36,1) .68s both}
+
+/* ── HERO ENTRANCE (animation-play-state — paused until .go added) ──── */
+@keyframes heroIn{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:none}
+}
+.hero-eyebrow{animation:heroIn .7s ease .05s both;animation-play-state:paused}
+.hero h1     {animation:heroIn .75s ease .2s  both;animation-play-state:paused}
+.hero p      {animation:heroIn .7s ease .36s  both;animation-play-state:paused}
+.hero-btns   {animation:heroIn .7s ease .52s  both;animation-play-state:paused}
+.hero-visual {animation:heroIn .85s ease .14s both;animation-play-state:paused}
+.hero.go .hero-eyebrow,
+.hero.go h1,
+.hero.go p,
+.hero.go .hero-btns,
+.hero.go .hero-visual{animation-play-state:running}
+
+/* ── HERO MOUNTAIN SCENE ─────────────────────────────────────────────── */
+.hero-scene{position:relative}
+.hero-mountain{display:block;width:100%;border-radius:18px;box-shadow:0 28px 65px rgba(0,0,0,.25)}
+.hcard{
+  position:absolute;
+  background:rgba(255,255,255,.97);border-radius:12px;
+  padding:.65rem 1rem;font-size:.75rem;font-family:inherit;
+  box-shadow:0 8px 28px rgba(0,0,0,.22);min-width:155px;
+}
+.hcard-t{font-weight:700;color:var(--navy);margin-bottom:.18rem}
+.hcard-s{color:var(--gray);font-size:.68rem}
+.hcard-gold{
+  background:var(--gold);color:var(--navy);font-weight:700;
+  font-size:.78rem;min-width:0;padding:.55rem .9rem;
+  box-shadow:0 6px 20px rgba(245,158,11,.45);
+}
 
 /* ── REDUCED MOTION ──────────────────────────────────────────────────── */
 @media(prefers-reduced-motion:reduce){
   #intro{display:none}
-  .anim,.anim-stagger>*,
+  .anim.visible,.anim-stagger.visible>*,
   .hero-eyebrow,.hero h1,.hero p,.hero-btns,.hero-visual{
-    opacity:1!important;transform:none!important;transition:none!important
+    animation:none!important;opacity:1!important;transform:none!important
   }
 }
 </style>
@@ -361,7 +387,7 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
 
 <div id="intro">
   <div class="intro-mark">
-    <svg class="intro-svg" viewBox="0 0 140 86" width="190">
+    <svg class="intro-svg" viewBox="0 0 140 86" width="240">
       <polygon class="intro-rdg1" points="28,82 58,28 88,82" fill="#1d4ed8" opacity=".55"/>
       <polygon class="intro-rdg2" points="60,82 88,36 116,82" fill="#1d4ed8" opacity=".55"/>
       <polygon class="intro-mtn" points="10,82 70,8 130,82" fill="#fff"/>
@@ -418,36 +444,70 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
       </div>
     </div>
     <div class="hero-visual">
-      <div class="browser-mock">
-        <div class="browser-bar">
-          <div class="browser-dots">
-            <div class="browser-dot" style="background:#f87171"></div>
-            <div class="browser-dot" style="background:#fbbf24"></div>
-            <div class="browser-dot" style="background:#4ade80"></div>
-          </div>
-          <div class="browser-url">🔒 yourbusiness.com</div>
+      <div class="hero-scene">
+        <svg class="hero-mountain" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="skyGrd" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#02091a"/>
+              <stop offset="55%" stop-color="#0b1f4a"/>
+              <stop offset="100%" stop-color="#1a3464"/>
+            </linearGradient>
+            <radialGradient id="summitGlow" cx="50%" cy="22%" r="28%">
+              <stop offset="0%" stop-color="#f59e0b" stop-opacity=".45"/>
+              <stop offset="100%" stop-color="#f59e0b" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="500" height="360" fill="url(#skyGrd)"/>
+          <ellipse cx="250" cy="79" rx="95" ry="68" fill="url(#summitGlow)"/>
+          <!-- Stars -->
+          <circle cx="28" cy="22" r="1.3" fill="white" opacity=".75"/>
+          <circle cx="78" cy="12" r=".9" fill="white" opacity=".5"/>
+          <circle cx="140" cy="30" r="1.5" fill="white" opacity=".8"/>
+          <circle cx="198" cy="8" r="1" fill="white" opacity=".6"/>
+          <circle cx="258" cy="20" r=".8" fill="white" opacity=".5"/>
+          <circle cx="350" cy="16" r="1.2" fill="white" opacity=".7"/>
+          <circle cx="420" cy="28" r="1" fill="white" opacity=".6"/>
+          <circle cx="470" cy="11" r="1.4" fill="white" opacity=".8"/>
+          <circle cx="48" cy="58" r=".7" fill="white" opacity=".4"/>
+          <circle cx="165" cy="50" r="1" fill="white" opacity=".5"/>
+          <circle cx="312" cy="44" r=".8" fill="white" opacity=".45"/>
+          <circle cx="450" cy="54" r="1.1" fill="white" opacity=".6"/>
+          <circle cx="108" cy="38" r=".6" fill="white" opacity=".35"/>
+          <circle cx="390" cy="44" r=".7" fill="white" opacity=".4"/>
+          <circle cx="60" cy="35" r=".5" fill="white" opacity=".3"/>
+          <circle cx="285" cy="35" r=".6" fill="white" opacity=".35"/>
+          <!-- Warm horizon -->
+          <ellipse cx="250" cy="296" rx="210" ry="32" fill="#f59e0b" opacity=".09"/>
+          <!-- Far mountains (hazy blue) -->
+          <polygon points="0,278 45,250 90,265 135,244 180,258 225,240 270,254 315,238 360,252 405,240 450,254 500,242 500,360 0,360" fill="#1d4ed8" opacity=".2"/>
+          <!-- Mid mountains -->
+          <polygon points="0,308 52,270 102,287 152,262 200,280 248,254 296,272 344,256 392,274 440,260 488,276 500,268 500,360 0,360" fill="#0a1e45" opacity=".8"/>
+          <!-- Left foreground peak -->
+          <polygon points="-5,360 62,218 148,360" fill="#071228"/>
+          <!-- Right foreground peak -->
+          <polygon points="350,360 438,230 508,360" fill="#071228"/>
+          <!-- Main center mountain -->
+          <polygon points="105,360 250,48 395,360" fill="#0f2c5e"/>
+          <!-- Subtle light on left face -->
+          <polygon points="178,248 250,48 226,90 172,260" fill="white" opacity=".028"/>
+          <!-- Gold summit -->
+          <polygon points="228,82 250,48 272,82" fill="#f59e0b"/>
+          <!-- Horizon baseline -->
+          <line x1="0" y1="308" x2="500" y2="308" stroke="white" stroke-width=".6" opacity=".07"/>
+        </svg>
+        <!-- Floating UI cards -->
+        <div class="hcard" style="top:10%;right:5%">
+          <div class="hcard-t">📅 New booking</div>
+          <div class="hcard-s">Added to Google Calendar ✓</div>
         </div>
-        <div class="browser-body">
-          <div class="mock-header">
-            <div class="mock-logo"></div>
-            <div class="mock-nav">
-              <span></span><span></span><span></span>
-            </div>
-          </div>
-          <div class="mock-hero">
-            <div class="mock-h1"></div>
-            <div class="mock-h2"></div>
-            <div class="mock-btn"></div>
-          </div>
-          <div class="mock-cards">
-            <div class="mock-card"><div class="mock-card-icon"></div><div class="mock-card-t"></div><div class="mock-card-s"></div><div class="mock-card-s2"></div></div>
-            <div class="mock-card"><div class="mock-card-icon" style="background:#f0fdf4"></div><div class="mock-card-t"></div><div class="mock-card-s"></div><div class="mock-card-s2"></div></div>
-            <div class="mock-card"><div class="mock-card-icon" style="background:#fef9ec"></div><div class="mock-card-t"></div><div class="mock-card-s"></div><div class="mock-card-s2"></div></div>
-          </div>
+        <div class="hcard" style="bottom:24%;left:4%">
+          <div class="hcard-t">💬 AI Chat active</div>
+          <div class="hcard-s">3 leads captured today</div>
         </div>
-      </div>
-      <div class="badge-float">
-        <span class="star">★★★★★</span> 5.0 · Happy clients
+        <div class="hcard hcard-gold" style="top:42%;right:4%">⚡ Your site is live</div>
+        <div class="badge-float">
+          <span class="star">★★★★★</span> 5.0 · Happy clients
+        </div>
       </div>
     </div>
   </div>
@@ -856,30 +916,32 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
 
 <script>
 (function(){
+  // ── INTRO ──────────────────────────────────────────────────────────────
   var intro = document.getElementById('intro');
   var hero  = document.querySelector('.hero');
-
-  // Lock scroll while intro plays
   document.body.style.overflow = 'hidden';
 
   setTimeout(function(){
     intro.classList.add('out');
     document.body.style.overflow = '';
-    // Kick off hero entrance
     if (hero) hero.classList.add('go');
-    // Remove from DOM after fade
-    setTimeout(function(){ if (intro.parentNode) intro.parentNode.removeChild(intro); }, 800);
+    setTimeout(function(){ if (intro && intro.parentNode) intro.parentNode.removeChild(intro); }, 800);
   }, 2700);
 
-  // Scroll-triggered fade-up / stagger
+  // ── SCROLL ANIMATIONS ──────────────────────────────────────────────────
+  // Double rAF: guarantees the browser paints opacity:0 first, so the
+  // keyframe animation always plays visibly instead of popping in.
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){
       if (e.isIntersecting){
-        e.target.classList.add('visible');
-        io.unobserve(e.target);
+        var el = e.target;
+        io.unobserve(el);
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ el.classList.add('visible'); });
+        });
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.08 });
 
   document.querySelectorAll('.anim, .anim-stagger').forEach(function(el){
     io.observe(el);
