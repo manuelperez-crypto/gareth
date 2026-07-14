@@ -373,6 +373,70 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
   box-shadow:0 6px 20px rgba(245,158,11,.45);
 }
 
+/* ── PANTITO AI ROBOT (Spline card) ─────────────────────────────────── */
+.pantito-section{background:#02091a;padding:3.5rem 0}
+.pantito-card{
+  border-radius:20px;
+  background:rgba(2,4,22,.97);
+  border:1px solid rgba(29,78,216,.22);
+  overflow:hidden;position:relative;
+  height:500px;display:flex;
+}
+@keyframes spotlight{
+  0%{opacity:0;transform:scale(.5) translate(-40%,-30%)}
+  100%{opacity:1;transform:scale(1) translate(0,0)}
+}
+.pantito-spotlight{
+  pointer-events:none;position:absolute;z-index:1;
+  height:169%;width:138%;top:-40%;left:-30%;opacity:0;
+  animation:spotlight 2s ease .75s 1 forwards;
+}
+.pantito-left{
+  flex:1;padding:2.5rem 3rem;
+  position:relative;z-index:10;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.pantito-tag{
+  font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gold);margin-bottom:1.2rem;
+}
+.pantito-h2{
+  font-size:2.8rem;font-weight:900;line-height:1.1;
+  background:linear-gradient(to bottom,#f8fafc,#94a3b8);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.pantito-p{margin-top:1.2rem;font-size:.93rem;color:#475569;max-width:36ch;line-height:1.75}
+.pantito-btn{
+  margin-top:2rem;display:inline-flex;align-items:center;gap:.5rem;
+  background:var(--gold);color:var(--navy);font-weight:700;font-size:.88rem;
+  padding:.75rem 1.6rem;border-radius:999px;transition:all .2s;
+  text-decoration:none;width:fit-content;
+}
+.pantito-btn:hover{background:#d97706;transform:translateY(-1px)}
+.pantito-right{flex:1;position:relative}
+.pantito-iframe{width:100%;height:100%;border:none;display:block}
+.pantito-loader{
+  position:absolute;inset:0;
+  display:flex;align-items:center;justify-content:center;
+  background:#02091a;z-index:5;
+  transition:opacity .5s ease;
+}
+.pantito-loader.done{opacity:0;pointer-events:none}
+.pantito-spinner{
+  width:42px;height:42px;
+  border:3px solid rgba(245,158,11,.18);
+  border-top-color:var(--gold);
+  border-radius:50%;
+  animation:spin .85s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:760px){
+  .pantito-card{flex-direction:column;height:auto}
+  .pantito-left{padding:2rem 1.5rem}
+  .pantito-h2{font-size:2rem}
+  .pantito-right{height:320px}
+}
+
 /* ── REDUCED MOTION ──────────────────────────────────────────────────── */
 @media(prefers-reduced-motion:reduce){
   #intro{display:none}
@@ -522,6 +586,54 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
     <div><div class="stat-num"><span>5.0</span> ★</div><div class="stat-lbl">Average rating</div></div>
   </div>
 </div>
+
+<!-- ── PANTITO AI ROBOT ──────────────────────────────────────────────────── -->
+<section class="pantito-section">
+  <div class="container">
+    <div class="pantito-card anim">
+
+      <!-- Spotlight beam -->
+      <svg class="pantito-spotlight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none">
+        <g filter="url(#spotFilter)">
+          <ellipse cx="1924.71" cy="273.501" rx="1924.71" ry="273.501"
+            transform="matrix(-0.822377 -0.568943 -0.568943 0.822377 3631.88 2291.09)"
+            fill="#3b82f6" fill-opacity="0.21"/>
+        </g>
+        <defs>
+          <filter id="spotFilter" x="0.86" y="0.84" width="3785.16" height="2840.26"
+            filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+            <feGaussianBlur stdDeviation="151" result="effect1"/>
+          </filter>
+        </defs>
+      </svg>
+
+      <!-- Left: text -->
+      <div class="pantito-left">
+        <div class="pantito-tag">⚡ Asistente IA · 24/7</div>
+        <h2 class="pantito-h2">Pantito,<br>tu robot<br>de ventas</h2>
+        <p class="pantito-p">Captura leads, responde preguntas y agenda citas en tiempo real — las 24 horas, los 7 días, sin que tú muevas un dedo.</p>
+        <a href="#contact" class="pantito-btn">Activa tu Pantito →</a>
+      </div>
+
+      <!-- Right: Spline 3D robot -->
+      <div class="pantito-right">
+        <div class="pantito-loader" id="pantitoLoader">
+          <div class="pantito-spinner"></div>
+        </div>
+        <iframe
+          class="pantito-iframe"
+          src="https://my.spline.design/kZDDjO5HuC9GJUM2/"
+          title="Pantito — Asistente IA 3D"
+          allow="autoplay"
+          onload="document.getElementById('pantitoLoader').classList.add('done')"
+        ></iframe>
+      </div>
+
+    </div>
+  </div>
+</section>
 
 <!-- ── SERVICES ─────────────────────────────────────────────────────────── -->
 <section class="services" id="services">

@@ -11,6 +11,13 @@ import {
   HeroButton,
 } from '@/components/ui/animated-video-on-scroll';
 import { PantitoRobot } from '@/components/ui/pantito-robot';
+import { Card } from '@/components/ui/card';
+import { Spotlight } from '@/components/ui/spotlight';
+
+const SplineScene = dynamic(
+  () => import('@/components/ui/splite').then((m) => ({ default: m.SplineScene })),
+  { ssr: false }
+);
 
 // Dynamic import — disables SSR for the WebGPU canvas
 const HeroFuturistic = dynamic(() => import('@/components/ui/hero-futuristic'), { ssr: false });
@@ -146,6 +153,47 @@ export default function Home() {
               <div className="text-sm text-white/70 mt-1 font-medium">{s.label}</div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── Spline 3D Robot Card ── */}
+      <section className="bg-[#02091a] px-6 py-16">
+        <div className="max-w-6xl mx-auto">
+          <Card className="w-full h-[500px] bg-black/[0.96] relative overflow-hidden border-[#1d4ed8]/20">
+            <Spotlight
+              className="-top-40 left-0 md:left-60 md:-top-20"
+              fill="#3b82f6"
+            />
+            <div className="flex h-full">
+              {/* Left — text */}
+              <div className="flex-1 p-10 relative z-10 flex flex-col justify-center">
+                <span className="text-[#f59e0b] text-xs font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
+                  <Sparkles size={12} /> Asistente IA
+                </span>
+                <h2 className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 leading-tight">
+                  Pantito,<br />tu robot<br />de ventas
+                </h2>
+                <p className="mt-5 text-neutral-400 max-w-[36ch] leading-relaxed text-sm md:text-base">
+                  Captura leads, responde preguntas y agenda citas en tiempo real —
+                  las 24 horas, los 7 días de la semana, sin que tú muevas un dedo.
+                </p>
+                <a
+                  href="#contacto"
+                  className="mt-8 inline-flex items-center gap-2 bg-[#f59e0b] hover:bg-[#d97706] text-[#0f2c5e] font-bold text-sm px-6 py-3 rounded-full w-fit transition-colors"
+                >
+                  Activa tu Pantito <ArrowRight size={15} />
+                </a>
+              </div>
+
+              {/* Right — Spline 3D scene */}
+              <div className="flex-1 relative">
+                <SplineScene
+                  scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                  className="w-full h-full"
+                />
+              </div>
+            </div>
+          </Card>
         </div>
       </section>
 
