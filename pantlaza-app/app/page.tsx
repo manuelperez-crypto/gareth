@@ -1,8 +1,16 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect, useRef } from 'react';
-import { ArrowRight, Calendar, MessageSquare, TrendingUp, Star, Zap, Globe, Bot } from 'lucide-react';
+import { useEffect } from 'react';
+import { ArrowRight, Calendar, MessageSquare, TrendingUp, Star, Zap, Globe, Bot, Sparkles } from 'lucide-react';
+import {
+  ContainerScroll,
+  ContainerSticky,
+  ContainerAnimated,
+  ContainerInset,
+  HeroButton,
+} from '@/components/ui/animated-video-on-scroll';
+import { PantitoRobot } from '@/components/ui/pantito-robot';
 
 // Dynamic import — disables SSR for the WebGPU canvas
 const HeroFuturistic = dynamic(() => import('@/components/ui/hero-futuristic'), { ssr: false });
@@ -139,6 +147,73 @@ export default function Home() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ── Pantito AI Mascot — animated scroll reveal ── */}
+      <section className="bg-[#02091a]">
+        <ContainerScroll className="h-[350vh]">
+          <ContainerSticky
+            className="flex items-center justify-center px-6 py-10 text-slate-50"
+            style={{
+              background:
+                "radial-gradient(55% 55% at 50% 25%, #1d4ed8 0%, #0f2c5e 35%, #02091a 80%)",
+            }}
+          >
+            {/* Headline */}
+            <ContainerAnimated className="absolute top-[10vh] left-0 right-0 text-center space-y-4 px-6 z-10">
+              <span className="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-[#f59e0b]">
+                <Sparkles size={12} /> Inteligencia Artificial
+              </span>
+              <h2 className="text-4xl md:text-6xl font-extrabold leading-tight">
+                Conoce a{" "}
+                <span className="text-[#f59e0b]">Pantito</span>
+              </h2>
+              <p className="mx-auto max-w-[42ch] text-white/70 text-lg">
+                Tu nuevo empleado IA — disponible 24/7, nunca se cansa y siempre responde a tus clientes.
+              </p>
+            </ContainerAnimated>
+
+            {/* Robot image reveal */}
+            <ContainerInset
+              className="flex items-center justify-center w-full"
+              style={{ height: "min(70vh, 560px)" }}
+              insetYRange={[30, 0]}
+              insetXRange={[20, 0]}
+              roundednessRange={[900, 32]}
+            >
+              <div className="flex items-center justify-center w-full h-full bg-[#0b1a3d] relative">
+                {/* Background glow rings */}
+                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                  <div className="w-64 h-64 rounded-full border border-[#1d4ed8]/20 animate-[ping_3s_ease-in-out_infinite]" />
+                  <div className="absolute w-48 h-48 rounded-full border border-[#f59e0b]/15 animate-[ping_4s_ease-in-out_infinite_0.5s]" />
+                </div>
+                {/* Grid dots pattern */}
+                <div
+                  className="absolute inset-0 opacity-10"
+                  style={{
+                    backgroundImage: "radial-gradient(circle, #93c5fd 1px, transparent 1px)",
+                    backgroundSize: "28px 28px",
+                  }}
+                />
+                {/* Pantito */}
+                <PantitoRobot className="relative z-10 h-[min(52vh,420px)] w-auto drop-shadow-[0_0_40px_rgba(29,78,216,0.5)]" />
+              </div>
+            </ContainerInset>
+
+            {/* CTA */}
+            <ContainerAnimated
+              transition={{ delay: 0.4 }}
+              outputRange={[-100, 0]}
+              inputRange={[0, 0.7]}
+              className="absolute bottom-[12vh] left-0 right-0 flex justify-center z-10"
+            >
+              <HeroButton onClick={() => document.getElementById("contacto")?.scrollIntoView({ behavior: "smooth" })}>
+                <span className="mr-2">Activa tu Pantito</span>
+                <ArrowRight size={15} />
+              </HeroButton>
+            </ContainerAnimated>
+          </ContainerSticky>
+        </ContainerScroll>
       </section>
 
       {/* ── Services ── */}
