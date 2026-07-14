@@ -20,7 +20,10 @@ const SplineScene = dynamic(
   () => import('@/components/ui/splite').then((m) => ({ default: m.SplineScene })),
   { ssr: false }
 );
-const HeroFuturistic = dynamic(() => import('@/components/ui/hero-futuristic'), { ssr: false });
+const RobotHero = dynamic(
+  () => import('@/components/ui/robot-hero').then((m) => ({ default: m.RobotHero })),
+  { ssr: false }
+);
 
 // ── Logos ──────────────────────────────────────────────────────────────────
 const NavLogo = () => (
@@ -177,8 +180,30 @@ export default function Home() {
         </a>
       </nav>
 
-      {/* ━━ HERO (WebGPU) ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <HeroFuturistic />
+      {/* ━━ HERO — CUTE ROBOT (Robot Hero, 21st.dev) ━━━━━━━━━━━━━━━━━━━━━━ */}
+      <RobotHero backgroundText="PANTLAZA" showNavbar={false}>
+        <div className="pointer-events-auto max-w-2xl">
+          <span className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-[#bfdbfe] rounded-full px-4 py-1.5 text-xs font-semibold text-[#1d4ed8] mb-5">
+            <Zap size={13} /> Websites · Automations · Smart Tools · New Jersey
+          </span>
+          <h1 className="text-4xl md:text-5xl font-black text-[#0f2c5e] leading-[1.1] tracking-tight">
+            Your business on autopilot —{' '}
+            <em className="not-italic text-[#f59e0b]">websites that work while you sleep</em>
+          </h1>
+          <p className="text-[#334155] mt-4 mb-7 max-w-[52ch] leading-relaxed">
+            At Pantlaza we build professional websites and connect them with powerful
+            automations: online booking, AI chat, calendar sync, instant notifications, and more.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <a href="#contact" className="inline-flex items-center gap-2 bg-[#0f2c5e] hover:bg-[#1d4ed8] text-white font-bold px-7 py-3.5 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(29,78,216,0.3)]">
+              Get a free consultation <ArrowRight size={16} />
+            </a>
+            <a href="#services" className="inline-flex items-center gap-2 bg-white/85 backdrop-blur-sm text-[#0f2c5e] font-bold px-7 py-3.5 rounded-xl border-2 border-white transition-all hover:-translate-y-0.5 hover:border-[#0f2c5e]">
+              View services
+            </a>
+          </div>
+        </div>
+      </RobotHero>
 
       {/* ━━ STATS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="bg-[#0f2c5e] py-14 px-6">

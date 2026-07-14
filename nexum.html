@@ -6,6 +6,7 @@
 <meta name="description" content="Pantlaza — Web design, AI chat, appointment booking &amp; business automations for local businesses in New Jersey."/>
 <meta name="author" content="Pantlaza Web Agency"/>
 <title>Pantlaza | Websites, Automations &amp; Smart Tools for Local Businesses</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 140 92'%3E%3Cpolygon points='28,82 58,28 88,82' fill='%231d4ed8' opacity='.55'/%3E%3Cpolygon points='60,82 88,36 116,82' fill='%231d4ed8' opacity='.55'/%3E%3Cpolygon points='10,82 70,8 130,82' fill='%230f2c5e'/%3E%3Cpolygon points='56,34 70,8 84,34' fill='%23f59e0b'/%3E%3C/svg%3E"/>
 <style>
 /* ── Reset & base ─────────────────────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -59,31 +60,41 @@ nav{
 /* ── HERO ─────────────────────────────────────────────────────────────── */
 .hero{
   padding:6rem 0 5rem;
-  background:linear-gradient(160deg,#f0f5ff 0%,#ffffff 55%,#fef9ec 100%);
+  background:radial-gradient(ellipse 90% 80% at 72% 18%,#16407e 0%,#0f2c5e 48%,#071228 100%);
   overflow:hidden;position:relative;
 }
 .hero::before{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 70% 60% at 80% 50%,rgba(59,130,246,.07),transparent);
+  background:radial-gradient(ellipse 55% 45% at 70% 62%,rgba(59,130,246,.16),transparent 70%),
+             radial-gradient(ellipse 40% 22% at 50% 100%,rgba(245,158,11,.07),transparent);
   pointer-events:none;
 }
+.hero-bigtext{
+  position:absolute;left:0;right:0;top:54%;transform:translateY(-50%);
+  display:flex;justify-content:center;overflow:hidden;
+  font-weight:900;line-height:1;letter-spacing:-.04em;white-space:nowrap;
+  font-size:clamp(4rem,12.5vw,12rem);
+  color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.13);
+  pointer-events:none;user-select:none;
+}
+.hero .container{position:relative;z-index:1}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center}
 @media(max-width:760px){.hero-grid{grid-template-columns:1fr}}
 
 .hero-eyebrow{
   display:inline-flex;align-items:center;gap:.5rem;
-  background:#eff6ff;border:1px solid #bfdbfe;
+  background:rgba(255,255,255,.06);border:1px solid rgba(125,211,252,.35);
   border-radius:999px;padding:.3rem .9rem;
-  font-size:.78rem;font-weight:600;color:var(--blue);margin-bottom:1.2rem;
+  font-size:.78rem;font-weight:600;color:#7dd3fc;margin-bottom:1.2rem;
 }
-.hero h1{font-size:2.7rem;font-weight:900;line-height:1.1;color:var(--navy);letter-spacing:-.5px}
+.hero h1{font-size:2.7rem;font-weight:900;line-height:1.1;color:#fff;letter-spacing:-.5px}
 .hero h1 em{font-style:normal;color:var(--gold)}
-.hero p{font-size:1.05rem;color:var(--gray);margin:1.1rem 0 2rem;max-width:460px}
+.hero p{font-size:1.05rem;color:#b6c5e0;margin:1.1rem 0 2rem;max-width:460px}
 .hero-btns{display:flex;flex-wrap:wrap;gap:.8rem}
-.btn-primary{background:var(--navy);color:#fff;font-weight:700;font-size:.95rem;padding:.8rem 1.8rem;border-radius:10px;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
-.btn-primary:hover{background:var(--blue);transform:translateY(-1px);box-shadow:0 6px 20px rgba(29,78,216,.3)}
-.btn-secondary{background:#fff;color:var(--navy);font-weight:700;font-size:.95rem;padding:.8rem 1.8rem;border-radius:10px;border:2px solid var(--border);transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
-.btn-secondary:hover{border-color:var(--navy);transform:translateY(-1px)}
+.btn-primary{background:var(--gold);color:var(--navy);font-weight:700;font-size:.95rem;padding:.8rem 1.8rem;border-radius:10px;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-primary:hover{background:#d97706;transform:translateY(-1px);box-shadow:0 6px 20px rgba(245,158,11,.35)}
+.btn-secondary{background:transparent;color:#fff;font-weight:700;font-size:.95rem;padding:.8rem 1.8rem;border-radius:10px;border:2px solid rgba(255,255,255,.35);transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
 @media(max-width:600px){.hero h1{font-size:2rem}}
 
 /* Browser mockup */
@@ -373,6 +384,29 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
   box-shadow:0 6px 20px rgba(245,158,11,.45);
 }
 
+/* ── HERO CUTE ROBOT (vanilla Three.js port of 21st.dev "Robot Hero") ── */
+/* Transparent stage — the robot floats right on the navy hero background */
+.hero-robot-panel{
+  position:relative;height:460px;overflow:hidden;
+}
+.hero-robot-shadow{
+  position:absolute;bottom:9%;left:50%;width:52%;height:34px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse at center,rgba(59,130,246,.5),rgba(59,130,246,.14) 55%,transparent 72%);
+  filter:blur(6px);pointer-events:none;
+}
+#heroRobotCanvas{
+  position:absolute;inset:0;width:100%;height:100%;display:block;
+  touch-action:manipulation;cursor:pointer;
+}
+@media(max-width:760px){
+  .hero-robot-panel{height:360px}
+  .hero-bigtext{top:auto;bottom:8%;transform:none}
+  /* keep the floating cards off the robot's face on narrow screens */
+  .hcard-gold{top:auto!important;bottom:5%!important;right:auto!important;left:4%!important}
+}
+@media(max-width:480px){.hero-robot-panel{height:310px}}
+
 /* ── PANTITO AI ROBOT (Spline card) ─────────────────────────────────── */
 .pantito-section{background:#02091a;padding:3.5rem 0}
 .pantito-card{
@@ -498,6 +532,7 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
 
 <!-- ── HERO ────────────────────────────────────────────────────────────── -->
 <section class="hero">
+  <div class="hero-bigtext" aria-hidden="true">PANTLAZA</div>
   <div class="container hero-grid">
     <div>
       <div class="hero-eyebrow">
@@ -512,6 +547,13 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
     </div>
     <div class="hero-visual">
       <div class="hero-scene">
+        <!-- Cute robot stage (Pantito Bot) — replaces the mountain scene -->
+        <div class="hero-robot-panel" id="heroRobotPanel">
+          <div class="hero-robot-shadow" id="heroRobotShadow" aria-hidden="true"></div>
+          <canvas id="heroRobotCanvas" role="img" aria-label="Pantito Bot — cute 3D robot that follows your cursor and blinks"></canvas>
+        </div>
+        <!-- Mountain scene kept as fallback if WebGL / CDN fails -->
+        <div id="heroRobotFallback" hidden>
         <svg class="hero-mountain" viewBox="0 0 500 360" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="skyGrd" x1="0" y1="0" x2="0" y2="1">
@@ -562,6 +604,7 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
           <!-- Horizon baseline -->
           <line x1="0" y1="308" x2="500" y2="308" stroke="white" stroke-width=".6" opacity=".07"/>
         </svg>
+        </div>
         <!-- Floating UI cards -->
         <div class="hcard" style="top:10%;right:5%">
           <div class="hcard-t">📅 New booking</div>
@@ -1090,6 +1133,328 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
         console.warn('Spline scene failed to load:', err);
         if (pantitoLoader) pantitoLoader.classList.add('done');
       });
+  }
+})();
+</script>
+
+<script type="module">
+// ── HERO CUTE ROBOT ─────────────────────────────────────────────────────
+// Vanilla Three.js port of the "Robot Hero" component (21st.dev / uithefactory):
+// white speckled body, black dome head with glowing teal screen, blinking
+// eyes (hearts when you tap it), and cursor-follow across the hero.
+(async function(){
+  var panel    = document.getElementById('heroRobotPanel');
+  var canvas   = document.getElementById('heroRobotCanvas');
+  var shadowEl = document.getElementById('heroRobotShadow');
+  var fallback = document.getElementById('heroRobotFallback');
+  if (!panel || !canvas) return;
+
+  function showFallback(err){
+    console.warn('Robot hero could not start, showing mountain scene instead:', err);
+    panel.hidden = true;
+    if (fallback) fallback.hidden = false;
+  }
+
+  var THREE;
+  try {
+    THREE = await import('https://cdn.jsdelivr.net/npm/three@0.185.1/build/three.module.js');
+  } catch (err) { showFallback(err); return; }
+
+  try {
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    var scene  = new THREE.Scene();
+    var camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    camera.position.set(0, 0.2, 6);
+
+    // The React original lights with an HDR "studio" environment;
+    // approximated here with ambient + hemisphere + key/fill lights.
+    scene.add(new THREE.AmbientLight(0xffffff, 1.0));
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x999999, 0.7));
+    var key = new THREE.DirectionalLight(0xffffff, 1.4); key.position.set(2, 4, 5); scene.add(key);
+    var fill = new THREE.DirectionalLight(0xffffff, 0.45); fill.position.set(-4, 1, 3); scene.add(fill);
+
+    // Speckled plastic texture (same procedural generation as the component)
+    function makeSpeckleTexture(base, dark, light){
+      var size = 512, c = document.createElement('canvas');
+      c.width = c.height = size;
+      var ctx = c.getContext('2d');
+      ctx.fillStyle = base; ctx.fillRect(0, 0, size, size);
+      for (var i = 0; i < 10000; i++){
+        var x = Math.random() * size, y = Math.random() * size;
+        var r = 0.5 + Math.random() * 1.5;
+        ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2);
+        ctx.fillStyle = Math.random() > 0.15 ? dark : light;
+        ctx.fill();
+      }
+      var tex = new THREE.CanvasTexture(c);
+      tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+      tex.repeat.set(6, 3);
+      return tex;
+    }
+    var colorMap = makeSpeckleTexture('#dcdcdc', '#222222', '#dddddd');
+    var bumpMap  = makeSpeckleTexture('#808080', '#000000', '#ffffff');
+
+    function chassisMat(){
+      return new THREE.MeshStandardMaterial({
+        color: '#c4c4c4', map: colorMap, bumpMap: bumpMap, bumpScale: 0.005,
+        roughness: 1.0, metalness: 0.0
+      });
+    }
+    function v3(x, y, z){ return new THREE.Vector3(x, y, z); }
+
+    var responsive = new THREE.Group(); scene.add(responsive);
+    var body = new THREE.Group(); body.position.set(0, -0.3, 0); responsive.add(body);
+
+    // Body sphere (top cut for the neck)
+    body.add(new THREE.Mesh(
+      new THREE.SphereGeometry(0.43, 64, 64, 0, Math.PI * 2, Math.PI * 0.15, Math.PI * 0.85),
+      chassisMat()
+    ));
+    // Bevel ring
+    var bevel = new THREE.Mesh(new THREE.TorusGeometry(0.235, 0.025, 32, 64), chassisMat());
+    bevel.position.y = 0.340; bevel.rotation.x = Math.PI / 2; body.add(bevel);
+    // Neck (lathe)
+    var np = { baseR: 0.215, baseH: -0.050, midR: 0.280, midH: 0.020, lipBottomR: 0.295,
+               lipBottomH: 0.045, lipTopR: 0.270, lipTopH: 0.055, innerR: 0.100, innerDropH: 0.000 };
+    var neckPts = [
+      new THREE.Vector2(np.innerR, np.baseH),
+      new THREE.Vector2(np.baseR, np.baseH),
+      new THREE.Vector2(np.midR, np.midH),
+      new THREE.Vector2(np.lipBottomR, np.lipBottomH),
+      new THREE.Vector2(np.lipTopR, np.lipTopH),
+      new THREE.Vector2(np.innerR, np.lipTopH),
+      new THREE.Vector2(np.innerR, np.lipTopH - np.innerDropH)
+    ];
+    var neck = new THREE.Mesh(new THREE.LatheGeometry(neckPts, 64), chassisMat());
+    neck.position.y = 0.38; body.add(neck);
+
+    // Head
+    var head = new THREE.Group(); head.position.y = 0.60; body.add(head);
+    head.add(new THREE.Mesh(
+      new THREE.SphereGeometry(0.28, 64, 64, 0, Math.PI * 2, 0, Math.PI),
+      new THREE.MeshStandardMaterial({ color: '#111111', roughness: 1.0, metalness: 0.0 })
+    ));
+
+    // Glass screen (fresnel glow shader)
+    var glass = new THREE.Mesh(
+      new THREE.SphereGeometry(0.30, 64, 64, 0, Math.PI * 2, 0, Math.PI),
+      new THREE.ShaderMaterial({
+        uniforms: {
+          color: { value: new THREE.Color('#00ffc6') },
+          power: { value: 3.8 },
+          intensity: { value: 1.2 }
+        },
+        vertexShader: [
+          'varying vec3 vNormal;',
+          'varying vec3 vViewPosition;',
+          'void main() {',
+          '  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);',
+          '  vViewPosition = -mvPosition.xyz;',
+          '  vNormal = normalize(normalMatrix * normal);',
+          '  gl_Position = projectionMatrix * mvPosition;',
+          '}'
+        ].join('\n'),
+        fragmentShader: [
+          'uniform vec3 color;',
+          'uniform float power;',
+          'uniform float intensity;',
+          'varying vec3 vNormal;',
+          'varying vec3 vViewPosition;',
+          'void main() {',
+          '  vec3 normal = normalize(vNormal);',
+          '  vec3 viewDir = normalize(vViewPosition);',
+          '  float fresnel = 1.0 - max(dot(viewDir, normal), 0.0);',
+          '  fresnel = pow(fresnel, power);',
+          '  gl_FragColor = vec4(color, fresnel * intensity);',
+          '}'
+        ].join('\n'),
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false
+      })
+    );
+    head.add(glass);
+
+    // Eyes (rounded tube strokes) + heart eyes
+    var eyeMat = new THREE.MeshBasicMaterial({ color: new THREE.Color(2, 2, 2), toneMapped: false, transparent: true });
+    var heartMat = new THREE.MeshBasicMaterial({ color: '#ff3366', toneMapped: false });
+
+    class HeartCurve extends THREE.Curve {
+      getPoint(t, target){
+        target = target || new THREE.Vector3();
+        t = t * Math.PI * 2;
+        var x = 16 * Math.pow(Math.sin(t), 3);
+        var y = 13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t);
+        return target.set(x * 0.002, (y + 6) * 0.002, 0);
+      }
+    }
+    var heartCurve = new HeartCurve();
+
+    function eyePaths(){
+      var w = 0.025, h = 0.035, r = 0.02, g = 0.005;
+      var t = new THREE.CurvePath();
+      t.add(new THREE.LineCurve3(v3(-w, g, 0), v3(-w, h - r, 0)));
+      t.add(new THREE.QuadraticBezierCurve3(v3(-w, h - r, 0), v3(-w, h, 0), v3(-w + r, h, 0)));
+      t.add(new THREE.LineCurve3(v3(-w + r, h, 0), v3(w - r, h, 0)));
+      t.add(new THREE.QuadraticBezierCurve3(v3(w - r, h, 0), v3(w, h, 0), v3(w, h - r, 0)));
+      t.add(new THREE.LineCurve3(v3(w, h - r, 0), v3(w, g, 0)));
+      var b = new THREE.CurvePath();
+      b.add(new THREE.LineCurve3(v3(-w, -g, 0), v3(-w, -(h - r), 0)));
+      b.add(new THREE.QuadraticBezierCurve3(v3(-w, -(h - r), 0), v3(-w, -h, 0), v3(-w + r, -h, 0)));
+      b.add(new THREE.LineCurve3(v3(-w + r, -h, 0), v3(w - r, -h, 0)));
+      b.add(new THREE.QuadraticBezierCurve3(v3(w - r, -h, 0), v3(w, -h, 0), v3(w, -(h - r), 0)));
+      b.add(new THREE.LineCurve3(v3(w, -(h - r), 0), v3(w, -g, 0)));
+      return { top: t, bottom: b };
+    }
+
+    var EYE_SCALE = 1.1;
+    function makeEye(px, rotY){
+      var grp = new THREE.Group();
+      grp.position.set(px, 0, 0); grp.rotation.y = rotY;
+      var paths = eyePaths();
+      var normal = new THREE.Group();
+      normal.add(new THREE.Mesh(new THREE.TubeGeometry(paths.top, 20, 0.0035, 8, false), eyeMat));
+      normal.add(new THREE.Mesh(new THREE.TubeGeometry(paths.bottom, 20, 0.0035, 8, false), eyeMat));
+      var heart = new THREE.Mesh(new THREE.TubeGeometry(heartCurve, 64, 0.0035, 8, true), heartMat);
+      heart.visible = false;
+      grp.add(normal); grp.add(heart);
+      return { group: grp, normal: normal, heart: heart };
+    }
+    var eyesRoot = new THREE.Group();
+    eyesRoot.position.set(0, -0.02, 0.29);
+    head.add(eyesRoot);
+    var eyeL = makeEye(-0.07, -0.2), eyeR = makeEye(0.07, 0.2);
+    eyesRoot.add(eyeL.group); eyesRoot.add(eyeR.group);
+
+    // Ears + antennas
+    function makeEar(isLeft){
+      var dir = isLeft ? -1 : 1;
+      var g = new THREE.Group();
+      var base = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.04, 0.04, 0.025, 32),
+        new THREE.MeshStandardMaterial({ color: '#f0f0f0', roughness: 0.5 })
+      );
+      base.rotation.z = Math.PI / 2; g.add(base);
+      var ring = new THREE.Mesh(
+        new THREE.TorusGeometry(0.032, 0.008, 16, 32),
+        new THREE.MeshStandardMaterial({ color: '#ffffff', roughness: 0.3 })
+      );
+      ring.position.x = dir * 0.012; ring.rotation.z = Math.PI / 2; g.add(ring);
+      var center = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.03, 0.03, 0.005, 32),
+        new THREE.MeshStandardMaterial({ color: '#cccccc', roughness: 0.8 })
+      );
+      center.position.x = dir * 0.012; center.rotation.z = Math.PI / 2; g.add(center);
+
+      var antenna = new THREE.Group();
+      antenna.position.set(dir * 0.015, 0.035, 0); antenna.rotation.x = -0.4;
+      var aBase = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.006, 0.008, 0.02, 16),
+        new THREE.MeshStandardMaterial({ color: '#999999', roughness: 0.4, metalness: 0.5 })
+      );
+      aBase.position.y = 0.01; antenna.add(aBase);
+      var aStick = new THREE.Mesh(
+        new THREE.CylinderGeometry(0.003, 0.003, 0.1, 8),
+        new THREE.MeshStandardMaterial({ color: '#d0d0d0', roughness: 0.4, metalness: 0.2 })
+      );
+      aStick.position.y = 0.06; antenna.add(aStick);
+      var aTip = new THREE.Mesh(
+        new THREE.SphereGeometry(0.006, 16, 16),
+        new THREE.MeshStandardMaterial({ color: '#ff3366', roughness: 0.2, toneMapped: false })
+      );
+      aTip.position.y = 0.11; antenna.add(aTip);
+      g.add(antenna);
+      return g;
+    }
+    var earL = makeEar(true);  earL.position.set(-0.29, 0, 0); earL.scale.setScalar(1.3); head.add(earL);
+    var earR = makeEar(false); earR.position.set( 0.29, 0, 0); earR.scale.setScalar(1.3); head.add(earR);
+
+    // Sizing / responsive scale (same formula as the R3F viewport)
+    var viewWidth = 4;
+    function resize(){
+      var w = panel.clientWidth || 1, h = panel.clientHeight || 1;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      viewWidth = 2 * Math.tan(THREE.MathUtils.degToRad(20)) * 6 * camera.aspect;
+      responsive.scale.setScalar(Math.min(1.35, viewWidth / 3.5));
+    }
+    if ('ResizeObserver' in window) new ResizeObserver(resize).observe(panel);
+    window.addEventListener('resize', resize);
+    resize();
+
+    // Cursor follow — tracked across the whole hero section
+    var ptrX = 0, ptrY = 0;
+    var hero = document.querySelector('.hero') || window;
+    hero.addEventListener('pointermove', function(e){
+      var r = canvas.getBoundingClientRect();
+      if (!r.width || !r.height) return;
+      ptrX = THREE.MathUtils.clamp(((e.clientX - r.left) / r.width) * 2 - 1, -1, 1);
+      ptrY = THREE.MathUtils.clamp(-(((e.clientY - r.top) / r.height) * 2 - 1), -1, 1);
+    }, { passive: true });
+
+    // Tap the robot → heart eyes for 2s
+    var isLoved = false, loveTimer = null;
+    canvas.addEventListener('pointerdown', function(){
+      isLoved = true;
+      if (loveTimer) clearTimeout(loveTimer);
+      loveTimer = setTimeout(function(){ isLoved = false; }, 2000);
+    });
+
+    var CFG = { moveSpeed: 0.35, bodyRotSpeed: 10.0, headRotSpeed: 20.0,
+                bodyTiltY: 0.95, headLookX: 0.30, headLookY: 1.80 };
+    var BLINK_CYCLE = 3.0, BLINK_DUR = 0.45;
+    var startTime = performance.now(), lastTime = startTime;
+
+    function tick(){
+      var now = performance.now();
+      var delta = (now - lastTime) / 1000;
+      lastTime = now;
+      var t = (now - startTime) / 1000;
+      var dt = Math.min(delta, 0.1);
+
+      if (!reduceMotion){
+        var maxMoveX = viewWidth / 3.5;
+        var targetX = ptrX * maxMoveX;
+        body.position.x = THREE.MathUtils.lerp(body.position.x, targetX, CFG.moveSpeed * dt);
+        var relX = ptrX - (body.position.x / 2.5);
+        body.rotation.y = THREE.MathUtils.lerp(body.rotation.y, -relX * CFG.bodyTiltY, CFG.bodyRotSpeed * dt);
+        body.rotation.x = THREE.MathUtils.lerp(body.rotation.x, -ptrY * 0.25, CFG.bodyRotSpeed * dt);
+        body.rotation.z = THREE.MathUtils.lerp(body.rotation.z, -relX * 0.15, CFG.bodyRotSpeed * dt);
+        head.rotation.y = THREE.MathUtils.lerp(head.rotation.y, relX * CFG.headLookY, CFG.headRotSpeed * dt);
+        head.rotation.x = THREE.MathUtils.lerp(head.rotation.x, -ptrY * CFG.headLookX, CFG.headRotSpeed * dt);
+      }
+
+      var sy = 1;
+      var cycle = t % BLINK_CYCLE;
+      if (!reduceMotion && cycle < BLINK_DUR && !isLoved){
+        sy = Math.max(0.05, 1.0 - Math.sin((cycle / BLINK_DUR) * Math.PI));
+      }
+      [eyeL, eyeR].forEach(function(e){
+        e.normal.visible = !isLoved;
+        e.heart.visible = isLoved;
+        e.group.scale.set(EYE_SCALE, EYE_SCALE * sy, EYE_SCALE);
+      });
+
+      // Soft blob shadow follows the robot
+      if (shadowEl){
+        var worldX = body.position.x * responsive.scale.x;
+        var px = worldX * ((canvas.clientWidth || 1) / viewWidth);
+        shadowEl.style.transform = 'translateX(calc(-50% + ' + px.toFixed(1) + 'px))';
+      }
+
+      renderer.render(scene, camera);
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  } catch (err) {
+    showFallback(err);
   }
 })();
 </script>
