@@ -195,8 +195,8 @@ export default function Home() {
       {/* ━━ PANTITO — SPLINE 3D CARD ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="bg-[#02091a] px-6 py-16">
         <div className="max-w-6xl mx-auto anim">
-          <Card className="w-full h-[500px] bg-black/[0.96] relative overflow-hidden border-[#1d4ed8]/20">
-            <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="#3b82f6" />
+          <Card className="w-full h-[500px] bg-black/[0.96] relative overflow-hidden border-white/10">
+            <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
             <div className="flex h-full flex-col md:flex-row">
               <div className="flex-1 p-8 md:p-12 relative z-10 flex flex-col justify-center">
                 <span className="text-[#f59e0b] text-xs font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
