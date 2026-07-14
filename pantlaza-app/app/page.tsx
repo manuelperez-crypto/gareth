@@ -1,7 +1,7 @@
 'use client';
 
 import dynamic from 'next/dynamic';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {
   ArrowRight, Calendar, MessageSquare, Zap, Globe, Bot,
   RefreshCw, Wrench, Settings, Bell, Mail, Clock,
@@ -13,6 +13,8 @@ import {
   ContainerInset, HeroButton,
 } from '@/components/ui/animated-video-on-scroll';
 import { PantitoRobot } from '@/components/ui/pantito-robot';
+import { ResponseStream } from '@/components/ui/response-stream';
+import { StreamOnView } from '@/components/ui/stream-on-view';
 import { Card } from '@/components/ui/card';
 import { Spotlight } from '@/components/ui/spotlight';
 
@@ -163,6 +165,7 @@ const steps = [
 // ── Page ───────────────────────────────────────────────────────────────────
 export default function Home() {
   useScrollReveal();
+  const [heroLine2, setHeroLine2] = useState(false);
 
   return (
     <>
@@ -187,13 +190,28 @@ export default function Home() {
             <Zap size={13} /> Websites · Automations · Smart Tools · New Jersey
           </span>
           <h1 className="text-4xl md:text-5xl font-black text-[#0f2c5e] leading-[1.1] tracking-tight">
-            Your business on autopilot —{' '}
-            <em className="not-italic text-[#f59e0b]">websites that work while you sleep</em>
+            <ResponseStream
+              as="span" mode="fade" fadeDuration={700} segmentDelay={55}
+              textStream={'Your business on autopilot — '}
+              onComplete={() => setHeroLine2(true)}
+            />
+            {heroLine2 ? (
+              <ResponseStream
+                as="em" className="not-italic text-[#f59e0b]" mode="fade"
+                fadeDuration={700} segmentDelay={55}
+                textStream="websites that work while you sleep"
+              />
+            ) : (
+              <em className="not-italic text-[#f59e0b] opacity-0" aria-hidden="true">
+                websites that work while you sleep
+              </em>
+            )}
           </h1>
-          <p className="text-[#334155] mt-4 mb-7 max-w-[52ch] leading-relaxed">
-            At Pantlaza we build professional websites and connect them with powerful
-            automations: online booking, AI chat, calendar sync, instant notifications, and more.
-          </p>
+          <ResponseStream
+            as="p" className="text-[#334155] mt-4 mb-7 max-w-[52ch] leading-relaxed"
+            mode="fade" fadeDuration={600} segmentDelay={22}
+            textStream="At Pantlaza we build professional websites and connect them with powerful automations: online booking, AI chat, calendar sync, instant notifications, and more."
+          />
           <div className="flex flex-wrap gap-3">
             <a href="#contact" className="inline-flex items-center gap-2 bg-[#0f2c5e] hover:bg-[#1d4ed8] text-white font-bold px-7 py-3.5 rounded-xl transition-all hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(29,78,216,0.3)]">
               Get a free consultation <ArrowRight size={16} />
@@ -218,22 +236,25 @@ export default function Home() {
       </section>
 
       {/* ━━ PANTITO — SPLINE 3D CARD ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section className="bg-[#02091a] px-6 py-16">
-        <div className="max-w-6xl mx-auto anim">
-          <Card className="w-full h-[500px] bg-black/[0.96] relative overflow-hidden border-white/10">
+      <section className="bg-[#02091a] px-5 py-6">
+        <div className="max-w-[1520px] mx-auto anim">
+          <Card className="w-full h-[88vh] min-h-[560px] max-h-[920px] bg-black/[0.96] relative overflow-hidden border-white/10 rounded-3xl">
             <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
             <div className="flex h-full flex-col md:flex-row">
-              <div className="flex-1 p-8 md:p-12 relative z-10 flex flex-col justify-center">
+              <div className="flex-1 p-8 md:p-14 relative z-10 flex flex-col justify-center">
                 <span className="text-[#f59e0b] text-xs font-bold tracking-widest uppercase mb-4 flex items-center gap-2">
                   <Sparkles size={12} /> AI Assistant · 24/7
                 </span>
-                <h2 className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 leading-tight">
-                  Pantito,<br />your sales<br />robot
-                </h2>
-                <p className="mt-5 text-neutral-400 max-w-[36ch] leading-relaxed text-sm md:text-base">
-                  Captures leads, answers questions and books appointments in real time —
-                  24 hours a day, 7 days a week, without you lifting a finger.
-                </p>
+                <StreamOnView
+                  as="h2" segmentDelay={80} fadeDuration={800}
+                  className="text-5xl md:text-6xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 leading-[1.05]"
+                  text="Pantito, your sales robot"
+                />
+                <StreamOnView
+                  as="p" segmentDelay={24} fadeDuration={650}
+                  className="mt-6 text-neutral-400 max-w-[40ch] leading-relaxed text-base md:text-lg"
+                  text="Captures leads, answers questions and books appointments in real time — 24 hours a day, 7 days a week, without you lifting a finger."
+                />
                 <a href="#contact" className="mt-8 inline-flex items-center gap-2 bg-[#f59e0b] hover:bg-[#d97706] text-[#0f2c5e] font-bold text-sm px-6 py-3 rounded-full w-fit transition-colors">
                   Activate Pantito <ArrowRight size={15} />
                 </a>
@@ -296,12 +317,15 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="anim text-center mb-16">
             <span className="text-[#1d4ed8] text-xs font-bold tracking-widest uppercase">Services</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2c5e] mt-3">
-              Everything your business needs<br />to run smarter
-            </h2>
-            <p className="text-[#64748b] mt-3 max-w-xl mx-auto">
-              Websites, smart chat, online booking, and automations — all built for local businesses.
-            </p>
+            <StreamOnView
+              as="h2" className="text-3xl md:text-4xl font-extrabold text-[#0f2c5e] mt-3"
+              text="Everything your business needs to run smarter"
+            />
+            <StreamOnView
+              as="p" segmentDelay={20} fadeDuration={600}
+              className="text-[#64748b] mt-3 max-w-xl mx-auto"
+              text="Websites, smart chat, online booking, and automations — all built for local businesses."
+            />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -342,12 +366,15 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="anim mb-14">
             <span className="text-[#7dd3fc] text-xs font-bold tracking-widest uppercase">Automations</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-3 max-w-2xl">
-              Things that happen automatically — so you don't have to
-            </h2>
-            <p className="text-[#94a3b8] mt-3 max-w-xl">
-              Every automation we set up saves you hours every week. Here are some examples of what we can connect to your website:
-            </p>
+            <StreamOnView
+              as="h2" className="text-3xl md:text-4xl font-extrabold text-white mt-3 max-w-2xl"
+              text={"Things that happen automatically — so you don't have to"}
+            />
+            <StreamOnView
+              as="p" segmentDelay={16} fadeDuration={600}
+              className="text-[#94a3b8] mt-3 max-w-xl"
+              text="Every automation we set up saves you hours every week. Here are some examples of what we can connect to your website:"
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -381,12 +408,15 @@ export default function Home() {
           <div>
             <div className="anim">
               <span className="text-[#1d4ed8] text-xs font-bold tracking-widest uppercase">Why Pantlaza?</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2c5e] mt-3 mb-4">
-                We work with you,<br />not just for you
-              </h2>
-              <p className="text-[#64748b] leading-relaxed mb-8">
-                We&apos;re not a generic agency. We specialize in local businesses and understand exactly what you need.
-              </p>
+              <StreamOnView
+                as="h2" className="text-3xl md:text-4xl font-extrabold text-[#0f2c5e] mt-3 mb-4"
+                text="We work with you, not just for you"
+              />
+              <StreamOnView
+                as="p" segmentDelay={20} fadeDuration={600}
+                className="text-[#64748b] leading-relaxed mb-8"
+                text="We're not a generic agency. We specialize in local businesses and understand exactly what you need."
+              />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {whyProps.map((p, i) => (
@@ -441,8 +471,15 @@ export default function Home() {
         <div className="max-w-6xl mx-auto">
           <div className="anim text-center mb-16">
             <span className="text-[#7dd3fc] text-xs font-bold tracking-widest uppercase">How we work</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-3">Simple, fast, and hassle-free</h2>
-            <p className="text-[#94a3b8] mt-3">4 steps to have your professional website live and ready.</p>
+            <StreamOnView
+              as="h2" className="text-3xl md:text-4xl font-extrabold text-white mt-3"
+              text="Simple, fast, and hassle-free"
+            />
+            <StreamOnView
+              as="p" segmentDelay={20} fadeDuration={600}
+              className="text-[#94a3b8] mt-3"
+              text="4 steps to have your professional website live and ready."
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 relative">
@@ -469,9 +506,11 @@ export default function Home() {
             We build your example first.<br />
             <span className="text-[#f59e0b]">You only pay if you love it.</span>
           </h2>
-          <p className="text-[#64748b] max-w-xl mx-auto mb-8 leading-relaxed">
-            Tell us about your business and we&apos;ll create a real website example for you — for free. Review it, request changes, and decide. No commitment, no risk.
-          </p>
+          <StreamOnView
+            as="p" segmentDelay={18} fadeDuration={600}
+            className="text-[#64748b] max-w-xl mx-auto mb-8 leading-relaxed"
+            text="Tell us about your business and we'll create a real website example for you — for free. Review it, request changes, and decide. No commitment, no risk."
+          />
           <a href="#contact" className="inline-flex items-center gap-2 bg-[#0f2c5e] hover:bg-[#1d4ed8] text-white font-bold px-8 py-4 rounded-full transition-colors">
             Get my free example <ArrowRight size={16} />
           </a>
@@ -484,12 +523,15 @@ export default function Home() {
           {/* Left */}
           <div className="anim">
             <span className="text-[#1d4ed8] text-xs font-bold tracking-widest uppercase">Contact</span>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-[#0f2c5e] mt-3 mb-4">
-              Let&apos;s build your example — free
-            </h2>
-            <p className="text-[#64748b] leading-relaxed mb-8">
-              Tell us about your business and we&apos;ll create a sample website for you at no cost. If you like it, we launch it. If not, no charge.
-            </p>
+            <StreamOnView
+              as="h2" className="text-3xl md:text-4xl font-extrabold text-[#0f2c5e] mt-3 mb-4"
+              text={"Let's build your example — free"}
+            />
+            <StreamOnView
+              as="p" segmentDelay={20} fadeDuration={600}
+              className="text-[#64748b] leading-relaxed mb-8"
+              text="Tell us about your business and we'll create a sample website for you at no cost. If you like it, we launch it. If not, no charge."
+            />
             <div className="space-y-4">
               {[
                 { icon: Phone,  label: 'Phone / WhatsApp', value: '(201) 000-0000' },
