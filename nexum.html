@@ -542,6 +542,64 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
   .pantito-right{height:320px}
 }
 
+/* ── LITE MODE (auto-enabled on slow machines) ───────────────────────── */
+/* Keeps the sweep as the page's life; pauses the heavy full-screen drifts. */
+.lite .bgp-layer{animation-play-state:paused}
+.lite .bgp-sweep{animation-duration:9s}
+.pantito-load3d{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:6;
+  font-family:inherit;font-size:.9rem;font-weight:700;cursor:pointer;
+  background:transparent;color:var(--gold);border:2px solid var(--gold);
+  border-radius:999px;padding:.8rem 1.6rem;transition:all .2s;
+}
+.pantito-load3d:hover{background:var(--gold);color:var(--navy)}
+
+/* ── LEGAL MODALS + COOKIE BAR ───────────────────────────────────────── */
+.legal-overlay{
+  position:fixed;inset:0;z-index:10000;
+  background:rgba(0,0,0,.72);
+  display:flex;align-items:center;justify-content:center;padding:1.25rem;
+}
+.legal-modal{
+  position:relative;max-width:760px;width:100%;max-height:84vh;overflow:auto;
+  background:#101013;border:1px solid rgba(255,255,255,.12);border-radius:20px;
+  padding:2.2rem 2.4rem;box-shadow:0 30px 80px rgba(0,0,0,.6);
+}
+.legal-modal h2{font-size:1.5rem;font-weight:800;color:var(--gold);margin-bottom:.3rem}
+.legal-modal .legal-date{font-size:.75rem;color:#77777f;margin-bottom:1.4rem}
+.legal-modal h3{font-size:1rem;font-weight:700;color:#f2f5fa;margin:1.3rem 0 .4rem}
+.legal-modal p,.legal-modal li{font-size:.9rem;color:#9a9aa1;line-height:1.75}
+.legal-modal ul{padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.legal-modal a{color:var(--gold);text-decoration:underline}
+.legal-close{
+  position:sticky;top:0;float:right;margin:-.8rem -1rem 0 0;
+  width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.15);
+  background:#1a1a1f;color:#e8e8ec;font-size:1.15rem;cursor:pointer;line-height:1;
+}
+.legal-close:hover{border-color:var(--gold);color:var(--gold)}
+.footer-legal{display:flex;gap:1.1rem;flex-wrap:wrap}
+.footer-legal a{cursor:pointer}
+
+.cookie-bar{
+  position:fixed;left:50%;bottom:1.1rem;transform:translateX(-50%);
+  z-index:9500;width:min(94vw,680px);
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  background:#131316;border:1px solid rgba(255,255,255,.14);border-radius:16px;
+  padding:.9rem 1.2rem;box-shadow:0 16px 50px rgba(0,0,0,.55);
+}
+.cookie-bar p{font-size:.82rem;color:#9a9aa1;line-height:1.55;flex:1;min-width:220px;margin:0}
+.cookie-bar a{color:var(--gold);text-decoration:underline;cursor:pointer}
+.cookie-actions{display:flex;gap:.5rem;margin-left:auto}
+.cookie-btn{
+  font-family:inherit;font-size:.82rem;font-weight:700;cursor:pointer;
+  padding:.5rem 1.1rem;border-radius:999px;transition:all .2s;
+}
+.cookie-btn.solid{background:var(--gold);color:var(--navy);border:none}
+.cookie-btn.solid:hover{background:#d97706}
+.cookie-btn.ghost{background:transparent;color:#9a9aa1;border:1px solid rgba(255,255,255,.2)}
+.cookie-btn.ghost:hover{color:#fff;border-color:#fff}
+@media(max-width:560px){.cookie-actions{margin-left:0;width:100%}.cookie-btn{flex:1}}
+
 /* ── REDUCED MOTION ──────────────────────────────────────────────────── */
 @media(prefers-reduced-motion:reduce){
   #intro{display:none}
@@ -1134,10 +1192,96 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
     </div>
     <div class="footer-bottom">
       <span>© 2026 Pantlaza · Bergen County, NJ</span>
+      <span class="footer-legal">
+        <a data-legal="privacy">Privacy Policy</a>
+        <a data-legal="terms">Terms of Service</a>
+        <a data-legal="cookies">Cookie Policy</a>
+      </span>
       <span>Designed with ♥ by Pantlaza</span>
     </div>
   </div>
 </footer>
+
+<!-- ── COOKIE CONSENT BAR ─────────────────────────────────────────────── -->
+<div class="cookie-bar" id="cookieBar" hidden>
+  <p>We use cookies to improve your experience and understand how visitors use our site. See our <a data-legal="cookies">Cookie Policy</a>.</p>
+  <div class="cookie-actions">
+    <button class="cookie-btn ghost" id="cookieDecline" type="button">Decline</button>
+    <button class="cookie-btn solid" id="cookieAccept" type="button">Accept</button>
+  </div>
+</div>
+
+<!-- ── LEGAL MODALS ───────────────────────────────────────────────────── -->
+<div class="legal-overlay" id="legalOverlay" hidden>
+  <div class="legal-modal" role="dialog" aria-modal="true">
+    <button class="legal-close" id="legalClose" type="button" aria-label="Close">✕</button>
+
+    <article id="legal-privacy" hidden>
+      <h2>Privacy Policy</h2>
+      <p class="legal-date">Last updated: July 2026</p>
+      <p>Pantlaza ("we", "us") is a web design and automation studio serving local businesses in Bergen County and Northern New Jersey. This policy explains what information we collect through this website and how we use it.</p>
+      <h3>Information we collect</h3>
+      <ul>
+        <li><strong>Contact form:</strong> your name, business name, phone number, service of interest, and the message you write.</li>
+        <li><strong>Email and phone:</strong> anything you send us at hola@pantlaza.com or via WhatsApp.</li>
+        <li><strong>Usage data:</strong> if you accept cookies, anonymous analytics about how the site is used (pages visited, device type).</li>
+      </ul>
+      <h3>How we use it</h3>
+      <ul>
+        <li>To respond to your inquiry and prepare your free website example.</li>
+        <li>To provide and improve our services.</li>
+        <li>We never sell your personal information to third parties.</li>
+      </ul>
+      <h3>Third-party services</h3>
+      <p>Some features rely on trusted third parties (for example hosting, Google Calendar integrations for bookings, or analytics). They only receive the information needed to perform their function.</p>
+      <h3>Data retention &amp; your rights</h3>
+      <p>We keep inquiry data only as long as needed to serve you. You can ask us at any time to access, correct, or delete your information by writing to <a href="mailto:hola@pantlaza.com">hola@pantlaza.com</a>.</p>
+      <h3>Children</h3>
+      <p>Our services are directed to businesses and we do not knowingly collect information from children under 13.</p>
+      <h3>Changes</h3>
+      <p>We may update this policy from time to time; the date above reflects the latest version. Questions? <a href="mailto:hola@pantlaza.com">hola@pantlaza.com</a>.</p>
+    </article>
+
+    <article id="legal-terms" hidden>
+      <h2>Terms of Service</h2>
+      <p class="legal-date">Last updated: July 2026</p>
+      <h3>Our services</h3>
+      <p>Pantlaza builds websites, AI chat assistants, online booking systems, and business automations for local businesses.</p>
+      <h3>Free example, then you decide</h3>
+      <p>We prepare a free website example before any payment. You only pay if you approve the example and ask us to finalize it. Until then you owe nothing, and the example remains Pantlaza's property.</p>
+      <h3>Payments &amp; deliverables</h3>
+      <ul>
+        <li>Scope, pricing, and delivery time are agreed per project before work is finalized.</li>
+        <li>Upon full payment, the finished website and its content belong to you.</li>
+        <li>Pantlaza may show completed work in its portfolio unless you ask us not to.</li>
+      </ul>
+      <h3>Your content</h3>
+      <p>You are responsible for the accuracy and legality of the text, images, and business information you provide for your website.</p>
+      <h3>Warranty &amp; liability</h3>
+      <p>Services are provided "as is". To the maximum extent permitted by law, Pantlaza's total liability for any claim is limited to the amount you paid for the service in question. We are not liable for indirect damages such as lost profits.</p>
+      <h3>Governing law</h3>
+      <p>These terms are governed by the laws of the State of New Jersey, USA.</p>
+      <h3>Contact</h3>
+      <p>Questions about these terms: <a href="mailto:hola@pantlaza.com">hola@pantlaza.com</a>.</p>
+    </article>
+
+    <article id="legal-cookies" hidden>
+      <h2>Cookie Policy</h2>
+      <p class="legal-date">Last updated: July 2026</p>
+      <h3>What are cookies?</h3>
+      <p>Cookies and similar technologies (like browser local storage) are small pieces of data a website saves on your device to remember preferences or measure usage.</p>
+      <h3>What we use</h3>
+      <ul>
+        <li><strong>Essential:</strong> we store your cookie choice in your browser's local storage ("pz-consent") so we don't ask again.</li>
+        <li><strong>Analytics (only if you accept):</strong> anonymous statistics that help us understand which sections visitors find useful. No analytics run if you decline.</li>
+      </ul>
+      <h3>Managing cookies</h3>
+      <p>You can change or clear cookies at any time in your browser settings, and you can change your choice here whenever you like: <a id="cookieReset">reset my cookie choice</a>.</p>
+    </article>
+
+  </div>
+</div>
+
 
 <script>
 (function(){
@@ -1258,6 +1402,59 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
     host.appendChild(sweep);
   })();
 
+  // ── LEGAL MODALS + COOKIE CONSENT ─────────────────────────────────────
+  var legalOverlay = document.getElementById('legalOverlay');
+  var legalArticles = { privacy: 'legal-privacy', terms: 'legal-terms', cookies: 'legal-cookies' };
+  function openLegal(which){
+    if (!legalOverlay || !legalArticles[which]) return;
+    Object.keys(legalArticles).forEach(function(k){
+      document.getElementById(legalArticles[k]).hidden = (k !== which);
+    });
+    legalOverlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    legalOverlay.querySelector('.legal-modal').scrollTop = 0;
+  }
+  function closeLegal(){
+    if (!legalOverlay) return;
+    legalOverlay.hidden = true;
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('click', function(e){
+    var link = e.target.closest('[data-legal]');
+    if (link){ e.preventDefault(); openLegal(link.getAttribute('data-legal')); }
+  });
+  var legalClose = document.getElementById('legalClose');
+  if (legalClose) legalClose.addEventListener('click', closeLegal);
+  if (legalOverlay) legalOverlay.addEventListener('click', function(e){
+    if (e.target === legalOverlay) closeLegal();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLegal();
+  });
+
+  var cookieBar = document.getElementById('cookieBar');
+  function cookieChoice(){ try { return localStorage.getItem('pz-consent'); } catch(e){ return 'unavailable'; } }
+  function setCookieChoice(v){
+    try { localStorage.setItem('pz-consent', v); } catch(e){}
+    window.pantlazaCookieConsent = v;
+    if (cookieBar) cookieBar.hidden = true;
+    // analytics would only be initialized here when v === 'accepted'
+  }
+  window.pantlazaCookieConsent = cookieChoice();
+  if (cookieBar && !cookieChoice()){
+    setTimeout(function(){ cookieBar.hidden = false; }, 3400); // after the intro splash
+  }
+  var accBtn = document.getElementById('cookieAccept');
+  var decBtn = document.getElementById('cookieDecline');
+  if (accBtn) accBtn.addEventListener('click', function(){ setCookieChoice('accepted'); });
+  if (decBtn) decBtn.addEventListener('click', function(){ setCookieChoice('declined'); });
+  var resetLink = document.getElementById('cookieReset');
+  if (resetLink) resetLink.addEventListener('click', function(){
+    try { localStorage.removeItem('pz-consent'); } catch(e){}
+    closeLegal();
+    if (cookieBar) cookieBar.hidden = false;
+  });
+
   // ── POINTER GLOW (spotlight-card port) ────────────────────────────────
   // Only the card under (or right next to) the cursor lights up. Coords are
   // recomputed on scroll too, so no card is left holding a stale light.
@@ -1290,6 +1487,35 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
     window.addEventListener('scroll', queueGlow, { passive: true });
   }
 
+  // ── ADAPTIVE PERFORMANCE ───────────────────────────────────────────────
+  // Measures real FPS after load; on slow machines (no GPU acceleration,
+  // low-core laptops) switches to lite mode: background drifts pause
+  // (sweep stays), Memo renders at lower resolution, Spline becomes
+  // tap-to-load. Everything stays on for fast machines.
+  window.pzLite = false;
+  window.pzLiteCallbacks = [];
+  function pzEnableLite(){
+    if (window.pzLite) return;
+    window.pzLite = true;
+    document.documentElement.classList.add('lite');
+    for (var i = 0; i < window.pzLiteCallbacks.length; i++){
+      try { window.pzLiteCallbacks[i](); } catch(e){}
+    }
+  }
+  if ((navigator.hardwareConcurrency || 8) <= 4 || (navigator.deviceMemory || 8) <= 4){
+    pzEnableLite();
+  } else {
+    setTimeout(function(){
+      var frames = 0, t0 = performance.now();
+      (function probe(){
+        frames++;
+        var dt = performance.now() - t0;
+        if (dt < 1200) requestAnimationFrame(probe);
+        else if (frames / (dt / 1000) < 30) pzEnableLite();
+      })();
+    }, 4200);
+  }
+
   // ── PANTITO — SPLINE 3D ROBOT ──────────────────────────────────────────
   // Renders the same scene as the 21st.dev "Spline Scene" demo using the
   // official @splinetool/runtime on a <canvas>. (An iframe embed does not
@@ -1311,16 +1537,33 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
         if (pantitoLoader) pantitoLoader.classList.add('done');
       });
   }
+  function armPantitoSpline(){
+    if (window.pzLite){
+      if (pantitoLoader) pantitoLoader.classList.add('done');
+      var btn = document.createElement('button');
+      btn.className = 'pantito-load3d';
+      btn.type = 'button';
+      btn.textContent = 'Tap to load the 3D robot';
+      pantitoCanvas.parentNode.appendChild(btn);
+      btn.addEventListener('click', function(){
+        btn.remove();
+        if (pantitoLoader) pantitoLoader.classList.remove('done');
+        loadPantitoSpline();
+      });
+    } else {
+      loadPantitoSpline();
+    }
+  }
   if (pantitoCanvas) {
     if ('IntersectionObserver' in window){
       var splineIO = new IntersectionObserver(function(entries){
         entries.forEach(function(e){
-          if (e.isIntersecting){ splineIO.disconnect(); loadPantitoSpline(); }
+          if (e.isIntersecting){ splineIO.disconnect(); armPantitoSpline(); }
         });
       }, { rootMargin: '700px' });
       splineIO.observe(pantitoCanvas);
     } else {
-      loadPantitoSpline();
+      armPantitoSpline();
     }
   }
 })();
@@ -5472,7 +5715,11 @@ three/build/three.module.js:
     var reduceMotion = false; // owner's call: Memo always moves, even if the OS disables animations
 
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.pzLite ? 1 : 1.5));
+    if (window.pzLiteCallbacks) window.pzLiteCallbacks.push(function(){
+      renderer.setPixelRatio(1);
+      resize();
+    });
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
@@ -5725,7 +5972,7 @@ three/build/three.module.js:
     function tick(){
       if (!robotRunning) return;
       var now = performance.now();
-      if (now - lastFrame < 33){ requestAnimationFrame(tick); return; }
+      if (now - lastFrame < (window.pzLite ? 45 : 33)){ requestAnimationFrame(tick); return; }
       lastFrame = now;
       var delta = (now - lastTime) / 1000;
       lastTime = now;
