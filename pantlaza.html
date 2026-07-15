@@ -60,13 +60,13 @@ nav{
 /* ── HERO ─────────────────────────────────────────────────────────────── */
 .hero{
   padding:6rem 0 5rem;
-  background:radial-gradient(ellipse 90% 80% at 72% 18%,#16407e 0%,#0f2c5e 48%,#071228 100%);
+  background:radial-gradient(ellipse 90% 80% at 72% 18%,#18181d 0%,#0b0b0e 48%,#010102 100%);
   overflow:hidden;position:relative;
 }
 .hero::before{
   content:'';position:absolute;inset:0;
-  background:radial-gradient(ellipse 55% 45% at 70% 62%,rgba(59,130,246,.16),transparent 70%),
-             radial-gradient(ellipse 40% 22% at 50% 100%,rgba(245,158,11,.07),transparent);
+  background:radial-gradient(ellipse 55% 45% at 70% 62%,rgba(0,255,198,.08),transparent 70%),
+             radial-gradient(ellipse 40% 22% at 50% 100%,rgba(245,158,11,.06),transparent);
   pointer-events:none;
 }
 .hero-bigtext{
@@ -400,9 +400,10 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
 .hero-robot-shadow{
   position:absolute;bottom:9%;left:50%;width:52%;height:34px;
   transform:translateX(-50%);
-  background:radial-gradient(ellipse at center,rgba(59,130,246,.5),rgba(59,130,246,.14) 55%,transparent 72%);
+  background:radial-gradient(ellipse at center,rgba(0,255,198,.34),rgba(0,255,198,.1) 55%,transparent 72%);
   filter:blur(6px);pointer-events:none;
 }
+.hcard-memo .hcard-t span{color:var(--gold)}
 #heroRobotCanvas{
   position:absolute;inset:0;width:100%;height:100%;display:block;
   touch-action:manipulation;cursor:pointer;
@@ -412,6 +413,7 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
   .hero-bigtext{top:auto;bottom:8%;transform:none}
   /* keep the floating cards off the robot's face on narrow screens */
   .hcard-gold{top:auto!important;bottom:5%!important;right:auto!important;left:4%!important}
+  .hcard-memo{top:30%!important;bottom:auto!important;left:auto!important;right:4%!important;transform:none!important}
 }
 @media(max-width:480px){.hero-robot-panel{height:310px}}
 
@@ -556,10 +558,10 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
     </div>
     <div class="hero-visual">
       <div class="hero-scene">
-        <!-- Cute robot stage (Pantito Bot) — replaces the mountain scene -->
+        <!-- Memo — the cute robot mascot (replaces the mountain scene) -->
         <div class="hero-robot-panel" id="heroRobotPanel">
           <div class="hero-robot-shadow" id="heroRobotShadow" aria-hidden="true"></div>
-          <canvas id="heroRobotCanvas" role="img" aria-label="Pantito Bot — cute 3D robot that follows your cursor and blinks"></canvas>
+          <canvas id="heroRobotCanvas" role="img" aria-label="Memo — Pantlaza's cute 3D robot; he follows your cursor, blinks, and loves being tapped"></canvas>
         </div>
         <!-- Mountain scene kept as fallback if WebGL / CDN fails -->
         <div id="heroRobotFallback" hidden>
@@ -624,6 +626,9 @@ footer{background:var(--navy);color:#fff;padding:3rem 0 1.5rem}
           <div class="hcard-s">3 leads captured today</div>
         </div>
         <div class="hcard hcard-gold" style="top:42%;right:4%">⚡ Your site is live</div>
+        <div class="hcard hcard-memo" style="bottom:3%;left:40%;transform:translateX(-50%)">
+          <div class="hcard-t">Hi, I&#39;m <span>Memo</span>! 👋</div>
+        </div>
         <div class="badge-float">
           <span class="star">★★★★★</span> 5.0 · Happy clients
         </div>
