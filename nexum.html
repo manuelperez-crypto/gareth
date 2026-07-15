@@ -59,7 +59,7 @@ nav{
 /* ── HERO ─────────────────────────────────────────────────────────────── */
 .hero{
   padding:7.5rem 0 6rem;
-  background:radial-gradient(ellipse 90% 80% at 72% 18%,rgba(26,26,28,.6) 0%,rgba(12,12,13,.3) 48%,rgba(1,1,2,0) 100%);
+  background:radial-gradient(ellipse 90% 80% at 72% 18%,rgba(26,26,28,.32) 0%,rgba(12,12,13,.14) 48%,rgba(1,1,2,0) 100%);
   overflow:hidden;position:relative;
 }
 .hero::before{
@@ -340,9 +340,10 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
 /* ── FLOWING BACKGROUND PATHS (port of "background-paths", 21st.dev) ─── */
 /* One fixed layer behind the whole site; sections are translucent so the
    animated curves flow underneath everything. */
-#bgPaths{position:fixed;inset:-12%;z-index:0;pointer-events:none;opacity:.5;overflow:hidden}
+#bgPaths{position:fixed;inset:-12%;z-index:0;pointer-events:none;opacity:.62;overflow:hidden}
 .bgp-layer{position:absolute;inset:0;will-change:transform,opacity}
 .bgp-layer svg{width:100%;height:100%;display:block}
+.bgp-layer.l2 svg{transform:scaleY(-1)}
 .bgp-sweep{
   position:absolute;top:-20%;bottom:-20%;left:0;width:30%;
   background:linear-gradient(90deg,transparent,rgba(245,158,11,.10) 38%,rgba(255,255,255,.16) 50%,rgba(245,158,11,.06) 62%,transparent);
@@ -1389,7 +1390,7 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
         path.setAttribute('d', d);
         path.setAttribute('stroke', '#ffffff');
         path.setAttribute('stroke-width', (0.5 + k * 0.022).toFixed(2));
-        path.setAttribute('stroke-opacity', Math.min(0.12 + k * 0.03, 0.5).toFixed(2));
+        path.setAttribute('stroke-opacity', Math.min(0.22 + k * 0.026, 0.55).toFixed(2));
         path.setAttribute('pathLength', '1');
         path.style.strokeDasharray = '0.32 0.18';
         path.style.strokeDashoffset = (Math.random()).toFixed(2);
