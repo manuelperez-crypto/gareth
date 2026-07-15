@@ -1192,7 +1192,7 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Pantlaza · Bergen County, NJ</span>
+      <span>© 2026 Pantlaza · Bergen County, NJ · v15</span>
       <span class="footer-legal">
         <a data-legal="privacy">Privacy Policy</a>
         <a data-legal="terms">Terms of Service</a>
@@ -1403,59 +1403,6 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
     host.appendChild(sweep);
   })();
 
-  // ── LEGAL MODALS + COOKIE CONSENT ─────────────────────────────────────
-  var legalOverlay = document.getElementById('legalOverlay');
-  var legalArticles = { privacy: 'legal-privacy', terms: 'legal-terms', cookies: 'legal-cookies' };
-  function openLegal(which){
-    if (!legalOverlay || !legalArticles[which]) return;
-    Object.keys(legalArticles).forEach(function(k){
-      document.getElementById(legalArticles[k]).hidden = (k !== which);
-    });
-    legalOverlay.hidden = false;
-    document.body.style.overflow = 'hidden';
-    legalOverlay.querySelector('.legal-modal').scrollTop = 0;
-  }
-  function closeLegal(){
-    if (!legalOverlay) return;
-    legalOverlay.hidden = true;
-    document.body.style.overflow = '';
-  }
-  document.addEventListener('click', function(e){
-    var link = e.target.closest('[data-legal]');
-    if (link){ e.preventDefault(); openLegal(link.getAttribute('data-legal')); }
-  });
-  var legalClose = document.getElementById('legalClose');
-  if (legalClose) legalClose.addEventListener('click', closeLegal);
-  if (legalOverlay) legalOverlay.addEventListener('click', function(e){
-    if (e.target === legalOverlay) closeLegal();
-  });
-  document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape') closeLegal();
-  });
-
-  var cookieBar = document.getElementById('cookieBar');
-  function cookieChoice(){ try { return localStorage.getItem('pz-consent'); } catch(e){ return 'unavailable'; } }
-  function setCookieChoice(v){
-    try { localStorage.setItem('pz-consent', v); } catch(e){}
-    window.pantlazaCookieConsent = v;
-    if (cookieBar) cookieBar.hidden = true;
-    // analytics would only be initialized here when v === 'accepted'
-  }
-  window.pantlazaCookieConsent = cookieChoice();
-  if (cookieBar && !cookieChoice()){
-    setTimeout(function(){ cookieBar.hidden = false; }, 3400); // after the intro splash
-  }
-  var accBtn = document.getElementById('cookieAccept');
-  var decBtn = document.getElementById('cookieDecline');
-  if (accBtn) accBtn.addEventListener('click', function(){ setCookieChoice('accepted'); });
-  if (decBtn) decBtn.addEventListener('click', function(){ setCookieChoice('declined'); });
-  var resetLink = document.getElementById('cookieReset');
-  if (resetLink) resetLink.addEventListener('click', function(){
-    try { localStorage.removeItem('pz-consent'); } catch(e){}
-    closeLegal();
-    if (cookieBar) cookieBar.hidden = false;
-  });
-
   // ── POINTER GLOW (spotlight-card port) ────────────────────────────────
   // Only the card under (or right next to) the cursor lights up. Coords are
   // recomputed on scroll too, so no card is left holding a stale light.
@@ -1567,6 +1514,65 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
       armPantitoSpline();
     }
   }
+})();
+</script>
+
+<script>
+// Legal modals + cookie consent — isolated so no unrelated error can block it.
+(function(){
+  // ── LEGAL MODALS + COOKIE CONSENT ─────────────────────────────────────
+  var legalOverlay = document.getElementById('legalOverlay');
+  var legalArticles = { privacy: 'legal-privacy', terms: 'legal-terms', cookies: 'legal-cookies' };
+  function openLegal(which){
+    if (!legalOverlay || !legalArticles[which]) return;
+    Object.keys(legalArticles).forEach(function(k){
+      document.getElementById(legalArticles[k]).hidden = (k !== which);
+    });
+    legalOverlay.hidden = false;
+    document.body.style.overflow = 'hidden';
+    legalOverlay.querySelector('.legal-modal').scrollTop = 0;
+  }
+  function closeLegal(){
+    if (!legalOverlay) return;
+    legalOverlay.hidden = true;
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('click', function(e){
+    var link = e.target.closest('[data-legal]');
+    if (link){ e.preventDefault(); openLegal(link.getAttribute('data-legal')); }
+  });
+  var legalClose = document.getElementById('legalClose');
+  if (legalClose) legalClose.addEventListener('click', closeLegal);
+  if (legalOverlay) legalOverlay.addEventListener('click', function(e){
+    if (e.target === legalOverlay) closeLegal();
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape') closeLegal();
+  });
+
+  var cookieBar = document.getElementById('cookieBar');
+  function cookieChoice(){ try { return localStorage.getItem('pz-consent'); } catch(e){ return null; } }
+  function setCookieChoice(v){
+    try { localStorage.setItem('pz-consent', v); } catch(e){}
+    window.pantlazaCookieConsent = v;
+    if (cookieBar) cookieBar.hidden = true;
+    // analytics would only be initialized here when v === 'accepted'
+  }
+  window.pantlazaCookieConsent = cookieChoice();
+  if (cookieBar && !cookieChoice()){
+    setTimeout(function(){ cookieBar.hidden = false; }, 3400); // after the intro splash
+  }
+  var accBtn = document.getElementById('cookieAccept');
+  var decBtn = document.getElementById('cookieDecline');
+  if (accBtn) accBtn.addEventListener('click', function(){ setCookieChoice('accepted'); });
+  if (decBtn) decBtn.addEventListener('click', function(){ setCookieChoice('declined'); });
+  var resetLink = document.getElementById('cookieReset');
+  if (resetLink) resetLink.addEventListener('click', function(){
+    try { localStorage.removeItem('pz-consent'); } catch(e){}
+    closeLegal();
+    if (cookieBar) cookieBar.hidden = false;
+  });
+  console.log('Pantlaza build v15 — legal/cookies ready');
 })();
 </script>
 
