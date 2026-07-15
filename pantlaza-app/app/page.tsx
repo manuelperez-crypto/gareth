@@ -228,7 +228,7 @@ export default function Home() {
       <RobotHero backgroundText="PANTLAZA" showNavbar={false}>
         <div className="pointer-events-auto max-w-2xl">
           <span className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm border border-[#bfdbfe] rounded-full px-4 py-1.5 text-xs font-semibold text-[#1d4ed8] mb-5">
-            <Zap size={13} /> Websites · Automations · Smart Tools · New Jersey
+            <Zap size={13} /> Websites · Automations · Smart Tools · NJ & NY
           </span>
           <h1 className="text-4xl md:text-5xl font-black text-[#0f2c5e] leading-[1.1] tracking-tight">
             <ResponseStream
@@ -582,9 +582,9 @@ export default function Home() {
             />
             <div className="space-y-4">
               {[
-                { icon: Phone,  label: 'Phone / WhatsApp', value: '(201) 000-0000' },
+                { icon: Phone,  label: 'Phone / WhatsApp', value: '(929) 412-0028' },
                 { icon: Mail,   label: 'Email',            value: 'hola@pantlaza.com' },
-                { icon: MapPin, label: 'Service area',     value: 'Bergen County & Northern NJ' },
+                { icon: MapPin, label: 'Service area',     value: 'All of New Jersey & New York' },
                 { icon: Clock,  label: 'Hours',            value: 'Mon–Fri 9am–7pm · Sat 10am–4pm' },
               ].map((c) => (
                 <div key={c.label} className="flex items-start gap-4">
@@ -616,7 +616,7 @@ export default function Home() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-[#0f2c5e]">Phone</label>
-                <input type="tel" placeholder="(201) 000-0000" className="px-4 py-3 rounded-xl border-[1.5px] border-[#e2e8f0] text-sm focus:outline-none focus:border-[#3b82f6] transition-colors" />
+                <input type="tel" placeholder="(929) 412-0028" className="px-4 py-3 rounded-xl border-[1.5px] border-[#e2e8f0] text-sm focus:outline-none focus:border-[#3b82f6] transition-colors" />
               </div>
               <div className="flex flex-col gap-1.5">
                 <label className="text-xs font-semibold text-[#0f2c5e]">Service of interest</label>
@@ -652,7 +652,7 @@ export default function Home() {
             <div>
               <FooterLogo />
               <p className="text-[#94a3b8] text-sm leading-relaxed mt-4 max-w-[260px]">
-                Professional web design for local businesses in New Jersey. Connecting your brand with more customers.
+                Professional web design for local businesses in New Jersey & New York. Connecting your brand with more customers.
               </p>
             </div>
             <div>
@@ -673,7 +673,7 @@ export default function Home() {
             </div>
           </div>
           <div className="flex flex-col md:flex-row justify-between items-center gap-3 pt-7 text-xs text-[#475569]">
-            <span>© {new Date().getFullYear()} Pantlaza · Bergen County, NJ</span>
+            <span>© {new Date().getFullYear()} Pantlaza · NJ & NY</span>
             <span>Designed with ♥ by Pantlaza</span>
           </div>
         </div>
