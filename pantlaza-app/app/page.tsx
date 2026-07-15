@@ -74,21 +74,41 @@ function useScrollReveal() {
 }
 
 // ── Pointer glow (spotlight-card GlowCard technique) ────────────────────────
+// Only the card under (or right next to) the cursor lights up; coords are
+// refreshed on scroll so no card keeps a stale light.
 function usePointerGlow() {
   useEffect(() => {
     if (!window.matchMedia('(hover:hover)').matches) return;
     const cards = Array.from(document.querySelectorAll<HTMLElement>('.glow'));
-    const onMove = (e: PointerEvent) => {
-      document.documentElement.style.setProperty('--mxp', (e.clientX / window.innerWidth).toFixed(3));
+    let px = -1e4, py = -1e4, queued = false;
+    const update = () => {
+      queued = false;
       for (const card of cards) {
         const r = card.getBoundingClientRect();
-        if (r.bottom < -240 || r.top > window.innerHeight + 240) continue;
-        card.style.setProperty('--cx', (e.clientX - r.left).toFixed(1));
-        card.style.setProperty('--cy', (e.clientY - r.top).toFixed(1));
+        const inside = px >= r.left && px <= r.right && py >= r.top && py <= r.bottom;
+        if (px < -9000 || !inside) {
+          card.style.setProperty('--cx', '-9999');
+          card.style.setProperty('--cy', '-9999');
+        } else {
+          card.style.setProperty('--cx', (px - r.left).toFixed(1));
+          card.style.setProperty('--cy', (py - r.top).toFixed(1));
+        }
       }
     };
+    const queue = () => {
+      if (!queued) { queued = true; requestAnimationFrame(update); }
+    };
+    const onMove = (e: PointerEvent) => {
+      px = e.clientX; py = e.clientY;
+      document.documentElement.style.setProperty('--mxp', (e.clientX / window.innerWidth).toFixed(3));
+      queue();
+    };
     document.addEventListener('pointermove', onMove, { passive: true });
-    return () => document.removeEventListener('pointermove', onMove);
+    window.addEventListener('scroll', queue, { passive: true });
+    return () => {
+      document.removeEventListener('pointermove', onMove);
+      window.removeEventListener('scroll', queue);
+    };
   }, []);
 }
 

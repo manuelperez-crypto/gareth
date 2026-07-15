@@ -1223,19 +1223,35 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
   });
 
   // ── POINTER GLOW (spotlight-card port) ────────────────────────────────
-  // Card borders light up and hue-shift as the mouse travels the page.
-  // Coordinates are written per card, relative to its own box.
+  // Only the card under (or right next to) the cursor lights up. Coords are
+  // recomputed on scroll too, so no card is left holding a stale light.
   if (window.matchMedia('(hover:hover)').matches){
     var glowCards = Array.prototype.slice.call(document.querySelectorAll('.glow'));
-    document.addEventListener('pointermove', function(e){
-      document.documentElement.style.setProperty('--mxp', (e.clientX / window.innerWidth).toFixed(3));
+    var gpx = -1e4, gpy = -1e4, glowQueued = false;
+    function updateGlow(){
+      glowQueued = false;
       for (var i = 0; i < glowCards.length; i++){
-        var r = glowCards[i].getBoundingClientRect();
-        if (r.bottom < -240 || r.top > window.innerHeight + 240) continue;
-        glowCards[i].style.setProperty('--cx', (e.clientX - r.left).toFixed(1));
-        glowCards[i].style.setProperty('--cy', (e.clientY - r.top).toFixed(1));
+        var c = glowCards[i];
+        var r = c.getBoundingClientRect();
+        var inside = gpx >= r.left && gpx <= r.right && gpy >= r.top && gpy <= r.bottom;
+        if (gpx < -9000 || !inside){
+          c.style.setProperty('--cx', '-9999');
+          c.style.setProperty('--cy', '-9999');
+        } else {
+          c.style.setProperty('--cx', (gpx - r.left).toFixed(1));
+          c.style.setProperty('--cy', (gpy - r.top).toFixed(1));
+        }
       }
+    }
+    function queueGlow(){
+      if (!glowQueued){ glowQueued = true; requestAnimationFrame(updateGlow); }
+    }
+    document.addEventListener('pointermove', function(e){
+      gpx = e.clientX; gpy = e.clientY;
+      document.documentElement.style.setProperty('--mxp', (e.clientX / window.innerWidth).toFixed(3));
+      queueGlow();
     }, { passive: true });
+    window.addEventListener('scroll', queueGlow, { passive: true });
   }
 
   // ── PANTITO — SPLINE 3D ROBOT ──────────────────────────────────────────
