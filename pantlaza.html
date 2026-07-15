@@ -342,8 +342,8 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
 #bgPaths{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
 #bgPaths svg{width:100%;height:100%;display:block}
 @keyframes bgFlow{to{stroke-dashoffset:-1}}
-@keyframes bgPulse{0%,100%{opacity:.35}50%{opacity:.8}}
-@media(prefers-reduced-motion:reduce){#bgPaths path,#bgPaths g{animation:none!important;opacity:.5}}
+@keyframes bgPulse{0%,100%{opacity:.35}50%{opacity:.85}}
+@media(prefers-reduced-motion:reduce){#bgPaths path{animation-duration:70s!important}#bgPaths g{animation-duration:40s!important}}
 
 .services .container,.auto .container,.why .container,.process .container,
 .contact .container,.banner-dark .container{position:relative;z-index:1}
@@ -1229,7 +1229,7 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
     // ~50 animations total instead of 144, light enough for any machine.
     [1, -1].forEach(function(position){
       var group = document.createElementNS(NS, 'g');
-      group.style.animation = 'bgPulse ' + (10 + Math.random() * 6).toFixed(1) + 's ease-in-out infinite';
+      group.style.animation = 'bgPulse ' + (6 + Math.random() * 5).toFixed(1) + 's ease-in-out infinite';
       for (var i = 0; i < 24; i++){
         var k = i * 1.5;
         var d = 'M-' + (380 - k * 5 * position) + ' -' + (189 + k * 6) +
@@ -1245,8 +1245,8 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
         path.setAttribute('stroke-width', (0.5 + k * 0.022).toFixed(2));
         path.setAttribute('stroke-opacity', Math.min(0.1 + k * 0.03, 0.5).toFixed(2));
         path.setAttribute('pathLength', '1');
-        path.style.strokeDasharray = '0.7 0.3';
-        path.style.animation = 'bgFlow ' + (20 + Math.random() * 10).toFixed(1) + 's linear infinite';
+        path.style.strokeDasharray = '0.32 0.18';
+        path.style.animation = 'bgFlow ' + (9 + Math.random() * 8).toFixed(1) + 's linear infinite';
         group.appendChild(path);
       }
       svg.appendChild(group);
