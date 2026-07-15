@@ -1552,24 +1552,35 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
   });
 
   var cookieBar = document.getElementById('cookieBar');
-  function cookieChoice(){ try { return localStorage.getItem('pz-consent'); } catch(e){ return null; } }
+  var CONSENT_KEY = 'pz-consent-v2';
+  try { localStorage.removeItem('pz-consent'); } catch(e){} // retire the old key
+  function cookieChoice(){ try { return localStorage.getItem(CONSENT_KEY); } catch(e){ return null; } }
   function setCookieChoice(v){
-    try { localStorage.setItem('pz-consent', v); } catch(e){}
+    try { localStorage.setItem(CONSENT_KEY, v); } catch(e){}
     window.pantlazaCookieConsent = v;
     if (cookieBar) cookieBar.hidden = true;
     // analytics would only be initialized here when v === 'accepted'
   }
   window.pantlazaCookieConsent = cookieChoice();
-  if (cookieBar && !cookieChoice()){
-    setTimeout(function(){ cookieBar.hidden = false; }, 2800); // right as the intro splash lifts
+  // open the file with #cookies at the end of the URL to force the banner
+  var forceCookies = (location.hash || '').indexOf('cookies') !== -1;
+  if (forceCookies){ try { localStorage.removeItem(CONSENT_KEY); } catch(e){} }
+  if (cookieBar && (forceCookies || !cookieChoice())){
+    setTimeout(function(){ cookieBar.hidden = false; }, forceCookies ? 500 : 2800);
   }
+  window.addEventListener('hashchange', function(){
+    if ((location.hash || '').indexOf('cookies') !== -1){
+      try { localStorage.removeItem(CONSENT_KEY); } catch(e){}
+      if (cookieBar) cookieBar.hidden = false;
+    }
+  });
   var accBtn = document.getElementById('cookieAccept');
   var decBtn = document.getElementById('cookieDecline');
   if (accBtn) accBtn.addEventListener('click', function(){ setCookieChoice('accepted'); });
   if (decBtn) decBtn.addEventListener('click', function(){ setCookieChoice('declined'); });
   var resetLink = document.getElementById('cookieReset');
   if (resetLink) resetLink.addEventListener('click', function(){
-    try { localStorage.removeItem('pz-consent'); } catch(e){}
+    try { localStorage.removeItem(CONSENT_KEY); } catch(e){}
     closeLegal();
     if (cookieBar) cookieBar.hidden = false;
   });
