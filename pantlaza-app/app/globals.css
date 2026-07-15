@@ -195,6 +195,38 @@ body {
   to { transform: rotate(360deg); }
 }
 
+/* ── Pointer glow (spotlight-card GlowCard technique, per-card coords) ── */
+.glow { --gradius: 16; position: relative; }
+.glow::before,
+.glow::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: calc(var(--gradius) * 1px);
+  background-repeat: no-repeat;
+}
+.glow::before {
+  background-image: radial-gradient(
+    210px 210px at calc(var(--cx, -9999) * 1px) calc(var(--cy, -9999) * 1px),
+    hsl(calc(220 + (var(--mxp, 0) * 200)) 100% 62% / 0.2),
+    transparent 100%
+  );
+}
+.glow::after {
+  background-image: radial-gradient(
+    70px 70px at calc(var(--cx, -9999) * 1px) calc(var(--cy, -9999) * 1px),
+    hsl(0 0% 100% / 0.16),
+    transparent 100%
+  );
+}
+@media (hover: none) {
+  .glow::before,
+  .glow::after {
+    display: none;
+  }
+}
+
 /* ── Reduced motion ── */
 @media (prefers-reduced-motion: reduce) {
   .hero-word-in,

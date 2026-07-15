@@ -73,6 +73,25 @@ function useScrollReveal() {
   }, []);
 }
 
+// ── Pointer glow (spotlight-card GlowCard technique) ────────────────────────
+function usePointerGlow() {
+  useEffect(() => {
+    if (!window.matchMedia('(hover:hover)').matches) return;
+    const cards = Array.from(document.querySelectorAll<HTMLElement>('.glow'));
+    const onMove = (e: PointerEvent) => {
+      document.documentElement.style.setProperty('--mxp', (e.clientX / window.innerWidth).toFixed(3));
+      for (const card of cards) {
+        const r = card.getBoundingClientRect();
+        if (r.bottom < -240 || r.top > window.innerHeight + 240) continue;
+        card.style.setProperty('--cx', (e.clientX - r.left).toFixed(1));
+        card.style.setProperty('--cy', (e.clientY - r.top).toFixed(1));
+      }
+    };
+    document.addEventListener('pointermove', onMove, { passive: true });
+    return () => document.removeEventListener('pointermove', onMove);
+  }, []);
+}
+
 // ── Data ───────────────────────────────────────────────────────────────────
 const stats = [
   { value: '+50', label: 'Sites delivered' },
@@ -165,6 +184,7 @@ const steps = [
 // ── Page ───────────────────────────────────────────────────────────────────
 export default function Home() {
   useScrollReveal();
+  usePointerGlow();
   const [heroLine2, setHeroLine2] = useState(false);
 
   return (
@@ -238,7 +258,7 @@ export default function Home() {
       {/* ━━ PANTITO — SPLINE 3D CARD ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <section className="bg-[#02091a] px-5 py-6">
         <div className="max-w-[1520px] mx-auto anim">
-          <Card className="w-full h-[88vh] min-h-[560px] max-h-[920px] bg-black/[0.96] relative overflow-hidden border-white/10 rounded-3xl">
+          <Card className="glow [--gradius:24] w-full h-[88vh] min-h-[560px] max-h-[920px] bg-black/[0.96] relative overflow-hidden border-white/10 rounded-3xl">
             <Spotlight className="-top-40 left-0 md:left-60 md:-top-20" fill="white" />
             <div className="flex h-full flex-col md:flex-row">
               <div className="flex-1 p-8 md:p-14 relative z-10 flex flex-col justify-center">
@@ -379,7 +399,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {automations.map((a, i) => (
-              <div key={a.title} className="anim bg-white/[0.06] border border-white/10 rounded-2xl p-5 hover:bg-white/10 hover:border-[#f59e0b]/60 hover:-translate-y-1 transition-all duration-200"
+              <div key={a.title} className="glow anim bg-white/[0.06] border border-white/10 rounded-2xl p-5 hover:bg-white/10 hover:border-[#f59e0b]/60 hover:-translate-y-1 transition-all duration-200"
                 style={{ animationDelay: `${i * 0.07}s` }}>
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center mb-4">
                   <a.icon size={18} className="text-[#f59e0b]" />

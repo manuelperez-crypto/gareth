@@ -336,17 +336,48 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes drawLine{to{stroke-dashoffset:0}}
 
-/* ── LIGHT RAYS — soft diagonal beams, like the Pantito card spotlight ── */
+/* ── LIGHT RAYS — diagonal beams, like the Pantito card spotlight ────── */
 .lray{
   position:absolute;pointer-events:none;z-index:0;
-  width:120%;height:44%;top:-9%;left:-16%;
-  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.08) 30%,rgba(147,197,253,.05) 58%,transparent 100%);
-  transform:rotate(-16deg);filter:blur(30px);
+  width:135%;height:58%;top:-16%;left:-20%;
+  background:
+    linear-gradient(90deg,transparent 0%,rgba(255,255,255,.11) 22%,rgba(255,255,255,.22) 34%,rgba(147,197,253,.13) 56%,transparent 100%);
+  transform:rotate(-16deg);filter:blur(16px);
 }
-.lray.r{left:auto;right:-16%;transform:rotate(16deg)}
-.lray.gold{background:linear-gradient(90deg,transparent 0%,rgba(245,158,11,.09) 38%,rgba(245,158,11,.03) 60%,transparent 100%)}
+.lray.r{left:auto;right:-20%;transform:rotate(16deg)}
+.lray.gold{background:
+  linear-gradient(90deg,transparent 0%,rgba(245,158,11,.12) 24%,rgba(245,158,11,.22) 38%,rgba(245,158,11,.07) 60%,transparent 100%)}
+
 .services .container,.auto .container,.why .container,.process .container,
 .contact .container,.banner-dark .container{position:relative;z-index:1}
+
+/* ── POINTER GLOW BORDERS (port of the "spotlight-card" GlowCard) ─────── */
+/* JS writes --cx/--cy on each card (cursor position relative to its box)
+   and --mxp (0-1, hue shift) on <html>, so borders light up near the mouse. */
+.glow{--gradius:14}
+.prop.glow,.testimonial-card.glow{--gradius:12}
+.form.glow{--gradius:16}
+.pantito-card.glow{--gradius:24}
+.glow{
+  background-image:radial-gradient(220px 220px at calc(var(--cx,-9999)*1px) calc(var(--cy,-9999)*1px),
+    hsl(calc(220 + (var(--mxp,0) * 200)) 100% 72% / .08),transparent);
+}
+.glow::before,.glow::after{
+  pointer-events:none;content:"";position:absolute;inset:0;
+  border-radius:calc(var(--gradius)*1px);
+  background-repeat:no-repeat;
+}
+/* pool of colored light that spills onto the card near the cursor */
+.glow::before{
+  background-image:radial-gradient(210px 210px at calc(var(--cx,-9999)*1px) calc(var(--cy,-9999)*1px),
+    hsl(calc(220 + (var(--mxp,0) * 200)) 100% 62% / .20),transparent 100%);
+}
+/* small bright core — the visible "little light" riding the mouse */
+.glow::after{
+  background-image:radial-gradient(70px 70px at calc(var(--cx,-9999)*1px) calc(var(--cy,-9999)*1px),
+    hsl(0 0% 100% / .16),transparent 100%);
+}
+@media(hover:none){.glow{background-image:none}.glow::before,.glow::after{display:none}}
 
 /* ── WORD-FADE TEXT STREAMING (port of prompt-kit ResponseStream, fade mode) ── */
 @keyframes wfIn{from{opacity:0}to{opacity:1}}
@@ -665,7 +696,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 <!-- ── PANTITO AI ROBOT ──────────────────────────────────────────────────── -->
 <section class="pantito-section">
   <div class="container">
-    <div class="pantito-card anim">
+    <div class="pantito-card anim glow">
 
       <!-- Spotlight beam -->
       <svg class="pantito-spotlight" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3787 2842" fill="none">
@@ -723,7 +754,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
     </div>
     <div class="services-grid anim-stagger">
 
-      <div class="svc-card">
+      <div class="svc-card glow">
         <div class="svc-icon">🌐</div>
         <h3 class="svc-title">Website Creation</h3>
         <p class="svc-desc">For businesses with no online presence. We take you from zero to a professional site ready to attract customers.</p>
@@ -736,7 +767,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
         </ul>
       </div>
 
-      <div class="svc-card featured">
+      <div class="svc-card featured glow">
         <div class="svc-badge">Most popular</div>
         <div class="svc-icon">🔄</div>
         <h3 class="svc-title">Redesign &amp; Update</h3>
@@ -750,7 +781,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
         </ul>
       </div>
 
-      <div class="svc-card">
+      <div class="svc-card glow">
         <div class="svc-icon">🛠️</div>
         <h3 class="svc-title">Website Maintenance</h3>
         <p class="svc-desc">Keep your site secure, up to date, and running smoothly month after month — no technical headaches for you.</p>
@@ -763,7 +794,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
         </ul>
       </div>
 
-      <div class="svc-card featured">
+      <div class="svc-card featured glow">
         <div class="svc-badge">New</div>
         <div class="svc-icon">💬</div>
         <h3 class="svc-title">AI Chat on Your Website</h3>
@@ -777,7 +808,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
         </ul>
       </div>
 
-      <div class="svc-card">
+      <div class="svc-card glow">
         <div class="svc-icon">📅</div>
         <h3 class="svc-title">Online Booking &amp; Calendar Sync</h3>
         <p class="svc-desc">Let clients book appointments directly from your website. Every booking auto-syncs to your Google Calendar and sends reminders.</p>
@@ -790,7 +821,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
         </ul>
       </div>
 
-      <div class="svc-card">
+      <div class="svc-card glow">
         <div class="svc-icon">⚙️</div>
         <h3 class="svc-title">Business Automations</h3>
         <p class="svc-desc">Connect your website to the tools you already use. We automate the repetitive tasks so you and your team can focus on what matters.</p>
@@ -818,49 +849,49 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
     </div>
     <div class="auto-grid anim-stagger">
 
-      <div class="auto-card">
+      <div class="auto-card glow">
         <div class="auto-card-icon">📅</div>
         <div class="auto-card-title">Client books appointment <span class="auto-arrow">→</span> added to your Google Calendar</div>
         <div class="auto-card-desc">No back-and-forth calls. The booking appears in your calendar the moment it's made.</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card glow">
         <div class="auto-card-icon">🔔</div>
         <div class="auto-card-title">New booking <span class="auto-arrow">→</span> WhatsApp alert to you</div>
         <div class="auto-card-desc">Get notified instantly on your phone every time a client schedules something.</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card glow">
         <div class="auto-card-icon">📧</div>
         <div class="auto-card-title">Client books <span class="auto-arrow">→</span> confirmation email sent to them</div>
         <div class="auto-card-desc">Professional automatic confirmation so your clients feel taken care of immediately.</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card glow">
         <div class="auto-card-icon">⏰</div>
         <div class="auto-card-title">24h before appointment <span class="auto-arrow">→</span> reminder to client</div>
         <div class="auto-card-desc">Reduce no-shows automatically. Clients get a reminder by email or text the day before.</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card glow">
         <div class="auto-card-icon">💬</div>
         <div class="auto-card-title">Visitor asks a question <span class="auto-arrow">→</span> AI chat responds instantly</div>
         <div class="auto-card-desc">Your chat answers "What are your hours?" or "Do you do X?" at 2am without you lifting a finger.</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card glow">
         <div class="auto-card-icon">📋</div>
         <div class="auto-card-title">Contact form filled <span class="auto-arrow">→</span> saved to your spreadsheet</div>
         <div class="auto-card-desc">Every lead goes straight into Google Sheets or your CRM. Never lose a contact again.</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card glow">
         <div class="auto-card-icon">🛒</div>
         <div class="auto-card-title">New order placed <span class="auto-arrow">→</span> invoice sent automatically</div>
         <div class="auto-card-desc">Clients receive a professional invoice the moment they order — zero manual work for you.</div>
       </div>
 
-      <div class="auto-card">
+      <div class="auto-card glow">
         <div class="auto-card-icon">📣</div>
         <div class="auto-card-title">New content published <span class="auto-arrow">→</span> posted to social media</div>
         <div class="auto-card-desc">Add a blog post or promotion to your site and it goes out on Instagram or Facebook automatically.</div>
@@ -885,27 +916,27 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
         <p class="section-sub wfade" style="--wf-step:22ms;--wf-dur:600ms">We're not a generic agency. We specialize in local businesses and understand exactly what you need.</p>
       </div>
       <div class="why-props anim-stagger">
-        <div class="prop">
+        <div class="prop glow">
           <div class="prop-icon">⚡</div>
           <div class="prop-title">Delivered in 1–5 days</div>
           <div class="prop-desc">No waiting weeks. Your site live and running in days, including any revisions.</div>
         </div>
-        <div class="prop">
+        <div class="prop glow">
           <div class="prop-icon">📱</div>
           <div class="prop-title">Mobile-first</div>
           <div class="prop-desc">70%+ of searches happen on phones. Your site looks perfect on every device.</div>
         </div>
-        <div class="prop">
+        <div class="prop glow">
           <div class="prop-icon">🔍</div>
           <div class="prop-title">Visible on Google</div>
           <div class="prop-desc">Every site includes basic SEO so you show up in local searches.</div>
         </div>
-        <div class="prop">
+        <div class="prop glow">
           <div class="prop-icon">🤝</div>
           <div class="prop-title">Support included</div>
           <div class="prop-desc">We don't disappear after delivery. Direct support via WhatsApp.</div>
         </div>
-        <div class="prop" style="grid-column:1/-1;background:linear-gradient(135deg,rgba(29,78,216,.16),rgba(245,158,11,.13));border-color:rgba(245,158,11,.35)">
+        <div class="prop glow" style="grid-column:1/-1;background:linear-gradient(135deg,rgba(29,78,216,.16),rgba(245,158,11,.13));border-color:rgba(245,158,11,.35)">
           <div class="prop-icon">🎨</div>
           <div class="prop-title">See it before you pay — zero commitment</div>
           <div class="prop-desc">We build a real example of your website first. If you love it, we finalize it together. If not, you walk away — no charge, no pressure, no commitment.</div>
@@ -913,7 +944,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
       </div>
     </div>
     <div class="why-visual anim">
-      <div class="testimonial-card">
+      <div class="testimonial-card glow">
         <div class="tc-stars">★★★★★</div>
         <p class="tc-text">"We had no website and customers couldn't find us on Google. Pantlaza built one in 10 days and now we get new calls every week."</p>
         <div class="tc-author">
@@ -924,7 +955,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
           </div>
         </div>
       </div>
-      <div class="testimonial-card">
+      <div class="testimonial-card glow">
         <div class="tc-stars">★★★★★</div>
         <p class="tc-text">"Our old site was from 2015 and looked terrible on mobile. The redesign they did converted more visitors into customers. Worth every penny."</p>
         <div class="tc-author">
@@ -1026,7 +1057,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
         </div>
       </div>
 
-      <div class="form anim" style="transition-delay:.15s">
+      <div class="form anim glow" style="transition-delay:.15s">
         <h3 style="font-size:1.1rem;font-weight:700;margin-bottom:1.2rem;color:#f2f5fa">Get your free website example</h3>
         <div class="form-row">
           <div class="field">
@@ -1190,6 +1221,22 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
   document.querySelectorAll('.wfade').forEach(function(el){
     if (!el.closest('.hero')) io.observe(el);
   });
+
+  // ── POINTER GLOW (spotlight-card port) ────────────────────────────────
+  // Card borders light up and hue-shift as the mouse travels the page.
+  // Coordinates are written per card, relative to its own box.
+  if (window.matchMedia('(hover:hover)').matches){
+    var glowCards = Array.prototype.slice.call(document.querySelectorAll('.glow'));
+    document.addEventListener('pointermove', function(e){
+      document.documentElement.style.setProperty('--mxp', (e.clientX / window.innerWidth).toFixed(3));
+      for (var i = 0; i < glowCards.length; i++){
+        var r = glowCards[i].getBoundingClientRect();
+        if (r.bottom < -240 || r.top > window.innerHeight + 240) continue;
+        glowCards[i].style.setProperty('--cx', (e.clientX - r.left).toFixed(1));
+        glowCards[i].style.setProperty('--cy', (e.clientY - r.top).toFixed(1));
+      }
+    }, { passive: true });
+  }
 
   // ── PANTITO — SPLINE 3D ROBOT ──────────────────────────────────────────
   // Renders the same scene as the 21st.dev "Spline Scene" demo using the
