@@ -517,13 +517,13 @@ a.ctv:hover { color: #ffffff; }
 /* =============================================================
    ABOUT MODAL
 ============================================================= */
-#abt-modal, #team-modal, #rev-modal, #mem-modal {
+#abt-modal, #team-modal, #rev-modal, #mem-modal, #privacy-modal, #terms-modal {
   position: fixed; inset: 0; z-index: 7000;
   display: flex; align-items: stretch; justify-content: flex-end;
   opacity: 0; pointer-events: none;
   transition: opacity .4s var(--ease-out);
 }
-#abt-modal.open, #team-modal.open, #rev-modal.open, #mem-modal.open { opacity: 1; pointer-events: all; }
+#abt-modal.open, #team-modal.open, #rev-modal.open, #mem-modal.open, #privacy-modal.open, #terms-modal.open { opacity: 1; pointer-events: all; }
 .abt-ov {
   position: absolute; inset: 0;
   background: rgba(9,21,41,.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
@@ -537,7 +537,38 @@ a.ctv:hover { color: #ffffff; }
   transition: transform .55s var(--ease-out);
   display: flex; flex-direction: column;
 }
-#abt-modal.open .abt-panel, #team-modal.open .abt-panel, #rev-modal.open .abt-panel, #mem-modal.open .abt-panel { transform: none; }
+#abt-modal.open .abt-panel, #team-modal.open .abt-panel, #rev-modal.open .abt-panel, #mem-modal.open .abt-panel, #privacy-modal.open .abt-panel, #terms-modal.open .abt-panel { transform: none; }
+
+/* ── Legal document styling (privacy / terms) ── */
+.legal p { font-size: clamp(.82rem,1.5vw,.9rem); color: #2a3340; line-height: 1.9; margin-bottom: 1rem; }
+.legal h3 { font-family: 'Poppins', sans-serif; font-size: 1.05rem; font-weight: 600; color: var(--navy); margin: 1.8rem 0 .7rem; }
+.legal h3:first-of-type { margin-top: .5rem; }
+.legal ul { list-style: none; margin: 0 0 1rem; padding: 0; }
+.legal li { position: relative; padding-left: 1.2rem; font-size: clamp(.82rem,1.5vw,.9rem); color: #2a3340; line-height: 1.8; margin-bottom: .5rem; }
+.legal li::before { content: '—'; position: absolute; left: 0; color: var(--gdk); }
+.legal a { color: var(--gdk); text-decoration: underline; }
+.legal-upd { font-family: 'Poppins', sans-serif; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sl); margin-bottom: 1.4rem; }
+.ftlegal { display: flex; gap: 1.4rem; flex-wrap: wrap; align-items: center; }
+.ftlegal a { font-family: 'Poppins', sans-serif; font-size: .62rem; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); cursor: pointer; transition: color .3s; }
+.ftlegal a:hover { color: #faf8f3; }
+
+/* ── Cookie consent banner ── */
+#cookie {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 8000;
+  background: var(--navy); border-top: 1px solid rgba(157,184,216,.25);
+  padding: 1rem clamp(1.2rem,4vw,2.5rem);
+  display: none; align-items: center; justify-content: space-between; gap: 1.4rem; flex-wrap: wrap;
+  box-shadow: 0 -6px 30px rgba(9,21,41,.35);
+}
+#cookie.show { display: flex; }
+.ck-txt { font-family: 'Poppins', sans-serif; font-size: .8rem; line-height: 1.6; color: rgba(255,255,255,.72); max-width: 68ch; }
+.ck-txt a { color: #9db8d8; text-decoration: underline; cursor: pointer; }
+.ck-btns { display: flex; gap: .7rem; flex-shrink: 0; }
+.ck-btn { font-family: 'Poppins', sans-serif; font-size: .62rem; letter-spacing: .12em; text-transform: uppercase; padding: .7rem 1.4rem; border-radius: 2px; cursor: pointer; border: 1px solid rgba(255,255,255,.3); background: none; color: #fff; transition: all .2s; }
+.ck-btn:hover { border-color: #fff; }
+.ck-btn.accept { background: var(--gold); border-color: var(--gold); color: #fff; }
+.ck-btn.accept:hover { background: var(--gdk); border-color: var(--gdk); }
+@media (max-width: 600px){ .ck-btns { width: 100%; } .ck-btn { flex: 1; } }
 .abt-hd {
   position: sticky; top: 0; z-index: 10;
   display: flex; justify-content: space-between; align-items: center;
@@ -1099,7 +1130,14 @@ footer { background: var(--dark); border-top: 1px solid rgba(122,152,190,.14); p
     <div class="ftcol"><h4>Services</h4><a href="#services">CFO Services</a><a href="#services">Fund Operations</a><a href="#advisory">Advisory</a><a href="#services">Compliance</a></div>
     <div class="ftcol"><h4>Contact</h4><a href="mailto:info@dsfadv.com">Email us</a><a href="tel:+12012125584">(201) 212-5584</a><a href="#contact">Schedule a call</a><a href="#location">Our location</a></div>
   </div>
-  <div class="ftbot"><div class="ftcp">© 2026 DSF Advisors LLC — All rights reserved</div><div class="ftbd">Outsourced CFO &amp; COO</div></div>
+  <div class="ftbot">
+    <div class="ftcp">© 2026 DSF Advisors LLC — All rights reserved</div>
+    <div class="ftlegal">
+      <a onclick="openPanel('privacy-modal')">Privacy Policy</a>
+      <a onclick="openPanel('terms-modal')">Terms &amp; Conditions</a>
+      <a onclick="openPanel('privacy-modal')">Cookie Policy</a>
+    </div>
+  </div>
 </footer>
 
 <!-- GSAP vía CDN (funciona en Hostinger; el código sigue funcionando sin él) -->
@@ -1596,6 +1634,118 @@ footer { background: var(--dark); border-top: 1px solid rgba(122,152,190,.14); p
   </div>
 </div>
 
+<!-- ===================== PRIVACY POLICY MODAL ===================== -->
+<div id="privacy-modal" role="dialog" aria-modal="true" aria-label="Privacy &amp; Cookie Policy">
+  <div class="abt-ov" onclick="closePanel('privacy-modal')"></div>
+  <div class="abt-panel">
+    <div class="abt-hd">
+      <div class="abt-hd-logo"><span class="abt-hd-box">DSF</span><span class="abt-hd-txt">ADVISORS</span></div>
+      <button class="abt-cls" onclick="closePanel('privacy-modal')">✕ &nbsp;Close</button>
+    </div>
+    <div class="abt-body legal">
+      <div class="abt-eye">Legal</div>
+      <h2 class="abt-h2">Privacy &amp; Cookie Policy</h2>
+      <div class="legal-upd">Last updated: January 2026</div>
+
+      <p>DSF Advisors LLC ("DSF," "we," "us," or "our") respects your privacy. This Privacy &amp; Cookie Policy explains how we collect, use, and protect information when you visit our website or contact us. By using this website, you agree to the practices described below.</p>
+
+      <h3>1. Information We Collect</h3>
+      <ul>
+        <li><strong>Information you provide.</strong> When you submit our contact form or email us, we may collect your name, firm, email address, phone number, and any message you send.</li>
+        <li><strong>Information collected automatically.</strong> Like most websites, we may collect limited technical data such as your browser type, device, approximate location, pages viewed, and referring website, through cookies and similar technologies.</li>
+      </ul>
+
+      <h3>2. How We Use Your Information</h3>
+      <ul>
+        <li>To respond to your inquiries and provide the services you request.</li>
+        <li>To operate, maintain, and improve our website.</li>
+        <li>To communicate with you about your engagement or request.</li>
+        <li>To comply with legal and regulatory obligations.</li>
+      </ul>
+
+      <h3>3. Cookies</h3>
+      <p>Cookies are small text files stored on your device. We use them to keep the site functioning and to understand how it is used. The categories we may use are:</p>
+      <ul>
+        <li><strong>Essential cookies</strong> — required for the site to work (they cannot be switched off).</li>
+        <li><strong>Analytics cookies</strong> — help us understand site traffic and improve content. These are only set if you accept cookies.</li>
+      </ul>
+      <p>You can accept or decline non-essential cookies using the banner shown on your first visit, and you can clear or block cookies at any time through your browser settings. Declining cookies will not affect your ability to browse the site.</p>
+
+      <h3>4. How We Share Information</h3>
+      <p>We do not sell your personal information. We may share it only with trusted service providers who help us operate the website or our business, or when required by law, regulation, or legal process.</p>
+
+      <h3>5. Data Security &amp; Retention</h3>
+      <p>We use reasonable administrative and technical safeguards to protect your information, and retain it only as long as necessary for the purposes described here or as required by law. No method of transmission over the internet is completely secure.</p>
+
+      <h3>6. Your Rights</h3>
+      <p>Depending on your location, you may have the right to access, correct, or request deletion of your personal information. To make a request, contact us using the details below.</p>
+
+      <h3>7. Third-Party Links</h3>
+      <p>Our website may embed or link to third-party services (such as maps). We are not responsible for the privacy practices of those third parties.</p>
+
+      <h3>8. Changes to This Policy</h3>
+      <p>We may update this policy from time to time. The "last updated" date above reflects the most recent revision.</p>
+
+      <h3>9. Contact Us</h3>
+      <p>DSF Advisors LLC<br>55 Main St, 3rd Floor, Hackensack, NJ 07601, United States<br>Email: <a href="mailto:info@dsfadv.com">info@dsfadv.com</a> · Phone: <a href="tel:+12012125584">(201) 212-5584</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TERMS &amp; CONDITIONS MODAL ===================== -->
+<div id="terms-modal" role="dialog" aria-modal="true" aria-label="Terms &amp; Conditions">
+  <div class="abt-ov" onclick="closePanel('terms-modal')"></div>
+  <div class="abt-panel">
+    <div class="abt-hd">
+      <div class="abt-hd-logo"><span class="abt-hd-box">DSF</span><span class="abt-hd-txt">ADVISORS</span></div>
+      <button class="abt-cls" onclick="closePanel('terms-modal')">✕ &nbsp;Close</button>
+    </div>
+    <div class="abt-body legal">
+      <div class="abt-eye">Legal</div>
+      <h2 class="abt-h2">Terms &amp; Conditions</h2>
+      <div class="legal-upd">Last updated: January 2026</div>
+
+      <p>These Terms &amp; Conditions ("Terms") govern your use of the website of DSF Advisors LLC ("DSF," "we," "us," or "our"). By accessing or using this website, you agree to these Terms. If you do not agree, please do not use the site.</p>
+
+      <h3>1. Informational Purpose Only</h3>
+      <p>The content on this website is provided for general informational purposes only. It does not constitute financial, accounting, tax, legal, or investment advice, and should not be relied upon as such. Nothing on this site creates a client, advisory, or fiduciary relationship between you and DSF. Such a relationship is established only through a signed engagement agreement.</p>
+
+      <h3>2. No Offer or Solicitation</h3>
+      <p>Nothing on this website constitutes an offer or solicitation to buy or sell any security or financial product, or to provide any service in any jurisdiction where such an offer would be unlawful.</p>
+
+      <h3>3. Intellectual Property</h3>
+      <p>All content on this website — including text, graphics, logos, and design — is the property of DSF Advisors LLC or its licensors and is protected by applicable intellectual-property laws. You may not reproduce, distribute, or create derivative works without our prior written consent.</p>
+
+      <h3>4. Disclaimer of Warranties</h3>
+      <p>This website is provided "as is" and "as available," without warranties of any kind, whether express or implied, including accuracy, completeness, or fitness for a particular purpose. We do not warrant that the site will be uninterrupted or error-free.</p>
+
+      <h3>5. Limitation of Liability</h3>
+      <p>To the fullest extent permitted by law, DSF Advisors LLC shall not be liable for any indirect, incidental, or consequential damages arising from your use of, or inability to use, this website.</p>
+
+      <h3>6. Third-Party Links</h3>
+      <p>This website may contain links to or embeds from third-party sites. We are not responsible for the content, policies, or practices of any third party.</p>
+
+      <h3>7. Governing Law</h3>
+      <p>These Terms are governed by the laws of the State of New Jersey, United States, without regard to its conflict-of-laws principles. Any dispute shall be subject to the exclusive jurisdiction of the courts located in New Jersey.</p>
+
+      <h3>8. Changes to These Terms</h3>
+      <p>We may revise these Terms at any time. Your continued use of the website after changes are posted constitutes acceptance of the revised Terms.</p>
+
+      <h3>9. Contact Us</h3>
+      <p>DSF Advisors LLC<br>55 Main St, 3rd Floor, Hackensack, NJ 07601, United States<br>Email: <a href="mailto:info@dsfadv.com">info@dsfadv.com</a> · Phone: <a href="tel:+12012125584">(201) 212-5584</a></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== COOKIE CONSENT BANNER ===================== -->
+<div id="cookie" role="dialog" aria-label="Cookie consent">
+  <div class="ck-txt">We use cookies to keep this site working and to understand how it is used. You can accept all cookies or decline non-essential ones. See our <a onclick="closeCookie(); openPanel('privacy-modal');">Cookie Policy</a>.</div>
+  <div class="ck-btns">
+    <button class="ck-btn" onclick="setCookieConsent('declined')">Decline</button>
+    <button class="ck-btn accept" onclick="setCookieConsent('accepted')">Accept all</button>
+  </div>
+</div>
+
 <script>
 var TEAM = {
   wil: {
@@ -1706,8 +1856,23 @@ function closeAbout()  { closePanel('abt-modal'); }
 function openTeam()    { openPanel('team-modal'); }
 function openReviews() { openPanel('rev-modal'); }
 document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closePanel('abt-modal'); closePanel('team-modal'); closePanel('rev-modal'); closePanel('mem-modal'); }
+  if (e.key === 'Escape') { closePanel('abt-modal'); closePanel('team-modal'); closePanel('rev-modal'); closePanel('mem-modal'); closePanel('privacy-modal'); closePanel('terms-modal'); }
 });
+
+/* ── Cookie consent ── */
+function closeCookie(){ var c = document.getElementById('cookie'); if (c) c.classList.remove('show'); }
+function setCookieConsent(choice){
+  try { localStorage.setItem('dsf-cookie-consent', choice); } catch(e){}
+  closeCookie();
+}
+(function(){
+  var saved = null;
+  try { saved = localStorage.getItem('dsf-cookie-consent'); } catch(e){}
+  if (!saved) {
+    var c = document.getElementById('cookie');
+    if (c) setTimeout(function(){ c.classList.add('show'); }, 800);
+  }
+})();
 /* reuse the embedded founder photo for the team panel (avoids duplicating it) */
 (function(){
   function cp(sel, id){ var s = document.querySelector(sel), d = document.getElementById(id); if (s && d) d.src = s.src; }
