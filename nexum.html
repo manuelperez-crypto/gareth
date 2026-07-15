@@ -60,7 +60,7 @@ nav{
 /* ── HERO ─────────────────────────────────────────────────────────────── */
 .hero{
   padding:6rem 0 5rem;
-  background:radial-gradient(ellipse 90% 80% at 72% 18%,#18181d 0%,#0b0b0e 48%,#010102 100%);
+  background:radial-gradient(ellipse 90% 80% at 72% 18%,rgba(24,24,29,.6) 0%,rgba(11,11,14,.3) 48%,rgba(1,1,2,0) 100%);
   overflow:hidden;position:relative;
 }
 .hero::before{
@@ -133,14 +133,14 @@ nav{
 .hero-visual{position:relative}
 
 /* ── STATS BAR ──────────────────────────────────────────────────────── */
-.stats{background:#07070b;padding:2rem 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
+.stats{background:rgba(9,9,15,.78);padding:2rem 0;border-top:1px solid rgba(255,255,255,.06);border-bottom:1px solid rgba(255,255,255,.06)}
 .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1rem;text-align:center}
 .stat-num{font-size:2rem;font-weight:900;color:#fff}
 .stat-num span{color:var(--gold)}
 .stat-lbl{font-size:.8rem;color:#94a3b8;margin-top:.1rem}
 
 /* ── SERVICES ───────────────────────────────────────────────────────── */
-.services{padding:5.5rem 0;background:#050507;position:relative;overflow:hidden}
+.services{padding:5.5rem 0;background:transparent;position:relative;overflow:hidden}
 .services-intro{text-align:center;margin-bottom:3.5rem}
 .services-intro .section-sub{margin:auto}
 .services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
@@ -172,7 +172,7 @@ nav{
 .svc-list li::before{content:'✓';color:var(--sky);font-weight:800;flex-shrink:0}
 
 /* ── WHY NEXUM ──────────────────────────────────────────────────────── */
-.why{padding:5.5rem 0;background:#07080d;position:relative;overflow:hidden}
+.why{padding:5.5rem 0;background:rgba(12,13,22,.62);position:relative;overflow:hidden}
 .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
 @media(max-width:760px){.why-grid{grid-template-columns:1fr}}
 .why-props{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;margin-top:2rem}
@@ -196,7 +196,7 @@ nav{
 .tc-biz{font-size:.75rem;color:var(--gray)}
 
 /* ── PROCESS ─────────────────────────────────────────────────────────── */
-.process{padding:5.5rem 0;background:#050507;color:#fff;position:relative;overflow:hidden}
+.process{padding:5.5rem 0;background:transparent;color:#fff;position:relative;overflow:hidden}
 .process .section-tag{color:#7dd3fc}
 .process .section-title{color:#fff}
 .process .section-sub{color:#94a3b8}
@@ -237,7 +237,7 @@ nav{
 .price-btn:hover{background:var(--navy);color:#fff}
 
 /* ── CONTACT ─────────────────────────────────────────────────────────── */
-.contact{padding:5.5rem 0;background:#050507;position:relative;overflow:hidden}
+.contact{padding:5.5rem 0;background:transparent;position:relative;overflow:hidden}
 .contact-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:start}
 @media(max-width:760px){.contact-grid{grid-template-columns:1fr}}
 .contact-info .section-sub{margin-bottom:2rem}
@@ -271,7 +271,7 @@ nav{
 .form-submit:hover{background:#d97706;transform:translateY(-1px)}
 
 /* ── FOOTER ──────────────────────────────────────────────────────────── */
-footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid rgba(255,255,255,.07)}
+footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1px solid rgba(255,255,255,.07)}
 .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:2.5rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.1)}
 @media(max-width:680px){.footer-grid{grid-template-columns:1fr}}
 .footer-brand .logo{margin-bottom:.7rem}
@@ -285,7 +285,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 .footer-bottom a:hover{color:#94a3b8}
 
 /* ── AUTOMATIONS SHOWCASE ────────────────────────────────────────────── */
-.auto{padding:5.5rem 0;background:#07080d;color:#fff;position:relative;overflow:hidden}
+.auto{padding:5.5rem 0;background:rgba(12,13,22,.62);color:#fff;position:relative;overflow:hidden}
 .auto .section-tag{color:#7dd3fc}
 .auto .section-title{color:#fff}
 .auto .section-sub{color:#94a3b8;max-width:580px}
@@ -336,17 +336,14 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes drawLine{to{stroke-dashoffset:0}}
 
-/* ── LIGHT RAYS — diagonal beams, like the Pantito card spotlight ────── */
-.lray{
-  position:absolute;pointer-events:none;z-index:0;
-  width:135%;height:58%;top:-16%;left:-20%;
-  background:
-    linear-gradient(90deg,transparent 0%,rgba(255,255,255,.11) 22%,rgba(255,255,255,.22) 34%,rgba(147,197,253,.13) 56%,transparent 100%);
-  transform:rotate(-16deg);filter:blur(16px);
-}
-.lray.r{left:auto;right:-20%;transform:rotate(16deg)}
-.lray.gold{background:
-  linear-gradient(90deg,transparent 0%,rgba(245,158,11,.12) 24%,rgba(245,158,11,.22) 38%,rgba(245,158,11,.07) 60%,transparent 100%)}
+/* ── FLOWING BACKGROUND PATHS (port of "background-paths", 21st.dev) ─── */
+/* One fixed layer behind the whole site; sections are translucent so the
+   animated curves flow underneath everything. */
+#bgPaths{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5}
+#bgPaths svg{width:100%;height:100%;display:block}
+@keyframes bgFlow{to{stroke-dashoffset:-1}}
+@keyframes bgPulse{0%,100%{opacity:.35}50%{opacity:.8}}
+@media(prefers-reduced-motion:reduce){#bgPaths path,#bgPaths g{animation:none!important;opacity:.5}}
 
 .services .container,.auto .container,.why .container,.process .container,
 .contact .container,.banner-dark .container{position:relative;z-index:1}
@@ -463,7 +460,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 @media(max-width:480px){.hero-robot-panel{height:310px}}
 
 /* ── PANTITO AI ROBOT (Spline card) — full-viewport showcase ─────────── */
-.pantito-section{background:#050507;padding:1.25rem 0}
+.pantito-section{background:transparent;padding:1.25rem 0}
 .pantito-section .container{max-width:1560px;padding:0 1.25rem}
 .pantito-card{
   border-radius:24px;
@@ -542,6 +539,8 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 </head>
 <body>
 
+<div id="bgPaths" aria-hidden="true"></div>
+
 <div id="intro">
   <div class="intro-mark">
     <svg class="intro-svg" viewBox="0 0 140 86" width="240">
@@ -588,7 +587,6 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 
 <!-- ── HERO ────────────────────────────────────────────────────────────── -->
 <section class="hero">
-  <div class="lray" aria-hidden="true"></div>
   <div class="hero-bigtext" aria-hidden="true">PANTLAZA</div>
   <div class="container hero-grid">
     <div>
@@ -745,7 +743,6 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 
 <!-- ── SERVICES ─────────────────────────────────────────────────────────── -->
 <section class="services" id="services">
-  <div class="lray" aria-hidden="true"></div>
   <div class="container">
     <div class="services-intro anim">
       <span class="section-tag">Services</span>
@@ -840,7 +837,6 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 
 <!-- ── AUTOMATIONS ───────────────────────────────────────────────────────── -->
 <section class="auto" id="automations">
-  <div class="lray r" aria-hidden="true"></div>
   <div class="container">
     <div class="anim">
       <span class="section-tag">Automations</span>
@@ -907,7 +903,6 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 
 <!-- ── WHY NEXUM ────────────────────────────────────────────────────────── -->
 <section class="why" id="why">
-  <div class="lray" aria-hidden="true"></div>
   <div class="container why-grid">
     <div>
       <div class="anim">
@@ -972,7 +967,6 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 
 <!-- ── PROCESS ──────────────────────────────────────────────────────────── -->
 <section class="process" id="process">
-  <div class="lray r" aria-hidden="true"></div>
   <div class="container">
     <div class="anim">
       <span class="section-tag">How we work</span>
@@ -1005,8 +999,7 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 </section>
 
 <!-- ── NO-COMMITMENT BANNER ─────────────────────────────────────────────── -->
-<div class="banner-dark" style="background:#0a0a10;padding:3rem 0;text-align:center;position:relative;overflow:hidden">
-  <div class="lray gold" aria-hidden="true"></div>
+<div class="banner-dark" style="background:rgba(14,14,24,.68);padding:3rem 0;text-align:center;position:relative;overflow:hidden">
   <div class="container anim">
     <p style="font-size:.8rem;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:#7dd3fc;margin-bottom:.6rem">How it works</p>
     <h2 class="wfade" style="font-size:1.9rem;font-weight:900;color:#fff;line-height:1.2;margin-bottom:1rem;--wf-step:60ms">We build your example first.<br><em style="color:var(--gold)">You only pay if you love it.</em></h2>
@@ -1017,7 +1010,6 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
 
 <!-- ── CONTACT ──────────────────────────────────────────────────────────── -->
 <section class="contact" id="contact">
-  <div class="lray" aria-hidden="true"></div>
   <div class="container">
     <div class="contact-grid">
       <div class="anim">
@@ -1221,6 +1213,46 @@ footer{background:#030305;color:#fff;padding:3rem 0 1.5rem;border-top:1px solid 
   document.querySelectorAll('.wfade').forEach(function(el){
     if (!el.closest('.hero')) io.observe(el);
   });
+
+  // ── FLOWING BACKGROUND PATHS (port of 21st.dev "background-paths") ────
+  // 36 curves per direction; dash-offset flow + opacity pulse per path.
+  (function(){
+    var host = document.getElementById('bgPaths');
+    if (!host) return;
+    var NS = 'http://www.w3.org/2000/svg';
+    var svg = document.createElementNS(NS, 'svg');
+    svg.setAttribute('viewBox', '0 0 696 316');
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid slice');
+    svg.setAttribute('fill', 'none');
+    // 24 curves per direction (index scaled x1.5 keeps the original fan
+    // spread); opacity pulse runs on the 2 groups, flow on each path —
+    // ~50 animations total instead of 144, light enough for any machine.
+    [1, -1].forEach(function(position){
+      var group = document.createElementNS(NS, 'g');
+      group.style.animation = 'bgPulse ' + (10 + Math.random() * 6).toFixed(1) + 's ease-in-out infinite';
+      for (var i = 0; i < 24; i++){
+        var k = i * 1.5;
+        var d = 'M-' + (380 - k * 5 * position) + ' -' + (189 + k * 6) +
+          'C-' + (380 - k * 5 * position) + ' -' + (189 + k * 6) +
+          ' -' + (312 - k * 5 * position) + ' ' + (216 - k * 6) +
+          ' ' + (152 - k * 5 * position) + ' ' + (343 - k * 6) +
+          'C' + (616 - k * 5 * position) + ' ' + (470 - k * 6) +
+          ' ' + (684 - k * 5 * position) + ' ' + (875 - k * 6) +
+          ' ' + (684 - k * 5 * position) + ' ' + (875 - k * 6);
+        var path = document.createElementNS(NS, 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('stroke', '#ffffff');
+        path.setAttribute('stroke-width', (0.5 + k * 0.022).toFixed(2));
+        path.setAttribute('stroke-opacity', Math.min(0.1 + k * 0.03, 0.5).toFixed(2));
+        path.setAttribute('pathLength', '1');
+        path.style.strokeDasharray = '0.7 0.3';
+        path.style.animation = 'bgFlow ' + (20 + Math.random() * 10).toFixed(1) + 's linear infinite';
+        group.appendChild(path);
+      }
+      svg.appendChild(group);
+    });
+    host.appendChild(svg);
+  })();
 
   // ── POINTER GLOW (spotlight-card port) ────────────────────────────────
   // Only the card under (or right next to) the cursor lights up. Coords are

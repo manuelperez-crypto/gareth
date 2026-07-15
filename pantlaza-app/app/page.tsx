@@ -13,6 +13,7 @@ import {
   ContainerInset, HeroButton,
 } from '@/components/ui/animated-video-on-scroll';
 import { PantitoRobot } from '@/components/ui/pantito-robot';
+import { FloatingPaths } from '@/components/ui/background-paths';
 import { ResponseStream } from '@/components/ui/response-stream';
 import { StreamOnView } from '@/components/ui/stream-on-view';
 import { Card } from '@/components/ui/card';
@@ -402,8 +403,12 @@ export default function Home() {
       </section>
 
       {/* ━━ AUTOMATIONS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section id="automations" className="py-24 px-6 bg-[#0f2c5e]">
-        <div className="max-w-6xl mx-auto">
+      <section id="automations" className="py-24 px-6 bg-[#0f2c5e] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-40 text-white" aria-hidden="true">
+          <FloatingPaths position={1} />
+          <FloatingPaths position={-1} />
+        </div>
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="anim mb-14">
             <span className="text-[#7dd3fc] text-xs font-bold tracking-widest uppercase">Automations</span>
             <StreamOnView
@@ -507,8 +512,11 @@ export default function Home() {
       </section>
 
       {/* ━━ PROCESS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <section id="process" className="py-24 px-6 bg-[#0f2c5e]">
-        <div className="max-w-6xl mx-auto">
+      <section id="process" className="py-24 px-6 bg-[#0f2c5e] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-40 text-white" aria-hidden="true">
+          <FloatingPaths position={-1} />
+        </div>
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="anim text-center mb-16">
             <span className="text-[#7dd3fc] text-xs font-bold tracking-widest uppercase">How we work</span>
             <StreamOnView
