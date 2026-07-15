@@ -289,7 +289,7 @@ export default function Home() {
                 <StreamOnView
                   as="h2" segmentDelay={80} fadeDuration={800}
                   className="text-5xl md:text-6xl lg:text-7xl font-extrabold bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400 leading-[1.05]"
-                  text="Pantito, your sales robot"
+                  text="Memo, your sales robot"
                 />
                 <StreamOnView
                   as="p" segmentDelay={24} fadeDuration={650}
@@ -297,7 +297,7 @@ export default function Home() {
                   text="Captures leads, answers questions and books appointments in real time — 24 hours a day, 7 days a week, without you lifting a finger."
                 />
                 <a href="#contact" className="mt-8 inline-flex items-center gap-2 bg-[#f59e0b] hover:bg-[#d97706] text-[#0f2c5e] font-bold text-sm px-6 py-3 rounded-full w-fit transition-colors">
-                  Activate Pantito <ArrowRight size={15} />
+                  Activate Memo <ArrowRight size={15} />
                 </a>
               </div>
               <div className="flex-1 relative min-h-[220px]">
@@ -320,7 +320,7 @@ export default function Home() {
                 <Sparkles size={12} /> Artificial Intelligence
               </span>
               <h2 className="text-4xl md:text-6xl font-extrabold leading-tight">
-                Meet <span className="text-[#f59e0b]">Pantito</span>
+                Meet <span className="text-[#f59e0b]">Memo</span>
               </h2>
               <p className="mx-auto max-w-[42ch] text-white/70 text-lg">
                 Your new AI employee — available 24/7, never gets tired and always responds to your customers.

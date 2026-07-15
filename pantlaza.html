@@ -343,13 +343,19 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
 #bgPaths{position:fixed;inset:-12%;z-index:0;pointer-events:none;opacity:.5;overflow:hidden}
 .bgp-layer{position:absolute;inset:0;will-change:transform,opacity}
 .bgp-layer svg{width:100%;height:100%;display:block}
-.bgp-layer.l1{animation:bgDrift1 26s ease-in-out infinite alternate,bgPulseA 9s ease-in-out infinite}
-.bgp-layer.l2{animation:bgDrift2 34s ease-in-out infinite alternate,bgPulseB 12s ease-in-out infinite}
-@keyframes bgDrift1{from{transform:translate3d(-2.4%,-1.6%,0) rotate(-1.2deg)}to{transform:translate3d(2.4%,1.6%,0) rotate(1.2deg)}}
-@keyframes bgDrift2{from{transform:translate3d(2%,1.8%,0) rotate(1deg)}to{transform:translate3d(-2%,-1.8%,0) rotate(-1deg)}}
-@keyframes bgPulseA{0%,100%{opacity:.55}50%{opacity:1}}
-@keyframes bgPulseB{0%,100%{opacity:.95}50%{opacity:.45}}
-@media(prefers-reduced-motion:reduce){.bgp-layer{animation-duration:90s,40s}}
+.bgp-sweep{
+  position:absolute;top:-20%;bottom:-20%;left:0;width:30%;
+  background:linear-gradient(90deg,transparent,rgba(147,197,253,.10) 38%,rgba(255,255,255,.16) 50%,rgba(147,197,253,.08) 62%,transparent);
+  transform:translateX(-120%) skewX(-14deg);will-change:transform;
+  animation:bgSweep 7.5s linear infinite;
+}
+@keyframes bgSweep{to{transform:translateX(460%) skewX(-14deg)}}
+.bgp-layer.l1{animation:bgDrift1 12s ease-in-out infinite alternate,bgPulseA 5s ease-in-out infinite}
+.bgp-layer.l2{animation:bgDrift2 16s ease-in-out infinite alternate,bgPulseB 7s ease-in-out infinite}
+@keyframes bgDrift1{from{transform:translate3d(-5%,-3%,0) rotate(-2.4deg)}to{transform:translate3d(5%,3%,0) rotate(2.4deg)}}
+@keyframes bgDrift2{from{transform:translate3d(4.5%,3.4%,0) rotate(2deg)}to{transform:translate3d(-4.5%,-3.4%,0) rotate(-2deg)}}
+@keyframes bgPulseA{0%,100%{opacity:.45}50%{opacity:1}}
+@keyframes bgPulseB{0%,100%{opacity:1}50%{opacity:.4}}
 @media(max-width:760px){.bgp-layer.l2{display:none}}
 
 .services .container,.auto .container,.why .container,.process .container,
@@ -709,9 +715,9 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></svg>
           AI Assistant · 24/7
         </div>
-        <h2 class="pantito-h2 wfade" style="--wf-step:80ms">Pantito,<br>your sales<br>robot</h2>
+        <h2 class="pantito-h2 wfade" style="--wf-step:80ms">Memo,<br>your sales<br>robot</h2>
         <p class="pantito-p wfade" style="--wf-step:24ms;--wf-dur:650ms">Captures leads, answers questions and books appointments in real time — 24 hours a day, 7 days a week, without you lifting a finger.</p>
-        <a href="#contact" class="pantito-btn">Activate Pantito →</a>
+        <a href="#contact" class="pantito-btn">Activate Memo →</a>
       </div>
 
       <!-- Right: Spline 3D robot (same scene as the 21st.dev demo) -->
@@ -723,7 +729,7 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
           class="pantito-canvas"
           id="pantitoCanvas"
           role="img"
-          aria-label="Pantito — interactive 3D AI robot"
+          aria-label="Memo — interactive 3D AI robot"
         ></canvas>
       </div>
 
@@ -1242,6 +1248,9 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
       layer.appendChild(svg);
       host.appendChild(layer);
     });
+    var sweep = document.createElement('div');
+    sweep.className = 'bgp-sweep';
+    host.appendChild(sweep);
   })();
 
   // ── POINTER GLOW (spotlight-card port) ────────────────────────────────
@@ -5455,7 +5464,7 @@ three/build/three.module.js:
   if (!THREE){ showFallback(new Error('three.js inline bundle missing')); return; }
 
   try {
-    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reduceMotion = false; // owner's call: Memo always moves, even if the OS disables animations
 
     var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
