@@ -1193,7 +1193,7 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Pantlaza · NJ &amp; NY · v19</span>
+      <span>© 2026 Pantlaza · NJ &amp; NY · v20</span>
       <span class="footer-legal">
         <a data-legal="privacy">Privacy Policy</a>
         <a data-legal="terms">Terms of Service</a>
@@ -1562,10 +1562,14 @@ footer{background:rgba(3,3,5,.93);color:#fff;padding:3rem 0 1.5rem;border-top:1p
     // analytics would only be initialized here when v === 'accepted'
   }
   window.pantlazaCookieConsent = cookieChoice();
+  // Pre-launch mode: show the banner on EVERY load so it is always
+  // visible right at the start. For the real launch, set this to false
+  // and the banner will respect the visitor's saved choice instead.
+  var ALWAYS_SHOW_COOKIES = true;
   // open the file with #cookies at the end of the URL to force the banner
   var forceCookies = (location.hash || '').indexOf('cookies') !== -1;
   if (forceCookies){ try { localStorage.removeItem(CONSENT_KEY); } catch(e){} }
-  if (cookieBar && (forceCookies || !cookieChoice())){
+  if (cookieBar && (ALWAYS_SHOW_COOKIES || forceCookies || !cookieChoice())){
     setTimeout(function(){ cookieBar.hidden = false; }, forceCookies ? 500 : 2800);
   }
   window.addEventListener('hashchange', function(){
