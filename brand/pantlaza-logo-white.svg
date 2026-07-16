@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 106" width="340" height="106">
+  <polygon points="28,82 58,28 88,82" fill="#f59e0b" opacity=".5"/>
+  <polygon points="60,82 88,36 116,82" fill="#f59e0b" opacity=".5"/>
+  <polygon points="10,82 70,8 130,82" fill="#ffffff"/>
+  <polygon points="56,34 70,8 84,34" fill="#f59e0b"/>
+  <line x1="10" y1="82" x2="130" y2="82" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+  <text x="150" y="67" font-family="'Helvetica Neue',Arial,sans-serif" font-size="42" font-weight="800" letter-spacing="-.8"><tspan fill="#ffffff">Pant</tspan><tspan fill="#f59e0b">laza</tspan></text>
+</svg>
