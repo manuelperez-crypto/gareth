@@ -7,25 +7,26 @@
 <meta name="description" content="Monteza Law Firm, P.C. — Abogados de inmigración en New York y New Jersey. Especialistas en Visa Juvenil (SIJS), defensa de deportación, asilo, VAWA, Visa U, peticiones familiares, residencia y ciudadanía. Llame al (212) 870-6175.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   PALETA DE MARCA — para igualar los colores exactos de
-   visajuvenil.com basta con cambiar estas variables
+   PALETA DE MARCA — solo azules, blancos y negros.
+   Cambiar aquí para igualar los colores exactos del sitio.
    ============================================================ */
 :root{
-  --navy:    #0a2a5e;                /* azul principal de marca */
-  --navy-d:  #061a3c;                /* azul profundo (fondos oscuros) */
-  --navy-x:  #04122b;                /* casi negro azulado */
-  --navy-l:  #1a4a9e;                /* azul de enlaces / hover */
-  --gold:    #c8a24b;                /* dorado principal */
-  --gold-l:  #e8cd8a;                /* dorado claro */
-  --gold-d:  #a5813a;                /* dorado oscuro */
-  --paper:   #f6f4ef;                /* marfil de secciones claras */
+  --black:   #06090f;               /* negro azulado */
+  --navy-x:  #081524;               /* fondo oscuro profundo */
+  --navy-d:  #0b2036;               /* azul noche */
+  --navy:    #123a63;               /* azul principal de marca */
+  --blue:    #2a6db5;               /* azul medio */
+  --sky:     #6fb4f0;               /* AZUL CLARO — acento principal */
+  --sky-l:   #a8d4fa;               /* azul claro suave */
+  --sky-x:   #d8ecfe;               /* azul hielo */
+  --paper:   #f3f8fd;               /* blanco azulado de secciones */
   --white:   #ffffff;
-  --ink:     #1a2230;
-  --gray:    #626b78;
-  --line:    #e3e0d8;
+  --ink:     #10161f;               /* texto principal (casi negro) */
+  --gray:    #58657a;               /* texto secundario */
+  --line:    #dbe7f3;
   --serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --sans:   'Inter', 'Segoe UI', Arial, sans-serif;
   --px: clamp(1.4rem, 5vw, 4.5rem);
@@ -37,261 +38,350 @@
 html{scroll-behavior:smooth}
 body{
   font-family:var(--sans);color:var(--ink);background:var(--white);
-  line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased;
-  font-size:16px;
+  line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased;font-size:16px;
 }
 img{max-width:100%;display:block}
-a{color:var(--navy-l);text-decoration:none}
-h1,h2,h3{font-family:var(--serif);line-height:1.15;color:var(--navy);font-weight:600}
+a{color:var(--blue);text-decoration:none}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;color:var(--navy-d);font-weight:600}
 .container{max-width:1200px;margin:0 auto;padding:0 var(--px)}
 section{padding:var(--py) 0}
+::selection{background:var(--sky);color:var(--navy-x)}
 
 .eyebrow{
-  display:flex;align-items:center;gap:.8rem;font-size:.74rem;font-weight:600;
-  letter-spacing:.28em;text-transform:uppercase;color:var(--gold-d);margin-bottom:1.1rem;
+  display:flex;align-items:center;gap:.8rem;font-size:.72rem;font-weight:600;
+  letter-spacing:.3em;text-transform:uppercase;color:var(--blue);margin-bottom:1.1rem;
 }
-.eyebrow::before{content:"";width:38px;height:1px;background:var(--gold)}
-.on-dark .eyebrow{color:var(--gold-l)}
-.section-title{font-size:clamp(2rem,4vw,3.1rem);margin-bottom:1.1rem;letter-spacing:.01em}
-.section-sub{color:var(--gray);max-width:620px;margin-bottom:3rem;font-size:1.02rem;font-weight:300}
+.eyebrow::before{content:"";width:38px;height:1px;background:var(--sky)}
+.on-dark .eyebrow{color:var(--sky)}
+.section-title{font-size:clamp(2rem,4vw,3.2rem);margin-bottom:1.1rem;letter-spacing:.01em}
+.section-sub{color:var(--gray);max-width:640px;margin-bottom:3rem;font-size:1.02rem;font-weight:300}
+
+/* ---------- Barra de progreso de scroll ---------- */
+#progress{
+  position:fixed;top:0;left:0;height:3px;width:0;z-index:200;
+  background:linear-gradient(90deg,var(--blue),var(--sky));
+  box-shadow:0 0 12px rgba(111,180,240,.7);
+}
 
 /* ---------- Barra superior ---------- */
 .topbar{
-  background:var(--navy-x);color:#aebbd2;font-size:.78rem;letter-spacing:.03em;
+  background:var(--black);color:#8fa6c4;font-size:.78rem;letter-spacing:.03em;
   padding:.5rem var(--px);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
 }
-.topbar a{color:var(--gold-l);font-weight:600}
+.topbar a{color:var(--sky);font-weight:600}
 .topbar span{white-space:nowrap}
 
 /* ---------- Navegación ---------- */
 header{
   position:sticky;top:0;z-index:100;
-  background:rgba(6,26,60,.92);backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(200,162,75,.25);
-  transition:background .3s;
+  background:rgba(8,21,36,.9);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(111,180,240,.22);
+  transition:background .3s, box-shadow .3s;
 }
-header.solid{background:var(--navy-x)}
+header.solid{background:rgba(6,9,15,.97);box-shadow:0 10px 30px rgba(0,0,0,.35)}
 .nav{
   display:flex;align-items:center;justify-content:space-between;
   padding:.9rem var(--px);max-width:1320px;margin:0 auto;
 }
 .brand{display:flex;align-items:center;gap:.85rem;color:var(--white)}
 .brand-mark{
-  width:48px;height:48px;flex:0 0 48px;border:1.5px solid var(--gold);border-radius:2px;
+  width:48px;height:48px;flex:0 0 48px;border:1.5px solid var(--sky);border-radius:2px;
   display:grid;place-items:center;font-family:var(--serif);font-weight:700;
-  font-size:1.5rem;color:var(--gold-l);position:relative;
+  font-size:1.5rem;color:var(--sky-l);position:relative;transition:transform .4s var(--ease);
 }
-.brand-mark::after{
-  content:"";position:absolute;inset:3px;border:1px solid rgba(200,162,75,.35);border-radius:1px;
-}
+.brand:hover .brand-mark{transform:rotate(-4deg) scale(1.05)}
+.brand-mark::after{content:"";position:absolute;inset:3px;border:1px solid rgba(111,180,240,.35);border-radius:1px}
 .brand-name{font-family:var(--serif);font-size:1.18rem;font-weight:600;letter-spacing:.04em;line-height:1.1}
 .brand-name small{
-  display:block;font-family:var(--sans);font-size:.6rem;font-weight:500;color:var(--gold-l);
+  display:block;font-family:var(--sans);font-size:.6rem;font-weight:500;color:var(--sky);
   letter-spacing:.32em;text-transform:uppercase;margin-top:.25rem;
 }
 nav ul{display:flex;gap:2rem;list-style:none;align-items:center}
-nav ul a{color:#d5deee;font-size:.86rem;font-weight:500;letter-spacing:.04em;transition:color .2s;position:relative}
+nav ul a{color:#cfdff2;font-size:.86rem;font-weight:500;letter-spacing:.04em;transition:color .2s;position:relative}
 nav ul a:not(.nav-cta)::after{
-  content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold-l);transition:width .3s var(--ease);
+  content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--sky);transition:width .35s var(--ease);
 }
-nav ul a:not(.nav-cta):hover{color:var(--gold-l)}
+nav ul a:not(.nav-cta):hover{color:var(--sky-l)}
 nav ul a:not(.nav-cta):hover::after{width:100%}
 .nav-cta{
-  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-l) 55%,var(--gold) 100%);
+  background:linear-gradient(135deg,var(--sky) 0%,var(--sky-l) 55%,var(--sky) 100%);
   color:var(--navy-x)!important;font-weight:700;letter-spacing:.06em;
   padding:.65rem 1.4rem;border-radius:2px;transition:filter .2s, transform .2s;
 }
-.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.nav-cta:hover{filter:brightness(1.07);transform:translateY(-1px)}
 .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:.4rem}
 .menu-btn span{display:block;width:26px;height:2px;background:#fff;margin:6px 0;transition:.3s}
 
-/* ---------- Hero ---------- */
-.hero{
-  position:relative;color:var(--white);overflow:hidden;
-  padding:clamp(5rem,12vw,9rem) 0 clamp(6rem,13vw,10rem);
-  background:
-    linear-gradient(100deg, rgba(4,18,43,.96) 0%, rgba(6,26,60,.88) 45%, rgba(10,42,94,.62) 100%),
-    var(--navy-d) url('https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=2000&q=80') center 30%/cover no-repeat;
-  /* si la foto no carga, queda el degradado navy */
-}
-.hero::after{
-  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.6;
-}
-.hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.3fr .95fr;gap:4rem;align-items:center}
-.hero h1{
-  color:var(--white);font-size:clamp(2.4rem,5.4vw,4.1rem);font-weight:600;margin:0 0 1.4rem;
-}
-.hero h1 em{
-  font-style:italic;color:var(--gold-l);position:relative;white-space:nowrap;
-}
-.hero p.lead{color:#c9d5e8;font-size:1.1rem;font-weight:300;max-width:560px;margin-bottom:2.4rem;line-height:1.8}
-.hero-actions{display:flex;gap:1.1rem;flex-wrap:wrap}
+/* ---------- Botones con brillo ---------- */
 .btn{
   display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.1rem;border-radius:2px;
-  font-weight:600;font-size:.92rem;letter-spacing:.05em;
-  transition:transform .3s var(--ease), filter .2s, border-color .2s, color .2s;
+  font-weight:600;font-size:.92rem;letter-spacing:.05em;position:relative;overflow:hidden;
+  transition:transform .3s var(--ease), filter .2s, border-color .2s, color .2s, box-shadow .3s;
 }
-.btn:hover{transform:translateY(-2px)}
-.btn-gold{
-  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-l) 55%,var(--gold) 100%);
-  color:var(--navy-x);box-shadow:0 8px 24px rgba(200,162,75,.35);
+.btn:hover{transform:translateY(-3px)}
+.btn::after{
+  content:"";position:absolute;top:0;bottom:0;left:-80%;width:45%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-20deg);transition:left .6s var(--ease);
 }
-.btn-gold:hover{filter:brightness(1.07)}
+.btn:hover::after{left:130%}
+.btn-blue{
+  background:linear-gradient(135deg,var(--sky) 0%,var(--sky-l) 55%,var(--sky) 100%);
+  color:var(--navy-x);box-shadow:0 10px 28px rgba(111,180,240,.4);
+}
+.btn-blue:hover{box-shadow:0 16px 38px rgba(111,180,240,.55)}
 .btn-line{border:1px solid rgba(255,255,255,.45);color:var(--white)}
-.btn-line:hover{border-color:var(--gold-l);color:var(--gold-l)}
+.btn-line:hover{border-color:var(--sky-l);color:var(--sky-l)}
 
-.hero-card{
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(200,162,75,.35);
-  border-radius:4px;padding:2.2rem;backdrop-filter:blur(8px);
-  box-shadow:0 30px 60px rgba(0,0,0,.35);
-  position:relative;
+/* ---------- Hero con efecto Ken Burns ---------- */
+.hero{
+  position:relative;color:var(--white);overflow:hidden;
+  padding:clamp(5rem,12vw,9.5rem) 0 clamp(6rem,13vw,10rem);
+  background:var(--navy-x);
 }
+.hero-bg{
+  position:absolute;inset:-4%;z-index:0;
+  background:url('https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=2000&q=80') center 30%/cover no-repeat;
+  animation:kenburns 24s ease-in-out infinite alternate;
+}
+@keyframes kenburns{from{transform:scale(1) translateY(0)}to{transform:scale(1.09) translateY(-1.5%)}}
+.hero-veil{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg, rgba(6,9,15,.97) 0%, rgba(8,21,36,.9) 45%, rgba(18,58,99,.6) 100%);
+}
+.hero::after{
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;z-index:2;
+  background:linear-gradient(90deg,transparent,var(--sky),transparent);opacity:.7;
+}
+.hero .container{position:relative;z-index:2;display:grid;grid-template-columns:1.3fr .95fr;gap:4rem;align-items:center}
+.hero h1{color:var(--white);font-size:clamp(2.4rem,5.4vw,4.2rem);font-weight:600;margin:0 0 1.4rem}
+.hero h1 em{font-style:italic;color:var(--sky-l)}
+.hero h1 .w{display:inline-block;opacity:0;transform:translateY(28px);animation:wordUp .8s var(--ease) forwards}
+@keyframes wordUp{to{opacity:1;transform:none}}
+.hero p.lead{color:#bed3ea;font-size:1.1rem;font-weight:300;max-width:560px;margin-bottom:2.4rem;line-height:1.8}
+.hero-actions{display:flex;gap:1.1rem;flex-wrap:wrap}
+.hero-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(111,180,240,.35);
+  border-radius:4px;padding:2.2rem;backdrop-filter:blur(8px);
+  box-shadow:0 30px 60px rgba(0,0,0,.4);position:relative;
+  transition:transform .5s var(--ease), box-shadow .5s;
+}
+.hero-card:hover{transform:translateY(-6px);box-shadow:0 44px 80px rgba(0,0,0,.5)}
 .hero-card::before{
   content:"";position:absolute;top:0;left:1.6rem;right:1.6rem;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  background:linear-gradient(90deg,transparent,var(--sky),transparent);
 }
-.hero-card h3{color:var(--gold-l);font-size:1.35rem;margin-bottom:1.2rem;letter-spacing:.03em}
+.hero-card h3{color:var(--sky-l);font-size:1.35rem;margin-bottom:1.2rem;letter-spacing:.03em}
 .hero-card ul{list-style:none}
 .hero-card li{
-  padding:.65rem 0 .65rem 1.9rem;position:relative;color:#dbe4f2;font-size:.93rem;font-weight:300;
-  border-bottom:1px solid rgba(255,255,255,.08);
+  padding:.65rem 0 .65rem 1.9rem;position:relative;color:#d4e3f5;font-size:.93rem;font-weight:300;
+  border-bottom:1px solid rgba(255,255,255,.08);transition:padding-left .3s var(--ease), color .3s;
 }
+.hero-card li:hover{padding-left:2.3rem;color:var(--sky-l)}
 .hero-card li:last-child{border-bottom:0}
-.hero-card li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:.8rem;top:.85rem}
-
+.hero-card li::before{content:"✦";position:absolute;left:0;color:var(--sky);font-size:.8rem;top:.85rem}
 .trustbar{
   margin-top:3rem;display:flex;gap:2.8rem;flex-wrap:wrap;align-items:center;
-  color:#9fb0ca;font-size:.82rem;letter-spacing:.02em;
+  color:#8fa6c4;font-size:.82rem;letter-spacing:.02em;
 }
-.trustbar strong{
-  color:var(--gold-l);font-size:1.6rem;display:block;font-family:var(--serif);font-weight:600;line-height:1.2;
+.trustbar strong{color:var(--sky-l);font-size:1.6rem;display:block;font-family:var(--serif);font-weight:600;line-height:1.2}
+.stars{color:var(--sky-l);letter-spacing:.14em}
+
+/* ---------- Marquesina ---------- */
+.marquee{
+  background:var(--black);border-bottom:1px solid rgba(111,180,240,.18);
+  overflow:hidden;padding:1rem 0;white-space:nowrap;
 }
-.stars{color:var(--gold-l);letter-spacing:.14em}
+.marquee-track{display:inline-block;animation:marquee 30s linear infinite}
+.marquee:hover .marquee-track{animation-play-state:paused}
+.marquee span{
+  display:inline-block;margin:0 2.2rem;color:#7d95b5;font-size:.78rem;
+  letter-spacing:.3em;text-transform:uppercase;font-weight:500;
+}
+.marquee b{color:var(--sky);font-weight:400}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 
 /* ---------- Franja de estadísticas ---------- */
-.stats{
-  background:var(--navy-x);padding:0;border-bottom:1px solid rgba(200,162,75,.2);
-}
-.stats .container{
-  display:grid;grid-template-columns:repeat(4,1fr);
-}
-.stat{
-  text-align:center;padding:2.6rem 1rem;position:relative;
-}
+.stats{background:var(--navy-x);padding:0;border-bottom:1px solid rgba(111,180,240,.18)}
+.stats .container{display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{text-align:center;padding:2.8rem 1rem;position:relative}
 .stat + .stat::before{
   content:"";position:absolute;left:0;top:28%;bottom:28%;width:1px;
-  background:linear-gradient(180deg,transparent,rgba(200,162,75,.4),transparent);
+  background:linear-gradient(180deg,transparent,rgba(111,180,240,.4),transparent);
 }
 .stat b{
-  font-family:var(--serif);font-size:clamp(2rem,4vw,2.9rem);font-weight:600;
-  color:var(--gold-l);display:block;line-height:1.1;
+  font-family:var(--serif);font-size:clamp(2rem,4vw,3rem);font-weight:600;
+  color:var(--sky-l);display:block;line-height:1.1;font-variant-numeric:tabular-nums;
 }
-.stat span{color:#8fa0bc;font-size:.8rem;letter-spacing:.06em;font-weight:300}
+.stat span{color:#7d95b5;font-size:.8rem;letter-spacing:.06em;font-weight:300}
 
-/* ---------- Servicios ---------- */
+/* ---------- Servicios (tarjetas con tilt 3D) ---------- */
 .services{background:var(--paper)}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.6rem}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.6rem;perspective:1200px}
 .svc{
   background:var(--white);border:1px solid var(--line);border-radius:3px;padding:2.1rem 1.9rem;
-  transition:transform .4s var(--ease), box-shadow .4s, border-color .3s;
-  position:relative;overflow:hidden;
+  transition:box-shadow .4s, border-color .3s, transform .25s ease-out;
+  position:relative;overflow:hidden;transform-style:preserve-3d;will-change:transform;
 }
 .svc::before{
   content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:linear-gradient(180deg,var(--gold-l),var(--gold-d));
+  background:linear-gradient(180deg,var(--sky-l),var(--blue));
   transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease);
 }
-.svc:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(10,42,94,.14);border-color:transparent}
+.svc:hover{box-shadow:0 28px 56px rgba(18,58,99,.16);border-color:transparent}
 .svc:hover::before{transform:scaleY(1)}
 .svc .ico{
-  width:52px;height:52px;border-radius:2px;background:var(--paper);
-  display:grid;place-items:center;margin-bottom:1.3rem;
-  border:1px solid var(--line);
+  width:52px;height:52px;border-radius:2px;background:var(--sky-x);
+  display:grid;place-items:center;margin-bottom:1.3rem;border:1px solid var(--line);
+  transition:transform .4s var(--ease), background .3s;
 }
+.svc:hover .ico{transform:translateY(-4px) scale(1.06);background:var(--sky-l)}
 .svc .ico svg{width:26px;height:26px;stroke:var(--navy);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .svc h3{font-size:1.3rem;margin-bottom:.55rem}
 .svc p{color:var(--gray);font-size:.9rem;font-weight:300}
-.svc.featured{background:linear-gradient(150deg,var(--navy-x),var(--navy));border:1px solid rgba(200,162,75,.4)}
-.svc.featured h3{color:var(--gold-l)}
-.svc.featured p{color:#c3cfe3}
-.svc.featured .ico{background:rgba(255,255,255,.06);border-color:rgba(200,162,75,.35)}
-.svc.featured .ico svg{stroke:var(--gold-l)}
+.svc.featured{background:linear-gradient(150deg,var(--black),var(--navy-d));border:1px solid rgba(111,180,240,.4)}
+.svc.featured h3{color:var(--sky-l)}
+.svc.featured p{color:#b7c9de}
+.svc.featured .ico{background:rgba(255,255,255,.06);border-color:rgba(111,180,240,.35)}
+.svc.featured .ico svg{stroke:var(--sky-l)}
 
 /* ---------- SIJS destacado ---------- */
 .sijs .container{display:grid;grid-template-columns:1.05fr .95fr;gap:4.5rem;align-items:start}
 .sijs-photo{
   position:relative;border-radius:4px;overflow:hidden;margin-bottom:2.2rem;
-  box-shadow:0 30px 60px rgba(10,42,94,.22);
-  background:linear-gradient(150deg,var(--navy),var(--navy-l));
+  box-shadow:0 30px 60px rgba(18,58,99,.22);
+  background:linear-gradient(150deg,var(--navy),var(--blue));
 }
-.sijs-photo img{width:100%;height:340px;object-fit:cover;display:block}
-.sijs-photo::after{
-  content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.5);border-radius:2px;pointer-events:none;
-}
+.sijs-photo img{width:100%;height:340px;object-fit:cover;display:block;transition:transform 1.2s var(--ease)}
+.sijs-photo:hover img{transform:scale(1.06)}
+.sijs-photo::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.5);border-radius:2px;pointer-events:none}
 .sijs ul{list-style:none;margin-top:1.6rem}
 .sijs li{
   padding:.85rem 0 .85rem 2.2rem;position:relative;border-bottom:1px solid var(--line);font-size:.97rem;
+  transition:padding-left .3s var(--ease);
 }
-.sijs li::before{
-  content:"✦";position:absolute;left:.2rem;top:.85rem;color:var(--gold);font-size:.85rem;
-}
+.sijs li:hover{padding-left:2.6rem}
+.sijs li::before{content:"✦";position:absolute;left:.2rem;top:.85rem;color:var(--sky);font-size:.85rem;transition:left .3s var(--ease)}
+.sijs li:hover::before{left:.6rem}
 .sijs-note{
-  margin-top:1.8rem;background:var(--paper);border-left:2px solid var(--gold);
+  margin-top:1.8rem;background:var(--sky-x);border-left:2px solid var(--sky);
   padding:1.2rem 1.4rem;font-size:.87rem;color:var(--gray);font-weight:300;
 }
 .steps{counter-reset:step;display:grid;gap:1.1rem}
 .step{
   background:var(--white);border:1px solid var(--line);border-radius:3px;
   padding:1.4rem 1.5rem 1.4rem 4.6rem;position:relative;
-  transition:border-color .3s, box-shadow .3s;
+  transition:border-color .3s, box-shadow .3s, transform .3s var(--ease);
 }
-.step:hover{border-color:var(--gold);box-shadow:0 12px 28px rgba(10,42,94,.1)}
+.step:hover{border-color:var(--sky);box-shadow:0 14px 30px rgba(18,58,99,.12);transform:translateX(6px)}
 .step::before{
   counter-increment:step;content:counter(step, decimal-leading-zero);
   position:absolute;left:1.3rem;top:1.35rem;
-  font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1;
+  font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--sky);line-height:1;
+  transition:color .3s;
 }
-.step h4{font-family:var(--serif);font-size:1.2rem;margin-bottom:.25rem;color:var(--navy)}
+.step:hover::before{color:var(--blue)}
+.step h4{font-family:var(--serif);font-size:1.2rem;margin-bottom:.25rem;color:var(--navy-d)}
 .step p{font-size:.88rem;color:var(--gray);font-weight:300}
+
+/* ---------- Beneficios de la Visa Juvenil ---------- */
+.benefits{background:var(--white)}
+.ben-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.6rem}
+.ben{
+  border:1px solid var(--line);border-radius:3px;padding:1.9rem;background:var(--paper);
+  position:relative;overflow:hidden;transition:transform .4s var(--ease), box-shadow .4s, background .4s;
+}
+.ben:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(18,58,99,.14);background:var(--white)}
+.ben::after{
+  content:"";position:absolute;right:-30px;bottom:-30px;width:110px;height:110px;border-radius:50%;
+  background:radial-gradient(circle, rgba(111,180,240,.18), transparent 70%);
+  transition:transform .5s var(--ease);
+}
+.ben:hover::after{transform:scale(1.6)}
+.ben .num{font-family:var(--serif);font-size:2rem;font-weight:700;color:var(--sky);line-height:1;margin-bottom:.7rem}
+.ben h3{font-size:1.25rem;margin-bottom:.45rem}
+.ben p{font-size:.9rem;color:var(--gray);font-weight:300}
+
+/* ---------- Mosaico de fotos ---------- */
+.mosaic{background:var(--navy-x);padding:var(--py) 0}
+.mosaic-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:1rem;
+}
+.mos{
+  position:relative;border-radius:3px;overflow:hidden;background:linear-gradient(150deg,var(--navy-d),var(--navy));
+}
+.mos img{width:100%;height:100%;object-fit:cover;transition:transform 1.1s var(--ease), filter .6s}
+.mos:hover img{transform:scale(1.08);filter:brightness(1.1)}
+.mos figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:2.2rem 1.2rem .9rem;
+  background:linear-gradient(transparent, rgba(6,9,15,.85));
+  color:var(--sky-x);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;font-weight:500;
+  opacity:0;transform:translateY(8px);transition:opacity .45s, transform .45s var(--ease);
+}
+.mos:hover figcaption{opacity:1;transform:none}
+.mos.wide{grid-column:span 2}
+.mos.tall{grid-row:span 2}
+
+/* ---------- Documentos ---------- */
+.docs .container{display:grid;grid-template-columns:.95fr 1.05fr;gap:4rem;align-items:center}
+.docs-photo{
+  position:relative;border-radius:4px;overflow:hidden;
+  box-shadow:0 30px 60px rgba(18,58,99,.2);
+  background:linear-gradient(150deg,var(--navy-d),var(--blue));
+}
+.docs-photo img{width:100%;height:440px;object-fit:cover;transition:transform 1.2s var(--ease)}
+.docs-photo:hover img{transform:scale(1.05)}
+.docs-photo::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.5);border-radius:2px;pointer-events:none}
+.doc-list{list-style:none;margin-top:1.8rem}
+.doc-list li{
+  display:flex;gap:1rem;align-items:flex-start;padding:.9rem 0;border-bottom:1px solid var(--line);
+}
+.doc-check{
+  width:26px;height:26px;flex:0 0 26px;border-radius:50%;margin-top:.15rem;
+  background:var(--sky-x);border:1px solid var(--sky);display:grid;place-items:center;
+  color:var(--blue);font-size:.8rem;font-weight:700;
+  transition:background .3s, color .3s, transform .3s var(--ease);
+}
+.doc-list li:hover .doc-check{background:var(--blue);color:#fff;transform:scale(1.15)}
+.doc-list b{color:var(--navy-d)}
+.doc-list p{font-size:.88rem;color:var(--gray);font-weight:300}
 
 /* ---------- Por qué elegirnos ---------- */
 .why{
-  position:relative;color:#dbe4f2;overflow:hidden;
+  position:relative;color:#d4e3f5;overflow:hidden;
   background:
-    linear-gradient(100deg, rgba(4,18,43,.97) 0%, rgba(6,26,60,.93) 55%, rgba(10,42,94,.82) 100%),
+    linear-gradient(100deg, rgba(6,9,15,.97) 0%, rgba(8,21,36,.93) 55%, rgba(18,58,99,.82) 100%),
     var(--navy-d) url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat fixed;
 }
 .why .section-title{color:var(--white)}
 .why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:3rem}
-.why-item{
-  border-top:1px solid rgba(200,162,75,.5);padding-top:1.4rem;position:relative;
-}
+.why-item{border-top:1px solid rgba(111,180,240,.5);padding-top:1.4rem;position:relative;transition:transform .4s var(--ease)}
+.why-item:hover{transform:translateY(-5px)}
 .why-item::before{
-  content:"";position:absolute;top:-1px;left:0;width:44px;height:3px;background:var(--gold);
+  content:"";position:absolute;top:-1px;left:0;width:44px;height:3px;background:var(--sky);
+  transition:width .4s var(--ease);
 }
-.why-item h3{color:var(--gold-l);font-size:1.35rem;margin-bottom:.6rem}
-.why-item p{font-size:.9rem;color:#b6c4da;font-weight:300}
+.why-item:hover::before{width:100%}
+.why-item h3{color:var(--sky-l);font-size:1.35rem;margin-bottom:.6rem}
+.why-item p{font-size:.9rem;color:#a8bdd8;font-weight:300}
 
 /* ---------- Testimonios ---------- */
 .tst-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
-.tst-score{
-  text-align:right;font-family:var(--serif);color:var(--navy);
-}
+.tst-score{text-align:right;font-family:var(--serif);color:var(--navy-d)}
 .tst-score b{font-size:3rem;font-weight:700;line-height:1}
-.tst-score .stars{color:var(--gold);font-size:1.05rem;display:block;margin:.3rem 0 .15rem}
+.tst-score .stars{color:var(--blue);font-size:1.05rem;display:block;margin:.3rem 0 .15rem}
 .tst-score small{font-family:var(--sans);color:var(--gray);font-size:.78rem;font-weight:300}
 .tst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.6rem;margin-top:2.6rem}
 .tst{
   background:var(--paper);border-radius:3px;padding:2.4rem 2rem 1.9rem;position:relative;
-  border:1px solid var(--line);
+  border:1px solid var(--line);transition:transform .4s var(--ease), box-shadow .4s;
 }
+.tst:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(18,58,99,.13)}
 .tst::before{
   content:"“";position:absolute;top:.4rem;left:1.4rem;font-family:var(--serif);
-  font-size:4.5rem;color:var(--gold);opacity:.45;line-height:1;
+  font-size:4.5rem;color:var(--sky);opacity:.5;line-height:1;
 }
-.tst .stars{color:var(--gold);margin-bottom:.8rem;font-size:.9rem}
+.tst .stars{color:var(--blue);margin-bottom:.8rem;font-size:.9rem}
 .tst p{font-size:.95rem;color:var(--ink);font-style:italic;font-weight:300;line-height:1.75}
 .tst footer{margin-top:1.2rem;font-size:.82rem;color:var(--gray);font-weight:600;letter-spacing:.03em}
 .tst-note{font-size:.75rem;color:var(--gray);margin-top:1.6rem;text-align:center;font-weight:300}
@@ -300,117 +390,135 @@ nav ul a:not(.nav-cta):hover::after{width:100%}
 .faq{background:var(--paper)}
 .faq details{
   border:1px solid var(--line);border-radius:3px;margin-bottom:.9rem;
-  background:var(--white);overflow:hidden;transition:border-color .3s;
+  background:var(--white);overflow:hidden;transition:border-color .3s, box-shadow .3s;
 }
-.faq details[open]{border-color:var(--gold)}
+.faq details[open]{border-color:var(--sky);box-shadow:0 12px 28px rgba(18,58,99,.08)}
 .faq summary{
-  cursor:pointer;padding:1.2rem 1.5rem;font-weight:600;color:var(--navy);font-size:.98rem;
-  list-style:none;position:relative;padding-right:3.2rem;
+  cursor:pointer;padding:1.2rem 1.5rem;font-weight:600;color:var(--navy-d);font-size:.98rem;
+  list-style:none;position:relative;padding-right:3.2rem;transition:color .2s;
 }
+.faq summary:hover{color:var(--blue)}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{
   content:"+";position:absolute;right:1.4rem;top:50%;transform:translateY(-50%);
-  font-size:1.5rem;color:var(--gold);font-weight:300;transition:transform .25s;
+  font-size:1.5rem;color:var(--sky);font-weight:300;transition:transform .3s var(--ease);
 }
 .faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
-.faq details p{padding:0 1.5rem 1.3rem;color:var(--gray);font-size:.93rem;font-weight:300}
+.faq details .faq-body{
+  padding:0 1.5rem;color:var(--gray);font-size:.93rem;font-weight:300;
+  max-height:0;opacity:0;transition:max-height .5s var(--ease), opacity .4s, padding .4s;
+}
+.faq details[open] .faq-body{max-height:320px;opacity:1;padding:0 1.5rem 1.3rem}
 
 /* ---------- Contacto ---------- */
 .contact .container{display:grid;grid-template-columns:1fr 1.05fr;gap:3.5rem;align-items:start}
 .c-item{display:flex;gap:1.1rem;margin-bottom:1.7rem;align-items:flex-start}
 .c-item .ico{
   width:46px;height:46px;flex:0 0 46px;border-radius:2px;
-  background:linear-gradient(150deg,var(--navy-x),var(--navy));
-  border:1px solid rgba(200,162,75,.4);display:grid;place-items:center;
+  background:linear-gradient(150deg,var(--black),var(--navy));
+  border:1px solid rgba(111,180,240,.4);display:grid;place-items:center;
+  transition:transform .35s var(--ease);
 }
-.c-item .ico svg{width:21px;height:21px;stroke:var(--gold-l);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.c-item h4{font-family:var(--serif);font-size:1.15rem;margin-bottom:.15rem;color:var(--navy)}
+.c-item:hover .ico{transform:translateY(-3px) scale(1.06)}
+.c-item .ico svg{width:21px;height:21px;stroke:var(--sky-l);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.c-item h4{font-family:var(--serif);font-size:1.15rem;margin-bottom:.15rem;color:var(--navy-d)}
 .c-item p, .c-item a{font-size:.92rem;color:var(--gray);font-weight:300}
-.c-item a{color:var(--navy-l);font-weight:600}
+.c-item a{color:var(--blue);font-weight:600}
 .hours{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:.3rem}
 .hours td{padding:.35rem 0;color:var(--gray);border-bottom:1px dashed var(--line);font-weight:300}
 .hours td:last-child{text-align:right;color:var(--ink);font-weight:600}
 .form-card{
   background:var(--white);border-radius:4px;padding:2.6rem;
-  box-shadow:0 30px 70px rgba(10,42,94,.14);border:1px solid var(--line);
-  border-top:3px solid var(--gold);
+  box-shadow:0 30px 70px rgba(18,58,99,.15);border:1px solid var(--line);
+  border-top:3px solid var(--sky);
 }
 .form-card h3{font-size:1.7rem;margin-bottom:.4rem}
 .form-card > p{color:var(--gray);font-size:.88rem;font-weight:300;margin-bottom:1.6rem}
 .fld{margin-bottom:1.1rem}
-.fld label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;color:var(--navy)}
+.fld label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;color:var(--navy-d)}
 .fld input,.fld select,.fld textarea{
   width:100%;padding:.8rem 1rem;border:1px solid var(--line);border-radius:2px;
   font:inherit;font-size:.93rem;background:var(--paper);color:var(--ink);
+  transition:border-color .25s, background .25s, box-shadow .25s;
 }
-.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--gold);background:#fff}
+.fld input:focus,.fld select:focus,.fld textarea:focus{
+  outline:none;border-color:var(--sky);background:#fff;box-shadow:0 0 0 3px rgba(111,180,240,.25);
+}
 .form-card button{
-  width:100%;border:0;cursor:pointer;
-  background:linear-gradient(135deg,var(--navy-x),var(--navy));color:var(--gold-l);
+  width:100%;border:0;cursor:pointer;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--black),var(--navy));color:var(--sky-l);
   padding:1.05rem;border-radius:2px;font-weight:700;font-size:.95rem;letter-spacing:.08em;
   text-transform:uppercase;transition:filter .2s, transform .2s;
 }
-.form-card button:hover{filter:brightness(1.25);transform:translateY(-1px)}
+.form-card button:hover{filter:brightness(1.35);transform:translateY(-1px)}
 .form-note{font-size:.73rem;color:var(--gray);margin-top:.9rem;text-align:center;font-weight:300}
-.map{border-radius:4px;overflow:hidden;border:1px solid var(--line);line-height:0;box-shadow:0 16px 40px rgba(10,42,94,.12)}
+.map{border-radius:4px;overflow:hidden;border:1px solid var(--line);line-height:0;box-shadow:0 16px 40px rgba(18,58,99,.13)}
 .map iframe{width:100%;height:290px;border:0}
 
 /* ---------- CTA final ---------- */
 .cta-final{
   position:relative;color:#fff;text-align:center;overflow:hidden;
   background:
-    linear-gradient(rgba(4,18,43,.9), rgba(6,26,60,.94)),
+    linear-gradient(rgba(6,9,15,.9), rgba(8,21,36,.94)),
     var(--navy-d) url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
 }
 .cta-final::before, .cta-final::after{
   content:"";position:absolute;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  background:linear-gradient(90deg,transparent,var(--sky),transparent);
 }
 .cta-final::before{top:0}
 .cta-final::after{bottom:0}
 .cta-final h2{color:#fff;font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:1rem}
-.cta-final p{color:#b6c4da;max-width:560px;margin:0 auto 2.4rem;font-weight:300}
+.cta-final p{color:#a8bdd8;max-width:560px;margin:0 auto 2.4rem;font-weight:300}
 
 /* ---------- Footer ---------- */
-footer.site{
-  background:var(--navy-x);color:#8fa0bc;font-size:.85rem;font-weight:300;
-  padding:3.5rem var(--px) 2rem;
-}
-.f-grid{
-  max-width:1200px;margin:0 auto;display:grid;
-  grid-template-columns:1.5fr 1fr 1fr;gap:3rem;
-}
-footer.site h4{
-  color:var(--gold-l);font-family:var(--serif);font-size:1.2rem;font-weight:600;margin-bottom:1rem;
-}
+footer.site{background:var(--black);color:#7d95b5;font-size:.85rem;font-weight:300;padding:3.5rem var(--px) 2rem}
+.f-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem}
+footer.site h4{color:var(--sky-l);font-family:var(--serif);font-size:1.2rem;font-weight:600;margin-bottom:1rem}
 footer.site ul{list-style:none}
 footer.site li{margin-bottom:.5rem}
-footer.site a{color:#b6c4da}
-footer.site a:hover{color:var(--gold-l)}
+footer.site a{color:#a8bdd8;transition:color .2s, padding-left .25s var(--ease)}
+footer.site a:hover{color:var(--sky-l);padding-left:4px}
 .f-brand{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
 .f-legal{
   max-width:1200px;margin:2.6rem auto 0;padding-top:1.6rem;
-  border-top:1px solid rgba(200,162,75,.18);font-size:.73rem;color:#5f7291;
+  border-top:1px solid rgba(111,180,240,.16);font-size:.73rem;color:#51677f;
 }
 
-/* ---------- Animación de aparición ---------- */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+/* ---------- Botón volver arriba ---------- */
+#toTop{
+  position:fixed;right:1.4rem;bottom:1.4rem;z-index:150;width:48px;height:48px;
+  border-radius:50%;border:1px solid rgba(111,180,240,.5);cursor:pointer;
+  background:rgba(8,21,36,.92);color:var(--sky-l);font-size:1.15rem;
+  display:grid;place-items:center;backdrop-filter:blur(6px);
+  opacity:0;transform:translateY(16px);pointer-events:none;
+  transition:opacity .4s, transform .4s var(--ease), background .3s;
+}
+#toTop.show{opacity:1;transform:none;pointer-events:auto}
+#toTop:hover{background:var(--navy)}
+
+/* ---------- Animación de aparición (con retraso escalonado) ---------- */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
 .reveal.on{opacity:1;transform:none}
+[data-parallax]{will-change:transform}
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
   .why{background-attachment:scroll}
+  .hero-bg,.marquee-track{animation:none}
 }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 960px){
-  .hero .container,.sijs .container,.contact .container{grid-template-columns:1fr}
+  .hero .container,.sijs .container,.contact .container,.docs .container{grid-template-columns:1fr}
   .stats .container{grid-template-columns:repeat(2,1fr)}
   .stat:nth-child(3)::before{display:none}
+  .mosaic-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:180px}
   .f-grid{grid-template-columns:1fr 1fr}
   .why{background-attachment:scroll}
+  .docs-photo img{height:300px}
   nav ul{
-    position:fixed;inset:0 0 auto 0;top:0;flex-direction:column;background:var(--navy-x);
+    position:fixed;inset:0 0 auto 0;top:0;flex-direction:column;background:var(--black);
     padding:6rem var(--px) 2.5rem;gap:1.4rem;transform:translateY(-100%);
     transition:transform .4s var(--ease);z-index:-1;align-items:flex-start;
     box-shadow:0 24px 48px rgba(0,0,0,.5);
@@ -425,10 +533,14 @@ footer.site a:hover{color:var(--gold-l)}
   .f-grid{grid-template-columns:1fr}
   .topbar{justify-content:center;text-align:center}
   .stats .container{grid-template-columns:1fr 1fr}
+  .mosaic-grid{grid-template-columns:1fr;grid-auto-rows:220px}
+  .mos.wide{grid-column:span 1}
 }
 </style>
 </head>
 <body>
+
+<div id="progress" aria-hidden="true"></div>
 
 <!-- Barra superior -->
 <div class="topbar">
@@ -450,8 +562,8 @@ footer.site a:hover{color:var(--gold-l)}
       <ul id="navlist">
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#visa-juvenil">Visa Juvenil</a></li>
+        <li><a href="#beneficios">Beneficios</a></li>
         <li><a href="#nosotros">La Firma</a></li>
-        <li><a href="#testimonios">Testimonios</a></li>
         <li><a href="#faq">Preguntas</a></li>
         <li><a class="nav-cta" href="#contacto">Consulta</a></li>
       </ul>
@@ -461,17 +573,19 @@ footer.site a:hover{color:var(--gold-l)}
 
 <!-- Hero -->
 <section class="hero on-dark" id="inicio">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
   <div class="container">
     <div>
       <span class="eyebrow">Especialistas en Visa Juvenil · SIJS</span>
-      <h1>Protegemos el futuro de los <em>jóvenes inmigrantes</em> y sus familias</h1>
+      <h1 id="heroTitle">Protegemos el futuro de los <em>jóvenes inmigrantes</em> y sus familias</h1>
       <p class="lead">
         Despacho boutique de inmigración en el corazón de Manhattan, al servicio de la comunidad
         hispana del área triestatal — New York, New Jersey y Connecticut. Un equipo que le
         acompaña en cada paso, en su idioma y con un trato humano.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="tel:+12128706175">Llámenos · (212) 870-6175</a>
+        <a class="btn btn-blue" href="tel:+12128706175">Llámenos · (212) 870-6175</a>
         <a class="btn btn-line" href="#contacto">Solicitar consulta</a>
       </div>
       <div class="trustbar">
@@ -480,7 +594,7 @@ footer.site a:hover{color:var(--gold-l)}
         <div><strong>Español</strong> Atención en su idioma</div>
       </div>
     </div>
-    <aside class="hero-card">
+    <aside class="hero-card" data-parallax="0.06">
       <h3>¿En qué podemos ayudarle?</h3>
       <ul>
         <li>Visa Juvenil (SIJS) para menores de 21 años</li>
@@ -494,13 +608,20 @@ footer.site a:hover{color:var(--gold-l)}
   </div>
 </section>
 
-<!-- Estadísticas -->
+<!-- Marquesina -->
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track">
+    <span>Visa Juvenil · SIJS <b>✦</b></span><span>Defensa de deportación <b>✦</b></span><span>Asilo <b>✦</b></span><span>VAWA <b>✦</b></span><span>Visa U <b>✦</b></span><span>Peticiones familiares <b>✦</b></span><span>Green Card <b>✦</b></span><span>Ciudadanía <b>✦</b></span><span>Visa Juvenil · SIJS <b>✦</b></span><span>Defensa de deportación <b>✦</b></span><span>Asilo <b>✦</b></span><span>VAWA <b>✦</b></span><span>Visa U <b>✦</b></span><span>Peticiones familiares <b>✦</b></span><span>Green Card <b>✦</b></span><span>Ciudadanía <b>✦</b></span>
+  </div>
+</div>
+
+<!-- Estadísticas (contadores animados) -->
 <div class="stats">
   <div class="container">
-    <div class="stat reveal"><b>4.9★</b><span>Calificación · 636 reseñas</span></div>
-    <div class="stat reveal"><b>2</b><span>Estados con licencia · NY y NJ</span></div>
-    <div class="stat reveal"><b>10+</b><span>Áreas de práctica migratoria</span></div>
-    <div class="stat reveal"><b>100%</b><span>Atención en español</span></div>
+    <div class="stat reveal"><b><span class="count" data-target="4.9" data-dec="1">0</span>★</b><span>Calificación promedio</span></div>
+    <div class="stat reveal"><b><span class="count" data-target="636">0</span></b><span>Reseñas en Google</span></div>
+    <div class="stat reveal"><b><span class="count" data-target="10">0</span>+</b><span>Áreas de práctica migratoria</span></div>
+    <div class="stat reveal"><b><span class="count" data-target="100">0</span>%</b><span>Atención en español</span></div>
   </div>
 </div>
 
@@ -513,7 +634,7 @@ footer.site a:hover{color:var(--gold-l)}
       Representamos a personas y familias en todo tipo de trámites migratorios,
       con especial dedicación a los casos de menores y víctimas.
     </p>
-    <div class="services-grid">
+    <div class="services-grid" id="svcGrid">
       <article class="svc featured reveal">
         <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
         <h3>Visa Juvenil (SIJS)</h3>
@@ -575,16 +696,15 @@ footer.site a:hover{color:var(--gold-l)}
       <!-- Foto: jóvenes estudiantes (stock Unsplash). Reemplazar por foto propia del despacho si se desea -->
       <div class="sijs-photo reveal">
         <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
-             alt="Jóvenes estudiantes conversando" loading="lazy"
-             onerror="this.style.display='none'">
+             alt="Jóvenes estudiantes conversando" loading="lazy" onerror="this.style.display='none'">
       </div>
       <span class="eyebrow reveal">Nuestra especialidad</span>
       <h2 class="section-title reveal">¿Qué es la Visa Juvenil (SIJS)?</h2>
       <p class="reveal">
         El <strong>Estatus Especial de Inmigrante Juvenil</strong> (SIJS, por sus siglas en inglés)
-        es una protección migratoria para jóvenes que no pueden reunirse con uno o ambos padres
-        por motivos de <strong>abandono, abuso o negligencia</strong>. Puede abrir el camino a la
-        residencia permanente (Green Card). Requisitos generales:
+        es una protección migratoria creada por el Congreso para jóvenes que no pueden reunirse
+        con uno o ambos padres por motivos de <strong>abandono, abuso o negligencia</strong>.
+        Puede abrir el camino a la residencia permanente (Green Card). Requisitos generales:
       </p>
       <ul>
         <li class="reveal">Tener <strong>menos de 21 años</strong> al presentar la petición.</li>
@@ -603,11 +723,91 @@ footer.site a:hover{color:var(--gold-l)}
       <h2 class="section-title reveal">Su caso, paso a paso</h2>
       <div class="steps">
         <div class="step reveal"><h4>Consulta inicial</h4><p>Escuchamos su historia, revisamos documentos y evaluamos si califica para SIJS u otra vía migratoria.</p></div>
-        <div class="step reveal"><h4>Corte de familia</h4><p>Presentamos el caso ante la corte estatal para obtener la orden con las determinaciones necesarias.</p></div>
-        <div class="step reveal"><h4>Petición I-360 ante USCIS</h4><p>Preparamos y presentamos la petición de Estatus Especial de Inmigrante Juvenil con toda la evidencia.</p></div>
-        <div class="step reveal"><h4>Residencia permanente</h4><p>Cuando corresponde, tramitamos el ajuste de estatus para obtener la Green Card.</p></div>
+        <div class="step reveal"><h4>Corte de familia</h4><p>Presentamos el caso ante la corte estatal (custodia o tutela) para obtener la orden con las determinaciones especiales necesarias.</p></div>
+        <div class="step reveal"><h4>Petición I-360 ante USCIS</h4><p>Preparamos y presentamos la petición de Estatus Especial de Inmigrante Juvenil con toda la evidencia. USCIS no cobra tarifa por esta petición.</p></div>
+        <div class="step reveal"><h4>Protección mientras espera</h4><p>Con la petición aprobada, USCIS puede otorgar acción diferida y elegibilidad para permiso de trabajo mientras hay visa disponible.</p></div>
+        <div class="step reveal"><h4>Residencia permanente</h4><p>Cuando corresponde, tramitamos el ajuste de estatus (Formulario I-485) para obtener la Green Card.</p></div>
         <div class="step reveal"><h4>Acompañamiento continuo</h4><p>Le mantenemos informado en todo momento y respondemos sus dudas, siempre en español.</p></div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Beneficios de la Visa Juvenil -->
+<section class="benefits" id="beneficios">
+  <div class="container">
+    <span class="eyebrow reveal">Más sobre la Visa Juvenil</span>
+    <h2 class="section-title reveal">Beneficios del estatus SIJS</h2>
+    <p class="section-sub reveal">
+      Obtener el Estatus Especial de Inmigrante Juvenil puede cambiar por completo el futuro
+      de un joven. Estos son los principales beneficios:
+    </p>
+    <div class="ben-grid">
+      <div class="ben reveal"><div class="num">01</div><h3>Camino a la Green Card</h3><p>El SIJS permite solicitar la residencia permanente cuando hay visa disponible, sin necesidad de un familiar peticionario.</p></div>
+      <div class="ben reveal"><div class="num">02</div><h3>Protección frente a la deportación</h3><p>Con la petición aprobada, USCIS puede otorgar acción diferida, una protección temporal mientras espera su residencia.</p></div>
+      <div class="ben reveal"><div class="num">03</div><h3>Permiso de trabajo</h3><p>Los jóvenes con SIJS aprobado y acción diferida pueden solicitar autorización de empleo para trabajar legalmente.</p></div>
+      <div class="ben reveal"><div class="num">04</div><h3>Sin tarifa de USCIS</h3><p>La petición I-360 de SIJS no tiene costo de presentación ante USCIS, y en el ajuste pueden solicitarse exenciones de tarifas.</p></div>
+      <div class="ben reveal"><div class="num">05</div><h3>Perdón de ciertas faltas migratorias</h3><p>El SIJS perdona varias causales de inadmisibilidad, como la entrada sin inspección, que bloquean otras vías.</p></div>
+      <div class="ben reveal"><div class="num">06</div><h3>Futuro con ciudadanía</h3><p>Tras cinco años como residente permanente, el joven puede solicitar la ciudadanía americana por naturalización.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- Mosaico de fotos -->
+<section class="mosaic on-dark" aria-label="Galería">
+  <div class="container">
+    <span class="eyebrow reveal">Nueva York, nuestra casa</span>
+    <h2 class="section-title reveal" style="color:#fff">Al servicio de la comunidad</h2>
+    <p class="section-sub reveal" style="color:#8fa6c4">
+      Desde Manhattan atendemos a familias de los cinco condados, New Jersey y Connecticut.
+    </p>
+    <!-- Fotos stock (Unsplash). Reemplazar por fotos reales del despacho cuando estén disponibles -->
+    <div class="mosaic-grid">
+      <figure class="mos wide reveal">
+        <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=1400&q=80" alt="Calles de Nueva York con bandera de Estados Unidos" loading="lazy" onerror="this.style.display='none'">
+        <figcaption>Manhattan · New York</figcaption>
+      </figure>
+      <figure class="mos tall reveal">
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Jóvenes estudiando juntos" loading="lazy" onerror="this.style.display='none'">
+        <figcaption>El futuro de los jóvenes</figcaption>
+      </figure>
+      <figure class="mos reveal">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=900&q=80" alt="Abogado revisando y firmando documentos" loading="lazy" onerror="this.style.display='none'">
+        <figcaption>Preparación experta</figcaption>
+      </figure>
+      <figure class="mos reveal">
+        <img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=900&q=80" alt="Biblioteca jurídica" loading="lazy" onerror="this.style.display='none'">
+        <figcaption>Conocimiento legal</figcaption>
+      </figure>
+      <figure class="mos wide reveal">
+        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?auto=format&fit=crop&w=1400&q=80" alt="Familia caminando junta al atardecer" loading="lazy" onerror="this.style.display='none'">
+        <figcaption>Familias unidas</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- Documentos -->
+<section class="docs">
+  <div class="container">
+    <div class="docs-photo reveal" data-parallax="0.05">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1100&q=80"
+           alt="Documentos y preparación de un caso legal" loading="lazy" onerror="this.style.display='none'">
+    </div>
+    <div>
+      <span class="eyebrow reveal">Prepare su consulta</span>
+      <h2 class="section-title reveal">Documentos útiles para su caso de Visa Juvenil</h2>
+      <p class="reveal" style="color:var(--gray);font-weight:300">
+        No necesita tenerlo todo para llamarnos — pero estos documentos ayudan a evaluar
+        y fortalecer el caso desde la primera cita:
+      </p>
+      <ul class="doc-list">
+        <li class="reveal"><span class="doc-check">✓</span><div><b>Acta de nacimiento del joven</b><p>Con traducción si está en otro idioma; demuestra la edad y la identidad.</p></div></li>
+        <li class="reveal"><span class="doc-check">✓</span><div><b>Pasaporte o identificación</b><p>Cualquier documento de identidad del país de origen, aunque esté vencido.</p></div></li>
+        <li class="reveal"><span class="doc-check">✓</span><div><b>Evidencia de la situación familiar</b><p>Todo lo que muestre el abandono, abuso o negligencia: mensajes, reportes, testigos, historial.</p></div></li>
+        <li class="reveal"><span class="doc-check">✓</span><div><b>Prueba de presencia en EE. UU.</b><p>Registros escolares, médicos o de vivienda que muestren dónde vive el joven.</p></div></li>
+        <li class="reveal"><span class="doc-check">✓</span><div><b>Documentos migratorios previos</b><p>Notificaciones de la corte de inmigración, si el joven tiene un proceso abierto.</p></div></li>
+      </ul>
     </div>
   </div>
 </section>
@@ -622,22 +822,10 @@ footer.site a:hover{color:var(--gold-l)}
       Nuestra misión es servir a la comunidad hispana con honestidad, dedicación y resultados.
     </p>
     <div class="why-grid">
-      <div class="why-item reveal">
-        <h3>Especialización real</h3>
-        <p>La Visa Juvenil (SIJS) es el corazón de nuestra práctica. Conocemos a fondo las cortes de familia y los requisitos de USCIS.</p>
-      </div>
-      <div class="why-item reveal">
-        <h3>Trato humano y en español</h3>
-        <p>Entendemos lo que está en juego para su familia. Le explicamos todo con claridad, sin tecnicismos y en su idioma.</p>
-      </div>
-      <div class="why-item reveal">
-        <h3>Licencia en NY y NJ</h3>
-        <p>Abogados con licencia en New York y New Jersey, al servicio de toda el área triestatal, incluido Connecticut.</p>
-      </div>
-      <div class="why-item reveal">
-        <h3>Reputación comprobada</h3>
-        <p>Calificación de 4.9/5 con cientos de reseñas de clientes que confiaron en nosotros su futuro y el de sus hijos.</p>
-      </div>
+      <div class="why-item reveal"><h3>Especialización real</h3><p>La Visa Juvenil (SIJS) es el corazón de nuestra práctica. Conocemos a fondo las cortes de familia y los requisitos de USCIS.</p></div>
+      <div class="why-item reveal"><h3>Trato humano y en español</h3><p>Entendemos lo que está en juego para su familia. Le explicamos todo con claridad, sin tecnicismos y en su idioma.</p></div>
+      <div class="why-item reveal"><h3>Licencia en NY y NJ</h3><p>Abogados con licencia en New York y New Jersey, al servicio de toda el área triestatal, incluido Connecticut.</p></div>
+      <div class="why-item reveal"><h3>Reputación comprobada</h3><p>Calificación de 4.9/5 con cientos de reseñas de clientes que confiaron en nosotros su futuro y el de sus hijos.</p></div>
     </div>
   </div>
 </section>
@@ -682,30 +870,38 @@ footer.site a:hover{color:var(--gold-l)}
 <section class="faq" id="faq">
   <div class="container" style="max-width:880px">
     <span class="eyebrow reveal">Preguntas frecuentes</span>
-    <h2 class="section-title reveal">Resolvemos sus dudas</h2>
+    <h2 class="section-title reveal">Resolvemos sus dudas sobre la Visa Juvenil</h2>
     <details class="reveal">
       <summary>¿Hasta qué edad puedo aplicar a la Visa Juvenil (SIJS)?</summary>
-      <p>En general, la petición debe presentarse antes de cumplir 21 años y mientras la persona esté soltera. Como los plazos en la corte de familia varían según el estado, es importante iniciar el proceso lo antes posible.</p>
+      <div class="faq-body"><p>En general, la petición debe presentarse antes de cumplir 21 años y mientras la persona esté soltera. Presentar la petición "congela" la edad para efectos migratorios, pero los plazos en la corte de familia varían según el estado — por eso es clave iniciar el proceso lo antes posible.</p></div>
     </details>
     <details class="reveal">
       <summary>¿Necesito que ambos padres me hayan abandonado?</summary>
-      <p>No necesariamente. La ley permite calificar cuando la reunificación no es viable con <em>uno o ambos</em> padres por abandono, abuso o negligencia. En la consulta evaluamos su situación específica.</p>
+      <div class="faq-body"><p>No necesariamente. La ley permite calificar cuando la reunificación no es viable con <em>uno o ambos</em> padres por abandono, abuso o negligencia. Un joven puede vivir con un padre y aun así calificar por la conducta del otro. En la consulta evaluamos su situación específica.</p></div>
     </details>
     <details class="reveal">
       <summary>¿La Visa Juvenil me da la residencia (Green Card)?</summary>
-      <p>El SIJS es la base para luego solicitar la residencia permanente. Una vez aprobada la petición y cuando hay visa disponible, se tramita el ajuste de estatus para obtener la Green Card.</p>
+      <div class="faq-body"><p>El SIJS es la base para luego solicitar la residencia permanente. Una vez aprobada la petición I-360 y cuando hay visa disponible según el Boletín de Visas, se tramita el ajuste de estatus (I-485) para obtener la Green Card.</p></div>
+    </details>
+    <details class="reveal">
+      <summary>¿Puedo trabajar mientras espero mi residencia?</summary>
+      <div class="faq-body"><p>En muchos casos, sí. Desde 2022, USCIS considera a los jóvenes con SIJS aprobado para acción diferida, lo que les permite solicitar un permiso de trabajo (EAD) mientras esperan que haya visa disponible.</p></div>
+    </details>
+    <details class="reveal">
+      <summary>¿Cuánto cuesta el trámite ante USCIS?</summary>
+      <div class="faq-body"><p>La petición I-360 de SIJS no tiene tarifa de presentación ante USCIS, y para el ajuste de estatus pueden solicitarse exenciones de tarifas según el caso. Los honorarios legales se explican con total claridad en la consulta inicial, sin sorpresas.</p></div>
+    </details>
+    <details class="reveal">
+      <summary>¿Qué pasa si el joven ya está en proceso de deportación?</summary>
+      <div class="faq-body"><p>Todavía puede calificar. De hecho, muchos casos de SIJS comienzan cuando el joven ya tiene un proceso abierto en la corte de inmigración. Trabajamos la defensa en la corte y el caso de SIJS en paralelo.</p></div>
     </details>
     <details class="reveal">
       <summary>¿Atienden casos fuera de New York?</summary>
-      <p>Sí. Nuestros abogados tienen licencia en New York y New Jersey, y atendemos a la comunidad de toda el área triestatal (NY, NJ y CT). En materia de inmigración, que es federal, podemos ayudarle en muchos casos aunque viva en otro estado — consúltenos.</p>
+      <div class="faq-body"><p>Sí. Nuestros abogados tienen licencia en New York y New Jersey, y atendemos a la comunidad de toda el área triestatal (NY, NJ y CT). En materia de inmigración, que es federal, podemos ayudarle en muchos casos aunque viva en otro estado — consúltenos.</p></div>
     </details>
     <details class="reveal">
-      <summary>¿La consulta es confidencial?</summary>
-      <p>Absolutamente. Todo lo que nos comparta se trata con estricta confidencialidad, incluidos los casos sensibles como VAWA, Visa U y asilo.</p>
-    </details>
-    <details class="reveal">
-      <summary>¿En qué idioma me atienden?</summary>
-      <p>Todo nuestro equipo le atiende en español, desde la primera llamada hasta el cierre de su caso.</p>
+      <summary>¿La consulta es confidencial y en español?</summary>
+      <div class="faq-body"><p>Absolutamente. Todo lo que nos comparta se trata con estricta confidencialidad, incluidos los casos sensibles como VAWA, Visa U y asilo. Todo nuestro equipo le atiende en español, desde la primera llamada hasta el cierre de su caso.</p></div>
     </details>
   </div>
 </section>
@@ -803,7 +999,7 @@ footer.site a:hover{color:var(--gold-l)}
   <div class="container">
     <h2 class="reveal">El tiempo importa en los casos de Visa Juvenil</h2>
     <p class="reveal">Los plazos de edad y de corte no esperan. Llámenos hoy y sepa con claridad si usted o su hijo califican.</p>
-    <a class="btn btn-gold reveal" href="tel:+12128706175">Llamar ahora · (212) 870-6175</a>
+    <a class="btn btn-blue reveal" href="tel:+12128706175">Llamar ahora · (212) 870-6175</a>
   </div>
 </section>
 
@@ -822,6 +1018,7 @@ footer.site a:hover{color:var(--gold-l)}
       <ul>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#visa-juvenil">Visa Juvenil (SIJS)</a></li>
+        <li><a href="#beneficios">Beneficios del SIJS</a></li>
         <li><a href="#nosotros">La Firma</a></li>
         <li><a href="#faq">Preguntas frecuentes</a></li>
         <li><a href="#contacto">Contacto</a></li>
@@ -846,13 +1043,36 @@ footer.site a:hover{color:var(--gold-l)}
   </div>
 </footer>
 
+<button id="toTop" aria-label="Volver arriba">↑</button>
+
 <script>
 // Año del footer
 document.getElementById('year').textContent = new Date().getFullYear();
 
-// Nav: fondo sólido al hacer scroll
-const hdr = document.getElementById('hdr');
-addEventListener('scroll', () => hdr.classList.toggle('solid', scrollY > 40), {passive:true});
+// Palabras del título del hero: entrada escalonada
+const h1 = document.getElementById('heroTitle');
+h1.innerHTML = h1.innerHTML.split(/\s+/).map((w,i) =>
+  `<span class="w" style="animation-delay:${.08*i + .1}s">${w}</span>`).join(' ');
+
+// Barra de progreso + nav sólida + botón volver arriba
+const prog = document.getElementById('progress');
+const hdr  = document.getElementById('hdr');
+const toTop = document.getElementById('toTop');
+function onScroll(){
+  const max = document.documentElement.scrollHeight - innerHeight;
+  prog.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+  hdr.classList.toggle('solid', scrollY > 40);
+  toTop.classList.toggle('show', scrollY > 600);
+  // Parallax sutil
+  document.querySelectorAll('[data-parallax]').forEach(el => {
+    const f = parseFloat(el.dataset.parallax) || 0.05;
+    const r = el.getBoundingClientRect();
+    el.style.transform = `translateY(${(r.top + r.height/2 - innerHeight/2) * -f}px)`;
+  });
+}
+addEventListener('scroll', onScroll, {passive:true});
+onScroll();
+toTop.addEventListener('click', () => scrollTo({top:0, behavior:'smooth'}));
 
 // Menú móvil
 const nav = document.getElementById('mainnav');
@@ -865,11 +1085,44 @@ document.querySelectorAll('#navlist a').forEach(a =>
   a.addEventListener('click', () => { nav.classList.remove('open'); btn.setAttribute('aria-expanded','false'); })
 );
 
-// Aparición al hacer scroll
+// Aparición al hacer scroll con retraso escalonado por grupo
+document.querySelectorAll('.services-grid, .ben-grid, .tst-grid, .why-grid, .mosaic-grid, .steps, .doc-list, .stats .container').forEach(group => {
+  [...group.children].forEach((el,i) => el.style.setProperty('--d', (i % 6) * 0.09 + 's'));
+});
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); } });
 }, { threshold: 0.12 });
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+// Contadores animados en las estadísticas
+const fmt = (v, dec) => dec ? v.toFixed(dec) : Math.round(v).toString();
+const cio = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (!e.isIntersecting) return;
+    const el = e.target, target = parseFloat(el.dataset.target), dec = parseInt(el.dataset.dec || 0);
+    const t0 = performance.now(), dur = 1400;
+    (function tick(t){
+      const p = Math.min((t - t0) / dur, 1), ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = fmt(target * ease, dec);
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+    cio.unobserve(el);
+  });
+}, { threshold: 0.6 });
+document.querySelectorAll('.count').forEach(el => cio.observe(el));
+
+// Tilt 3D sutil en tarjetas de servicios (solo dispositivos con puntero fino)
+if (matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+  document.querySelectorAll('.svc').forEach(card => {
+    card.addEventListener('mousemove', ev => {
+      const r = card.getBoundingClientRect();
+      const rx = ((ev.clientY - r.top) / r.height - .5) * -6;
+      const ry = ((ev.clientX - r.left) / r.width - .5) * 6;
+      card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+}
 </script>
 </body>
 </html>
