@@ -5,319 +5,426 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Visa Juvenil (SIJS) — Monteza Law Firm, P.C. | Abogados de Inmigración en New York</title>
 <meta name="description" content="Monteza Law Firm, P.C. — Abogados de inmigración en New York y New Jersey. Especialistas en Visa Juvenil (SIJS), defensa de deportación, asilo, VAWA, Visa U, peticiones familiares, residencia y ciudadanía. Llame al (212) 870-6175.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   PALETA DE MARCA — ajustar aquí si los colores exactos
-   de visajuvenil.com difieren (cambiar solo estas variables)
+   PALETA DE MARCA — para igualar los colores exactos de
+   visajuvenil.com basta con cambiar estas variables
    ============================================================ */
 :root{
-  --navy:   #0a2a5e;   /* azul principal de marca */
-  --navy-d: #071e44;   /* azul profundo (fondos oscuros) */
-  --navy-l: #14418f;   /* azul claro (hovers, enlaces) */
-  --gold:   #c9a227;   /* dorado / acento */
-  --gold-l: #e3c35a;   /* dorado claro */
-  --paper:  #f4f6fa;   /* fondo claro de secciones */
-  --white:  #ffffff;
-  --ink:    #1c2530;   /* texto principal */
-  --gray:   #5c6672;   /* texto secundario */
-  --line:   #dde3ec;
-  --px: clamp(1.2rem, 5vw, 4rem);
-  --py: clamp(3.5rem, 8vw, 6.5rem);
+  --navy:    #0a2a5e;                /* azul principal de marca */
+  --navy-d:  #061a3c;                /* azul profundo (fondos oscuros) */
+  --navy-x:  #04122b;                /* casi negro azulado */
+  --navy-l:  #1a4a9e;                /* azul de enlaces / hover */
+  --gold:    #c8a24b;                /* dorado principal */
+  --gold-l:  #e8cd8a;                /* dorado claro */
+  --gold-d:  #a5813a;                /* dorado oscuro */
+  --paper:   #f6f4ef;                /* marfil de secciones claras */
+  --white:   #ffffff;
+  --ink:     #1a2230;
+  --gray:    #626b78;
+  --line:    #e3e0d8;
+  --serif:  'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  --sans:   'Inter', 'Segoe UI', Arial, sans-serif;
+  --px: clamp(1.4rem, 5vw, 4.5rem);
+  --py: clamp(4.5rem, 10vw, 8rem);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{
-  font-family:'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-  color:var(--ink);
-  background:var(--white);
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
+  font-family:var(--sans);color:var(--ink);background:var(--white);
+  line-height:1.7;font-weight:400;-webkit-font-smoothing:antialiased;
+  font-size:16px;
 }
 img{max-width:100%;display:block}
 a{color:var(--navy-l);text-decoration:none}
-h1,h2,h3,h4{font-family:Georgia, 'Times New Roman', serif;line-height:1.2;color:var(--navy)}
-.container{max-width:1160px;margin:0 auto;padding:0 var(--px)}
+h1,h2,h3{font-family:var(--serif);line-height:1.15;color:var(--navy);font-weight:600}
+.container{max-width:1200px;margin:0 auto;padding:0 var(--px)}
 section{padding:var(--py) 0}
 
 .eyebrow{
-  display:inline-block;font-family:inherit;font-size:.78rem;font-weight:700;
-  letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
-  margin-bottom:.9rem;
+  display:flex;align-items:center;gap:.8rem;font-size:.74rem;font-weight:600;
+  letter-spacing:.28em;text-transform:uppercase;color:var(--gold-d);margin-bottom:1.1rem;
 }
-.section-title{font-size:clamp(1.7rem,3.4vw,2.5rem);margin-bottom:1rem}
-.section-sub{color:var(--gray);max-width:640px;margin-bottom:2.5rem}
+.eyebrow::before{content:"";width:38px;height:1px;background:var(--gold)}
+.on-dark .eyebrow{color:var(--gold-l)}
+.section-title{font-size:clamp(2rem,4vw,3.1rem);margin-bottom:1.1rem;letter-spacing:.01em}
+.section-sub{color:var(--gray);max-width:620px;margin-bottom:3rem;font-size:1.02rem;font-weight:300}
 
 /* ---------- Barra superior ---------- */
 .topbar{
-  background:var(--navy-d);color:#cdd8ea;font-size:.82rem;
-  padding:.45rem var(--px);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  background:var(--navy-x);color:#aebbd2;font-size:.78rem;letter-spacing:.03em;
+  padding:.5rem var(--px);display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
 }
 .topbar a{color:var(--gold-l);font-weight:600}
 .topbar span{white-space:nowrap}
 
 /* ---------- Navegación ---------- */
 header{
-  position:sticky;top:0;z-index:100;background:var(--navy);
-  box-shadow:0 2px 14px rgba(4,15,35,.35);
+  position:sticky;top:0;z-index:100;
+  background:rgba(6,26,60,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(200,162,75,.25);
+  transition:background .3s;
 }
+header.solid{background:var(--navy-x)}
 .nav{
   display:flex;align-items:center;justify-content:space-between;
-  padding:.8rem var(--px);max-width:1280px;margin:0 auto;
+  padding:.9rem var(--px);max-width:1320px;margin:0 auto;
 }
-.brand{display:flex;align-items:center;gap:.7rem;color:var(--white)}
+.brand{display:flex;align-items:center;gap:.85rem;color:var(--white)}
 .brand-mark{
-  width:44px;height:44px;flex:0 0 44px;border:2px solid var(--gold);border-radius:6px;
-  display:grid;place-items:center;font-family:Georgia,serif;font-weight:700;
-  font-size:1.05rem;color:var(--gold);letter-spacing:.02em;
+  width:48px;height:48px;flex:0 0 48px;border:1.5px solid var(--gold);border-radius:2px;
+  display:grid;place-items:center;font-family:var(--serif);font-weight:700;
+  font-size:1.5rem;color:var(--gold-l);position:relative;
 }
-.brand-name{font-family:Georgia,serif;font-size:1.06rem;font-weight:700;letter-spacing:.02em;line-height:1.15}
-.brand-name small{display:block;font-family:'Segoe UI',Arial,sans-serif;font-size:.68rem;font-weight:400;color:#b9c6dc;letter-spacing:.14em;text-transform:uppercase}
-nav ul{display:flex;gap:1.6rem;list-style:none;align-items:center}
-nav ul a{color:#dfe7f3;font-size:.92rem;font-weight:500;transition:color .2s}
-nav ul a:hover{color:var(--gold-l)}
+.brand-mark::after{
+  content:"";position:absolute;inset:3px;border:1px solid rgba(200,162,75,.35);border-radius:1px;
+}
+.brand-name{font-family:var(--serif);font-size:1.18rem;font-weight:600;letter-spacing:.04em;line-height:1.1}
+.brand-name small{
+  display:block;font-family:var(--sans);font-size:.6rem;font-weight:500;color:var(--gold-l);
+  letter-spacing:.32em;text-transform:uppercase;margin-top:.25rem;
+}
+nav ul{display:flex;gap:2rem;list-style:none;align-items:center}
+nav ul a{color:#d5deee;font-size:.86rem;font-weight:500;letter-spacing:.04em;transition:color .2s;position:relative}
+nav ul a:not(.nav-cta)::after{
+  content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold-l);transition:width .3s var(--ease);
+}
+nav ul a:not(.nav-cta):hover{color:var(--gold-l)}
+nav ul a:not(.nav-cta):hover::after{width:100%}
 .nav-cta{
-  background:var(--gold);color:var(--navy-d)!important;font-weight:700;
-  padding:.55rem 1.15rem;border-radius:4px;transition:background .2s;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-l) 55%,var(--gold) 100%);
+  color:var(--navy-x)!important;font-weight:700;letter-spacing:.06em;
+  padding:.65rem 1.4rem;border-radius:2px;transition:filter .2s, transform .2s;
 }
-.nav-cta:hover{background:var(--gold-l)}
+.nav-cta:hover{filter:brightness(1.08);transform:translateY(-1px)}
 .menu-btn{display:none;background:none;border:0;cursor:pointer;padding:.4rem}
-.menu-btn span{display:block;width:24px;height:2px;background:#fff;margin:5px 0;transition:.3s}
+.menu-btn span{display:block;width:26px;height:2px;background:#fff;margin:6px 0;transition:.3s}
 
 /* ---------- Hero ---------- */
 .hero{
+  position:relative;color:var(--white);overflow:hidden;
+  padding:clamp(5rem,12vw,9rem) 0 clamp(6rem,13vw,10rem);
   background:
-    radial-gradient(ellipse at 75% 20%, rgba(201,162,39,.16), transparent 55%),
-    linear-gradient(160deg, var(--navy-d) 0%, var(--navy) 55%, #0d3573 100%);
-  color:var(--white);padding:clamp(4rem,10vw,7.5rem) 0;
-  position:relative;overflow:hidden;
+    linear-gradient(100deg, rgba(4,18,43,.96) 0%, rgba(6,26,60,.88) 45%, rgba(10,42,94,.62) 100%),
+    var(--navy-d) url('https://images.unsplash.com/photo-1485738422979-f5c462d49f74?auto=format&fit=crop&w=2000&q=80') center 30%/cover no-repeat;
+  /* si la foto no carga, queda el degradado navy */
 }
 .hero::after{
-  content:"";position:absolute;inset:auto -10% -55% -10%;height:70%;
-  background:radial-gradient(ellipse at center, rgba(20,65,143,.5), transparent 70%);
-  pointer-events:none;
+  content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.6;
 }
-.hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.25fr .9fr;gap:3rem;align-items:center}
-.hero h1{color:var(--white);font-size:clamp(2rem,4.6vw,3.3rem);margin:0 0 1.2rem}
-.hero h1 em{font-style:normal;color:var(--gold-l)}
-.hero p.lead{color:#ccd8ec;font-size:1.08rem;max-width:560px;margin-bottom:2rem}
-.hero-actions{display:flex;gap:1rem;flex-wrap:wrap}
+.hero .container{position:relative;z-index:1;display:grid;grid-template-columns:1.3fr .95fr;gap:4rem;align-items:center}
+.hero h1{
+  color:var(--white);font-size:clamp(2.4rem,5.4vw,4.1rem);font-weight:600;margin:0 0 1.4rem;
+}
+.hero h1 em{
+  font-style:italic;color:var(--gold-l);position:relative;white-space:nowrap;
+}
+.hero p.lead{color:#c9d5e8;font-size:1.1rem;font-weight:300;max-width:560px;margin-bottom:2.4rem;line-height:1.8}
+.hero-actions{display:flex;gap:1.1rem;flex-wrap:wrap}
 .btn{
-  display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.7rem;border-radius:4px;
-  font-weight:700;font-size:.98rem;transition:transform .25s var(--ease), background .2s;
+  display:inline-flex;align-items:center;gap:.6rem;padding:1rem 2.1rem;border-radius:2px;
+  font-weight:600;font-size:.92rem;letter-spacing:.05em;
+  transition:transform .3s var(--ease), filter .2s, border-color .2s, color .2s;
 }
 .btn:hover{transform:translateY(-2px)}
-.btn-gold{background:var(--gold);color:var(--navy-d)}
-.btn-gold:hover{background:var(--gold-l)}
-.btn-line{border:1.5px solid rgba(255,255,255,.55);color:var(--white)}
+.btn-gold{
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-l) 55%,var(--gold) 100%);
+  color:var(--navy-x);box-shadow:0 8px 24px rgba(200,162,75,.35);
+}
+.btn-gold:hover{filter:brightness(1.07)}
+.btn-line{border:1px solid rgba(255,255,255,.45);color:var(--white)}
 .btn-line:hover{border-color:var(--gold-l);color:var(--gold-l)}
 
 .hero-card{
-  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);
-  border-radius:10px;padding:1.8rem;backdrop-filter:blur(4px);
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(200,162,75,.35);
+  border-radius:4px;padding:2.2rem;backdrop-filter:blur(8px);
+  box-shadow:0 30px 60px rgba(0,0,0,.35);
+  position:relative;
 }
-.hero-card h3{color:var(--gold-l);font-size:1.05rem;margin-bottom:1rem;letter-spacing:.04em}
+.hero-card::before{
+  content:"";position:absolute;top:0;left:1.6rem;right:1.6rem;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.hero-card h3{color:var(--gold-l);font-size:1.35rem;margin-bottom:1.2rem;letter-spacing:.03em}
 .hero-card ul{list-style:none}
 .hero-card li{
-  padding:.55rem 0 .55rem 1.7rem;position:relative;color:#dbe4f2;font-size:.95rem;
+  padding:.65rem 0 .65rem 1.9rem;position:relative;color:#dbe4f2;font-size:.93rem;font-weight:300;
   border-bottom:1px solid rgba(255,255,255,.08);
 }
 .hero-card li:last-child{border-bottom:0}
-.hero-card li::before{content:"✓";position:absolute;left:0;color:var(--gold);font-weight:700}
+.hero-card li::before{content:"✦";position:absolute;left:0;color:var(--gold);font-size:.8rem;top:.85rem}
 
 .trustbar{
-  margin-top:2.4rem;display:flex;gap:2.2rem;flex-wrap:wrap;align-items:center;
-  color:#b9c6dc;font-size:.88rem;
+  margin-top:3rem;display:flex;gap:2.8rem;flex-wrap:wrap;align-items:center;
+  color:#9fb0ca;font-size:.82rem;letter-spacing:.02em;
 }
-.trustbar strong{color:var(--gold-l);font-size:1.25rem;display:block;font-family:Georgia,serif}
-.stars{color:var(--gold-l);letter-spacing:.12em}
+.trustbar strong{
+  color:var(--gold-l);font-size:1.6rem;display:block;font-family:var(--serif);font-weight:600;line-height:1.2;
+}
+.stars{color:var(--gold-l);letter-spacing:.14em}
 
 /* ---------- Franja de estadísticas ---------- */
-.stats{background:var(--paper);padding:2.2rem 0;border-bottom:1px solid var(--line)}
-.stats .container{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;text-align:center}
-.stat b{font-family:Georgia,serif;font-size:clamp(1.5rem,3vw,2.1rem);color:var(--navy);display:block}
-.stat span{color:var(--gray);font-size:.86rem}
+.stats{
+  background:var(--navy-x);padding:0;border-bottom:1px solid rgba(200,162,75,.2);
+}
+.stats .container{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.stat{
+  text-align:center;padding:2.6rem 1rem;position:relative;
+}
+.stat + .stat::before{
+  content:"";position:absolute;left:0;top:28%;bottom:28%;width:1px;
+  background:linear-gradient(180deg,transparent,rgba(200,162,75,.4),transparent);
+}
+.stat b{
+  font-family:var(--serif);font-size:clamp(2rem,4vw,2.9rem);font-weight:600;
+  color:var(--gold-l);display:block;line-height:1.1;
+}
+.stat span{color:#8fa0bc;font-size:.8rem;letter-spacing:.06em;font-weight:300}
 
 /* ---------- Servicios ---------- */
-.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:1.4rem}
+.services{background:var(--paper)}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.6rem}
 .svc{
-  background:var(--white);border:1px solid var(--line);border-radius:8px;padding:1.6rem;
-  transition:transform .3s var(--ease), box-shadow .3s, border-color .3s;
+  background:var(--white);border:1px solid var(--line);border-radius:3px;padding:2.1rem 1.9rem;
+  transition:transform .4s var(--ease), box-shadow .4s, border-color .3s;
+  position:relative;overflow:hidden;
 }
-.svc:hover{transform:translateY(-5px);box-shadow:0 14px 30px rgba(10,42,94,.12);border-color:var(--gold)}
+.svc::before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--gold-l),var(--gold-d));
+  transform:scaleY(0);transform-origin:top;transition:transform .4s var(--ease);
+}
+.svc:hover{transform:translateY(-6px);box-shadow:0 24px 48px rgba(10,42,94,.14);border-color:transparent}
+.svc:hover::before{transform:scaleY(1)}
 .svc .ico{
-  width:46px;height:46px;border-radius:8px;background:var(--paper);
-  display:grid;place-items:center;margin-bottom:1rem;color:var(--navy);
-}
-.svc .ico svg{width:24px;height:24px;stroke:var(--navy);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.svc h3{font-size:1.08rem;margin-bottom:.5rem}
-.svc p{color:var(--gray);font-size:.92rem}
-.svc.featured{background:linear-gradient(150deg,var(--navy-d),var(--navy));border-color:var(--navy)}
-.svc.featured h3{color:var(--gold-l)}
-.svc.featured p{color:#ccd8ec}
-.svc.featured .ico{background:rgba(255,255,255,.1)}
-.svc.featured .ico svg{stroke:var(--gold-l)}
-.svc.featured:hover{border-color:var(--gold)}
-
-/* ---------- SIJS destacado ---------- */
-.sijs{background:var(--paper)}
-.sijs .container{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
-.sijs ul{list-style:none;margin-top:1.4rem}
-.sijs li{
-  padding:.7rem 0 .7rem 2rem;position:relative;border-bottom:1px solid var(--line);
-}
-.sijs li::before{
-  content:"";position:absolute;left:0;top:1rem;width:11px;height:11px;
-  border-radius:50%;background:var(--gold);
-}
-.sijs-note{
-  margin-top:1.6rem;background:#fff;border-left:4px solid var(--gold);
-  padding:1rem 1.2rem;border-radius:0 6px 6px 0;font-size:.88rem;color:var(--gray);
-}
-.steps{counter-reset:step;display:grid;gap:1rem}
-.step{
-  background:var(--white);border:1px solid var(--line);border-radius:8px;
-  padding:1.2rem 1.3rem 1.2rem 4.2rem;position:relative;
-}
-.step::before{
-  counter-increment:step;content:counter(step);
-  position:absolute;left:1.1rem;top:1.05rem;width:2.1rem;height:2.1rem;
-  background:var(--navy);color:var(--gold-l);border-radius:50%;
-  display:grid;place-items:center;font-family:Georgia,serif;font-weight:700;
-}
-.step h4{font-size:1rem;margin-bottom:.2rem}
-.step p{font-size:.88rem;color:var(--gray)}
-
-/* ---------- Por qué elegirnos ---------- */
-.why{background:linear-gradient(160deg,var(--navy-d),var(--navy));color:#dbe4f2}
-.why .eyebrow{color:var(--gold-l)}
-.why .section-title{color:var(--white)}
-.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:1.6rem;margin-top:2.5rem}
-.why-item{border-top:2px solid var(--gold);padding-top:1.1rem}
-.why-item h3{color:var(--gold-l);font-size:1.05rem;margin-bottom:.5rem}
-.why-item p{font-size:.92rem;color:#c3cfe3}
-
-/* ---------- Testimonios ---------- */
-.tst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.4rem}
-.tst{
-  background:var(--paper);border-radius:8px;padding:1.7rem;position:relative;
+  width:52px;height:52px;border-radius:2px;background:var(--paper);
+  display:grid;place-items:center;margin-bottom:1.3rem;
   border:1px solid var(--line);
 }
-.tst .stars{color:var(--gold);margin-bottom:.7rem;font-size:.95rem}
-.tst p{font-size:.94rem;color:var(--ink);font-style:italic}
-.tst footer{margin-top:1rem;font-size:.85rem;color:var(--gray);font-weight:600}
-.tst-note{font-size:.78rem;color:var(--gray);margin-top:1.4rem;text-align:center}
+.svc .ico svg{width:26px;height:26px;stroke:var(--navy);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.svc h3{font-size:1.3rem;margin-bottom:.55rem}
+.svc p{color:var(--gray);font-size:.9rem;font-weight:300}
+.svc.featured{background:linear-gradient(150deg,var(--navy-x),var(--navy));border:1px solid rgba(200,162,75,.4)}
+.svc.featured h3{color:var(--gold-l)}
+.svc.featured p{color:#c3cfe3}
+.svc.featured .ico{background:rgba(255,255,255,.06);border-color:rgba(200,162,75,.35)}
+.svc.featured .ico svg{stroke:var(--gold-l)}
+
+/* ---------- SIJS destacado ---------- */
+.sijs .container{display:grid;grid-template-columns:1.05fr .95fr;gap:4.5rem;align-items:start}
+.sijs-photo{
+  position:relative;border-radius:4px;overflow:hidden;margin-bottom:2.2rem;
+  box-shadow:0 30px 60px rgba(10,42,94,.22);
+  background:linear-gradient(150deg,var(--navy),var(--navy-l));
+}
+.sijs-photo img{width:100%;height:340px;object-fit:cover;display:block}
+.sijs-photo::after{
+  content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.5);border-radius:2px;pointer-events:none;
+}
+.sijs ul{list-style:none;margin-top:1.6rem}
+.sijs li{
+  padding:.85rem 0 .85rem 2.2rem;position:relative;border-bottom:1px solid var(--line);font-size:.97rem;
+}
+.sijs li::before{
+  content:"✦";position:absolute;left:.2rem;top:.85rem;color:var(--gold);font-size:.85rem;
+}
+.sijs-note{
+  margin-top:1.8rem;background:var(--paper);border-left:2px solid var(--gold);
+  padding:1.2rem 1.4rem;font-size:.87rem;color:var(--gray);font-weight:300;
+}
+.steps{counter-reset:step;display:grid;gap:1.1rem}
+.step{
+  background:var(--white);border:1px solid var(--line);border-radius:3px;
+  padding:1.4rem 1.5rem 1.4rem 4.6rem;position:relative;
+  transition:border-color .3s, box-shadow .3s;
+}
+.step:hover{border-color:var(--gold);box-shadow:0 12px 28px rgba(10,42,94,.1)}
+.step::before{
+  counter-increment:step;content:counter(step, decimal-leading-zero);
+  position:absolute;left:1.3rem;top:1.35rem;
+  font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--gold);line-height:1;
+}
+.step h4{font-family:var(--serif);font-size:1.2rem;margin-bottom:.25rem;color:var(--navy)}
+.step p{font-size:.88rem;color:var(--gray);font-weight:300}
+
+/* ---------- Por qué elegirnos ---------- */
+.why{
+  position:relative;color:#dbe4f2;overflow:hidden;
+  background:
+    linear-gradient(100deg, rgba(4,18,43,.97) 0%, rgba(6,26,60,.93) 55%, rgba(10,42,94,.82) 100%),
+    var(--navy-d) url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat fixed;
+}
+.why .section-title{color:var(--white)}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2rem;margin-top:3rem}
+.why-item{
+  border-top:1px solid rgba(200,162,75,.5);padding-top:1.4rem;position:relative;
+}
+.why-item::before{
+  content:"";position:absolute;top:-1px;left:0;width:44px;height:3px;background:var(--gold);
+}
+.why-item h3{color:var(--gold-l);font-size:1.35rem;margin-bottom:.6rem}
+.why-item p{font-size:.9rem;color:#b6c4da;font-weight:300}
+
+/* ---------- Testimonios ---------- */
+.tst-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;flex-wrap:wrap}
+.tst-score{
+  text-align:right;font-family:var(--serif);color:var(--navy);
+}
+.tst-score b{font-size:3rem;font-weight:700;line-height:1}
+.tst-score .stars{color:var(--gold);font-size:1.05rem;display:block;margin:.3rem 0 .15rem}
+.tst-score small{font-family:var(--sans);color:var(--gray);font-size:.78rem;font-weight:300}
+.tst-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1.6rem;margin-top:2.6rem}
+.tst{
+  background:var(--paper);border-radius:3px;padding:2.4rem 2rem 1.9rem;position:relative;
+  border:1px solid var(--line);
+}
+.tst::before{
+  content:"“";position:absolute;top:.4rem;left:1.4rem;font-family:var(--serif);
+  font-size:4.5rem;color:var(--gold);opacity:.45;line-height:1;
+}
+.tst .stars{color:var(--gold);margin-bottom:.8rem;font-size:.9rem}
+.tst p{font-size:.95rem;color:var(--ink);font-style:italic;font-weight:300;line-height:1.75}
+.tst footer{margin-top:1.2rem;font-size:.82rem;color:var(--gray);font-weight:600;letter-spacing:.03em}
+.tst-note{font-size:.75rem;color:var(--gray);margin-top:1.6rem;text-align:center;font-weight:300}
 
 /* ---------- FAQ ---------- */
+.faq{background:var(--paper)}
 .faq details{
-  border:1px solid var(--line);border-radius:6px;margin-bottom:.8rem;
-  background:var(--white);overflow:hidden;
+  border:1px solid var(--line);border-radius:3px;margin-bottom:.9rem;
+  background:var(--white);overflow:hidden;transition:border-color .3s;
 }
+.faq details[open]{border-color:var(--gold)}
 .faq summary{
-  cursor:pointer;padding:1.05rem 1.3rem;font-weight:600;color:var(--navy);
-  list-style:none;position:relative;padding-right:3rem;
+  cursor:pointer;padding:1.2rem 1.5rem;font-weight:600;color:var(--navy);font-size:.98rem;
+  list-style:none;position:relative;padding-right:3.2rem;
 }
+.faq summary::-webkit-details-marker{display:none}
 .faq summary::after{
-  content:"+";position:absolute;right:1.2rem;top:50%;transform:translateY(-50%);
-  font-size:1.4rem;color:var(--gold);font-weight:400;transition:transform .25s;
+  content:"+";position:absolute;right:1.4rem;top:50%;transform:translateY(-50%);
+  font-size:1.5rem;color:var(--gold);font-weight:300;transition:transform .25s;
 }
 .faq details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
-.faq details p{padding:0 1.3rem 1.1rem;color:var(--gray);font-size:.94rem}
+.faq details p{padding:0 1.5rem 1.3rem;color:var(--gray);font-size:.93rem;font-weight:300}
 
 /* ---------- Contacto ---------- */
-.contact{background:var(--paper)}
-.contact .container{display:grid;grid-template-columns:1fr 1.1fr;gap:3rem;align-items:start}
-.c-item{display:flex;gap:1rem;margin-bottom:1.5rem;align-items:flex-start}
+.contact .container{display:grid;grid-template-columns:1fr 1.05fr;gap:3.5rem;align-items:start}
+.c-item{display:flex;gap:1.1rem;margin-bottom:1.7rem;align-items:flex-start}
 .c-item .ico{
-  width:42px;height:42px;flex:0 0 42px;border-radius:8px;background:var(--navy);
-  display:grid;place-items:center;
+  width:46px;height:46px;flex:0 0 46px;border-radius:2px;
+  background:linear-gradient(150deg,var(--navy-x),var(--navy));
+  border:1px solid rgba(200,162,75,.4);display:grid;place-items:center;
 }
-.c-item .ico svg{width:20px;height:20px;stroke:var(--gold-l);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.c-item h4{font-size:.98rem;margin-bottom:.15rem}
-.c-item p, .c-item a{font-size:.93rem;color:var(--gray)}
+.c-item .ico svg{width:21px;height:21px;stroke:var(--gold-l);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.c-item h4{font-family:var(--serif);font-size:1.15rem;margin-bottom:.15rem;color:var(--navy)}
+.c-item p, .c-item a{font-size:.92rem;color:var(--gray);font-weight:300}
 .c-item a{color:var(--navy-l);font-weight:600}
-.hours{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:.3rem}
-.hours td{padding:.3rem 0;color:var(--gray);border-bottom:1px dashed var(--line)}
+.hours{width:100%;border-collapse:collapse;font-size:.88rem;margin-top:.3rem}
+.hours td{padding:.35rem 0;color:var(--gray);border-bottom:1px dashed var(--line);font-weight:300}
 .hours td:last-child{text-align:right;color:var(--ink);font-weight:600}
 .form-card{
-  background:var(--white);border-radius:10px;padding:2rem;
-  box-shadow:0 10px 34px rgba(10,42,94,.10);border:1px solid var(--line);
+  background:var(--white);border-radius:4px;padding:2.6rem;
+  box-shadow:0 30px 70px rgba(10,42,94,.14);border:1px solid var(--line);
+  border-top:3px solid var(--gold);
 }
-.form-card h3{margin-bottom:1.2rem}
-.fld{margin-bottom:1rem}
-.fld label{display:block;font-size:.85rem;font-weight:600;margin-bottom:.3rem;color:var(--navy)}
+.form-card h3{font-size:1.7rem;margin-bottom:.4rem}
+.form-card > p{color:var(--gray);font-size:.88rem;font-weight:300;margin-bottom:1.6rem}
+.fld{margin-bottom:1.1rem}
+.fld label{display:block;font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.35rem;color:var(--navy)}
 .fld input,.fld select,.fld textarea{
-  width:100%;padding:.7rem .9rem;border:1px solid var(--line);border-radius:5px;
+  width:100%;padding:.8rem 1rem;border:1px solid var(--line);border-radius:2px;
   font:inherit;font-size:.93rem;background:var(--paper);color:var(--ink);
 }
-.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--navy-l);background:#fff}
+.fld input:focus,.fld select:focus,.fld textarea:focus{outline:2px solid var(--gold);background:#fff}
 .form-card button{
-  width:100%;border:0;cursor:pointer;background:var(--navy);color:var(--gold-l);
-  padding:.95rem;border-radius:5px;font-weight:700;font-size:1rem;transition:background .2s;
+  width:100%;border:0;cursor:pointer;
+  background:linear-gradient(135deg,var(--navy-x),var(--navy));color:var(--gold-l);
+  padding:1.05rem;border-radius:2px;font-weight:700;font-size:.95rem;letter-spacing:.08em;
+  text-transform:uppercase;transition:filter .2s, transform .2s;
 }
-.form-card button:hover{background:var(--navy-l)}
-.form-note{font-size:.76rem;color:var(--gray);margin-top:.8rem;text-align:center}
-.map{margin-top:0;border-radius:10px;overflow:hidden;border:1px solid var(--line);line-height:0}
-.map iframe{width:100%;height:280px;border:0}
+.form-card button:hover{filter:brightness(1.25);transform:translateY(-1px)}
+.form-note{font-size:.73rem;color:var(--gray);margin-top:.9rem;text-align:center;font-weight:300}
+.map{border-radius:4px;overflow:hidden;border:1px solid var(--line);line-height:0;box-shadow:0 16px 40px rgba(10,42,94,.12)}
+.map iframe{width:100%;height:290px;border:0}
 
 /* ---------- CTA final ---------- */
 .cta-final{
+  position:relative;color:#fff;text-align:center;overflow:hidden;
   background:
-    radial-gradient(ellipse at 20% 0%, rgba(201,162,39,.18), transparent 55%),
-    linear-gradient(150deg,var(--navy),var(--navy-d));
-  color:#fff;text-align:center;
+    linear-gradient(rgba(4,18,43,.9), rgba(6,26,60,.94)),
+    var(--navy-d) url('https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?auto=format&fit=crop&w=2000&q=80') center/cover no-repeat;
 }
-.cta-final h2{color:#fff;font-size:clamp(1.6rem,3.4vw,2.4rem);margin-bottom:.8rem}
-.cta-final p{color:#c3cfe3;max-width:560px;margin:0 auto 2rem}
+.cta-final::before, .cta-final::after{
+  content:"";position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+.cta-final::before{top:0}
+.cta-final::after{bottom:0}
+.cta-final h2{color:#fff;font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:1rem}
+.cta-final p{color:#b6c4da;max-width:560px;margin:0 auto 2.4rem;font-weight:300}
 
 /* ---------- Footer ---------- */
 footer.site{
-  background:var(--navy-d);color:#9fb0ca;font-size:.85rem;
-  padding:3rem var(--px) 2rem;
+  background:var(--navy-x);color:#8fa0bc;font-size:.85rem;font-weight:300;
+  padding:3.5rem var(--px) 2rem;
 }
 .f-grid{
-  max-width:1160px;margin:0 auto;display:grid;
-  grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;
+  max-width:1200px;margin:0 auto;display:grid;
+  grid-template-columns:1.5fr 1fr 1fr;gap:3rem;
 }
-footer.site h4{color:var(--gold-l);font-size:.95rem;margin-bottom:.9rem}
+footer.site h4{
+  color:var(--gold-l);font-family:var(--serif);font-size:1.2rem;font-weight:600;margin-bottom:1rem;
+}
 footer.site ul{list-style:none}
-footer.site li{margin-bottom:.45rem}
-footer.site a{color:#c3cfe3}
+footer.site li{margin-bottom:.5rem}
+footer.site a{color:#b6c4da}
 footer.site a:hover{color:var(--gold-l)}
+.f-brand{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
 .f-legal{
-  max-width:1160px;margin:2.2rem auto 0;padding-top:1.4rem;
-  border-top:1px solid rgba(255,255,255,.12);font-size:.75rem;color:#7e8ea8;
+  max-width:1200px;margin:2.6rem auto 0;padding-top:1.6rem;
+  border-top:1px solid rgba(200,162,75,.18);font-size:.73rem;color:#5f7291;
 }
 
 /* ---------- Animación de aparición ---------- */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .reveal.on{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){
   .reveal{opacity:1;transform:none;transition:none}
   html{scroll-behavior:auto}
+  .why{background-attachment:scroll}
 }
 
 /* ---------- Responsive ---------- */
-@media (max-width: 900px){
+@media (max-width: 960px){
   .hero .container,.sijs .container,.contact .container{grid-template-columns:1fr}
   .stats .container{grid-template-columns:repeat(2,1fr)}
+  .stat:nth-child(3)::before{display:none}
   .f-grid{grid-template-columns:1fr 1fr}
+  .why{background-attachment:scroll}
   nav ul{
-    position:fixed;inset:0 0 auto 0;top:0;flex-direction:column;background:var(--navy-d);
-    padding:5.5rem var(--px) 2rem;gap:1.2rem;transform:translateY(-100%);
-    transition:transform .35s var(--ease);z-index:-1;align-items:flex-start;
-    box-shadow:0 20px 40px rgba(0,0,0,.4);
+    position:fixed;inset:0 0 auto 0;top:0;flex-direction:column;background:var(--navy-x);
+    padding:6rem var(--px) 2.5rem;gap:1.4rem;transform:translateY(-100%);
+    transition:transform .4s var(--ease);z-index:-1;align-items:flex-start;
+    box-shadow:0 24px 48px rgba(0,0,0,.5);
   }
   nav.open ul{transform:none;z-index:99}
   .menu-btn{display:block;position:relative;z-index:101}
-  nav.open .menu-btn span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  nav.open .menu-btn span:nth-child(1){transform:translateY(8px) rotate(45deg)}
   nav.open .menu-btn span:nth-child(2){opacity:0}
-  nav.open .menu-btn span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  nav.open .menu-btn span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 }
-@media (max-width: 540px){
+@media (max-width: 560px){
   .f-grid{grid-template-columns:1fr}
   .topbar{justify-content:center;text-align:center}
+  .stats .container{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
@@ -325,12 +432,12 @@ footer.site a:hover{color:var(--gold-l)}
 
 <!-- Barra superior -->
 <div class="topbar">
-  <span>📍 213 W 35th St, Suite 905, New York, NY 10001</span>
-  <span>📞 <a href="tel:+12128706175">(212) 870-6175</a> &nbsp;·&nbsp; Lun–Vie 10:00–18:00 · Sáb 10:00–14:00</span>
+  <span>213 W 35th St, Suite 905 · New York, NY 10001</span>
+  <span><a href="tel:+12128706175">(212) 870-6175</a> &nbsp;·&nbsp; Lun–Vie 10:00–18:00 · Sáb 10:00–14:00</span>
 </div>
 
 <!-- Navegación -->
-<header>
+<header id="hdr">
   <div class="nav" id="nav">
     <a class="brand" href="#inicio" aria-label="Monteza Law Firm — inicio">
       <span class="brand-mark">M</span>
@@ -342,8 +449,8 @@ footer.site a:hover{color:var(--gold-l)}
       </button>
       <ul id="navlist">
         <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#visa-juvenil">Visa Juvenil (SIJS)</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#visa-juvenil">Visa Juvenil</a></li>
+        <li><a href="#nosotros">La Firma</a></li>
         <li><a href="#testimonios">Testimonios</a></li>
         <li><a href="#faq">Preguntas</a></li>
         <li><a class="nav-cta" href="#contacto">Consulta</a></li>
@@ -353,23 +460,23 @@ footer.site a:hover{color:var(--gold-l)}
 </header>
 
 <!-- Hero -->
-<section class="hero" id="inicio">
+<section class="hero on-dark" id="inicio">
   <div class="container">
     <div>
-      <span class="eyebrow">Especialistas en Visa Juvenil (SIJS)</span>
+      <span class="eyebrow">Especialistas en Visa Juvenil · SIJS</span>
       <h1>Protegemos el futuro de los <em>jóvenes inmigrantes</em> y sus familias</h1>
       <p class="lead">
-        Somos un despacho boutique de inmigración en Manhattan al servicio de la comunidad
-        hispana del área triestatal (New York, New Jersey y Connecticut). Le acompañamos en
-        cada paso de su proceso, en su idioma y con un trato humano.
+        Despacho boutique de inmigración en el corazón de Manhattan, al servicio de la comunidad
+        hispana del área triestatal — New York, New Jersey y Connecticut. Un equipo que le
+        acompaña en cada paso, en su idioma y con un trato humano.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-gold" href="tel:+12128706175">Llámenos: (212) 870-6175</a>
+        <a class="btn btn-gold" href="tel:+12128706175">Llámenos · (212) 870-6175</a>
         <a class="btn btn-line" href="#contacto">Solicitar consulta</a>
       </div>
       <div class="trustbar">
-        <div><strong>4.9 / 5</strong> <span class="stars">★★★★★</span> según 636 reseñas en Google</div>
-        <div><strong>NY &amp; NJ</strong> Abogados licenciados</div>
+        <div><strong>4.9 / 5</strong> <span class="stars">★★★★★</span> 636 reseñas en Google</div>
+        <div><strong>NY · NJ</strong> Abogados licenciados</div>
         <div><strong>Español</strong> Atención en su idioma</div>
       </div>
     </div>
@@ -390,15 +497,15 @@ footer.site a:hover{color:var(--gold-l)}
 <!-- Estadísticas -->
 <div class="stats">
   <div class="container">
-    <div class="stat reveal"><b>4.9★</b><span>Calificación promedio (636 reseñas)</span></div>
-    <div class="stat reveal"><b>2</b><span>Estados: licencia en NY y NJ</span></div>
+    <div class="stat reveal"><b>4.9★</b><span>Calificación · 636 reseñas</span></div>
+    <div class="stat reveal"><b>2</b><span>Estados con licencia · NY y NJ</span></div>
     <div class="stat reveal"><b>10+</b><span>Áreas de práctica migratoria</span></div>
     <div class="stat reveal"><b>100%</b><span>Atención en español</span></div>
   </div>
 </div>
 
 <!-- Servicios -->
-<section id="servicios">
+<section class="services" id="servicios">
   <div class="container">
     <span class="eyebrow reveal">Áreas de práctica</span>
     <h2 class="section-title reveal">Servicios de inmigración</h2>
@@ -465,6 +572,12 @@ footer.site a:hover{color:var(--gold-l)}
 <section class="sijs" id="visa-juvenil">
   <div class="container">
     <div>
+      <!-- Foto: jóvenes estudiantes (stock Unsplash). Reemplazar por foto propia del despacho si se desea -->
+      <div class="sijs-photo reveal">
+        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80"
+             alt="Jóvenes estudiantes conversando" loading="lazy"
+             onerror="this.style.display='none'">
+      </div>
       <span class="eyebrow reveal">Nuestra especialidad</span>
       <h2 class="section-title reveal">¿Qué es la Visa Juvenil (SIJS)?</h2>
       <p class="reveal">
@@ -500,11 +613,11 @@ footer.site a:hover{color:var(--gold-l)}
 </section>
 
 <!-- Por qué elegirnos -->
-<section class="why" id="nosotros">
+<section class="why on-dark" id="nosotros">
   <div class="container">
     <span class="eyebrow reveal">Sobre el despacho</span>
     <h2 class="section-title reveal">¿Por qué Monteza Law Firm?</h2>
-    <p class="reveal" style="max-width:640px">
+    <p class="reveal" style="max-width:640px;font-weight:300">
       Somos una firma boutique: cada caso recibe atención directa y personalizada.
       Nuestra misión es servir a la comunidad hispana con honestidad, dedicación y resultados.
     </p>
@@ -532,24 +645,32 @@ footer.site a:hover{color:var(--gold-l)}
 <!-- Testimonios -->
 <section id="testimonios">
   <div class="container">
-    <span class="eyebrow reveal">Testimonios</span>
-    <h2 class="section-title reveal">Lo que dicen nuestros clientes</h2>
-    <p class="section-sub reveal">Calificación 4.9 de 5 estrellas según 636 reseñas en Google.</p>
+    <div class="tst-head">
+      <div>
+        <span class="eyebrow reveal">Testimonios</span>
+        <h2 class="section-title reveal" style="margin-bottom:0">Lo que dicen nuestros clientes</h2>
+      </div>
+      <div class="tst-score reveal">
+        <b>4.9</b>
+        <span class="stars">★★★★★</span>
+        <small>636 reseñas en Google</small>
+      </div>
+    </div>
     <div class="tst-grid">
       <!-- ⚠️ DEMO: reemplazar estas 3 tarjetas con reseñas reales de Google (copiar texto y nombre tal cual) -->
       <article class="tst reveal">
         <div class="stars" aria-label="5 estrellas">★★★★★</div>
-        <p>"Gracias al despacho mi hijo obtuvo su Visa Juvenil y hoy tiene su residencia. Siempre nos explicaron cada paso con paciencia."</p>
+        <p>Gracias al despacho mi hijo obtuvo su Visa Juvenil y hoy tiene su residencia. Siempre nos explicaron cada paso con paciencia.</p>
         <footer>— M. R., Queens, NY <span style="font-weight:400">(ejemplo ilustrativo)</span></footer>
       </article>
       <article class="tst reveal">
         <div class="stars" aria-label="5 estrellas">★★★★★</div>
-        <p>"Muy profesionales y honestos. Me dijeron desde el inicio qué opciones tenía y cumplieron con todo lo prometido."</p>
+        <p>Muy profesionales y honestos. Me dijeron desde el inicio qué opciones tenía y cumplieron con todo lo prometido.</p>
         <footer>— J. G., Newark, NJ <span style="font-weight:400">(ejemplo ilustrativo)</span></footer>
       </article>
       <article class="tst reveal">
         <div class="stars" aria-label="5 estrellas">★★★★★</div>
-        <p>"Atención en español de principio a fin. Se nota que conocen muy bien los casos de jóvenes. Los recomiendo totalmente."</p>
+        <p>Atención en español de principio a fin. Se nota que conocen muy bien los casos de jóvenes. Los recomiendo totalmente.</p>
         <footer>— A. P., Bronx, NY <span style="font-weight:400">(ejemplo ilustrativo)</span></footer>
       </article>
     </div>
@@ -558,8 +679,8 @@ footer.site a:hover{color:var(--gold-l)}
 </section>
 
 <!-- FAQ -->
-<section class="faq" id="faq" style="background:var(--paper)">
-  <div class="container" style="max-width:860px">
+<section class="faq" id="faq">
+  <div class="container" style="max-width:880px">
     <span class="eyebrow reveal">Preguntas frecuentes</span>
     <h2 class="section-title reveal">Resolvemos sus dudas</h2>
     <details class="reveal">
@@ -590,7 +711,7 @@ footer.site a:hover{color:var(--gold-l)}
 </section>
 
 <!-- Contacto -->
-<section class="contact" id="contacto" style="background:var(--white)">
+<section class="contact" id="contacto">
   <div class="container">
     <div>
       <span class="eyebrow reveal">Contacto</span>
@@ -633,6 +754,7 @@ footer.site a:hover{color:var(--gold-l)}
 
     <div class="form-card reveal">
       <h3>Solicite su consulta</h3>
+      <p>Cuéntenos su caso y le contactaremos a la brevedad.</p>
       <!-- ⚠️ Configurar destino del formulario: reemplazar CORREO@DELDESPACHO.com por el email real
            (formsubmit.co enviará las respuestas ahí; la primera vez pide confirmar el correo) -->
       <form action="https://formsubmit.co/CORREO@DELDESPACHO.com" method="POST">
@@ -681,7 +803,7 @@ footer.site a:hover{color:var(--gold-l)}
   <div class="container">
     <h2 class="reveal">El tiempo importa en los casos de Visa Juvenil</h2>
     <p class="reveal">Los plazos de edad y de corte no esperan. Llámenos hoy y sepa con claridad si usted o su hijo califican.</p>
-    <a class="btn btn-gold reveal" href="tel:+12128706175">Llamar ahora: (212) 870-6175</a>
+    <a class="btn btn-gold reveal" href="tel:+12128706175">Llamar ahora · (212) 870-6175</a>
   </div>
 </section>
 
@@ -689,7 +811,10 @@ footer.site a:hover{color:var(--gold-l)}
 <footer class="site">
   <div class="f-grid">
     <div>
-      <h4>Monteza Law Firm, P.C.</h4>
+      <div class="f-brand">
+        <span class="brand-mark" style="width:42px;height:42px;flex:0 0 42px;font-size:1.3rem">M</span>
+        <span style="font-family:var(--serif);font-size:1.15rem;color:#fff">Monteza Law Firm, P.C.</span>
+      </div>
       <p>Despacho boutique de inmigración al servicio de la comunidad hispana del área triestatal (NY, NJ, CT). Especialistas en Visa Juvenil (SIJS).</p>
     </div>
     <div>
@@ -697,7 +822,7 @@ footer.site a:hover{color:var(--gold-l)}
       <ul>
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#visa-juvenil">Visa Juvenil (SIJS)</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="#nosotros">La Firma</a></li>
         <li><a href="#faq">Preguntas frecuentes</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
@@ -724,6 +849,10 @@ footer.site a:hover{color:var(--gold-l)}
 <script>
 // Año del footer
 document.getElementById('year').textContent = new Date().getFullYear();
+
+// Nav: fondo sólido al hacer scroll
+const hdr = document.getElementById('hdr');
+addEventListener('scroll', () => hdr.classList.toggle('solid', scrollY > 40), {passive:true});
 
 // Menú móvil
 const nav = document.getElementById('mainnav');
