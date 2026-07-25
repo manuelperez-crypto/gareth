@@ -41,7 +41,7 @@ Toda la info de negocio la aprueba **Wilfredo Rodriguez (CPA)**.
 - Sección de equipo en pirámide (Partners arriba), paneles individuales por miembro.
 - Banner de cookies + paneles de Términos y Privacidad.
 - Portada, servicios (con nota de expansión Advisors CPA), asesoría, industrias, proceso, FAQ, contacto, mapa.
-- Segunda oficina (Midland Park — Advisors CPA): 700 Godwin Avenue, Suite 210, Midland Park NJ 07432,
+- Segunda oficina (Midland Park — Advisors CPA): 700 Godwin Ave, Suite 210, Midland Park NJ 07432,
   tel (201) 794-9300, fax (201) 794-3355, info@cpaadvisors.tax, con su propio mapa.
 - Auditoría de accesibilidad WCAG 2.1 AA: 0 violaciones (axe-core, escritorio y móvil).
 - Ortografía revisada, todo en inglés, responsive (móvil), tipografía y color de marca.
