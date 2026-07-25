@@ -281,6 +281,7 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .eye::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
 .eye i { font-style: normal; color: #565e66; }
 .bg-d .eye { color: rgba(255,255,255,.6); }
+.bg-d .eye i { color: rgba(255,255,255,.62); }
 
 /* =============================================================
    ABOUT
@@ -291,7 +292,7 @@ h1, h2, h3, h4 { text-wrap: balance; }
 .abiw:hover .abimg { transform: scale(1.03); }
 .abbadge { position: absolute; bottom: 0; left: 0; transform: translate(-14%,28%); background: var(--dark); color: #faf8f3; padding: clamp(1.4rem,2.5vw,2rem) clamp(1.8rem,3vw,2.6rem); min-width: 148px; }
 .abbadge .n { font-family: 'Poppins', sans-serif; font-size: clamp(2rem,3.4vw,2.8rem); font-weight: 600; color: #ffffff; line-height: 1; }
-.abbadge .l { font-family: 'Poppins', sans-serif; font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(250,248,243,.44); margin-top: .5rem; }
+.abbadge .l { font-family: 'Poppins', sans-serif; font-size: .65rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(250,248,243,.78); margin-top: .5rem; }
 .abh  { font-family: 'Poppins', sans-serif; font-size: clamp(1.7rem,3.4vw,2.8rem); font-weight: 600; line-height: 1.1; color: var(--ink); margin-bottom: 1.4rem; }
 .abh em { font-style: italic; color: var(--ink); }
 .abp  { font-size: clamp(.87rem,1.7vw,.95rem); color: #0f0f0f; line-height: 1.95; margin-bottom: 1rem; max-width: 52ch; }
@@ -512,7 +513,7 @@ a.ctv:hover { color: #ffffff; }
 .fmsg  { font-family: 'Poppins', sans-serif; font-size: .72rem; letter-spacing: .06em; line-height: 1.7; padding: .9rem 0; display: none; }
 .fmsg.ok { display: block; color: rgba(255,255,255,.85); }
 .fmsg.er { display: block; color: #c05f5f; }
-.fnote { font-family: 'Poppins', sans-serif; font-size: .6rem; letter-spacing: .08em; color: var(--sl); line-height: 1.8; margin-top: .3rem; }
+.fnote { font-family: 'Poppins', sans-serif; font-size: .6rem; letter-spacing: .08em; color: rgba(255,255,255,.66); line-height: 1.8; margin-top: .3rem; }
 
 /* =============================================================
    ABOUT MODAL
@@ -636,7 +637,7 @@ footer { background: var(--dark); border-top: 1px solid rgba(122,152,190,.14); p
 .ftmk-box { background: #ffffff; color: #041e42; font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 700; letter-spacing: .08em; padding: .34rem .52rem; line-height: 1; }
 .ftmk-txt { font-family: 'Poppins', sans-serif; font-size: 1rem; font-weight: 400; letter-spacing: .22em; text-transform: uppercase; color: #ffffff; padding-left: .75rem; }
 .ftmk-cur { color: var(--glt); font-weight: 300; animation: blink 1.1s step-end infinite; }
-.fttag { font-family: 'Poppins', sans-serif; font-size: .66rem; letter-spacing: .12em; color: var(--sl); text-transform: uppercase; line-height: 2; max-width: 30ch; }
+.fttag { font-family: 'Poppins', sans-serif; font-size: .66rem; letter-spacing: .12em; color: rgba(255,255,255,.66); text-transform: uppercase; line-height: 2; max-width: 30ch; }
 .ftcol h4 { font-family: 'Poppins', sans-serif; font-size: .65rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 1rem; }
 .ftcol a  { display: block; font-size: .8rem; color: rgba(255,255,255,0.65); margin-bottom: .6rem; transition: color .3s, padding-left .3s; }
 .ftcol a:hover { color: #faf8f3; padding-left: 5px; }
@@ -971,13 +972,13 @@ footer { background: var(--dark); border-top: 1px solid rgba(122,152,190,.14); p
       <div class="nwdate"><span class="demo-chip" style="margin:0">Demo</span></div>
       <h3 class="nwt">Space reserved for the firm's next announcement</h3>
       <p class="nwd">This card is a placeholder — headlines, articles, or resources will appear here once the firm provides its content.</p>
-      <span class="nwl" style="opacity:.45;cursor:default">Read more →</span>
+      <span class="nwl" style="opacity:.78;cursor:default">Read more →</span>
     </article>
     <article class="nwc">
       <div class="nwdate"><span class="demo-chip" style="margin:0">Demo</span></div>
       <h3 class="nwt">Insights and updates, coming soon</h3>
       <p class="nwd">This card is a placeholder — headlines, articles, or resources will appear here once the firm provides its content.</p>
-      <span class="nwl" style="opacity:.45;cursor:default">Read more →</span>
+      <span class="nwl" style="opacity:.78;cursor:default">Read more →</span>
     </article>
   </div>
 </div></section>
@@ -1070,11 +1071,11 @@ footer { background: var(--dark); border-top: 1px solid rgba(122,152,190,.14); p
       </div>
       <div>
         <form class="form" id="cform">
-          <div class="fld"><label>I'd like to</label><select name="intent" id="intent"><option>Schedule a consultation</option><option>Send a general message</option><option>Ask about a specific service</option><option>Discuss fund / manager set-up</option></select></div>
-          <div class="fldr"><div class="fld"><label>Full name</label><input type="text" name="name" placeholder="Your name" required autocomplete="name"></div><div class="fld"><label>Firm</label><input type="text" name="firm" placeholder="Company name" autocomplete="organization"></div></div>
-          <div class="fldr"><div class="fld"><label>Email</label><input type="email" name="email" placeholder="you@firm.com" required autocomplete="email"></div><div class="fld"><label>Phone (optional)</label><input type="tel" name="phone" placeholder="(___) ___-____"></div></div>
-          <div class="fld"><label>How can we help?</label><textarea name="message" placeholder="A sentence or two about your firm and what you need." required></textarea></div>
-          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
+          <div class="fld"><label for="intent">I'd like to</label><select name="intent" id="intent"><option>Schedule a consultation</option><option>Send a general message</option><option>Ask about a specific service</option><option>Discuss fund / manager set-up</option></select></div>
+          <div class="fldr"><div class="fld"><label for="f-name">Full name</label><input id="f-name" type="text" name="name" placeholder="Your name" required autocomplete="name"></div><div class="fld"><label for="f-firm">Firm</label><input id="f-firm" type="text" name="firm" placeholder="Company name" autocomplete="organization"></div></div>
+          <div class="fldr"><div class="fld"><label for="f-email">Email</label><input id="f-email" type="email" name="email" placeholder="you@firm.com" required autocomplete="email"></div><div class="fld"><label for="f-phone">Phone (optional)</label><input id="f-phone" type="tel" name="phone" placeholder="(___) ___-____"></div></div>
+          <div class="fld"><label for="f-msg">How can we help?</label><textarea id="f-msg" name="message" placeholder="A sentence or two about your firm and what you need." required></textarea></div>
+          <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
           <button type="submit" class="btn btn-g fbtn" id="sbtn">Send message →</button>
           <div class="fmsg" id="fmsg" role="alert" aria-live="polite"></div>
           <p class="fnote">Sent securely. We typically reply within one business day.</p>
