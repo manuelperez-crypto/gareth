@@ -473,7 +473,7 @@ nav ul a:not(.nav-cta):hover::after{width:100%}
 
 /* ---------- Footer ---------- */
 footer.site{background:var(--black);color:#7d95b5;font-size:.85rem;font-weight:300;padding:3.5rem var(--px) 2rem}
-.f-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem}
+.f-grid{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:3rem}
 footer.site h4{color:var(--sky-l);font-family:var(--serif);font-size:1.2rem;font-weight:600;margin-bottom:1rem}
 footer.site ul{list-style:none}
 footer.site li{margin-bottom:.5rem}
@@ -496,6 +496,79 @@ footer.site a:hover{color:var(--sky-l);padding-left:4px}
 }
 #toTop.show{opacity:1;transform:none;pointer-events:auto}
 #toTop:hover{background:var(--navy)}
+
+/* ---------- Accesibilidad: salto al contenido y foco visible ---------- */
+.skip-link{
+  position:absolute;left:1rem;top:-100px;z-index:300;
+  background:var(--sky);color:var(--navy-x);font-weight:700;font-size:.9rem;
+  padding:.8rem 1.4rem;border-radius:0 0 4px 4px;transition:top .3s var(--ease);
+}
+.skip-link:focus{top:0}
+a:focus-visible, button:focus-visible, summary:focus-visible,
+input:focus-visible, select:focus-visible, textarea:focus-visible{
+  outline:3px solid var(--sky);outline-offset:2px;border-radius:2px;
+}
+
+/* ---------- Banner de cookies ---------- */
+.cookie-bar{
+  position:fixed;left:50%;bottom:1.2rem;transform:translate(-50%, 140%);
+  z-index:220;width:min(680px, calc(100% - 2rem));
+  background:rgba(8,21,36,.97);border:1px solid rgba(111,180,240,.4);
+  border-radius:6px;padding:1.4rem 1.6rem;color:#cfdff2;
+  box-shadow:0 30px 70px rgba(0,0,0,.5);backdrop-filter:blur(10px);
+  transition:transform .6s var(--ease);
+}
+.cookie-bar.show{transform:translate(-50%, 0)}
+.cookie-bar h2{font-family:var(--serif);font-size:1.15rem;color:var(--sky-l);margin-bottom:.4rem}
+.cookie-bar p{font-size:.83rem;font-weight:300;line-height:1.6;margin-bottom:1rem}
+.cookie-bar p a{color:var(--sky);text-decoration:underline}
+.cookie-actions{display:flex;gap:.8rem;flex-wrap:wrap}
+.cookie-actions button{
+  cursor:pointer;font:inherit;font-size:.83rem;font-weight:600;letter-spacing:.04em;
+  padding:.65rem 1.3rem;border-radius:2px;transition:filter .2s, transform .2s;
+}
+.cookie-actions button:hover{transform:translateY(-1px);filter:brightness(1.1)}
+.ck-accept{border:0;background:linear-gradient(135deg,var(--sky),var(--sky-l));color:var(--navy-x)}
+.ck-reject{background:none;border:1px solid rgba(255,255,255,.4);color:#cfdff2}
+
+/* ---------- Paneles legales (Términos / Privacidad / Accesibilidad) ---------- */
+.panel-overlay{
+  position:fixed;inset:0;z-index:230;background:rgba(4,9,15,.6);backdrop-filter:blur(3px);
+  opacity:0;pointer-events:none;transition:opacity .4s;
+}
+.panel-overlay.show{opacity:1;pointer-events:auto}
+.panel{
+  position:fixed;top:0;right:0;bottom:0;z-index:240;width:min(620px, 100%);
+  background:var(--white);box-shadow:-30px 0 80px rgba(0,0,0,.4);
+  transform:translateX(105%);transition:transform .55s var(--ease);
+  display:flex;flex-direction:column;
+}
+.panel.show{transform:none}
+.panel[hidden]{display:none}
+.panel-head{
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  padding:1.4rem var(--px) 1.2rem 2rem;background:var(--navy-x);color:#fff;
+  border-bottom:2px solid var(--sky);
+}
+.panel-head h2{font-family:var(--serif);font-size:1.4rem;color:var(--sky-l)}
+.panel-close{
+  background:none;border:1px solid rgba(111,180,240,.5);color:var(--sky-l);
+  width:40px;height:40px;border-radius:50%;font-size:1.2rem;cursor:pointer;
+  display:grid;place-items:center;transition:background .2s, transform .3s var(--ease);
+}
+.panel-close:hover{background:var(--navy);transform:rotate(90deg)}
+.panel-body{
+  overflow-y:auto;padding:1.8rem 2rem 2.4rem;font-size:.9rem;color:var(--ink);font-weight:300;
+}
+.panel-body h3{font-size:1.15rem;margin:1.5rem 0 .5rem;color:var(--navy-d)}
+.panel-body h3:first-child{margin-top:0}
+.panel-body p, .panel-body li{margin-bottom:.7rem;line-height:1.7;color:var(--gray)}
+.panel-body ul{padding-left:1.2rem}
+.panel-body strong{color:var(--ink)}
+.panel-note{
+  background:var(--sky-x);border-left:2px solid var(--sky);padding:.9rem 1.1rem;
+  font-size:.8rem;margin-bottom:1.4rem;color:var(--gray);
+}
 
 /* ---------- Animación de aparición (con retraso escalonado) ---------- */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease);transition-delay:var(--d,0s)}
@@ -540,6 +613,7 @@ footer.site a:hover{color:var(--sky-l);padding-left:4px}
 </head>
 <body>
 
+<a class="skip-link" href="#inicio">Saltar al contenido principal</a>
 <div id="progress" aria-hidden="true"></div>
 
 <!-- Barra superior -->
@@ -572,7 +646,7 @@ footer.site a:hover{color:var(--sky-l);padding-left:4px}
 </header>
 
 <!-- Hero -->
-<section class="hero on-dark" id="inicio">
+<section class="hero on-dark" id="inicio" tabindex="-1">
   <div class="hero-bg" aria-hidden="true"></div>
   <div class="hero-veil" aria-hidden="true"></div>
   <div class="container">
@@ -1032,6 +1106,15 @@ footer.site a:hover{color:var(--sky-l);padding-left:4px}
         <li>Lun–Vie 10:00–18:00 · Sáb 10:00–14:00</li>
       </ul>
     </div>
+    <div>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#" data-panel="terminos">Términos y Condiciones</a></li>
+        <li><a href="#" data-panel="privacidad">Privacidad y Cookies</a></li>
+        <li><a href="#" data-panel="accesibilidad">Accesibilidad</a></li>
+        <li><a href="#" id="ckPrefs">Preferencias de cookies</a></li>
+      </ul>
+    </div>
   </div>
   <div class="f-legal">
     <p>© <span id="year"></span> Monteza Law Firm, P.C. Todos los derechos reservados.</p>
@@ -1044,6 +1127,118 @@ footer.site a:hover{color:var(--sky-l);padding-left:4px}
 </footer>
 
 <button id="toTop" aria-label="Volver arriba">↑</button>
+
+<!-- Banner de cookies -->
+<div class="cookie-bar" id="cookieBar" role="dialog" aria-modal="false" aria-labelledby="ckTitle" aria-describedby="ckDesc">
+  <h2 id="ckTitle">🍪 Uso de cookies</h2>
+  <p id="ckDesc">
+    Este sitio usa cookies esenciales para su funcionamiento y, con su permiso, cookies de
+    análisis para mejorar la experiencia. Puede leer más en nuestra
+    <a href="#" data-panel="privacidad">Política de Privacidad y Cookies</a>.
+  </p>
+  <div class="cookie-actions">
+    <button class="ck-accept" id="ckAccept">Aceptar todas</button>
+    <button class="ck-reject" id="ckReject">Solo esenciales</button>
+  </div>
+</div>
+
+<!-- Superposición y paneles legales -->
+<div class="panel-overlay" id="panelOverlay"></div>
+
+<!-- ⚠️ PLANTILLA PROFESIONAL: estos textos legales son una base seria pero genérica.
+     Antes de publicar, generar los definitivos con Termly/iubenda y que el abogado
+     responsable del despacho los revise y apruebe. -->
+<aside class="panel" id="panel-terminos" role="dialog" aria-modal="true" aria-labelledby="pt-title" hidden>
+  <div class="panel-head">
+    <h2 id="pt-title">Términos y Condiciones</h2>
+    <button class="panel-close" aria-label="Cerrar panel">✕</button>
+  </div>
+  <div class="panel-body">
+    <p class="panel-note">Última actualización: julio de 2026. Texto base sujeto a revisión por el despacho.</p>
+    <h3>1. Aceptación de los términos</h3>
+    <p>Al acceder y utilizar este sitio web de <strong>Monteza Law Firm, P.C.</strong> ("el Despacho"), usted acepta estos Términos y Condiciones. Si no está de acuerdo, le pedimos no utilizar el sitio.</p>
+    <h3>2. Solo información general — no es asesoría legal</h3>
+    <p>El contenido de este sitio se ofrece únicamente con fines informativos y de publicidad de abogados ("Attorney Advertising"). <strong>Nada en este sitio constituye asesoría legal</strong> ni debe tomarse como tal. Las leyes de inmigración cambian y cada caso es distinto; solo una consulta con un abogado puede evaluar su situación concreta.</p>
+    <h3>3. No se crea relación abogado-cliente</h3>
+    <p>Visitar este sitio, llamar por teléfono o enviar el formulario de contacto <strong>no crea una relación abogado-cliente</strong>. Dicha relación solo se establece mediante un acuerdo de representación firmado por usted y el Despacho. Le pedimos no enviar información confidencial a través del sitio antes de que exista dicha relación.</p>
+    <h3>4. Resultados anteriores</h3>
+    <p>Los resultados obtenidos en casos anteriores no garantizan un resultado similar en su caso. Cada asunto depende de sus propios hechos y circunstancias.</p>
+    <h3>5. Propiedad intelectual</h3>
+    <p>Los textos, marcas y elementos gráficos de este sitio pertenecen al Despacho o se usan con licencia. No está permitida su reproducción sin autorización escrita.</p>
+    <h3>6. Enlaces a terceros</h3>
+    <p>El sitio puede enlazar a páginas de terceros (por ejemplo, mapas o agencias gubernamentales). El Despacho no controla ni se hace responsable de su contenido o prácticas de privacidad.</p>
+    <h3>7. Limitación de responsabilidad</h3>
+    <p>En la máxima medida permitida por la ley, el Despacho no será responsable por daños derivados del uso o imposibilidad de uso de este sitio o de la confianza depositada en su contenido informativo.</p>
+    <h3>8. Jurisdicción</h3>
+    <p>Estos términos se rigen por las leyes del Estado de New York, sin perjuicio de sus normas sobre conflicto de leyes.</p>
+    <h3>9. Contacto</h3>
+    <p>Para preguntas sobre estos términos: Monteza Law Firm, P.C., 213 W 35th St, Suite 905, New York, NY 10001 · (212) 870-6175.</p>
+  </div>
+</aside>
+
+<aside class="panel" id="panel-privacidad" role="dialog" aria-modal="true" aria-labelledby="pp-title" hidden>
+  <div class="panel-head">
+    <h2 id="pp-title">Política de Privacidad y Cookies</h2>
+    <button class="panel-close" aria-label="Cerrar panel">✕</button>
+  </div>
+  <div class="panel-body">
+    <p class="panel-note">Última actualización: julio de 2026. Texto base sujeto a revisión por el despacho.</p>
+    <h3>1. Información que recopilamos</h3>
+    <p>Cuando usted envía el formulario de contacto recopilamos los datos que decide compartir: nombre, teléfono, correo electrónico, tipo de caso y el mensaje que escriba. No debe incluir información confidencial de su caso antes de una consulta formal.</p>
+    <h3>2. Cómo usamos su información</h3>
+    <ul>
+      <li>Responder a su solicitud de consulta y comunicarnos con usted.</li>
+      <li>Administrar y mejorar este sitio web.</li>
+      <li>Cumplir obligaciones legales y profesionales del Despacho.</li>
+    </ul>
+    <p><strong>No vendemos ni alquilamos</strong> su información personal a terceros.</p>
+    <h3>3. Cookies</h3>
+    <p>Este sitio utiliza:</p>
+    <ul>
+      <li><strong>Cookies esenciales:</strong> necesarias para el funcionamiento básico (por ejemplo, recordar su elección de cookies). No pueden desactivarse.</li>
+      <li><strong>Cookies de análisis (opcionales):</strong> si las acepta, nos ayudan a entender cómo se usa el sitio para mejorarlo. Puede rechazarlas sin que ello afecte su navegación.</li>
+    </ul>
+    <p>Puede cambiar su elección en cualquier momento desde "Preferencias de cookies" en el pie de página, y borrar las cookies desde la configuración de su navegador.</p>
+    <h3>4. Servicios de terceros</h3>
+    <p>El sitio incorpora servicios de terceros que pueden recibir datos técnicos (como su dirección IP) al cargarse: Google Maps (mapa de la oficina), Google Fonts (tipografías) y el proveedor del formulario de contacto. Cada uno se rige por su propia política de privacidad.</p>
+    <h3>5. Conservación y seguridad</h3>
+    <p>Conservamos la información de contacto solo el tiempo necesario para atender su solicitud o cumplir obligaciones legales, y aplicamos medidas razonables para protegerla.</p>
+    <h3>6. Sus derechos</h3>
+    <p>Usted puede solicitar acceso, corrección o eliminación de sus datos personales escribiéndonos o llamando al despacho. Atenderemos su solicitud conforme a la ley aplicable, incluida la ley del Estado de New York.</p>
+    <h3>7. Menores de edad</h3>
+    <p>Este sitio informa sobre servicios legales para jóvenes, pero el formulario debe ser enviado por un adulto (padre, tutor o el propio interesado mayor de 18 años) siempre que sea posible.</p>
+    <h3>8. Contacto</h3>
+    <p>Monteza Law Firm, P.C., 213 W 35th St, Suite 905, New York, NY 10001 · (212) 870-6175.</p>
+  </div>
+</aside>
+
+<aside class="panel" id="panel-accesibilidad" role="dialog" aria-modal="true" aria-labelledby="pa-title" hidden>
+  <div class="panel-head">
+    <h2 id="pa-title">Declaración de Accesibilidad</h2>
+    <button class="panel-close" aria-label="Cerrar panel">✕</button>
+  </div>
+  <div class="panel-body">
+    <p class="panel-note">Última actualización: julio de 2026.</p>
+    <h3>Nuestro compromiso</h3>
+    <p><strong>Monteza Law Firm, P.C.</strong> está comprometido con que este sitio web sea accesible para todas las personas, incluidas aquellas con discapacidades, conforme a las <strong>Pautas de Accesibilidad para el Contenido Web (WCAG) 2.1 nivel AA</strong> y al espíritu de la Ley de Estadounidenses con Discapacidades (ADA).</p>
+    <h3>Medidas implementadas</h3>
+    <ul>
+      <li>Estructura semántica con encabezados jerárquicos y regiones etiquetadas.</li>
+      <li>Navegación completa por teclado, con indicador de foco visible y enlace para saltar al contenido.</li>
+      <li>Texto alternativo en las imágenes informativas.</li>
+      <li>Contraste de color conforme al nivel AA en textos y controles.</li>
+      <li>Formularios con etiquetas asociadas y mensajes claros.</li>
+      <li>Respeto a la preferencia de movimiento reducido del sistema (se desactivan las animaciones).</li>
+      <li>Diálogos y paneles que pueden cerrarse con la tecla Escape y devuelven el foco.</li>
+      <li>Diseño adaptable que permite ampliar el texto hasta 200% sin pérdida de contenido.</li>
+    </ul>
+    <h3>Limitaciones conocidas</h3>
+    <p>Algunos contenidos de terceros (como el mapa incrustado de Google) pueden no ser totalmente accesibles. Ofrecemos alternativas: la dirección está disponible en texto y por teléfono le indicamos cómo llegar.</p>
+    <h3>¿Encontró una barrera?</h3>
+    <p>La accesibilidad es un esfuerzo continuo. Si tiene dificultades para usar alguna parte de este sitio, contáctenos y le ayudaremos a obtener la información por otro medio, además de corregir el problema:</p>
+    <p><strong>Teléfono:</strong> (212) 870-6175<br><strong>Dirección:</strong> 213 W 35th St, Suite 905, New York, NY 10001</p>
+  </div>
+</aside>
 
 <script>
 // Año del footer
@@ -1110,6 +1305,64 @@ const cio = new IntersectionObserver(entries => {
   });
 }, { threshold: 0.6 });
 document.querySelectorAll('.count').forEach(el => cio.observe(el));
+
+// ---------- Paneles legales (Términos / Privacidad / Accesibilidad) ----------
+const overlay = document.getElementById('panelOverlay');
+let openPanel = null, lastFocus = null;
+
+function showPanel(name){
+  const p = document.getElementById('panel-' + name);
+  if (!p) return;
+  lastFocus = document.activeElement;
+  p.hidden = false;
+  requestAnimationFrame(() => {
+    p.classList.add('show');
+    overlay.classList.add('show');
+  });
+  openPanel = p;
+  document.body.style.overflow = 'hidden';
+  p.querySelector('.panel-close').focus();
+}
+function hidePanel(){
+  if (!openPanel) return;
+  const p = openPanel;
+  p.classList.remove('show');
+  overlay.classList.remove('show');
+  document.body.style.overflow = '';
+  setTimeout(() => { p.hidden = true; }, 550);
+  openPanel = null;
+  if (lastFocus) lastFocus.focus();
+}
+document.querySelectorAll('[data-panel]').forEach(a =>
+  a.addEventListener('click', ev => { ev.preventDefault(); showPanel(a.dataset.panel); })
+);
+document.querySelectorAll('.panel-close').forEach(b => b.addEventListener('click', hidePanel));
+overlay.addEventListener('click', hidePanel);
+addEventListener('keydown', ev => {
+  if (ev.key === 'Escape' && openPanel) hidePanel();
+  // Mantener el foco dentro del panel abierto (trampa de foco accesible)
+  if (ev.key === 'Tab' && openPanel){
+    const f = openPanel.querySelectorAll('button, a[href]');
+    const first = f[0], last = f[f.length - 1];
+    if (ev.shiftKey && document.activeElement === first){ ev.preventDefault(); last.focus(); }
+    else if (!ev.shiftKey && document.activeElement === last){ ev.preventDefault(); first.focus(); }
+  }
+});
+
+// ---------- Banner de cookies ----------
+const ckBar = document.getElementById('cookieBar');
+const CK_KEY = 'mlf-cookie-consent';
+function ckShow(){ ckBar.classList.add('show') }
+function ckSet(v){
+  try { localStorage.setItem(CK_KEY, v); } catch(e){}
+  ckBar.classList.remove('show');
+}
+document.getElementById('ckAccept').addEventListener('click', () => ckSet('all'));
+document.getElementById('ckReject').addEventListener('click', () => ckSet('essential'));
+document.getElementById('ckPrefs').addEventListener('click', ev => { ev.preventDefault(); ckShow(); });
+let ckSaved = null;
+try { ckSaved = localStorage.getItem(CK_KEY); } catch(e){}
+if (!ckSaved) setTimeout(ckShow, 1600);
 
 // Tilt 3D sutil en tarjetas de servicios (solo dispositivos con puntero fino)
 if (matchMedia('(pointer:fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches){
