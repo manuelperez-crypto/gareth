@@ -1,0 +1,19 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "rewrites": [
+      { "source": "/api/claude", "function": "claudeProxy" },
+      { "source": "/api/qb/connect", "function": "qbAuthStart" },
+      { "source": "/api/qb/callback", "function": "qbCallback" },
+      { "source": "/api/qb/query", "function": "qbApi" },
+      { "source": "/api/setup/users", "function": "provisionUsers" }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  },
+  "functions": {
+    "source": "functions"
+  }
+}

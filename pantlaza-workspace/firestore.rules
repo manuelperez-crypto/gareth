@@ -1,0 +1,27 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function ownerOf(u) {
+      return signedIn() && request.auth.token.email == u + '@pantlaza.app';
+    }
+    function isAdmin() {
+      return signedIn() && request.auth.token.admin == true;
+    }
+
+    // Per-user app data (cases, history, docs, payments, liveCases)
+    // Path segment {u} is the demo username, e.g. users/ana.garcia/cases/...
+    match /users/{u}/{document=**} {
+      allow read, write: if ownerOf(u) || isAdmin();
+    }
+
+    // Shared team inbox — any signed-in team member
+    match /shared/{document=**} {
+      allow read, write: if signedIn();
+    }
+
+    // qbTokens/* and qbOauthStates/* are server-only (Admin SDK bypasses rules).
+    // Everything not matched above is denied by default.
+  }
+}
