@@ -1,0 +1,84 @@
+{
+  "name": "Nexum Contact → Claude",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "nexum-contact",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "b1f7c0a2-0001-4a10-9c11-000000000001",
+      "name": "Webhook (form submission)",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [240, 320],
+      "webhookId": "nexum-contact"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            { "name": "x-api-key", "value": "YOUR_ANTHROPIC_API_KEY" },
+            { "name": "anthropic-version", "value": "2023-06-01" },
+            { "name": "content-type", "value": "application/json" }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ model: \"claude-fable-5\", max_tokens: 1500, system: \"You are the assistant for Nexum, a web design agency in New Jersey. A potential client just submitted the contact form. Write a warm, concise, professional reply in English (3-4 sentences) that acknowledges their message, references what they asked about, and proposes a short intro call as the next step. Sign off as 'The Nexum Team'. Return only the email body text.\", messages: [{ role: \"user\", content: \"New Nexum contact form submission. Name: \" + ($json.body.name || \"-\") + \". Firm: \" + ($json.body.firm || \"-\") + \". Email: \" + ($json.body.email || \"-\") + \". Intent: \" + ($json.body.intent || \"-\") + \". Their message: \" + ($json.body.message || \"-\") }] }) }}",
+        "options": {}
+      },
+      "id": "b1f7c0a2-0002-4a10-9c11-000000000002",
+      "name": "Claude — draft reply",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [520, 320]
+    },
+    {
+      "parameters": {
+        "sendTo": "you@nexum.com",
+        "subject": "=New Nexum lead — {{ $('Webhook (form submission)').item.json.body.name || 'unknown' }}",
+        "emailType": "text",
+        "message": "=New contact form submission\n\nName:   {{ $('Webhook (form submission)').item.json.body.name }}\nFirm:   {{ $('Webhook (form submission)').item.json.body.firm }}\nEmail:  {{ $('Webhook (form submission)').item.json.body.email }}\nPhone:  {{ $('Webhook (form submission)').item.json.body.phone }}\nIntent: {{ $('Webhook (form submission)').item.json.body.intent }}\n\nMessage:\n{{ $('Webhook (form submission)').item.json.body.message }}\n\n----- Suggested reply (drafted by Claude) -----\n\n{{ ($json.content.find(b => b.type === 'text') || {}).text }}",
+        "options": {}
+      },
+      "id": "b1f7c0a2-0003-4a10-9c11-000000000003",
+      "name": "Email the lead to you",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [800, 320],
+      "notes": "Connect your Gmail credential here (or replace with the SMTP 'Send Email' node). Change 'you@nexum.com' to your real inbox."
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": true\n}",
+        "options": {}
+      },
+      "id": "b1f7c0a2-0004-4a10-9c11-000000000004",
+      "name": "Respond success to site",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1080, 320]
+    }
+  ],
+  "connections": {
+    "Webhook (form submission)": {
+      "main": [[{ "node": "Claude — draft reply", "type": "main", "index": 0 }]]
+    },
+    "Claude — draft reply": {
+      "main": [[{ "node": "Email the lead to you", "type": "main", "index": 0 }]]
+    },
+    "Email the lead to you": {
+      "main": [[{ "node": "Respond success to site", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1" },
+  "meta": { "description": "Receives a Nexum contact-form POST, asks Claude (Anthropic API) to draft a reply, emails you the lead + draft, and returns {success:true} to the website." },
+  "pinData": {}
+}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nomos · Claude vs Copilot — Concept Map</title>
+<meta name="description" content="A schematic concept map: how Claude (a model) differs from Copilot (a product), why adoption lags, and how safe it is. Nomos.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --navy:  #0d1f3c;
+  --navy2: #091529;
+  --gold:  #c9922a;
+  --glt:   #e8b84b;
+  --gdk:   #8a6018;
+  --sl:    #5a6a7e;
+  --sll:   #7a8ca0;
+  --line:  rgba(201,146,42,.38);
+  --ease:  cubic-bezier(0.16, 1, 0.3, 1);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  background: var(--navy2);
+  color: #faf8f3;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  padding: clamp(1.4rem, 4vw, 3.5rem);
+  min-height: 100vh;
+}
+.orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(12px); }
+.orb1 { width: 44vw; height: 44vw; top: -16vw; right: -12vw; background: radial-gradient(circle, rgba(201,146,42,.1) 0%, transparent 66%); }
+.orb2 { width: 36vw; height: 36vw; bottom: -14vw; left: -10vw; background: radial-gradient(circle, rgba(45,94,172,.12) 0%, transparent 66%); }
+
+.sheet { position: relative; z-index: 1; max-width: 1080px; margin: 0 auto; }
+
+/* ── Header ─────────────────────────────────────── */
+header { margin-bottom: clamp(1.8rem, 4vw, 3rem); }
+.brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 500; letter-spacing: .05em; color: var(--glt); margin-bottom: 1.1rem; display: inline-flex; align-items: baseline; }
+.brand b { color: var(--gold); font-weight: 400; }
+.brand span { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .22em; text-transform: uppercase; color: var(--sll); margin-left: .7rem; }
+.eyebrow { font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .26em; text-transform: uppercase; color: var(--gdk); display: flex; align-items: center; gap: .7rem; margin-bottom: 1rem; }
+.eyebrow::before { content: ''; width: 26px; height: 1px; background: var(--gold); }
+h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(2rem, 5.5vw, 3.6rem); line-height: 1.05; letter-spacing: -.01em; }
+h1 em { font-style: italic; color: var(--glt); }
+.sub { font-size: clamp(.85rem, 1.7vw, .98rem); color: rgba(255,255,255,.62); margin-top: .8rem; max-width: 62ch; }
+
+/* ── Root node ──────────────────────────────────── */
+.root { position: relative; padding-left: clamp(1.8rem, 5vw, 3rem); margin-bottom: 1.4rem; }
+.root-box {
+  display: inline-flex; flex-direction: column; align-items: flex-start;
+  background: rgba(201,146,42,.1); border: 1px solid rgba(201,146,42,.45);
+  padding: clamp(.9rem,2vw,1.3rem) clamp(1.3rem,3vw,2rem); border-radius: 3px;
+}
+.root-box .rt { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.4rem,3.4vw,2.3rem); font-weight: 400; color: #faf8f3; line-height: 1.05; }
+.root-box .rt em { font-style: italic; color: var(--glt); font-size: .8em; }
+.root-box .rl { font-family: 'DM Mono', monospace; font-size: .55rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-top: .5rem; }
+/* stub connecting root to spine */
+.root::after { content: ''; position: absolute; left: 13px; bottom: -1.4rem; width: 2px; height: 1.4rem; background: var(--line); }
+
+/* ── Tree spine & branches ──────────────────────── */
+.branches { position: relative; padding-left: clamp(1.8rem, 5vw, 3rem); }
+.branches::before { content: ''; position: absolute; left: 13px; top: 0; bottom: 2.6rem; width: 2px; background: linear-gradient(var(--line), rgba(201,146,42,.12)); }
+
+.branch { position: relative; padding: 0 0 clamp(1.4rem,3vw,2rem) clamp(1.5rem,4vw,2.6rem); }
+.branch::before { content: ''; position: absolute; left: 13px; top: 1.15rem; width: clamp(1.1rem,3vw,2rem); height: 2px; background: var(--line); }
+.branch::after { content: ''; position: absolute; left: 9px; top: .85rem; width: 9px; height: 9px; border-radius: 50%; background: var(--navy2); border: 2px solid var(--gold); }
+
+.node-h { display: flex; align-items: baseline; gap: .8rem; margin-bottom: .9rem; flex-wrap: wrap; }
+.node-n { font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .14em; color: var(--gdk); }
+.node-t { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.25rem,2.8vw,1.75rem); font-weight: 500; color: #faf8f3; line-height: 1.1; }
+.node-t em { font-style: italic; color: var(--glt); }
+.node-tag { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; color: var(--sll); border: 1px solid rgba(122,140,160,.3); padding: .22rem .5rem; }
+
+/* leaves */
+.leaves { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: .55rem 1.6rem; }
+.leaves li { position: relative; padding-left: 1rem; font-size: clamp(.78rem,1.5vw,.88rem); color: rgba(255,255,255,.8); line-height: 1.55; }
+.leaves li::before { content: '—'; position: absolute; left: 0; color: var(--gdk); }
+.leaves li b { color: #faf8f3; font-weight: 500; }
+.leaves li.key {
+  grid-column: 1 / -1; margin-top: .35rem; padding: .6rem .8rem .6rem 1rem;
+  background: rgba(201,146,42,.08); border-left: 2px solid var(--gold); color: var(--glt);
+}
+.leaves li.key::before { content: '▸'; color: var(--gold); }
+.leaves li.key b { color: var(--glt); }
+
+.chip { font-family: 'DM Mono', monospace; font-size: .62rem; font-weight: 500; color: var(--navy2); background: var(--glt); padding: .05rem .4rem; border-radius: 2px; letter-spacing: .02em; white-space: nowrap; }
+.chip.warn { background: #e08a6a; color: #2a0f08; }
+
+/* ── Footer / sources ───────────────────────────── */
+.foot { margin-top: clamp(1.5rem,3vw,2.5rem); padding-top: 1.3rem; border-top: 1px solid rgba(201,146,42,.16); }
+.foot .lbl { font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: .7rem; }
+.foot p { font-family: 'DM Mono', monospace; font-size: .56rem; letter-spacing: .04em; color: var(--sl); line-height: 1.9; }
+.foot .note { margin-top: .7rem; color: var(--sll); text-transform: none; letter-spacing: normal; font-family: 'DM Sans', sans-serif; font-size: .72rem; }
+
+/* reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+
+@media (max-width: 680px) {
+  .leaves { grid-template-columns: 1fr; }
+}
+
+/* print-friendly (for handing in) */
+@media print {
+  body { background: #fff; color: #111; padding: 0; }
+  .orb { display: none; }
+  .brand, .brand b { color: var(--gdk); }
+  h1, .node-t, .root-box .rt { color: var(--navy); }
+  h1 em, .node-t em, .root-box .rt em { color: var(--gdk); }
+  .leaves li, .sub { color: #222; }
+  .leaves li b { color: #000; }
+  .leaves li.key { color: var(--gdk); background: #f6efdd; }
+  .root-box { background: #f6efdd; }
+  .reveal { opacity: 1; transform: none; }
+  .foot p { color: #444; }
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="sheet">
+  <header class="reveal">
+    <div class="brand">Nomos<b>.</b><span>Concept Map</span></div>
+    <div class="eyebrow">Schematic · AI Research</div>
+    <h1>Claude <em>vs</em> Copilot</h1>
+    <p class="sub">The difference, why enterprise adoption lags, and how safe it is — at a glance.</p>
+  </header>
+
+  <!-- ROOT -->
+  <div class="root reveal">
+    <div class="root-box">
+      <div class="rt">Claude <em>vs</em> Copilot</div>
+      <div class="rl">Model vs Product</div>
+    </div>
+  </div>
+
+  <!-- BRANCHES -->
+  <div class="branches">
+
+    <div class="branch reveal">
+      <div class="node-h">
+        <span class="node-n">01</span>
+        <span class="node-t">What they <em>are</em></span>
+        <span class="node-tag">The core difference</span>
+      </div>
+      <ul class="leaves">
+        <li><b>Claude</b> = the AI <b>model</b> — Anthropic builds the intelligence itself</li>
+        <li><b>Copilot</b> = the <b>product / wrapper</b> — Microsoft's assistant inside Office &amp; GitHub</li>
+        <li>Copilot is <b>multi-model</b>: it runs GPT · Claude · Gemini (you pick the engine)</li>
+        <li>Analogy: Claude is the <b>engine</b>, Copilot is the <b>car</b></li>
+        <li class="key">Not rivals — Copilot now <b>runs Claude underneath</b> as a selectable model</li>
+      </ul>
+    </div>
+
+    <div class="branch reveal">
+      <div class="node-h">
+        <span class="node-n">02</span>
+        <span class="node-t">Why adoption <em>lags</em></span>
+        <span class="node-tag">"why nobody uses it"</span>
+      </div>
+      <ul class="leaves">
+        <li>Only <span class="chip">~3% pay</span> of Microsoft 365 users buy Copilot (≈15M of 450M)</li>
+        <li>Of licensed users, only <span class="chip">~36% active</span> — the rest is paid &amp; idle</li>
+        <li><span class="chip">$30 / user / mo</span> → ROI hard to prove, pilots stall for months</li>
+        <li>Governance fear: <span class="chip">40% delayed</span> rollout 3+ months (Gartner)</li>
+        <li class="key">Cause = <b>ROI + data-governance fear</b>, not weak AI</li>
+      </ul>
+    </div>
+
+    <div class="branch reveal">
+      <div class="node-h">
+        <span class="node-n">03</span>
+        <span class="node-t">How <em>safe</em> it is</span>
+        <span class="node-tag">Risks &amp; reality</span>
+      </div>
+      <ul class="leaves">
+        <li><b>EchoLeak</b> (CVE-2025-32711, <span class="chip warn">9.3 / 10</span>) → zero-click prompt injection; <b>patched</b>, no known abuse</li>
+        <li><b>Oversharing</b> → Copilot surfaces messy SharePoint permissions (<span class="chip">~802K files</span> at risk / org avg)</li>
+        <li>These are <b>structural LLM risks</b> (any AI + broad data) — not "Copilot is spyware"</li>
+        <li>Microsoft does <b>not</b> train on your tenant data; offers governance tooling</li>
+        <li class="key"><b>Anthropic / Claude:</b> Constitutional AI · SOC 2 · ISO 27001 · HIPAA-ready · no training on enterprise data</li>
+      </ul>
+    </div>
+
+    <div class="branch reveal">
+      <div class="node-h">
+        <span class="node-n">04</span>
+        <span class="node-t">Bottom <em>line</em></span>
+        <span class="node-tag">Takeaway</span>
+      </div>
+      <ul class="leaves">
+        <li><b>Difference:</b> Claude = the intelligence · Copilot = the workplace wrapper</li>
+        <li><b>"Nobody uses it":</b> overstated — but adoption is genuinely lagging</li>
+        <li><b>Safety:</b> enterprise-safe <b>if</b> you clean up permissions &amp; pick the right tier</li>
+        <li class="key">Same class of risk for every provider — it scales with how much data you connect</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- SOURCES -->
+  <div class="foot reveal">
+    <div class="lbl">Sources</div>
+    <p>
+      GitHub Docs — Supported AI models · Anthropic — Claude in Microsoft Foundry &amp; M365 Copilot ·
+      Petri — Copilot adoption &amp; ROI · Varonis / SOC Prime — EchoLeak (CVE-2025-32711) ·
+      EPC Group &amp; Microsoft — Copilot oversharing · ClaudeReadiness — Anthropic enterprise security
+    </p>
+    <p class="note">Adoption figures and risk data are drawn from 2025–2026 industry reporting and are indicative, not audited benchmarks.</p>
+  </div>
+</div>
+
+<script>
+(function () {
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = Math.min(i * 0.06, 0.4) + 's';
+    io.observe(el);
+  });
+})();
+</script>
+</body>
+</html>
