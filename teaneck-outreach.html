@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Prospección Negocios – Teaneck NJ | Radio 50 km</title>
+<style>
+:root{
+  --bg:#0f172a;--card:#1e293b;--border:#334155;--text:#e2e8f0;--muted:#94a3b8;
+  --blue:#3b82f6;--green:#22c55e;--amber:#f59e0b;--red:#ef4444;--gray:#6b7280;
+  --indigo:#6366f1;--purple:#a855f7;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+
+header{background:linear-gradient(135deg,#1e3a5f,#0f172a);border-bottom:1px solid var(--border);padding:2.5rem 2rem 1.8rem;text-align:center}
+header h1{font-size:1.9rem;font-weight:800;letter-spacing:-.4px}
+header h1 span{color:var(--amber)}
+header p{color:var(--muted);font-size:.9rem;margin-top:.3rem}
+.badge{display:inline-block;background:var(--indigo);color:#fff;font-size:.72rem;font-weight:700;padding:.2rem .8rem;border-radius:999px;margin-top:.6rem;letter-spacing:.4px;text-transform:uppercase}
+
+main{max-width:1180px;margin:0 auto;padding:2rem 1.5rem 4rem}
+
+h2{font-size:1.1rem;font-weight:700;margin:2.5rem 0 1rem;padding-left:.75rem;border-left:3px solid var(--amber);letter-spacing:.3px}
+
+/* KPI grid */
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.9rem;margin-bottom:.5rem}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.1rem .9rem;text-align:center}
+.kpi .num{font-size:1.9rem;font-weight:800}
+.kpi .lbl{font-size:.71rem;color:var(--muted);margin-top:.15rem;text-transform:uppercase;letter-spacing:.5px}
+.kpi.b .num{color:var(--blue)}
+.kpi.g .num{color:var(--green)}
+.kpi.r .num{color:var(--red)}
+.kpi.a .num{color:var(--amber)}
+.kpi.i .num{color:var(--indigo)}
+.kpi.p .num{color:var(--purple)}
+
+/* Charts row */
+.charts-row{display:grid;grid-template-columns:1fr 380px;gap:1.4rem;align-items:start}
+@media(max-width:760px){.charts-row{grid-template-columns:1fr}}
+
+/* Bar chart */
+.bar-wrap{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem}
+.bar-wrap h3{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1.1rem}
+.br{display:flex;align-items:center;gap:.6rem;margin-bottom:.45rem}
+.bl{font-size:.72rem;color:var(--muted);width:190px;flex-shrink:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.bt{flex:1;background:#1a2740;border-radius:3px;height:18px;position:relative}
+.bf{height:100%;border-radius:3px;position:absolute;left:0;top:0;display:flex;align-items:center;justify-content:flex-end;padding-right:5px;font-size:.64rem;font-weight:700;color:#fff}
+.bf.hw{background:linear-gradient(90deg,#1d4ed8,#3b82f6)}
+.bf.nw{background:linear-gradient(90deg,#b45309,#f59e0b)}
+.bf.uw{background:linear-gradient(90deg,#374151,#6b7280)}
+.bar-legend{display:flex;gap:1rem;margin-top:1rem;font-size:.72rem;color:var(--muted)}
+.bar-legend span{display:flex;align-items:center;gap:.3rem}
+.dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* Donuts panel */
+.donuts-panel{display:flex;flex-direction:column;gap:1rem}
+.donut-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.3rem}
+.donut-card h3{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:1rem;text-align:center}
+.donut-ring{width:130px;height:130px;border-radius:50%;margin:0 auto;position:relative}
+.donut-ring::after{content:'';position:absolute;inset:30px;border-radius:50%;background:var(--card)}
+.donut-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.7rem;color:var(--muted);z-index:1;pointer-events:none}
+.donut-center strong{font-size:1.3rem;font-weight:800;color:var(--text);display:block;line-height:1.1}
+.donut-legend{display:flex;flex-direction:column;gap:.35rem;margin-top:.9rem;font-size:.75rem}
+.dl{display:flex;align-items:center;gap:.5rem}
+.dlc{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* Alert box */
+.alert{background:linear-gradient(135deg,#451a03,#1c0a02);border:1px solid #b45309;border-radius:10px;padding:.9rem 1.1rem;margin-bottom:1.2rem;font-size:.82rem;color:#fde68a}
+.alert strong{color:#fbbf24}
+.alert2{background:linear-gradient(135deg,#1e1b4b,#0d0b2e);border:1px solid #4338ca;border-radius:10px;padding:.9rem 1.1rem;margin-bottom:1.2rem;font-size:.82rem;color:#c7d2fe}
+.alert2 strong{color:#818cf8}
+
+/* Tables */
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:.8rem}
+thead th{background:#162032;color:var(--muted);text-transform:uppercase;font-size:.67rem;letter-spacing:.6px;padding:.65rem .85rem;text-align:left;border-bottom:1px solid var(--border)}
+tbody tr{border-bottom:1px solid var(--border);transition:background .15s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#253048}
+td{padding:.6rem .85rem;vertical-align:middle}
+
+.rk{font-weight:800;color:var(--muted);width:28px;font-size:.75rem}
+.rk.g1{color:#f59e0b}.rk.g2{color:#9ca3af}.rk.g3{color:#b45309}
+.bn{font-weight:600}.bc{color:var(--muted);font-size:.7rem;margin-top:1px}
+.st{color:var(--amber);font-size:.8rem}
+.rv{color:var(--muted);font-size:.68rem}
+.ph{font-family:monospace;color:var(--blue);font-size:.78rem}
+
+.tag{display:inline-flex;align-items:center;gap:.2rem;font-size:.67rem;font-weight:600;padding:.12rem .5rem;border-radius:5px;letter-spacing:.2px;white-space:nowrap}
+.tag.hw{background:#1e3a5f;color:#60a5fa;border:1px solid #2563eb}
+.tag.nw{background:#451a03;color:#fcd34d;border:1px solid #b45309}
+.tag.uw{background:#1e1b4b;color:#a5b4fc;border:1px solid #4338ca}
+
+.map-btn{display:inline-flex;align-items:center;gap:.25rem;font-size:.67rem;color:#34d399;text-decoration:none;border:1px solid #065f46;background:#022c22;border-radius:5px;padding:.12rem .5rem;white-space:nowrap}
+.map-btn:hover{background:#065f46}
+
+tr.hi{background:rgba(245,158,11,.05)}
+tr.hi:hover{background:rgba(245,158,11,.1)}
+tr.hi2{background:rgba(99,102,241,.05)}
+tr.hi2:hover{background:rgba(99,102,241,.1)}
+
+.op-new{color:#fbbf24;font-weight:700;font-size:.75rem}
+.op-upd{color:#60a5fa;font-size:.75rem}
+.op-chk{color:#a5b4fc;font-size:.75rem}
+
+/* Category section headers */
+.cat-header{background:#162032;border:1px solid var(--border);border-radius:8px;padding:.6rem 1rem;margin:1.2rem 0 .6rem;font-size:.82rem;font-weight:700;display:flex;align-items:center;gap:.5rem;color:var(--text)}
+
+/* Contact script */
+.script-box{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:1.4rem;font-size:.82rem;line-height:1.9}
+.script-box h4{color:var(--amber);font-size:.85rem;margin-bottom:.4rem}
+.script-box p{color:var(--muted);margin-bottom:1rem}
+.script-box em{color:var(--text);font-style:normal}
+
+footer{text-align:center;color:var(--muted);font-size:.72rem;padding:1.8rem 1rem;border-top:1px solid var(--border);margin-top:3rem}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Prospección de Negocios Locales — <span>Teaneck, NJ</span></h1>
+  <p>Radio de búsqueda: <strong>50 km</strong> · Bergen, Essex, Passaic, Hudson County + Fort Lee, Hackensack, Paramus, Englewood, Lodi, Montvale</p>
+  <span class="badge">Objetivo: Venta de creación / actualización de sitios web · Junio 2026</span>
+</header>
+
+<main>
+
+<!-- KPIs -->
+<h2>Resumen Ejecutivo</h2>
+<div class="kpi-grid">
+  <div class="kpi b"><div class="num">38</div><div class="lbl">Negocios</div></div>
+  <div class="kpi g"><div class="num">27</div><div class="lbl">Tienen web</div></div>
+  <div class="kpi r"><div class="num">6</div><div class="lbl">Sin sitio web ⚡</div></div>
+  <div class="kpi i"><div class="num">5</div><div class="lbl">Web no encontrada</div></div>
+  <div class="kpi a"><div class="num">4.3</div><div class="lbl">Rating promedio</div></div>
+  <div class="kpi p"><div class="num">12</div><div class="lbl">Categorías</div></div>
+</div>
+
+<!-- Charts -->
+<h2>Análisis Visual</h2>
+<div class="charts-row">
+
+  <!-- Bar chart -->
+  <div class="bar-wrap">
+    <h3>Calificación por negocio (ordenado de mayor a menor)</h3>
+
+    <div class="br"><div class="bl">🏠 Tony Nabhan – KW (Bienes Raíces)</div><div class="bt"><div class="bf hw" style="width:100%">5.0★</div></div></div>
+    <div class="br"><div class="bl">🦷 NÜVA Smile (Bergenfield)</div><div class="bt"><div class="bf hw" style="width:98%">4.9★</div></div></div>
+    <div class="br"><div class="bl">⚖️ Meyerson Fox Conte P.A.</div><div class="bt"><div class="bf hw" style="width:96%">4.8★</div></div></div>
+    <div class="br"><div class="bl">🦷 My NJ Dentist (Hackensack)</div><div class="bt"><div class="bf hw" style="width:96%">4.8★</div></div></div>
+    <div class="br"><div class="bl">🦷 Dr. Edward Feins DMD</div><div class="bt"><div class="bf hw" style="width:96%">4.8★</div></div></div>
+    <div class="br"><div class="bl">🍗 Peck Peck Korean Chicken</div><div class="bt"><div class="bf hw" style="width:94%">4.7★</div></div></div>
+    <div class="br"><div class="bl">☕ Coffee &amp; Cornbread Co.</div><div class="bt"><div class="bf hw" style="width:94%">4.7★</div></div></div>
+    <div class="br"><div class="bl">🚗 DCH Paramus Honda</div><div class="bt"><div class="bf hw" style="width:94%">4.7★</div></div></div>
+    <div class="br"><div class="bl">🔩 Anton Plumbing H&amp;C</div><div class="bt"><div class="bf hw" style="width:94%">4.7★</div></div></div>
+    <div class="br"><div class="bl">🍳 Golden Grill Restaurant</div><div class="bt"><div class="bf hw" style="width:92%">4.6★</div></div></div>
+    <div class="br"><div class="bl">🍛 Rudra Indian Bistro</div><div class="bt"><div class="bf hw" style="width:92%">4.6★</div></div></div>
+    <div class="br"><div class="bl">🚿 Muccia Plumbing H&amp;AC</div><div class="bt"><div class="bf hw" style="width:92%">4.6★</div></div></div>
+    <div class="br"><div class="bl">🍕 Forte Ristorante (Hackensack)</div><div class="bt"><div class="bf uw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">🍝 BV Tuscany Italian</div><div class="bt"><div class="bf hw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">🚙 All American Ford Paramus</div><div class="bt"><div class="bf hw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">💪 Equinox Paramus</div><div class="bt"><div class="bf hw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">⚖️ Cohn Lifland LLP</div><div class="bt"><div class="bf hw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">🔧 Paramus Best Auto Body</div><div class="bt"><div class="bf hw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">📊 Peligri &amp; Co. CPAs</div><div class="bt"><div class="bf hw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">🛡️ Bogle Agency Insurance</div><div class="bt"><div class="bf hw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">🏘️ Nelson Chen Agency</div><div class="bt"><div class="bf uw" style="width:90%">4.5★</div></div></div>
+    <div class="br"><div class="bl">🥗 Veggie Heaven</div><div class="bt"><div class="bf hw" style="width:88%">4.4★</div></div></div>
+    <div class="br"><div class="bl">🏡 Daniel Sokolich RE</div><div class="bt"><div class="bf uw" style="width:88%">4.4★</div></div></div>
+    <div class="br"><div class="bl">🔨 Best Auto Body CC</div><div class="bt"><div class="bf hw" style="width:84%">4.2★</div></div></div>
+    <div class="br"><div class="bl">🚘 Auction Direct NJ</div><div class="bt"><div class="bf uw" style="width:84%">4.2★</div></div></div>
+    <div class="br"><div class="bl">🏨 Hyatt Place Fort Lee</div><div class="bt"><div class="bf hw" style="width:84%">4.2★</div></div></div>
+    <div class="br"><div class="bl">📈 Pogogeff &amp; Co. CPAs</div><div class="bt"><div class="bf hw" style="width:84%">4.2★</div></div></div>
+    <div class="br"><div class="bl">🎯 Taste of India — SIN WEB</div><div class="bt"><div class="bf nw" style="width:82%">4.1★</div></div></div>
+    <div class="br"><div class="bl">🍷 NoBo Wine &amp; Grill</div><div class="bt"><div class="bf hw" style="width:80%">4.0★</div></div></div>
+    <div class="br"><div class="bl">🚕 Paramus Chevrolet</div><div class="bt"><div class="bf uw" style="width:80%">4.0★</div></div></div>
+    <div class="br"><div class="bl">🎯 Style &amp; Chic Salon — SIN WEB</div><div class="bt"><div class="bf nw" style="width:80%">4.0★</div></div></div>
+    <div class="br"><div class="bl">🏩 DoubleTree Fort Lee GWB</div><div class="bt"><div class="bf hw" style="width:80%">4.0★</div></div></div>
+    <div class="br"><div class="bl">🥡 Chinatown Kitchen</div><div class="bt"><div class="bf hw" style="width:76%">3.8★</div></div></div>
+    <div class="br"><div class="bl">🎯 Cedar Lane Pharmacy — SIN WEB</div><div class="bt"><div class="bf nw" style="width:76%">3.8★</div></div></div>
+    <div class="br"><div class="bl">🎯 Cedar Lane Flowers — SIN WEB</div><div class="bt"><div class="bf nw" style="width:74%">3.7★</div></div></div>
+    <div class="br"><div class="bl">🎯 Teaneck Quick Shop — SIN WEB</div><div class="bt"><div class="bf nw" style="width:70%">3.5★</div></div></div>
+    <div class="br"><div class="bl">🎯 Teaneck Vision Center — SIN WEB</div><div class="bt"><div class="bf nw" style="width:50%">2.5★</div></div></div>
+
+    <div class="bar-legend">
+      <span><span class="dot" style="background:#3b82f6"></span>Tiene sitio web</span>
+      <span><span class="dot" style="background:#f59e0b"></span>Sin sitio web (prioridad)</span>
+      <span><span class="dot" style="background:#6b7280"></span>Web no encontrada</span>
+    </div>
+  </div>
+
+  <!-- Donut charts -->
+  <div class="donuts-panel">
+
+    <!-- Website distribution -->
+    <div class="donut-card">
+      <h3>Distribución de Sitios Web</h3>
+      <div style="position:relative;width:130px;height:130px;margin:0 auto">
+        <div class="donut-ring" style="background:conic-gradient(#3b82f6 0% 71.1%,#f59e0b 71.1% 86.8%,#6b7280 86.8% 100%)"></div>
+        <div class="donut-center" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2">
+          <strong style="font-size:1.3rem;font-weight:800;color:var(--text)">38</strong>
+          <span style="font-size:.65rem;color:var(--muted)">negocios</span>
+        </div>
+      </div>
+      <div class="donut-legend" style="margin-top:.9rem">
+        <div class="dl"><span class="dlc" style="background:#3b82f6"></span>Tiene web (27 · 71%)</div>
+        <div class="dl"><span class="dlc" style="background:#f59e0b"></span>Sin sitio web (6 · 16%)</div>
+        <div class="dl"><span class="dlc" style="background:#6b7280"></span>Web no encontrada (5 · 13%)</div>
+      </div>
+    </div>
+
+    <!-- Category distribution -->
+    <div class="donut-card">
+      <h3>Categorías de Negocios</h3>
+      <div style="position:relative;width:130px;height:130px;margin:0 auto">
+        <div class="donut-ring" style="background:conic-gradient(
+          #f59e0b 0% 26.3%,
+          #3b82f6 26.3% 44.7%,
+          #22c55e 44.7% 57.9%,
+          #6366f1 57.9% 71.1%,
+          #a855f7 71.1% 79%,
+          #06b6d4 79% 84.2%,
+          #f97316 84.2% 89.5%,
+          #ec4899 89.5% 94.7%,
+          #64748b 94.7% 100%)">
+        </div>
+        <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:2">
+          <strong style="font-size:1.1rem;font-weight:800;color:var(--text)">12</strong>
+          <span style="font-size:.6rem;color:var(--muted)">categorías</span>
+        </div>
+      </div>
+      <div class="donut-legend" style="margin-top:.9rem">
+        <div class="dl"><span class="dlc" style="background:#f59e0b"></span>Restaurantes (10)</div>
+        <div class="dl"><span class="dlc" style="background:#3b82f6"></span>Autos/Mecánica (7)</div>
+        <div class="dl"><span class="dlc" style="background:#22c55e"></span>Salud/Dental (5)</div>
+        <div class="dl"><span class="dlc" style="background:#6366f1"></span>Legal/Contab/Seg (5)</div>
+        <div class="dl"><span class="dlc" style="background:#a855f7"></span>Bienes Raíces (3)</div>
+        <div class="dl"><span class="dlc" style="background:#64748b"></span>Otros (8)</div>
+      </div>
+    </div>
+
+  </div><!-- /donuts -->
+</div><!-- /charts-row -->
+
+
+<!-- PRIORITY: NO WEBSITE -->
+<h2>⚡ Prioridad Alta — Sin Sitio Web (Oportunidad: Crear sitio nuevo)</h2>
+<div class="alert"><strong>6 negocios confirmados sin sitio web propio.</strong> Llamar primero a los de mayor calificación — ya tienen clientela y reseñas positivas, sólo les falta presencia online.</div>
+
+<table>
+  <thead><tr><th>#</th><th>Negocio</th><th>Ciudad</th><th>Categoría</th><th>Rating</th><th>Teléfono</th><th>Ubicación</th><th>Acción</th></tr></thead>
+  <tbody>
+    <tr class="hi">
+      <td class="rk g1">1</td>
+      <td><div class="bn">Taste of India</div><div class="bc">🍛 Restaurante Indio</div></td>
+      <td>Teaneck, NJ</td>
+      <td>Restaurante</td>
+      <td><span class="st">★★★★</span> <span class="rv">4.1 (279 res.)</span></td>
+      <td><span class="ph">(201) 692-3222</span></td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Taste+of+India+166+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Ver mapa</a></td>
+      <td><span class="op-new">⚡ Crear sitio</span></td>
+    </tr>
+    <tr class="hi">
+      <td class="rk g2">2</td>
+      <td><div class="bn">Style &amp; Chic Hair Salon</div><div class="bc">💇 Salón de Belleza</div></td>
+      <td>Teaneck, NJ</td>
+      <td>Belleza</td>
+      <td><span class="st">★★★★</span> <span class="rv">4.0+</span></td>
+      <td><span class="ph">(201) 530-5000</span></td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Style+and+Chic+Hair+Salon+1211+Teaneck+Rd+Teaneck+NJ" target="_blank">📍 Ver mapa</a></td>
+      <td><span class="op-new">⚡ Crear sitio</span></td>
+    </tr>
+    <tr class="hi">
+      <td class="rk g3">3</td>
+      <td><div class="bn">Cedar Lane Pharmacy</div><div class="bc">💊 Farmacia independiente</div></td>
+      <td>Teaneck, NJ</td>
+      <td>Salud</td>
+      <td><span class="st">★★★★</span> <span class="rv">3.8</span></td>
+      <td><span class="ph">(201) 836-7003</span></td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Cedar+Lane+Pharmacy+527+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Ver mapa</a></td>
+      <td><span class="op-new">⚡ Crear sitio</span></td>
+    </tr>
+    <tr class="hi">
+      <td class="rk">4</td>
+      <td><div class="bn">Cedar Lane Flower Shoppe</div><div class="bc">🌸 Floristería local</div></td>
+      <td>Teaneck, NJ</td>
+      <td>Comercio</td>
+      <td><span class="st">★★★½</span> <span class="rv">3.7</span></td>
+      <td><span class="ph">(201) 836-7106</span></td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Cedar+Lane+Flower+Shoppe+457+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Ver mapa</a></td>
+      <td><span class="op-new">⚡ Crear sitio</span></td>
+    </tr>
+    <tr class="hi">
+      <td class="rk">5</td>
+      <td><div class="bn">Teaneck Quick Shop</div><div class="bc">🏪 Tienda de conveniencia</div></td>
+      <td>Teaneck, NJ</td>
+      <td>Comercio</td>
+      <td><span class="st">★★★½</span> <span class="rv">3.5</span></td>
+      <td><span class="ph">(201) 836-2946</span></td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Teaneck+Quick+Shop+725+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Ver mapa</a></td>
+      <td><span class="op-new">⚡ Crear sitio</span></td>
+    </tr>
+    <tr class="hi">
+      <td class="rk">6</td>
+      <td><div class="bn">Teaneck Vision Center</div><div class="bc">👓 Optometrista</div></td>
+      <td>Teaneck, NJ</td>
+      <td>Salud / Óptica</td>
+      <td><span class="st">★★½</span> <span class="rv">2.5 (5 res.)</span></td>
+      <td><span class="ph">(201) 836-5644</span></td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Teaneck+Vision+Center+502+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Ver mapa</a></td>
+      <td><span class="op-new">⚡ Crear sitio</span></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- PRIORITY: UNCLEAR -->
+<h2>🔍 Prioridad Media — Sitio Web No Encontrado (Verificar antes de llamar)</h2>
+<div class="alert2"><strong>5 negocios</strong> con alta calificación donde no se encontró un sitio web independiente. Pueden tener solo una página básica o desactualizada — oportunidad de venta de creación o rediseño.</div>
+
+<table>
+  <thead><tr><th>#</th><th>Negocio</th><th>Ciudad</th><th>Categoría</th><th>Rating</th><th>Teléfono</th><th>Dirección</th><th>Ubicación</th></tr></thead>
+  <tbody>
+    <tr class="hi2">
+      <td class="rk g1">1</td>
+      <td><div class="bn">Forte Ristorante</div><div class="bc">🍕 Italiano / Pizzería</div></td>
+      <td>Hackensack, NJ</td>
+      <td>Restaurante</td>
+      <td><span class="st">★★★★½</span> <span class="rv">4.5 (90+ res.)</span></td>
+      <td><span class="ph">(201) 277-3400</span></td>
+      <td style="font-size:.75rem">160 Prospect Ave</td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Forte+Ristorante+160+Prospect+Ave+Hackensack+NJ" target="_blank">📍 Ver mapa</a></td>
+    </tr>
+    <tr class="hi2">
+      <td class="rk g2">2</td>
+      <td><div class="bn">Nelson Chen – The Chen Agency</div><div class="bc">🏘️ Bienes Raíces</div></td>
+      <td>Fort Lee, NJ</td>
+      <td>Bienes Raíces</td>
+      <td><span class="st">★★★★½</span> <span class="rv">4.5</span></td>
+      <td><span class="ph">(201) 346-8888</span></td>
+      <td style="font-size:.75rem">1392 Palisade Ave</td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Chen+Agency+Realtors+1392+Palisade+Ave+Fort+Lee+NJ" target="_blank">📍 Ver mapa</a></td>
+    </tr>
+    <tr class="hi2">
+      <td class="rk g3">3</td>
+      <td><div class="bn">Daniel Sokolich Real Estate</div><div class="bc">🏡 Agencia Inmobiliaria</div></td>
+      <td>Fort Lee, NJ</td>
+      <td>Bienes Raíces</td>
+      <td><span class="st">★★★★½</span> <span class="rv">4.4</span></td>
+      <td><span class="ph">(201) 637-1444</span></td>
+      <td style="font-size:.75rem">1223 Anderson Ave</td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Sokolich+Real+Estate+1223+Anderson+Ave+Fort+Lee+NJ" target="_blank">📍 Ver mapa</a></td>
+    </tr>
+    <tr class="hi2">
+      <td class="rk">4</td>
+      <td><div class="bn">Paramus Chevrolet</div><div class="bc">🚕 Concesionario GM</div></td>
+      <td>Paramus, NJ</td>
+      <td>Autos</td>
+      <td><span class="st">★★★★</span> <span class="rv">4.0</span></td>
+      <td><span class="ph">(201) 350-7626</span></td>
+      <td style="font-size:.75rem">194 Route 17 N</td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Paramus+Chevrolet+194+Route+17+N+Paramus+NJ" target="_blank">📍 Ver mapa</a></td>
+    </tr>
+    <tr class="hi2">
+      <td class="rk">5</td>
+      <td><div class="bn">Auction Direct NJ Auto Sales</div><div class="bc">🚘 Autos usados</div></td>
+      <td>North Bergen, NJ</td>
+      <td>Autos</td>
+      <td><span class="st">★★★★</span> <span class="rv">4.2</span></td>
+      <td><span class="ph">—</span></td>
+      <td style="font-size:.75rem">8203 JFK Blvd</td>
+      <td><a class="map-btn" href="https://maps.google.com/?q=Auction+Direct+NJ+8203+JFK+Blvd+North+Bergen+NJ" target="_blank">📍 Ver mapa</a></td>
+    </tr>
+  </tbody>
+</table>
+
+
+<!-- FULL LIST BY CATEGORY -->
+<h2>📋 Lista Completa por Categoría — 38 Negocios</h2>
+
+<!-- Restaurantes -->
+<div class="cat-header">🍽️ Restaurantes &amp; Cafés <span style="color:var(--muted);font-weight:400;font-size:.75rem;margin-left:auto">10 negocios</span></div>
+<table>
+  <thead><tr><th>#</th><th>Negocio</th><th>Ciudad</th><th>Rating</th><th>Reseñas</th><th>Teléfono</th><th>Sitio Web</th><th>Ubicación</th><th>Oportunidad</th></tr></thead>
+  <tbody>
+    <tr><td class="rk g1">1</td><td><div class="bn">Peck Peck Korean Fried Chicken</div><div class="bc">🍗 Coreano · Fast food</div></td><td>Teaneck</td><td><span class="st">★★★★★</span> 4.7</td><td class="rv">41+</td><td><span class="ph">(201) 530-5858</span></td><td><span class="tag hw">✔ peckpeckchicken.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Peck+Peck+Korean+Chicken+250+Degraw+Ave+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk g2">2</td><td><div class="bn">Coffee &amp; Cornbread Co.</div><div class="bc">☕ Café · Desayuno</div></td><td>Teaneck</td><td><span class="st">★★★★★</span> 4.7</td><td class="rv">366+</td><td><span class="ph">(201) 862-0600</span></td><td><span class="tag hw">✔ coffeeandcornbread.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Coffee+and+Cornbread+1350+Queen+Anne+Rd+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk g3">3</td><td><div class="bn">Forte Ristorante</div><div class="bc">🍕 Italiano · Pizza</div></td><td>Hackensack</td><td><span class="st">★★★★½</span> 4.5</td><td class="rv">90+</td><td><span class="ph">(201) 277-3400</span></td><td><span class="tag uw">? No encontrado</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Forte+Ristorante+160+Prospect+Ave+Hackensack+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-chk">🔍 Verificar</span></td></tr>
+    <tr><td class="rk">4</td><td><div class="bn">BV Tuscany Italian Ristorante</div><div class="bc">🍝 Italiano · Fine dining</div></td><td>Teaneck</td><td><span class="st">★★★★½</span> 4.5</td><td class="rv">273+</td><td><span class="ph">(201) 287-0404</span></td><td><span class="tag hw">✔ bvtuscany.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=BV+Tuscany+Italian+368+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk">5</td><td><div class="bn">Golden Grill Restaurant</div><div class="bc">🍳 Americano · Brunch</div></td><td>Teaneck</td><td><span class="st">★★★★½</span> 4.6</td><td class="rv">69+</td><td><span class="ph">(201) 837-1078</span></td><td><span class="tag hw">✔ goldengrillteaneck.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Golden+Grill+Restaurant+1379+Queen+Anne+Rd+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk">6</td><td><div class="bn">Rudra Indian Bistro</div><div class="bc">🍛 Indio · Bistró</div></td><td>Teaneck</td><td><span class="st">★★★★½</span> 4.6</td><td class="rv">157+</td><td><span class="ph">(201) 530-7575</span></td><td><span class="tag hw">✔ rudraindianbistro.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Rudra+Indian+Bistro+561+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk">7</td><td><div class="bn">Veggie Heaven</div><div class="bc">🥗 Vegano · Kosher · Asiático</div></td><td>Teaneck</td><td><span class="st">★★★★½</span> 4.4</td><td class="rv">119+</td><td><span class="ph">(201) 836-0887</span></td><td><span class="tag hw">✔ orderveggieheaven.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Veggie+Heaven+473+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr class="hi"><td class="rk">8</td><td><div class="bn">Taste of India</div><div class="bc">🎯 Indio · Familiar</div></td><td>Teaneck</td><td><span class="st">★★★★</span> 4.1</td><td class="rv">279+</td><td><span class="ph">(201) 692-3222</span></td><td><span class="tag nw">⚡ Sin sitio web</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Taste+of+India+166+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-new">⚡ Crear sitio</span></td></tr>
+    <tr><td class="rk">9</td><td><div class="bn">NoBo Wine &amp; Grill</div><div class="bc">🍷 Vinos · Parrilla</div></td><td>Teaneck</td><td><span class="st">★★★★</span> 4.0</td><td class="rv">—</td><td><span class="ph">(201) 837-1000</span></td><td><span class="tag hw">✔ noboteaneck.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=NoBo+Wine+and+Grill+1400+Palisade+Ave+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk">10</td><td><div class="bn">Chinatown Kitchen</div><div class="bc">🥡 Chino · Takeout</div></td><td>Teaneck</td><td><span class="st">★★★★</span> 3.8</td><td class="rv">75+</td><td><span class="ph">(201) 530-7388</span></td><td><span class="tag hw">✔ chinatownkitchenteaneck.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Chinatown+Kitchen+257+Degraw+Ave+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+  </tbody>
+</table>
+
+<!-- Autos -->
+<div class="cat-header">🚗 Concesionarios &amp; Talleres Automotrices <span style="color:var(--muted);font-weight:400;font-size:.75rem;margin-left:auto">7 negocios</span></div>
+<table>
+  <thead><tr><th>#</th><th>Negocio</th><th>Ciudad</th><th>Rating</th><th>Teléfono</th><th>Dirección</th><th>Sitio Web</th><th>Ubicación</th><th>Oportunidad</th></tr></thead>
+  <tbody>
+    <tr><td class="rk g1">1</td><td><div class="bn">DCH Paramus Honda</div><div class="bc">🚗 Honda · #4 volumen EE.UU.</div></td><td>Paramus</td><td><span class="st">★★★★★</span> 4.7</td><td><span class="ph">(201) 426-4676</span></td><td style="font-size:.75rem">120 NJ-4</td><td><span class="tag hw">✔ dchparamushonda.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=DCH+Paramus+Honda+120+NJ-4+Paramus+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk g2">2</td><td><div class="bn">All American Ford of Paramus</div><div class="bc">🚙 Ford · Ruta 17</div></td><td>Paramus</td><td><span class="st">★★★★½</span> 4.5</td><td><span class="ph">(201) 262-4900</span></td><td style="font-size:.75rem">375 NJ-17</td><td><span class="tag hw">✔ allamericanfordinparamus.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=All+American+Ford+375+NJ-17+Paramus+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk g3">3</td><td><div class="bn">Paramus Best Auto Body</div><div class="bc">🔧 Colisión · Carrocería</div></td><td>Rochelle Park</td><td><span class="st">★★★★½</span> 4.5</td><td><span class="ph">(201) 368-0118</span></td><td style="font-size:.75rem">43 W Passaic St</td><td><span class="tag hw">✔ paramusbestautobody.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Paramus+Best+Auto+Body+43+W+Passaic+St+Rochelle+Park+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk">4</td><td><div class="bn">Best Auto Body Collision Center</div><div class="bc">🔨 Colisión · Bergen County</div></td><td>Paramus</td><td><span class="st">★★★★</span> 4.2</td><td><span class="ph">(201) 627-1500</span></td><td style="font-size:.75rem">Bergen County</td><td><span class="tag hw">✔ bestautobodynj.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Best+Auto+Body+Collision+Center+Paramus+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr class="hi2"><td class="rk">5</td><td><div class="bn">Auction Direct NJ Auto Sales</div><div class="bc">🚘 Usados · Subasta</div></td><td>North Bergen</td><td><span class="st">★★★★</span> 4.2</td><td><span class="ph">—</span></td><td style="font-size:.75rem">8203 JFK Blvd</td><td><span class="tag uw">? No encontrado</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Auction+Direct+NJ+8203+JFK+Blvd+North+Bergen+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-chk">🔍 Verificar</span></td></tr>
+    <tr><td class="rk">6</td><td><div class="bn">Bergen Car Company</div><div class="bc">🏎️ Usados · Certificados</div></td><td>Lodi</td><td><span class="st">★★★★</span> 4.0</td><td><span class="ph">—</span></td><td style="font-size:.75rem">22 US-46 East</td><td><span class="tag hw">✔ bergencar.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Bergen+Car+Company+22+US-46+East+Lodi+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr class="hi2"><td class="rk">7</td><td><div class="bn">Paramus Chevrolet</div><div class="bc">🚕 Chevrolet · Ruta 17</div></td><td>Paramus</td><td><span class="st">★★★★</span> 4.0</td><td><span class="ph">(201) 350-7626</span></td><td style="font-size:.75rem">194 Route 17 N</td><td><span class="tag uw">? No encontrado</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Paramus+Chevrolet+194+Route+17+N+Paramus+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-chk">🔍 Verificar</span></td></tr>
+  </tbody>
+</table>
+
+<!-- Salud -->
+<div class="cat-header">🏥 Salud, Dental &amp; Óptica <span style="color:var(--muted);font-weight:400;font-size:.75rem;margin-left:auto">5 negocios</span></div>
+<table>
+  <thead><tr><th>#</th><th>Negocio</th><th>Ciudad</th><th>Rating</th><th>Reseñas</th><th>Teléfono</th><th>Sitio Web</th><th>Ubicación</th><th>Oportunidad</th></tr></thead>
+  <tbody>
+    <tr><td class="rk g1">1</td><td><div class="bn">NÜVA Smile</div><div class="bc">🦷 Dental · 4.9 estrellas</div></td><td>Bergenfield</td><td><span class="st">★★★★★</span> 4.9</td><td class="rv">225+</td><td><span class="ph">(201) 385-5454</span></td><td><span class="tag hw">✔ nuvasmile.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=NUVA+Smile+Bergenfield+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk g2">2</td><td><div class="bn">My NJ Dentist</div><div class="bc">🦷 Dental · Premiado Bergen County</div></td><td>Hackensack</td><td><span class="st">★★★★★</span> 4.8</td><td class="rv">—</td><td><span class="ph">(201) 298-8000</span></td><td><span class="tag hw">✔ mynjdentist.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=My+NJ+Dentist+Hackensack+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr><td class="rk g3">3</td><td><div class="bn">Dr. Edward Feins DMD</div><div class="bc">🦷 Dental · River Vale</div></td><td>River Vale</td><td><span class="st">★★★★★</span> 4.8</td><td class="rv">—</td><td><span class="ph">(201) 666-3300</span></td><td><span class="tag hw">✔ drfeins.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Dr+Edward+Feins+DMD+River+Vale+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Actualizar</span></td></tr>
+    <tr class="hi"><td class="rk">4</td><td><div class="bn">Cedar Lane Pharmacy</div><div class="bc">💊 Farmacia independiente</div></td><td>Teaneck</td><td><span class="st">★★★★</span> 3.8</td><td class="rv">—</td><td><span class="ph">(201) 836-7003</span></td><td><span class="tag nw">⚡ Sin sitio web</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Cedar+Lane+Pharmacy+527+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-new">⚡ Crear sitio</span></td></tr>
+    <tr class="hi"><td class="rk">5</td><td><div class="bn">Teaneck Vision Center</div><div class="bc">👓 Optometrista · Dr. Levinger</div></td><td>Teaneck</td><td><span class="st">★★½</span> 2.5</td><td class="rv">5</td><td><span class="ph">(201) 836-5644</span></td><td><span class="tag nw">⚡ Sin sitio web</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Teaneck+Vision+Center+502+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-new">⚡ Crear sitio</span></td></tr>
+  </tbody>
+</table>
+
+<!-- Legal / Contabilidad / Seguros -->
+<div class="cat-header">⚖️ Legal, Contabilidad &amp; Seguros <span style="color:var(--muted);font-weight:400;font-size:.75rem;margin-left:auto">5 negocios</span></div>
+<table>
+  <thead><tr><th>#</th><th>Negocio</th><th>Ciudad</th><th>Especialidad</th><th>Rating</th><th>Teléfono</th><th>Dirección</th><th>Sitio Web</th><th>Ubicación</th></tr></thead>
+  <tbody>
+    <tr><td class="rk g1">1</td><td><div class="bn">Meyerson Fox Conte P.A.</div><div class="bc">⚖️ Firma legal · 30 abogados</div></td><td>Montvale</td><td>Legal</td><td><span class="st">★★★★★</span> 4.8</td><td><span class="ph">(201) 802-9202</span></td><td style="font-size:.75rem">1 Paragon Dr #240</td><td><span class="tag hw">✔ mfmclaw.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Meyerson+Fox+Conte+One+Paragon+Drive+Montvale+NJ" target="_blank">📍 Mapa</a></td></tr>
+    <tr><td class="rk g2">2</td><td><div class="bn">Cohn Lifland Pearlman et al.</div><div class="bc">⚖️ Firma legal · Norte NJ</div></td><td>Saddle Brook</td><td>Legal</td><td><span class="st">★★★★½</span> 4.5</td><td><span class="ph">(201) 845-9600</span></td><td style="font-size:.75rem">Saddle Brook, NJ</td><td><span class="tag hw">✔ njlawfirm.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Cohn+Lifland+Pearlman+Saddle+Brook+NJ" target="_blank">📍 Mapa</a></td></tr>
+    <tr><td class="rk g3">3</td><td><div class="bn">Peligri &amp; Company CPAs</div><div class="bc">📊 CPA · Hackensack</div></td><td>Hackensack</td><td>Contabilidad</td><td><span class="st">★★★★½</span> 4.5</td><td><span class="ph">(201) 489-6500</span></td><td style="font-size:.75rem">302 Union St</td><td><span class="tag hw">✔ peligri.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Peligri+Company+CPAs+302+Union+St+Hackensack+NJ" target="_blank">📍 Mapa</a></td></tr>
+    <tr><td class="rk">4</td><td><div class="bn">Pogogeff &amp; Company CPAs</div><div class="bc">📈 CPA · Fort Lee</div></td><td>Fort Lee</td><td>Contabilidad</td><td><span class="st">★★★★</span> 4.2</td><td><span class="ph">(201) 592-0006</span></td><td style="font-size:.75rem">2050 Center Ave #440</td><td><span class="tag hw">✔ pogandco.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Pogogeff+Company+CPAs+2050+Center+Ave+Fort+Lee+NJ" target="_blank">📍 Mapa</a></td></tr>
+    <tr><td class="rk">5</td><td><div class="bn">Bogle Agency Insurance</div><div class="bc">🛡️ Seguros · 100 años Bergen County</div></td><td>Bergen County</td><td>Seguros</td><td><span class="st">★★★★½</span> 4.5</td><td><span class="ph">(201) 939-1076</span></td><td style="font-size:.75rem">Bergen County, NJ</td><td><span class="tag hw">✔ bogleagency.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Bogle+Agency+Insurance+Bergen+County+NJ" target="_blank">📍 Mapa</a></td></tr>
+  </tbody>
+</table>
+
+<!-- Bienes Raices -->
+<div class="cat-header">🏠 Bienes Raíces <span style="color:var(--muted);font-weight:400;font-size:.75rem;margin-left:auto">3 negocios</span></div>
+<table>
+  <thead><tr><th>#</th><th>Negocio</th><th>Ciudad</th><th>Rating</th><th>Teléfono</th><th>Dirección</th><th>Sitio Web</th><th>Ubicación</th><th>Oportunidad</th></tr></thead>
+  <tbody>
+    <tr><td class="rk g1">1</td><td><div class="bn">Tony Nabhan – KW City Views</div><div class="bc">🏠 #1 KW · $156M ventas 2024</div></td><td>Fort Lee</td><td><span class="st">★★★★★</span> 5.0</td><td><span class="ph">(973) 271-1044</span></td><td style="font-size:.75rem">2200 Fletcher Ave #502</td><td><span class="tag hw">✔ Via KW</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Keller+Williams+City+Views+2200+Fletcher+Ave+Fort+Lee+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑ Sitio personal</span></td></tr>
+    <tr class="hi2"><td class="rk g2">2</td><td><div class="bn">Nelson Chen – The Chen Agency</div><div class="bc">🏘️ Agencia local Fort Lee</div></td><td>Fort Lee</td><td><span class="st">★★★★½</span> 4.5</td><td><span class="ph">(201) 346-8888</span></td><td style="font-size:.75rem">1392 Palisade Ave</td><td><span class="tag uw">? No encontrado</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Chen+Agency+Realtors+1392+Palisade+Ave+Fort+Lee+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-chk">🔍 Verificar</span></td></tr>
+    <tr class="hi2"><td class="rk g3">3</td><td><div class="bn">Daniel Sokolich Real Estate</div><div class="bc">🏡 Agencia independiente</div></td><td>Fort Lee</td><td><span class="st">★★★★½</span> 4.4</td><td><span class="ph">(201) 637-1444</span></td><td style="font-size:.75rem">1223 Anderson Ave</td><td><span class="tag uw">? No encontrado</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Sokolich+Real+Estate+1223+Anderson+Ave+Fort+Lee+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-chk">🔍 Verificar</span></td></tr>
+  </tbody>
+</table>
+
+<!-- Belleza / Gym / HVAC / Hotels / Retail -->
+<div class="cat-header">💇 Belleza, Gimnasios, HVAC, Hoteles &amp; Comercios <span style="color:var(--muted);font-weight:400;font-size:.75rem;margin-left:auto">11 negocios</span></div>
+<table>
+  <thead><tr><th>#</th><th>Negocio</th><th>Ciudad</th><th>Categoría</th><th>Rating</th><th>Teléfono</th><th>Dirección</th><th>Sitio Web</th><th>Ubicación</th><th>Oport.</th></tr></thead>
+  <tbody>
+    <tr><td class="rk g1">1</td><td><div class="bn">Anton Plumbing H&amp;C</div><div class="bc">🔩 HVAC · 18,200+ clientes</div></td><td>Bergen Co.</td><td>HVAC</td><td><span class="st">★★★★★</span> 4.7</td><td><span class="ph">(732) 771-4771</span></td><td style="font-size:.75rem">Bergen County</td><td><span class="tag hw">✔ antonplumbinghvac.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Anton+Plumbing+Heating+Cooling+Bergen+County+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑</span></td></tr>
+    <tr><td class="rk g2">2</td><td><div class="bn">Muccia Plumbing H&amp;AC</div><div class="bc">🚿 HVAC · Hackensack</div></td><td>Hackensack</td><td>HVAC</td><td><span class="st">★★★★½</span> 4.6</td><td><span class="ph">—</span></td><td style="font-size:.75rem">Hackensack, NJ</td><td><span class="tag hw">✔ mucciaplumbing.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Muccia+Plumbing+Heating+AC+Hackensack+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑</span></td></tr>
+    <tr><td class="rk g3">3</td><td><div class="bn">Equinox Paramus</div><div class="bc">💪 Gimnasio premium</div></td><td>Paramus</td><td>Gimnasio</td><td><span class="st">★★★★½</span> 4.5</td><td><span class="ph">(201) 447-7183</span></td><td style="font-size:.75rem">Paramus, NJ</td><td><span class="tag hw">✔ equinox.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Equinox+Paramus+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑</span></td></tr>
+    <tr><td class="rk">4</td><td><div class="bn">Hyatt Place Fort Lee</div><div class="bc">🏨 Hotel · GWB</div></td><td>Fort Lee</td><td>Hotel</td><td><span class="st">★★★★</span> 4.2</td><td><span class="ph">(201) 849-5900</span></td><td style="font-size:.75rem">2167 Route 4 East</td><td><span class="tag hw">✔ hyatt.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Hyatt+Place+Fort+Lee+2167+Route+4+East+Fort+Lee+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑</span></td></tr>
+    <tr class="hi"><td class="rk">5</td><td><div class="bn">Style &amp; Chic Hair Salon</div><div class="bc">🎯 Salón de Belleza · SIN WEB</div></td><td>Teaneck</td><td>Belleza</td><td><span class="st">★★★★</span> 4.0</td><td><span class="ph">(201) 530-5000</span></td><td style="font-size:.75rem">1211 Teaneck Rd</td><td><span class="tag nw">⚡ Sin sitio web</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Style+and+Chic+1211+Teaneck+Rd+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-new">⚡</span></td></tr>
+    <tr><td class="rk">6</td><td><div class="bn">DoubleTree by Hilton Fort Lee</div><div class="bc">🏩 Hotel · GWB</div></td><td>Fort Lee</td><td>Hotel</td><td><span class="st">★★★★</span> 4.0</td><td><span class="ph">(201) 944-5000</span></td><td style="font-size:.75rem">2339 State Rt 4</td><td><span class="tag hw">✔ hilton.com</span></td><td><a class="map-btn" href="https://maps.google.com/?q=DoubleTree+Hilton+Fort+Lee+2339+State+Rt+4+Fort+Lee+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-upd">↑</span></td></tr>
+    <tr class="hi"><td class="rk">7</td><td><div class="bn">Cedar Lane Flower Shoppe</div><div class="bc">🎯 Floristería · SIN WEB</div></td><td>Teaneck</td><td>Comercio</td><td><span class="st">★★★½</span> 3.7</td><td><span class="ph">(201) 836-7106</span></td><td style="font-size:.75rem">457 Cedar Ln</td><td><span class="tag nw">⚡ Sin sitio web</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Cedar+Lane+Flower+Shoppe+457+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-new">⚡</span></td></tr>
+    <tr class="hi"><td class="rk">8</td><td><div class="bn">Teaneck Quick Shop</div><div class="bc">🎯 Conveniencia · SIN WEB</div></td><td>Teaneck</td><td>Comercio</td><td><span class="st">★★★½</span> 3.5</td><td><span class="ph">(201) 836-2946</span></td><td style="font-size:.75rem">725 Cedar Ln</td><td><span class="tag nw">⚡ Sin sitio web</span></td><td><a class="map-btn" href="https://maps.google.com/?q=Teaneck+Quick+Shop+725+Cedar+Ln+Teaneck+NJ" target="_blank">📍 Mapa</a></td><td><span class="op-new">⚡</span></td></tr>
+  </tbody>
+</table>
+
+
+<!-- CONTACT SCRIPTS -->
+<h2>📞 Guiones de Contacto por Tipo de Negocio</h2>
+<div class="script-box">
+  <h4>⚡ Para negocios SIN sitio web (Prioridad Alta)</h4>
+  <p>"Hola, le llamo de <em>[tu empresa]</em>. Encontré su negocio en Google con excelentes reseñas, pero noté que <em>no tienen sitio web propio</em>. Hoy más del 85% de los clientes buscan en internet antes de visitar. Le podemos crear un sitio profesional desde <em>$X/mes</em>. ¿Tiene 10 minutos esta semana para una presentación sin compromiso?"</p>
+
+  <h4>↑ Para negocios CON sitio web (Actualización)</h4>
+  <p>"Hola, visité su sitio web y noté que <em>podría mejorar en velocidad, diseño mobile y posicionamiento en Google</em>. Nuestro equipo puede actualizarlo para traer más clientes sin interrumpir su operación. ¿Le interesaría ver un análisis gratuito de su sitio actual?"</p>
+
+  <h4>🔍 Para negocios con web poco desarrollada</h4>
+  <p>"Hola, encontré su perfil en Google Maps con <em>[X estrellas y Y reseñas]</em> — eso es excelente. Su sitio web actual no refleja la calidad que sus clientes describen. ¿Le gustaría que le mostremos cómo un rediseño puede convertir más visitantes en clientes reales?"</p>
+
+  <h4>🚗 Para concesionarios de autos</h4>
+  <p>"Hola, somos especialistas en sitios web para concesionarias. Notamos que su inventario <em>no está bien optimizado para búsquedas locales en Google</em>. Podemos agregarle módulos de inventario en tiempo real, chat, y formularios de crédito. ¿Hablamos esta semana?"</p>
+</div>
+
+</main>
+
+<footer>
+  Generado el <strong>29 de junio 2026</strong> · Radio 50 km desde Teaneck, NJ ·
+  Fuentes: Yelp, TripAdvisor, Google Maps, KBB, Birdeye, MenuPix, YellowPages ·
+  38 negocios · 12 categorías · Uso interno de prospección
+</footer>
+
+</body>
+</html>

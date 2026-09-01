@@ -1,0 +1,243 @@
+@import "tailwindcss";
+
+/* ── Pantlaza design tokens ── */
+:root {
+  --background: #ffffff;
+  --foreground: #0f2c5e;
+  --card: #ffffff;
+  --card-foreground: #0f2c5e;
+  --primary: #0f2c5e;
+  --primary-foreground: #ffffff;
+  --secondary: #f59e0b;
+  --secondary-foreground: #0f2c5e;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #1d4ed8;
+  --accent-foreground: #ffffff;
+  --border: #e2e8f0;
+  --radius: 0.5rem;
+
+  /* Pantlaza brand */
+  --navy: #0f2c5e;
+  --blue: #1d4ed8;
+  --sky: #3b82f6;
+  --gold: #f59e0b;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #02091a;
+    --foreground: #f8fafc;
+    --card: #0f2c5e;
+    --card-foreground: #f8fafc;
+    --muted: #1e3a5f;
+    --muted-foreground: #94a3b8;
+    --border: #1e3a5f;
+  }
+}
+
+:root[data-theme="dark"] {
+  --background: #02091a;
+  --foreground: #f8fafc;
+  --card: #0f2c5e;
+  --card-foreground: #f8fafc;
+  --muted: #1e3a5f;
+  --muted-foreground: #94a3b8;
+  --border: #1e3a5f;
+}
+
+:root[data-theme="light"] {
+  --background: #ffffff;
+  --foreground: #0f2c5e;
+  --card: #ffffff;
+  --card-foreground: #0f2c5e;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans, 'Helvetica Neue', Arial, sans-serif);
+}
+
+/* ── Hero word-reveal animation ── */
+@keyframes heroWordIn {
+  from {
+    opacity: 0;
+    transform: translateY(40px) skewY(4deg);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) skewY(0deg);
+    filter: blur(0);
+  }
+}
+
+.hero-word-in {
+  animation: heroWordIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Hero subtitle animation ── */
+@keyframes heroSubtitleIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.hero-subtitle-in {
+  animation: heroSubtitleIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Explore / scroll CTA button ── */
+.explore-btn {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  opacity: 0;
+  animation: fadeInUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+.explore-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(6px); }
+}
+
+.arrow-svg {
+  animation: bounceArrow 1.6s ease-in-out infinite;
+}
+
+/* ── Section slide-up animation ── */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(32px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.anim {
+  opacity: 0;
+}
+
+.anim.visible {
+  animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-stagger {
+  opacity: 0;
+}
+
+.anim-stagger.visible {
+  animation: slideUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Spotlight animation ── */
+@keyframes spotlight {
+  0%   { opacity: 0; transform: translate(-72%, -62%) scale(0.5); }
+  100% { opacity: 1; transform: translate(-50%, -40%) scale(1); }
+}
+
+.animate-spotlight {
+  animation: spotlight 2s ease 0.75s 1 forwards;
+}
+
+/* ── Spline loader spinner ── */
+.spline-loader {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(245, 158, 11, 0.2);
+  border-top-color: #f59e0b;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Pointer glow (spotlight-card GlowCard technique, per-card coords) ── */
+.glow { --gradius: 16; position: relative; }
+.glow::before,
+.glow::after {
+  pointer-events: none;
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: calc(var(--gradius) * 1px);
+  background-repeat: no-repeat;
+}
+.glow::before {
+  background-image: radial-gradient(
+    210px 210px at calc(var(--cx, -9999) * 1px) calc(var(--cy, -9999) * 1px),
+    hsl(calc(220 + (var(--mxp, 0) * 200)) 100% 62% / 0.2),
+    transparent 100%
+  );
+}
+.glow::after {
+  background-image: radial-gradient(
+    70px 70px at calc(var(--cx, -9999) * 1px) calc(var(--cy, -9999) * 1px),
+    hsl(0 0% 100% / 0.16),
+    transparent 100%
+  );
+}
+@media (hover: none) {
+  .glow::before,
+  .glow::after {
+    display: none;
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .hero-word-in,
+  .hero-subtitle-in,
+  .explore-btn,
+  .arrow-svg,
+  .anim.visible,
+  .anim-stagger.visible {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
