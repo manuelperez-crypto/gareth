@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nomos · Why Companies Adopt Artificial Intelligence</title>
+<meta name="description" content="Presentation: why companies use AI and why they choose one provider over another. Nomos.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── Tokens ─────────────────────────────────────────────── */
+:root {
+  --navy:  #0d1f3c;
+  --navy2: #091529;
+  --gold:  #c9922a;
+  --glt:   #e8b84b;
+  --gdk:   #8a6018;
+  --paper: #f4f2ee;
+  --p2:    #e5e0d5;
+  --bone:  #ffffff;
+  --sl:    #5a6a7e;
+  --sll:   #7a8ca0;
+  --ease:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  background: var(--navy2);
+  color: #faf8f3;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+  line-height: 1.6;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+p { text-wrap: pretty; }
+h1, h2, h3 { text-wrap: balance; }
+::selection { background: #c39a3e; color: #faf8f3; }
+
+/* ── Deck shell ─────────────────────────────────────────── */
+#deck { position: fixed; inset: 0; overflow: hidden; }
+
+/* animated background orbs */
+.orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(10px); }
+.orb1 { width: 46vw; height: 46vw; top: -14vw; right: -10vw; background: radial-gradient(circle, rgba(201,146,42,.12) 0%, transparent 66%); animation: drift1 26s ease-in-out infinite; }
+.orb2 { width: 38vw; height: 38vw; bottom: -12vw; left: -8vw; background: radial-gradient(circle, rgba(45,94,172,.14) 0%, transparent 66%); animation: drift2 32s ease-in-out infinite; }
+@keyframes drift1 { 0%,100% { transform: translate(0,0) scale(1) } 50% { transform: translate(-4vw,3vw) scale(1.1) } }
+@keyframes drift2 { 0%,100% { transform: translate(0,0) scale(1) } 50% { transform: translate(3vw,-2vw) scale(1.08) } }
+
+/* ── Slides ─────────────────────────────────────────────── */
+.slide {
+  position: absolute; inset: 0; z-index: 1;
+  display: flex; align-items: center; justify-content: center;
+  padding: clamp(3rem, 6vh, 5rem) clamp(1.4rem, 6vw, 6rem) clamp(4.5rem, 8vh, 6rem);
+  opacity: 0; visibility: hidden;
+  transform: translateX(48px) scale(.99);
+  transition: opacity .6s var(--ease), transform .7s var(--ease), visibility .6s;
+  overflow-y: auto;
+}
+.slide.active { opacity: 1; visibility: visible; transform: none; }
+.slide.prev  { transform: translateX(-48px) scale(.99); }
+.s-inner { width: 100%; max-width: 1180px; margin: auto; }
+
+/* staggered entrance for children */
+[data-anim] {
+  opacity: 0; transform: translateY(26px);
+  transition: opacity .7s var(--ease), transform .7s var(--ease);
+  transition-delay: 0s;
+}
+.slide.active [data-anim] { opacity: 1; transform: none; transition-delay: var(--d, 0s); }
+
+/* ── Shared type ────────────────────────────────────────── */
+.eye {
+  font-family: 'DM Mono', monospace; font-size: clamp(.55rem,1.1vw,.64rem); letter-spacing: .28em;
+  text-transform: uppercase; color: var(--glt);
+  display: inline-flex; align-items: center; gap: .8rem; margin-bottom: clamp(1rem,2.5vh,1.8rem);
+}
+.eye::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+.s-title {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(1.9rem, 4.6vw, 3.5rem); line-height: 1.08; letter-spacing: -.01em;
+  margin-bottom: clamp(1.4rem, 3vh, 2.4rem);
+}
+.s-title em { font-style: italic; color: var(--glt); }
+.lead { font-size: clamp(.9rem, 1.7vw, 1.05rem); color: rgba(255,255,255,.72); line-height: 1.8; max-width: 60ch; }
+
+/* ── Cover slide ────────────────────────────────────────── */
+.cover { text-align: left; }
+.cover .brand {
+  font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 5vw, 3.4rem);
+  font-weight: 500; letter-spacing: .04em; color: var(--glt); margin-bottom: 2.5rem;
+  display: inline-flex; align-items: baseline; gap: .1em;
+}
+.cover .brand b { color: var(--gold); font-weight: 400; }
+.cover h1 {
+  font-family: 'Cormorant Garamond', serif; font-weight: 300;
+  font-size: clamp(2.6rem, 7.5vw, 6.2rem); line-height: 1.02; letter-spacing: -.02em;
+  color: #faf8f3; margin-bottom: 1.6rem;
+}
+.cover h1 em { font-style: italic; color: var(--glt); }
+.cover .csub { font-size: clamp(1rem, 2.2vw, 1.35rem); color: rgba(255,255,255,.7); font-weight: 300; max-width: 48ch; line-height: 1.6; }
+.cover .cmeta {
+  margin-top: clamp(2rem,5vh,3.5rem); padding-top: 1.4rem; border-top: 1px solid rgba(201,146,42,.22);
+  font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--sll); display: flex; gap: 2rem; flex-wrap: wrap;
+}
+
+/* ── Reason grid ────────────────────────────────────────── */
+.rgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.7rem,1.4vw,1rem); }
+.rcard {
+  background: rgba(255,255,255,.035); border: 1px solid rgba(201,146,42,.15);
+  padding: clamp(1.1rem, 2vw, 1.6rem); transition: background .35s, border-color .35s, transform .35s;
+}
+.rcard:hover { background: rgba(201,146,42,.07); border-color: rgba(201,146,42,.4); transform: translateY(-4px); }
+.rnum { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 2rem; color: var(--glt); line-height: 1; margin-bottom: .6rem; }
+.rt { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem,1.9vw,1.28rem); font-weight: 500; color: #faf8f3; margin-bottom: .5rem; line-height: 1.15; }
+.rd { font-size: clamp(.74rem, 1.35vw, .84rem); color: rgba(255,255,255,.66); line-height: 1.65; }
+
+/* ── Stats ──────────────────────────────────────────────── */
+.stg { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1rem,2vw,1.6rem); }
+.st { border-left: 1px solid rgba(201,146,42,.18); padding-left: clamp(1rem,2vw,1.6rem); }
+.st:first-child { border-left: none; padding-left: 0; }
+.stn { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.6rem,6vw,4.6rem); font-weight: 300; color: #faf8f3; line-height: 1; }
+.stn s { text-decoration: none; color: var(--glt); }
+.stl { font-family: 'DM Mono', monospace; font-size: clamp(.5rem,1vw,.58rem); letter-spacing: .12em; text-transform: uppercase; color: var(--sll); margin-top: .9rem; line-height: 1.9; }
+
+/* ── Provider cards ─────────────────────────────────────── */
+.pvg { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.7rem,1.4vw,1rem); }
+.pvc {
+  padding: clamp(1.1rem, 2vw, 1.7rem); border: 1px solid rgba(201,146,42,.14);
+  background: rgba(255,255,255,.03); display: flex; flex-direction: column;
+  transition: transform .35s, box-shadow .35s, border-color .35s;
+}
+.pvc:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,.3); border-color: rgba(201,146,42,.35); }
+.pvc.top { border-color: rgba(201,146,42,.5); background: rgba(201,146,42,.07); }
+.pvbadge { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .14em; text-transform: uppercase; color: var(--gdk); margin-bottom: 1rem; }
+.pvc.top .pvbadge { color: var(--glt); }
+.pvname { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.3rem,2.6vw,1.9rem); font-weight: 400; color: #faf8f3; line-height: 1.05; margin-bottom: .3rem; }
+.pvmodel { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .08em; color: var(--sl); margin-bottom: 1rem; }
+.pvdiv { height: 1px; background: rgba(201,146,42,.15); margin-bottom: 1rem; }
+.pvl { list-style: none; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
+.pvl li { font-size: clamp(.72rem,1.3vw,.8rem); color: rgba(255,255,255,.78); line-height: 1.55; padding-left: .9rem; position: relative; }
+.pvl li::before { content: '—'; position: absolute; left: 0; color: var(--gdk); }
+.pvc.top .pvl li::before { color: var(--gold); }
+
+/* ── Comparison table ───────────────────────────────────── */
+.tbl-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; min-width: 640px; }
+thead th {
+  font-family: 'DM Mono', monospace; font-size: clamp(.5rem,1vw,.58rem); letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gold); text-align: left;
+  padding: .8rem 1rem; border-bottom: 1px solid rgba(201,146,42,.28); white-space: nowrap;
+}
+thead th:first-child { width: 28%; }
+tbody td { padding: .7rem 1rem; font-size: clamp(.7rem,1.3vw,.82rem); border-bottom: 1px solid rgba(255,255,255,.06); }
+tbody tr:last-child td { border-bottom: none; }
+.tf { font-family: 'Cormorant Garamond', serif; font-size: clamp(.92rem,1.6vw,1.1rem); color: #faf8f3; }
+.badge { display: inline-flex; font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .08em; text-transform: uppercase; padding: .26rem .5rem; border-radius: 2px; white-space: nowrap; }
+.b-best { background: rgba(232,184,75,.14); color: var(--glt); border: 1px solid rgba(232,184,75,.3); }
+.b-good { background: rgba(255,255,255,.05); color: rgba(250,248,243,.7); border: 1px solid rgba(255,255,255,.1); }
+.b-fair { background: rgba(160,160,160,.06); color: rgba(250,248,243,.42); border: 1px solid rgba(255,255,255,.06); }
+
+/* ── Industry bars ──────────────────────────────────────── */
+.ibg { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(1rem,2.5vw,2.2rem) clamp(2rem,4vw,4rem); }
+.ib-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 1rem; }
+.ib-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.05rem,2vw,1.4rem); color: #faf8f3; }
+.ib-lead { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; padding: .26rem .55rem; border: 1px solid rgba(201,146,42,.4); color: var(--glt); white-space: nowrap; }
+.ib-row { display: flex; align-items: center; gap: .8rem; margin-bottom: .5rem; }
+.ib-lbl { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .06em; text-transform: uppercase; color: var(--sll); width: 74px; flex-shrink: 0; }
+.ib-track { flex: 1; height: 5px; background: rgba(255,255,255,.08); border-radius: 3px; overflow: hidden; }
+.ib-fill { height: 100%; width: 0; border-radius: 3px; transition: width 1.1s var(--ease); }
+.f-gold { background: linear-gradient(90deg, var(--gdk), var(--glt)); }
+.f-blue { background: linear-gradient(90deg, #2b5eac, #4d8ef5); }
+.f-green { background: linear-gradient(90deg, #1a6643, #34c878); }
+.f-gray { background: linear-gradient(90deg, #455566, #7a8ca0); }
+.ib-pct { font-family: 'DM Mono', monospace; font-size: .5rem; color: var(--sll); width: 26px; text-align: right; flex-shrink: 0; }
+
+/* ── Decision factors ───────────────────────────────────── */
+.dfg { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.1rem,2.5vw,1.8rem) clamp(2rem,4vw,4rem); }
+.df-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: .7rem; }
+.df-name { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem,1.9vw,1.3rem); color: #faf8f3; }
+.df-win { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .1em; text-transform: uppercase; color: var(--glt); border: 1px solid rgba(201,146,42,.4); padding: .24rem .5rem; white-space: nowrap; }
+.df-win.alt { color: var(--sll); border-color: rgba(122,140,160,.35); }
+.df-bar { display: flex; align-items: center; gap: .8rem; }
+
+/* ── Security ───────────────────────────────────────────── */
+.sec-list { list-style: none; display: flex; flex-direction: column; gap: .9rem; }
+.sec-list li { display: grid; grid-template-columns: 18px 1fr; gap: .7rem; align-items: baseline; font-size: clamp(.78rem,1.4vw,.88rem); color: rgba(255,255,255,.78); line-height: 1.55; }
+.sec-list b { color: #faf8f3; font-weight: 500; }
+.sec-list .ck { color: var(--glt); font-size: .8rem; }
+.sec-take { margin-top: 1.4rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1rem,1.9vw,1.25rem); color: var(--glt); line-height: 1.4; }
+.smx { border: 1px solid rgba(201,146,42,.18); }
+.smx-row { display: grid; grid-template-columns: 1.5fr repeat(4, 1fr); align-items: center; }
+.smx-row + .smx-row { border-top: 1px solid rgba(255,255,255,.06); }
+.smx-head { background: rgba(201,146,42,.05); }
+.smx-head span { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); padding: .6rem .4rem; text-align: center; }
+.smx-head span:first-child { text-align: left; padding-left: .7rem; }
+.smx-f { font-size: clamp(.68rem,1.3vw,.8rem); color: rgba(255,255,255,.8); padding: .55rem .7rem; line-height: 1.35; }
+.smx-c { text-align: center; padding: .55rem .3rem; font-family: 'DM Mono', monospace; font-size: .9rem; }
+.mk-y { color: var(--glt); }
+.mk-p { color: var(--sll); }
+.mk-n { color: rgba(255,255,255,.22); }
+.smx-legend { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .08em; color: var(--sl); margin-top: .8rem; text-transform: uppercase; }
+
+/* ── Why Claude ─────────────────────────────────────────── */
+.wg { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.5rem,4vw,4rem); align-items: start; }
+.wl { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+.wi { display: grid; grid-template-columns: 34px 1fr; gap: .9rem; align-items: baseline; padding-bottom: 1rem; border-bottom: 1px solid rgba(201,146,42,.12); }
+.wi:last-child { border-bottom: none; padding-bottom: 0; }
+.wn { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.3rem; color: var(--glt); line-height: 1; }
+.wt { font-family: 'Cormorant Garamond', serif; font-size: clamp(.98rem,1.8vw,1.2rem); color: #faf8f3; margin-bottom: .25rem; }
+.wd { font-size: clamp(.74rem,1.35vw,.82rem); color: rgba(255,255,255,.68); line-height: 1.6; }
+.wq-box { background: rgba(201,146,42,.07); border: 1px solid rgba(201,146,42,.22); padding: clamp(1.5rem,3vw,2.4rem); }
+.wq { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: clamp(1.15rem,2.4vw,1.7rem); color: #faf8f3; line-height: 1.5; margin-bottom: 1.4rem; }
+.wq-src { font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .12em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: .6rem; }
+.wq-src::before { content: ''; width: 18px; height: 1px; background: var(--gold); }
+.wq-stats { display: flex; gap: 1.6rem; margin-top: 1.8rem; flex-wrap: wrap; }
+.wqs-n { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.7rem,3.4vw,2.6rem); font-weight: 300; color: var(--glt); line-height: 1; }
+.wqs-l { font-family: 'DM Mono', monospace; font-size: .48rem; letter-spacing: .1em; text-transform: uppercase; color: var(--sll); margin-top: .4rem; line-height: 1.7; }
+
+/* ── Closing ────────────────────────────────────────────── */
+.close { text-align: center; }
+.close .brand { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.4rem,6vw,4rem); font-weight: 500; letter-spacing: .04em; color: var(--glt); margin-bottom: 1.5rem; }
+.close .brand b { color: var(--gold); }
+.close h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(1.7rem,4vw,3rem); line-height: 1.15; color: #faf8f3; margin: 0 auto 1.5rem; max-width: 22ch; }
+.close h2 em { font-style: italic; color: var(--glt); }
+.close p { font-size: clamp(.9rem,1.8vw,1.05rem); color: rgba(255,255,255,.65); max-width: 56ch; margin: 0 auto; line-height: 1.8; }
+.close .cline { width: 60px; height: 1px; background: var(--gold); margin: 2rem auto; }
+
+/* ── Fixed UI: brand, progress, nav, counter ───────────── */
+.ui-brand {
+  position: fixed; top: clamp(1.1rem,3vh,1.8rem); left: clamp(1.4rem,4vw,3rem); z-index: 60;
+  font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 500; letter-spacing: .06em; color: var(--glt);
+  display: flex; align-items: baseline; gap: .1em;
+}
+.ui-brand b { color: var(--gold); font-weight: 400; }
+.ui-brand span { font-family: 'DM Mono', monospace; font-size: .5rem; letter-spacing: .22em; text-transform: uppercase; color: var(--sll); margin-left: .6rem; }
+
+#prog { position: fixed; top: 0; left: 0; height: 2px; background: linear-gradient(90deg, var(--gdk), var(--glt)); z-index: 70; transition: width .5s var(--ease); }
+
+.nav {
+  position: fixed; bottom: clamp(1.1rem,3vh,1.8rem); left: 50%; transform: translateX(-50%); z-index: 60;
+  display: flex; align-items: center; gap: 1.2rem;
+}
+.nbtn {
+  width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(201,146,42,.35);
+  background: rgba(9,21,41,.6); color: var(--glt); font-size: 1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background .3s, border-color .3s, transform .2s;
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+}
+.nbtn:hover { background: rgba(201,146,42,.18); border-color: var(--gold); transform: translateY(-2px); }
+.nbtn:disabled { opacity: .3; cursor: default; transform: none; }
+.counter { font-family: 'DM Mono', monospace; font-size: .62rem; letter-spacing: .16em; color: var(--sll); min-width: 62px; text-align: center; }
+.counter b { color: var(--glt); font-weight: 400; }
+
+.dots { position: fixed; right: clamp(1.2rem,3vw,2rem); top: 50%; transform: translateY(-50%); z-index: 60; display: flex; flex-direction: column; gap: .7rem; }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.18); border: none; cursor: pointer; padding: 0; transition: background .3s, transform .3s; }
+.dot.on { background: var(--gold); transform: scale(1.35); }
+
+.hint { position: fixed; bottom: clamp(1.1rem,3vh,1.8rem); right: clamp(1.4rem,4vw,3rem); z-index: 60; font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .14em; text-transform: uppercase; color: var(--sl); transition: opacity .5s; }
+
+@media (max-width: 860px) {
+  .rgrid, .pvg { grid-template-columns: 1fr 1fr; }
+  .stg { grid-template-columns: 1fr 1fr; gap: 1.6rem 1rem; }
+  .ibg, .wg, .dfg { grid-template-columns: 1fr; }
+  .smx-f, .smx-head span:first-child { font-size: .62rem; }
+  .dots, .hint { display: none; }
+}
+@media (max-width: 560px) {
+  .rgrid, .pvg { grid-template-columns: 1fr; }
+  .cover .cmeta { gap: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .orb { animation: none; }
+  [data-anim] { transition: opacity .3s; transform: none; }
+  .ib-fill { transition: width .4s; }
+}
+</style>
+</head>
+<body>
+
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<div class="ui-brand">Nomos<b>.</b><span>AI Research</span></div>
+<div id="prog"></div>
+
+<div id="deck">
+
+  <!-- ═══ 01 · COVER ═══ -->
+  <section class="slide cover">
+    <div class="s-inner">
+      <div class="brand" data-anim style="--d:.05s">Nomos<b>.</b></div>
+      <h1 data-anim style="--d:.15s">Why companies adopt<br><em>Artificial Intelligence</em></h1>
+      <p class="csub" data-anim style="--d:.3s">And why they choose one provider over another — with Anthropic (Claude) leading the sectors where it matters most.</p>
+      <div class="cmeta" data-anim style="--d:.45s">
+        <span>Presentation 2026</span>
+        <span>Nomos · Research</span>
+        <span>10 sections</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 · WHY THEY USE AI ═══ -->
+  <section class="slide">
+    <div class="s-inner">
+      <div class="eye" data-anim>01 · The motive</div>
+      <h2 class="s-title" data-anim style="--d:.1s">Why do companies <em>use AI?</em></h2>
+      <div class="rgrid">
+        <div class="rcard" data-anim style="--d:.18s">
+          <div class="rnum">01</div>
+          <div class="rt">Cost reduction</div>
+          <div class="rd">AI automates repetitive knowledge work — drafting, summarizing, extracting and classifying data — that once required teams of analysts. Up to 40% lower operating cost.</div>
+        </div>
+        <div class="rcard" data-anim style="--d:.26s">
+          <div class="rnum">02</div>
+          <div class="rt">Decision speed</div>
+          <div class="rd">Compresses analysis cycles from days to minutes. Reports, summaries and documents that took a week are now produced in hours.</div>
+        </div>
+        <div class="rcard" data-anim style="--d:.34s">
+          <div class="rnum">03</div>
+          <div class="rt">Competitive pressure</div>
+          <div class="rd">When competitors adopt AI and cut costs, those who don't fall behind. It is no longer optional — it's a baseline requirement to stay competitive.</div>
+        </div>
+        <div class="rcard" data-anim style="--d:.42s">
+          <div class="rnum">04</div>
+          <div class="rt">Customer experience</div>
+          <div class="rd">Assistants that handle inquiries, route tickets and personalize communication at scale — cutting response times from hours to seconds.</div>
+        </div>
+        <div class="rcard" data-anim style="--d:.5s">
+          <div class="rnum">05</div>
+          <div class="rt">Regulatory compliance</div>
+          <div class="rd">Monitors transactions, flags anomalies and drafts compliance reports — reducing the manual burden of audits and regulatory reporting.</div>
+        </div>
+        <div class="rcard" data-anim style="--d:.58s">
+          <div class="rnum">06</div>
+          <div class="rt">Data intelligence</div>
+          <div class="rd">Companies sit on unstructured data — contracts, emails, transcripts. AI extracts patterns and risk signals that stay invisible to a human analyst.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 03 · THE NUMBERS ═══ -->
+  <section class="slide">
+    <div class="s-inner">
+      <div class="eye" data-anim>02 · The impact</div>
+      <h2 class="s-title" data-anim style="--d:.1s">Adoption is no longer <em>a trend.</em></h2>
+      <div class="stg">
+        <div class="st" data-anim style="--d:.2s">
+          <div class="stn"><span class="ct" data-to="78">0</span><s>%</s></div>
+          <div class="stl">of Fortune 500 companies<br>use at least one AI</div>
+        </div>
+        <div class="st" data-anim style="--d:.3s">
+          <div class="stn"><span class="ct" data-to="67">0</span><s>%</s></div>
+          <div class="stl">of executives: AI is a<br>top-3 investment priority</div>
+        </div>
+        <div class="st" data-anim style="--d:.4s">
+          <div class="stn"><span class="ct" data-to="40">0</span><s>%</s></div>
+          <div class="stl">cost reduction in<br>knowledge-work tasks</div>
+        </div>
+        <div class="st" data-anim style="--d:.5s">
+          <div class="stn"><span class="ct" data-to="3">0</span><s>×</s></div>
+          <div class="stl">faster document<br>review with AI</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 04 · PROVIDERS ═══ -->
+  <section class="slide">
+    <div class="s-inner">
+      <div class="eye" data-anim>03 · The landscape</div>
+      <h2 class="s-title" data-anim style="--d:.1s">Four platforms, <em>very different value.</em></h2>
+      <div class="pvg">
+        <div class="pvc top" data-anim style="--d:.18s">
+          <div class="pvbadge">▲ Anthropic · Leader</div>
+          <div class="pvname">Claude</div>
+          <div class="pvmodel">opus-4 / sonnet-5</div>
+          <div class="pvdiv"></div>
+          <ul class="pvl">
+            <li>Constitutional AI safety — fewer fabricated errors</li>
+            <li>Best reasoning over long documents (200K tokens)</li>
+            <li>Preferred in finance, legal and healthcare</li>
+            <li>Leader in coding and structured data extraction</li>
+            <li>Privacy: your data doesn't train the model</li>
+          </ul>
+        </div>
+        <div class="pvc" data-anim style="--d:.26s">
+          <div class="pvbadge">OpenAI</div>
+          <div class="pvname">GPT-4o</div>
+          <div class="pvmodel">gpt-4o / o3</div>
+          <div class="pvdiv"></div>
+          <ul class="pvl">
+            <li>The widest ecosystem of integrations</li>
+            <li>Strong multimodal (vision, audio, images)</li>
+            <li>Dominant in Microsoft 365 Copilot</li>
+            <li>The largest installed user base</li>
+          </ul>
+        </div>
+        <div class="pvc" data-anim style="--d:.34s">
+          <div class="pvbadge">Google</div>
+          <div class="pvname">Gemini</div>
+          <div class="pvmodel">gemini-2.5-pro</div>
+          <div class="pvdiv"></div>
+          <ul class="pvl">
+            <li>Native integration with Google Workspace</li>
+            <li>Best at video and real-time multimodal</li>
+            <li>Competitive pricing at high volume</li>
+            <li>Ideal if you already run on Google Cloud</li>
+          </ul>
+        </div>
+        <div class="pvc" data-anim style="--d:.42s">
+          <div class="pvbadge">Meta</div>
+          <div class="pvname">Llama</div>
+          <div class="pvmodel">llama-4 (open)</div>
+          <div class="pvdiv"></div>
+          <ul class="pvl">
+            <li>Open-weight: runs on your own infrastructure</li>
+            <li>Preferred with highly confidential data</li>
+            <li>Flexible to fine-tune for specific tasks</li>
+            <li>Dominant in government and defense</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 05 · COMPARISON ═══ -->
+  <section class="slide">
+    <div class="s-inner">
+      <div class="eye" data-anim>04 · Head to head</div>
+      <h2 class="s-title" data-anim style="--d:.1s">What matters by <em>each criterion.</em></h2>
+      <div class="tbl-wrap" data-anim style="--d:.2s">
+        <table>
+          <thead>
+            <tr>
+              <th>Criterion</th><th>Claude</th><th>GPT-4o</th><th>Gemini</th><th>Llama</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="tf">Safety &amp; error control</td>
+              <td><span class="badge b-best">Best</span></td>
+              <td><span class="badge b-good">Strong</span></td>
+              <td><span class="badge b-good">Strong</span></td>
+              <td><span class="badge b-fair">Variable</span></td>
+            </tr>
+            <tr>
+              <td class="tf">Long documents</td>
+              <td><span class="badge b-best">Best</span></td>
+              <td><span class="badge b-good">Strong</span></td>
+              <td><span class="badge b-good">Strong</span></td>
+              <td><span class="badge b-fair">Limited</span></td>
+            </tr>
+            <tr>
+              <td class="tf">Coding / technical</td>
+              <td><span class="badge b-best">Best</span></td>
+              <td><span class="badge b-good">Strong</span></td>
+              <td><span class="badge b-good">Competitive</span></td>
+              <td><span class="badge b-fair">Moderate</span></td>
+            </tr>
+            <tr>
+              <td class="tf">Enterprise privacy</td>
+              <td><span class="badge b-best">Highest</span></td>
+              <td><span class="badge b-good">Strong</span></td>
+              <td><span class="badge b-good">Strong</span></td>
+              <td><span class="badge b-best">Full control</span></td>
+            </tr>
+            <tr>
+              <td class="tf">Ecosystem &amp; integrations</td>
+              <td><span class="badge b-good">Growing</span></td>
+              <td><span class="badge b-best">Widest</span></td>
+              <td><span class="badge b-good">Google stack</span></td>
+              <td><span class="badge b-fair">Self-managed</span></td>
+            </tr>
+            <tr>
+              <td class="tf">Multimodal (vision/audio)</td>
+              <td><span class="badge b-good">Good vision</span></td>
+              <td><span class="badge b-best">Best</span></td>
+              <td><span class="badge b-best">Best video</span></td>
+              <td><span class="badge b-fair">Limited</span></td>
+            </tr>
+            <tr>
+              <td class="tf">Trust in regulated sectors</td>
+              <td><span class="badge b-best">Highest adoption</span></td>
+              <td><span class="badge b-good">High</span></td>
+              <td><span class="badge b-good">Growing</span></td>
+              <td><span class="badge b-fair">Niche</span></td>
+            </tr>
+            <tr>
+              <td class="tf">Cost at scale</td>
+              <td><span class="badge b-good">Competitive</span></td>
+              <td><span class="badge b-good">Competitive</span></td>
+              <td><span class="badge b-best">Lowest</span></td>
+              <td><span class="badge b-best">Near zero</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 06 · HOW THEY CHOOSE (DECISION FACTORS) ═══ -->
+  <section class="slide">
+    <div class="s-inner">
+      <div class="eye" data-anim>05 · How they choose</div>
+      <h2 class="s-title" data-anim style="--d:.1s">Why one provider <em>over another.</em></h2>
+      <p class="lead" data-anim style="--d:.18s;margin-bottom:clamp(1.6rem,3vh,2.4rem);max-width:66ch">When enterprises pick an AI vendor, these are the factors that carry the most weight in the decision — and the two heaviest, accuracy and security, are exactly where Anthropic wins.</p>
+      <div class="dfg">
+        <div class="df" data-anim style="--d:.26s">
+          <div class="df-head"><span class="df-name">Accuracy &amp; reliability</span><span class="df-win">Claude wins</span></div>
+          <div class="df-bar"><div class="ib-track"><div class="ib-fill f-gold" data-w="92"></div></div><span class="ib-pct">92%</span></div>
+        </div>
+        <div class="df" data-anim style="--d:.32s">
+          <div class="df-head"><span class="df-name">Data security &amp; privacy</span><span class="df-win">Claude wins</span></div>
+          <div class="df-bar"><div class="ib-track"><div class="ib-fill f-gold" data-w="88"></div></div><span class="ib-pct">88%</span></div>
+        </div>
+        <div class="df" data-anim style="--d:.38s">
+          <div class="df-head"><span class="df-name">Safety &amp; compliance</span><span class="df-win">Claude wins</span></div>
+          <div class="df-bar"><div class="ib-track"><div class="ib-fill f-gold" data-w="78"></div></div><span class="ib-pct">78%</span></div>
+        </div>
+        <div class="df" data-anim style="--d:.44s">
+          <div class="df-head"><span class="df-name">Cost / ROI</span><span class="df-win alt">Gemini · Llama</span></div>
+          <div class="df-bar"><div class="ib-track"><div class="ib-fill f-green" data-w="74"></div></div><span class="ib-pct">74%</span></div>
+        </div>
+        <div class="df" data-anim style="--d:.5s">
+          <div class="df-head"><span class="df-name">Ease of integration</span><span class="df-win alt">OpenAI</span></div>
+          <div class="df-bar"><div class="ib-track"><div class="ib-fill f-blue" data-w="71"></div></div><span class="ib-pct">71%</span></div>
+        </div>
+        <div class="df" data-anim style="--d:.56s">
+          <div class="df-head"><span class="df-name">Support &amp; roadmap</span><span class="df-win alt">Tie</span></div>
+          <div class="df-bar"><div class="ib-track"><div class="ib-fill f-gray" data-w="64"></div></div><span class="ib-pct">64%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 07 · SECURITY & TRUST ═══ -->
+  <section class="slide">
+    <div class="s-inner">
+      <div class="eye" data-anim>06 · Security &amp; trust</div>
+      <h2 class="s-title" data-anim style="--d:.1s">Security is <em>why they commit.</em></h2>
+      <div class="wg">
+        <div>
+          <ul class="sec-list">
+            <li data-anim style="--d:.2s"><span class="ck">✓</span><span><b>Your data is never used to train models</b> — the default in Anthropic's enterprise agreements.</span></li>
+            <li data-anim style="--d:.27s"><span class="ck">✓</span><span><b>Constitutional AI</b> — safety is trained into the model itself, not bolted on as an external filter.</span></li>
+            <li data-anim style="--d:.34s"><span class="ck">✓</span><span><b>Enterprise certifications</b> — SOC 2 Type II, ISO 27001, and HIPAA-eligible deployments.</span></li>
+            <li data-anim style="--d:.41s"><span class="ck">✓</span><span><b>Access &amp; audit control</b> — SSO/SAML, role-based permissions and full activity logs.</span></li>
+            <li data-anim style="--d:.48s"><span class="ck">✓</span><span><b>Zero-retention &amp; data residency</b> options for regulated and cross-border workloads.</span></li>
+          </ul>
+          <p class="sec-take" data-anim style="--d:.55s">Security isn't a feature you add later — it's the reason regulated firms pick Anthropic first.</p>
+        </div>
+        <div data-anim style="--d:.3s">
+          <div class="smx">
+            <div class="smx-row smx-head">
+              <span>Security posture</span><span>Claude</span><span>GPT</span><span>Gemini</span><span>Llama</span>
+            </div>
+            <div class="smx-row">
+              <div class="smx-f">Data excluded from training</div>
+              <div class="smx-c mk-y">✓</div><div class="smx-c mk-y">✓</div><div class="smx-c mk-y">✓</div><div class="smx-c mk-y">✓</div>
+            </div>
+            <div class="smx-row">
+              <div class="smx-f">SOC 2 / ISO 27001</div>
+              <div class="smx-c mk-y">✓</div><div class="smx-c mk-y">✓</div><div class="smx-c mk-y">✓</div><div class="smx-c mk-p">~</div>
+            </div>
+            <div class="smx-row">
+              <div class="smx-f">HIPAA-eligible</div>
+              <div class="smx-c mk-y">✓</div><div class="smx-c mk-y">✓</div><div class="smx-c mk-y">✓</div><div class="smx-c mk-p">~</div>
+            </div>
+            <div class="smx-row">
+              <div class="smx-f">Zero data retention</div>
+              <div class="smx-c mk-y">✓</div><div class="smx-c mk-y">✓</div><div class="smx-c mk-p">~</div><div class="smx-c mk-y">✓</div>
+            </div>
+            <div class="smx-row">
+              <div class="smx-f">Safety built into model</div>
+              <div class="smx-c mk-y">✓</div><div class="smx-c mk-p">~</div><div class="smx-c mk-p">~</div><div class="smx-c mk-n">—</div>
+            </div>
+            <div class="smx-row">
+              <div class="smx-f">Self-host / on-prem</div>
+              <div class="smx-c mk-p">~</div><div class="smx-c mk-n">—</div><div class="smx-c mk-p">~</div><div class="smx-c mk-y">✓</div>
+            </div>
+          </div>
+          <div class="smx-legend">✓ full &nbsp;·&nbsp; ~ enterprise tier &nbsp;·&nbsp; — not available</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 08 · ADOPTION BY INDUSTRY ═══ -->
+  <section class="slide">
+    <div class="s-inner">
+      <div class="eye" data-anim>07 · By industry</div>
+      <h2 class="s-title" data-anim style="--d:.1s">Who leads <em>each sector.</em></h2>
+      <div class="ibg">
+
+        <div data-anim style="--d:.2s">
+          <div class="ib-head"><div class="ib-name">Finance &amp; funds</div><div class="ib-lead">Claude leads</div></div>
+          <div class="ib-row"><span class="ib-lbl">Anthropic</span><div class="ib-track"><div class="ib-fill f-gold" data-w="68"></div></div><span class="ib-pct">68%</span></div>
+          <div class="ib-row"><span class="ib-lbl">OpenAI</span><div class="ib-track"><div class="ib-fill f-blue" data-w="45"></div></div><span class="ib-pct">45%</span></div>
+          <div class="ib-row"><span class="ib-lbl">Google</span><div class="ib-track"><div class="ib-fill f-green" data-w="28"></div></div><span class="ib-pct">28%</span></div>
+          <div class="ib-row"><span class="ib-lbl">Llama</span><div class="ib-track"><div class="ib-fill f-gray" data-w="14"></div></div><span class="ib-pct">14%</span></div>
+        </div>
+
+        <div data-anim style="--d:.3s">
+          <div class="ib-head"><div class="ib-name">Legal &amp; consulting</div><div class="ib-lead">Claude leads</div></div>
+          <div class="ib-row"><span class="ib-lbl">Anthropic</span><div class="ib-track"><div class="ib-fill f-gold" data-w="72"></div></div><span class="ib-pct">72%</span></div>
+          <div class="ib-row"><span class="ib-lbl">OpenAI</span><div class="ib-track"><div class="ib-fill f-blue" data-w="38"></div></div><span class="ib-pct">38%</span></div>
+          <div class="ib-row"><span class="ib-lbl">Google</span><div class="ib-track"><div class="ib-fill f-green" data-w="22"></div></div><span class="ib-pct">22%</span></div>
+          <div class="ib-row"><span class="ib-lbl">Llama</span><div class="ib-track"><div class="ib-fill f-gray" data-w="10"></div></div><span class="ib-pct">10%</span></div>
+        </div>
+
+        <div data-anim style="--d:.4s">
+          <div class="ib-head"><div class="ib-name">Healthcare &amp; pharma</div><div class="ib-lead">Claude leads</div></div>
+          <div class="ib-row"><span class="ib-lbl">Anthropic</span><div class="ib-track"><div class="ib-fill f-gold" data-w="59"></div></div><span class="ib-pct">59%</span></div>
+          <div class="ib-row"><span class="ib-lbl">OpenAI</span><div class="ib-track"><div class="ib-fill f-blue" data-w="48"></div></div><span class="ib-pct">48%</span></div>
+          <div class="ib-row"><span class="ib-lbl">Google</span><div class="ib-track"><div class="ib-fill f-green" data-w="36"></div></div><span class="ib-pct">36%</span></div>
+          <div class="ib-row"><span class="ib-lbl">Llama</span><div class="ib-track"><div class="ib-fill f-gray" data-w="22"></div></div><span class="ib-pct">22%</span></div>
+        </div>
+
+        <div data-anim style="--d:.5s">
+          <div class="ib-head"><div class="ib-name">Technology &amp; software</div><div class="ib-lead">Claude leads</div></div>
+          <div class="ib-row"><span class="ib-lbl">Anthropic</span><div class="ib-track"><div class="ib-fill f-gold" data-w="61"></div></div><span class="ib-pct">61%</span></div>
+          <div class="ib-row"><span class="ib-lbl">OpenAI</span><div class="ib-track"><div class="ib-fill f-blue" data-w="57"></div></div><span class="ib-pct">57%</span></div>
+          <div class="ib-row"><span class="ib-lbl">Google</span><div class="ib-track"><div class="ib-fill f-green" data-w="31"></div></div><span class="ib-pct">31%</span></div>
+          <div class="ib-row"><span class="ib-lbl">Llama</span><div class="ib-track"><div class="ib-fill f-gray" data-w="29"></div></div><span class="ib-pct">29%</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 09 · WHY CLAUDE LEADS ═══ -->
+  <section class="slide">
+    <div class="s-inner">
+      <div class="eye" data-anim>08 · The reason</div>
+      <div class="wg">
+        <div>
+          <h2 class="s-title" data-anim style="--d:.1s;margin-bottom:1.4rem">Why they choose <em>Anthropic</em> when the stakes are high</h2>
+          <ul class="wl">
+            <li class="wi" data-anim style="--d:.2s"><span class="wn">i</span><div><div class="wt">Constitutional AI</div><div class="wd">Principles built into the model: far less likely to invent citations, figures or false data — critical in financial and legal reports.</div></div></li>
+            <li class="wi" data-anim style="--d:.28s"><span class="wn">ii</span><div><div class="wt">200K-token context</div><div class="wd">Processes ~150,000 words in a single prompt without "forgetting" the middle. A 300-page memorandum fits whole.</div></div></li>
+            <li class="wi" data-anim style="--d:.36s"><span class="wn">iii</span><div><div class="wt">Privacy by default</div><div class="wd">Client data is not used to train future models — a legal necessity for banks, law firms and hospitals.</div></div></li>
+            <li class="wi" data-anim style="--d:.44s"><span class="wn">iv</span><div><div class="wt">Calibrated uncertainty</div><div class="wd">Says "I'm not sure, verify the source" instead of inventing. In compliance, that beats a confident but wrong answer.</div></div></li>
+            <li class="wi" data-anim style="--d:.52s"><span class="wn">v</span><div><div class="wt">Instruction-following precision</div><div class="wd">Formats, tables and calculations exactly as requested — fewer human correction loops in production.</div></div></li>
+          </ul>
+        </div>
+        <div data-anim style="--d:.3s">
+          <div class="wq-box">
+            <p class="wq">"We evaluated all five providers. Claude was the only one that didn't hallucinate once across our 60-document test set of financial filings. That's why we chose it."</p>
+            <div class="wq-src">CTO · $2.4B investment fund · 2025</div>
+            <div class="wq-stats">
+              <div><div class="wqs-n">94<s>%</s></div><div class="wqs-l">accuracy on legal<br>document extraction</div></div>
+              <div><div class="wqs-n">3<s>×</s></div><div class="wqs-l">fewer errors than<br>GPT-4o in finance</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 08 · CLOSING ═══ -->
+  <section class="slide close">
+    <div class="s-inner">
+      <div class="brand" data-anim style="--d:.05s">Nomos<b>.</b></div>
+      <h2 data-anim style="--d:.18s">Companies don't just choose AI:<br>they choose <em>who to trust.</em></h2>
+      <div class="cline" data-anim style="--d:.3s"></div>
+      <p data-anim style="--d:.4s">Cost, speed and competition drive adoption — but when an error costs money or reputation, Anthropic (Claude) is the standard in finance, legal and healthcare.</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- Navigation UI -->
+<div class="dots" id="dots"></div>
+<div class="nav">
+  <button class="nbtn" id="prev" aria-label="Previous">←</button>
+  <div class="counter"><b id="cur">01</b> / <span id="tot">08</span></div>
+  <button class="nbtn" id="next" aria-label="Next">→</button>
+</div>
+<div class="hint" id="hint">← →  to navigate</div>
+
+<script>
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let cur = 0;
+
+  const prog = document.getElementById('prog');
+  const curEl = document.getElementById('cur');
+  const totEl = document.getElementById('tot');
+  const prevBtn = document.getElementById('prev');
+  const nextBtn = document.getElementById('next');
+  const dotsWrap = document.getElementById('dots');
+  const hint = document.getElementById('hint');
+
+  totEl.textContent = String(total).padStart(2, '0');
+
+  // build dots
+  slides.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'dot'; d.setAttribute('aria-label', 'Go to section ' + (i + 1));
+    d.addEventListener('click', () => go(i));
+    dotsWrap.appendChild(d);
+  });
+  const dots = Array.from(dotsWrap.children);
+
+  function countUp(el) {
+    const to = parseInt(el.dataset.to, 10);
+    if (isNaN(to)) return;
+    const dur = 1100, t0 = performance.now();
+    function step(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(to * eased);
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  function triggerAnims(slide) {
+    // count-ups
+    slide.querySelectorAll('[data-to]').forEach(el => { el.textContent = '0'; countUp(el); });
+    // bars
+    slide.querySelectorAll('.ib-fill[data-w]').forEach(b => {
+      b.style.width = '0';
+      requestAnimationFrame(() => requestAnimationFrame(() => { b.style.width = b.dataset.w + '%'; }));
+    });
+  }
+
+  function go(n) {
+    n = Math.max(0, Math.min(total - 1, n));
+    if (n === cur) return;
+    slides[cur].classList.remove('active');
+    slides[cur].classList.toggle('prev', n > cur);
+    cur = n;
+    render();
+  }
+
+  function render() {
+    slides.forEach((s, i) => {
+      s.classList.toggle('active', i === cur);
+      if (i !== cur) s.classList.toggle('prev', i < cur);
+    });
+    slides[cur].classList.remove('prev');
+    triggerAnims(slides[cur]);
+    prog.style.width = ((cur + 1) / total * 100) + '%';
+    curEl.textContent = String(cur + 1).padStart(2, '0');
+    prevBtn.disabled = cur === 0;
+    nextBtn.disabled = cur === total - 1;
+    dots.forEach((d, i) => d.classList.toggle('on', i === cur));
+    if (hint) hint.style.opacity = cur > 0 ? '0' : '1';
+  }
+
+  // init
+  slides[0].classList.add('active');
+  triggerAnims(slides[0]);
+  render();
+
+  prevBtn.addEventListener('click', () => go(cur - 1));
+  nextBtn.addEventListener('click', () => go(cur + 1));
+
+  // keyboard
+  document.addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', 'PageDown', ' '].includes(e.key)) { e.preventDefault(); go(cur + 1); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { e.preventDefault(); go(cur - 1); }
+    else if (e.key === 'Home') { e.preventDefault(); go(0); }
+    else if (e.key === 'End') { e.preventDefault(); go(total - 1); }
+  });
+
+  // touch / swipe
+  let tx = 0, ty = 0;
+  document.addEventListener('touchstart', e => { tx = e.changedTouches[0].clientX; ty = e.changedTouches[0].clientY; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tx;
+    const dy = e.changedTouches[0].clientY - ty;
+    if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) go(cur + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+})();
+</script>
+</body>
+</html>
